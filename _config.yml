@@ -1,6 +1,6 @@
-username: minixalpha
-baseurl: /StrayBirds
+username: wilmosfang
+baseurl: /blog
 markdown: redcarpet
 safe: false
-pygments: true
-title: 飞鸟集
+highlighter: pygments
+title: 镜缘浮影
