@@ -142,8 +142,6 @@ selinux有时也会造成影响，需要关闭
 SELinux status:                 disabled
 [root@test ~]# getenforce 
 Disabled
-[root@test ~]# cat /etc/se
-securetty      security/      selinux/       services       sestatus.conf  setuptool.d/   
 [root@test ~]# cat /etc/selinux/config 
 
 # This file controls the state of SELinux on the system.
@@ -163,7 +161,7 @@ SELINUXTYPE=targeted
 
 ```
 
-关闭方法 
+临时关闭方法 
 
 ```bash
 
