@@ -131,7 +131,43 @@ vnet0     Link encap:Ethernet  HWaddr FE:54:00:12:1E:4A
 
 ```
 
+##补充
+
+selinux有时也会造成影响，需要关闭
+
+查看方法
+
+```bash
+[root@test ~]# sestatus  -v 
+SELinux status:                 disabled
+[root@test ~]# getenforce 
+Disabled
+[root@test ~]# cat /etc/se
+securetty      security/      selinux/       services       sestatus.conf  setuptool.d/   
+[root@test ~]# cat /etc/selinux/config 
+
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+#SELINUX=enforcing
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#     targeted - Targeted processes are protected,
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted 
 
 
+[root@test ~]# 
 
+```
+
+关闭方法 
+
+```bash
+
+setenforce 0
+
+```
 
