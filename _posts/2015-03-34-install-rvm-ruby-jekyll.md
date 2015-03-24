@@ -1,18 +1,18 @@
----
+ï»¿---
 layout: default
-title: °²×°jekyll 
+title: å®‰è£…jekyll 
 ---
 
-##Ç°ÑÔ
+##å‰è¨€
 
-ÎÒÇ°ÃæÓÐÒ»ÆªÎÄÕÂ¿ÉÒÔ[21·ÖÖÓ´î½¨Ò»¸öGitHub Blog](http://wilmosfang.github.io/blog/2015/03/02/build-a-githubblog-in-21minutes.html)
+æˆ‘å‰é¢æœ‰ä¸€ç¯‡æ–‡ç« å¯ä»¥[21åˆ†é’Ÿæ­å»ºä¸€ä¸ªGitHub Blog](http://wilmosfang.github.io/blog/2015/03/02/build-a-githubblog-in-21minutes.html)
 
-ÕâÀïÎÒÃÇÉîÈëµ½jekyll²ãÃæ¿´¿´,ÈçºÎÔÚ±¾µØÒ²Éú³ÉÒ»¸öblog,Ò²¾ÍÊÇÔÚ±¾µØ¸ÉºÍgithubÉÏÒ»ÑùµÄÊÂÇé
+è¿™é‡Œæˆ‘ä»¬æ·±å…¥åˆ°jekyllå±‚é¢çœ‹çœ‹,å¦‚ä½•åœ¨æœ¬åœ°ä¹Ÿç”Ÿæˆä¸€ä¸ªblog,ä¹Ÿå°±æ˜¯åœ¨æœ¬åœ°å¹²å’Œgithubä¸Šä¸€æ ·çš„äº‹æƒ…
 
-ÕâÀïÉæ¼°µ½rvm ruby gem ºÍjekyllµÄ°²×°,¾ø¶Ô¸É»õ,ÒòÎªÀïÃæÒÑ¾­°üº¬ÁË¼¸¸öÎÒ²ÈµÄ¿Ó,¿Ó¶ÔÃæµÄŒÅË¿¿´¹ýÀ´,¿´¹ýÀ´,¿´¹ýÀ´¡­¡­ÕâÀïÓÐ±íÑÝºÜ¾«²Ê¡­¡­
+è¿™é‡Œæ¶‰åŠåˆ°rvm ruby gem å’Œjekyllçš„å®‰è£…,ç»å¯¹å¹²è´§,å› ä¸ºé‡Œé¢å·²ç»åŒ…å«äº†å‡ ä¸ªæˆ‘è¸©çš„å‘,å‘å¯¹é¢çš„å±Œä¸çœ‹è¿‡æ¥,çœ‹è¿‡æ¥,çœ‹è¿‡æ¥â€¦â€¦è¿™é‡Œæœ‰è¡¨æ¼”å¾ˆç²¾å½©â€¦â€¦
 
 
-##ÏµÍ³»·¾³
+##ç³»ç»ŸçŽ¯å¢ƒ
 
 >[root@Test-slave ~]# lsb_release  -a 
 >LSB Version:	:base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
