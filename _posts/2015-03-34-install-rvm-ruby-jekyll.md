@@ -1,7 +1,8 @@
-﻿---
-layout: default
-title: 安装jekyll 
 ---
+layout: default
+title: 安装jekyll
+---
+
 
 ##前言
 
