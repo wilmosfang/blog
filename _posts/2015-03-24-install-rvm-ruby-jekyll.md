@@ -490,7 +490,7 @@ Configuration file: /root/tmp/myblog/_config.yml
 
 ![jekyll_init_page](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/install_jekyll/jekyll_install.png)
 
-下面这个就将我的blog clone到本地后的运行效果
+下面这个是将我的blog clone到本地后的运行效果
 
 ![jekyll_init_page](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/install_jekyll/myblog_local_page.png)
 
