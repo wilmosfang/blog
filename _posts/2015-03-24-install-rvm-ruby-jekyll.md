@@ -268,7 +268,7 @@ rvm 1.26.10 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <
 
 
 ```
-[root@Test-slave ~]# rvm install 2.2.1
+[root@Test ~]# rvm install 2.2.1
 Searching for binary rubies, this might take some time.
 Found remote file https://rvm_io.global.ssl.fastly.net/binaries/centos/6/x86_64/ruby-2.2.1.tar.bz2
 Checking requirements for centos.
@@ -307,9 +307,9 @@ ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-linux]
 2号坑来了
 
 ```
-[root@Test-slave ~]# gem install jekyll
+[root@Test ~]# gem install jekyll
 ^CERROR:  Interrupted
-[root@Test-slave ~]# 
+[root@Test ~]# 
 ```
 
 为什么我会去中断，原因是等太久了，具体多少时间没统计，反正超出了我的忍耐
@@ -331,26 +331,26 @@ IP Location : Oregon - Portland - Amazon.com Inc.
 解决办法是替换安装源地址
 
 ```
-[root@Test-slave ~]# gem sources -a https://ruby.taobao.org/
+[root@Test ~]# gem sources -a https://ruby.taobao.org/
 https://ruby.taobao.org/ added to sources
-[root@Test-slave ~]# gem sources -l 
+[root@Test ~]# gem sources -l 
 *** CURRENT SOURCES ***
 
 https://rubygems.org/
 https://ruby.taobao.org/
-[root@Test-slave ~]# gem sources --remove https://rubygems.org/
+[root@Test ~]# gem sources --remove https://rubygems.org/
 https://rubygems.org/ removed from sources
-[root@Test-slave ~]# gem sources -l 
+[root@Test ~]# gem sources -l 
 *** CURRENT SOURCES ***
 
 https://ruby.taobao.org/
-[root@Test-slave ~]# 
+[root@Test ~]# 
 ```
 
 再次安装jekyll,这回我使用time统计了一下共花费了2分半钟左右
 
 ```
-[root@Test-slave ~]#  time gem install jekyll
+[root@Test ~]#  time gem install jekyll
 Fetching: liquid-2.6.2.gem
 Fetching: liquid-2.6.2.gem ( 35%)
 Fetching: liquid-2.6.2.gem ( 70%)
@@ -367,9 +367,9 @@ Done installing documentation for liquid, kramdown, mercenary, safe_yaml, colora
 real	2m21.194s
 user	0m46.456s
 sys	0m2.128s
-[root@Test-slave ~]# echo $?
+[root@Test ~]# echo $?
 0
-[root@Test-slave ~]#
+[root@Test ~]#
 ```
 
 * 5.安装nodejs
@@ -377,7 +377,7 @@ sys	0m2.128s
 为什么要安装nodejs呢，因为jekyll要依赖它，不安装会报错，下面是我没安装，常试直接运行的结果 
 
 ```
-[root@Test-slave tmp]# jekyll  new myblog
+[root@Test tmp]# jekyll  new myblog
 /usr/local/rvm/gems/ruby-2.2.1/gems/execjs-2.4.0/lib/execjs/runtimes.rb:45:in `autodetect': Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)
 	from /usr/local/rvm/gems/ruby-2.2.1/gems/execjs-2.4.0/lib/execjs.rb:5:in `<module:ExecJS>'
 	from /usr/local/rvm/rubies/ruby-2.2.1/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
@@ -388,13 +388,13 @@ sys	0m2.128s
 	from /usr/local/rvm/gems/ruby-2.2.1/bin/jekyll:23:in `<main>'
 	from /usr/local/rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `eval'
 	from /usr/local/rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `<main>'
-[root@Test-slave tmp]#  
+[root@Test tmp]#  
 ```
 
 安装nodejs
 
 ```
-[root@Test-slave tmp]#  yum -y nodejs
+[root@Test tmp]#  yum -y nodejs
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
 Loading mirror speeds from cached hostfile
@@ -457,24 +457,24 @@ Dependency Installed:
   libuv.x86_64 1:0.10.29-1.el6               v8.x86_64 1:3.14.5.10-14.el6                                
 
 Complete!
-[root@Test-slave tmp]#
+[root@Test tmp]#
 
 ```
 
 * 6.生成blog
 
 ```
-[root@Test-slave tmp]# jekyll  new myblog
+[root@Test tmp]# jekyll  new myblog
 New jekyll site installed in /root/tmp/myblog. 
-[root@Test-slave tmp]# 
+[root@Test tmp]# 
 ```
 
 
 * 7.运行jekyll server
 
 ```
-[root@Test-slave tmp]# cd myblog/
-[root@Test-slave myblog]# jekyll  serve
+[root@Test tmp]# cd myblog/
+[root@Test myblog]# jekyll  serve
 Configuration file: /root/tmp/myblog/_config.yml
             Source: /root/tmp/myblog
        Destination: /root/tmp/myblog/_site
@@ -488,4 +488,27 @@ Configuration file: /root/tmp/myblog/_config.yml
 
 于是使用firefox打开 http://127.0.0.1:4000/ 就会显现
 
-![jekyll_init_page](/images/install_jekyll/jekyll_install.png)
+![jekyll_init_page](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/install_jekyll/jekyll_install.png)
+
+下面这个就将我的blog clone到本地后的运行效果
+
+![jekyll_init_page](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/install_jekyll/myblog_local_page.png)
+
+感觉棒棒哒！！
+
+
+##总结
+
+* 1.安装gcc
+* 2.安装rvm
+* 3.安装ruby
+* 4.安装jekyll
+* 5.安装nodejs
+* 6.生成blog
+* 7.运行jekyll server 
+
+##注意
+
+* 1.尽量使用rvm,这是一款ruby神器
+* 2.使用合适的安装源,别让自己的青春虚度
+
