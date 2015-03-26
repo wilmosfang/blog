@@ -5,7 +5,7 @@ title: 星海拾遗
 
 <ul class="post-list">
     {% for post in site.posts %}
-        <a href="{{site.baseurl}}{{post.url}}"> {{ post.title }}  </a>
-        {{ post.date | date: "%F" }} <br>
+        {{ post.date | date: "%F" }}
+        <a href="{{site.baseurl}}{{post.url}}"> {{ post.title }}  </a> <br>
     {% endfor %}
 </ul>
