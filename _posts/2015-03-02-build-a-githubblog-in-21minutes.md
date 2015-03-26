@@ -1,6 +1,7 @@
 ---
 layout: default
 title: 21分钟搭建一个GitHub Blog
+comments: true
 ---
 
 ##前言

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: 安装jekyll (include rvm,ruby,gem)
+comments: true
 ---
 
 

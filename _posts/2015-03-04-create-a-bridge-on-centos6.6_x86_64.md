@@ -1,6 +1,7 @@
 ---
 layout: default
 title: 在Centos6.6中创建一个Bridge
+comments: true
 ---
 
 ##前言

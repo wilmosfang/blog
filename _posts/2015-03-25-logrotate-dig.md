@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Centos6下logrotate探源
+comments: true
 ---
 
 #前言
