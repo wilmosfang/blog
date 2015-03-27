@@ -12,7 +12,7 @@ comments: true
 
 这是Centos5下面的crontab文件
 
-```
+~~~
 [test@Test ~]$ cat /etc/crontab 
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
@@ -26,11 +26,11 @@ HOME=/
 42 4 1 * * root run-parts /etc/cron.monthly
 [test@Test ~]$ 
 
-```
+~~~
 
 这是Centos6下面的crontab文件
 
-```
+~~~
 [root@Test-slave ~]# cat /etc/crontab  
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
@@ -49,13 +49,13 @@ HOME=/
 # *  *  *  *  * user-name command to be executed
 
 [root@Test-slave ~]# 
-```
+~~~
 
 可知对于Centos6每日的计划任务不在crontab里定义
 
 实际定义位置是anacrontab
 
-```
+~~~
 [root@Test-slave ~]# cat /etc/anacrontab 
 # /etc/anacrontab: configuration file for anacron
 
@@ -74,13 +74,13 @@ START_HOURS_RANGE=3-22
 7	25	cron.weekly		nice run-parts /etc/cron.weekly
 @monthly 45	cron.monthly		nice run-parts /etc/cron.monthly
 [root@Test-slave ~]# 
-```
+~~~
 它的意义是:每一天的3点到22点期间随机延时45分钟+5分钟，执行/etc/cron.daily中的任务，通知给root
 (此处只对daily work进行解释，其它类推)
 
 然后我们看看/etc/cron.daily下的内容
 
-```
+~~~
 [root@Test-slave ~]# ll /etc/cron.daily
 total 28
 -rwx------. 1 root root  118 Oct 15 23:33 cups
@@ -91,12 +91,12 @@ total 28
 -rwxr-xr-x. 1 root root  563 Nov 23  2013 readahead.cron
 -rwxr-xr-x. 1 root root  365 Oct 16  2009 tmpwatch
 [root@Test-slave ~]# 
-```
+~~~
 我们发现其中就有logrotate
 
 打开看看里面什么内容
 
-```
+~~~
 [root@Test-slave ~]# cat  /etc/cron.daily/logrotate 
 #!/bin/sh
 
@@ -107,11 +107,11 @@ if [ $EXITVALUE != 0 ]; then
 fi
 exit 0
 [root@Test-slave ~]# 
-```
+~~~
 
 继续打开配置文件/etc/logrotate.conf
 
-```
+~~~
 [root@Test-slave ~]# cat /etc/logrotate.conf 
 # see "man logrotate" for details
 # rotate log files weekly
@@ -149,11 +149,11 @@ include /etc/logrotate.d
 
 # system-specific logs may be also be configured here.
 [root@Test-slave ~]# 
-```
+~~~
 
 里面还有一个配置文件目录/etc/logrotate.d ,打开它，看看究竟有些什么 
 
-```
+~~~
 [root@Test-slave ~]# ll  /etc/logrotate.d 
 total 44
 -rw-r--r--. 1 root root  71 Oct 15 23:33 cups
@@ -168,11 +168,11 @@ total 44
 -rw-r--r--. 1 root root 125 Jan 29  2014 zabbix-agent
 -rw-r--r--. 1 root root 140 Jan 29  2014 zabbix-server
 [root@Test-slave ~]# 
-```
+~~~
 
 里面有对不同服务的定制配置，这是一种方便管理的方法，在apache，nginx等里面都是这样的, 我们随便打开一个如mysql,看看里面有些什么 
 
-```
+~~~
 [root@Test-slave ~]# cat /etc/logrotate.d/mysql 
 # The log file name and location can be set in
 # /etc/my.cnf by setting the "log-error" option
@@ -212,14 +212,14 @@ total 44
     endscript
 }
 [root@Test-slave ~]# 
-```
+~~~
 这么一条龙下来，已经对logrotate的执行时间点有了一个直观的感受
 
 #附:
 
 下面是logrotate的man page,上面的各种参数就可以扫盲了
 
-```
+~~~
 LOGROTATE(8)             System Administrator’s Manual            LOGROTATE(8)
 
 
@@ -730,7 +730,7 @@ AUTHORS
 
 
 Linux                           Wed Nov 5 2002                    LOGROTATE(8)
-```
+~~~
 
 
 

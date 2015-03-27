@@ -1,6 +1,6 @@
 username: wilmosfang
 baseurl: /blog
-markdown: redcarpet
+markdown: kramdown
 safe: false
 highlighter: pygments
 title: 镜缘浮影

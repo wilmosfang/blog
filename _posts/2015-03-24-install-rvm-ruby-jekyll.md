@@ -19,7 +19,7 @@ comments: true
 
 ##系统环境
 
-```
+~~~
 [root@Test ~]# lsb_release  -a 
 LSB Version:	:base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
 Distributor ID:	CentOS
@@ -33,14 +33,14 @@ Kernel \r on an \m
 [root@Test ~]# uname -a 
 Linux Test 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
 [root@Test ~]# 
-```
+~~~
 
 ##安装过程
 
 
 * 1.安装gcc
 
-```
+~~~
 [root@Test ~]# yum -y install gcc
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -103,13 +103,13 @@ Dependency Installed:
 Complete!
 [root@Test ~]# 
 
-```
+~~~
 
 * 1号坑:安装ruby(用于展示坑的大小,不要跟着操作,因为这是白操作)
 
 系统默认安装好了ruby
 
-```
+~~~
 [root@Test ~]# yum list ruby
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Loading mirror speeds from cached hostfile
@@ -122,35 +122,35 @@ ruby.x86_64                                   1.8.7.374-4.el6_6                 
 [root@Test ~]# ruby -v 
 ruby 1.8.7 (2013-06-27 patchlevel 374) [x86_64-linux]
 [root@Test ~]#
-```
+~~~
 
 安装rubygems
 
 其中的这些包都是根据错误提示一个个加上去的，这个过程就略过了，至于为什么要安装gem呢，是网上的很多声称实践过的先驱们探索出来的,方便用来安装jekyll用的
 
 
-```
+~~~
 [root@Test ~]# yum -y install rubygems ruby-devel rubygems-devel
-```
+~~~
 
 安装jekyll(坑来了，坑来了)
 
-```
+~~~
 [root@Test ~]# gem install jekyll  
 ERROR:  Error installing jekyll:
 	redcarpet requires Ruby version >= 1.9.2.
 [root@Test ~]# ruby  -v 
 ruby 1.8.7 (2013-06-27 patchlevel 374) [x86_64-linux]
 [root@Test ~]#
-```
+~~~
 
 按说也就是一个版本问题，升级不得了呗，结果这个系统最高的也就是1.8.7，于是从官网下载源码2.2.1和1.9.3进行尝试，卸载掉ruby，用源码安装成功
 
-```
+~~~
 [root@Test ~]# ruby  -v 
 ruby 1.9.3p545 (2014-02-24 revision 45159) [x86_64-linux]
 [root@Test ~]# 
-```
+~~~
 可这个不是问题的关键，关键是由于此系统中的gem依赖1.8.7，结果一安装又把ruby覆盖掉了回到了1.8.7,解决办法是源码编译高版本的gem...,当然也不知道到时候又有什么别的依赖....,太浪费时间了
 
 干脆放弃了这个方法
@@ -159,7 +159,7 @@ ruby 1.9.3p545 (2014-02-24 revision 45159) [x86_64-linux]
 
 有了rvm，妈妈再也不担心我的ruby版本了
 
-```
+~~~
 [root@Test ~]# curl -L get.rvm.io | bash -s stable 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -193,11 +193,11 @@ the key can be compared with:
 [root@Test ~]# echo $?
 2
 [root@Test ~]#
-```
+~~~
 
 GPG signature verification failed
 
-```
+~~~
 [root@Test ~]# gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39 
 DC0E3
 gpg: keyring `/root/.gnupg/secring.gpg' created
@@ -210,11 +210,11 @@ gpg:               imported: 1  (RSA: 1)
 [root@Test ~]# echo $?
 0
 [root@Test ~]#
-```
+~~~
 
 再次rvm安装就成功了
 
-```
+~~~
 [root@Test ~]# curl -L get.rvm.io | bash -s stable 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -253,22 +253,22 @@ Upgrade Notes:
 [root@Test ~]# echo $?
 0
 [root@Test ~]#
-```
+~~~
 
 切换一下环境，就可以看到rvm命令了
 
-```
+~~~
 [root@Test ~]# su - 
 [root@Test ~]# rvm -v 
 rvm 1.26.10 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
 [root@Test ~]#
-```
+~~~
 
 
 * 3.安装ruby
 
 
-```
+~~~
 [root@Test ~]# rvm install 2.2.1
 Searching for binary rubies, this might take some time.
 Found remote file https://rvm_io.global.ssl.fastly.net/binaries/centos/6/x86_64/ruby-2.2.1.tar.bz2
@@ -293,37 +293,37 @@ ruby-2.2.1 - #generating default wrappers........
 ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-linux]
 [root@Test ~]#
 
-```
+~~~
 
 安装好ruby，gem也跟着安装上去了
 
-```
+~~~
 [root@Test ~]# gem -v 
 2.4.6
 [root@Test ~]#
-```
+~~~
 
 * 4.安装jekyll
 
 2号坑来了
 
-```
+~~~
 [root@Test ~]# gem install jekyll
 ^CERROR:  Interrupted
 [root@Test ~]# 
-```
+~~~
 
 为什么我会去中断，原因是等太久了，具体多少时间没统计，反正超出了我的忍耐
 
 原因是我使用的安装源太远
 
-```
+~~~
 [root@Test ~]# gem sources -l 
 *** CURRENT SOURCES ***
 
 https://rubygems.org/
 [root@Test ~]#
-```
+~~~
 
 IP Address : 54.186.104.15 - 1 other site is hosted on this server
 
@@ -331,7 +331,7 @@ IP Location : Oregon - Portland - Amazon.com Inc.
 
 解决办法是替换安装源地址
 
-```
+~~~
 [root@Test ~]# gem sources -a https://ruby.taobao.org/
 https://ruby.taobao.org/ added to sources
 [root@Test ~]# gem sources -l 
@@ -346,11 +346,11 @@ https://rubygems.org/ removed from sources
 
 https://ruby.taobao.org/
 [root@Test ~]# 
-```
+~~~
 
 再次安装jekyll,这回我使用time统计了一下共花费了2分半钟左右
 
-```
+~~~
 [root@Test ~]#  time gem install jekyll
 Fetching: liquid-2.6.2.gem
 Fetching: liquid-2.6.2.gem ( 35%)
@@ -371,13 +371,13 @@ sys	0m2.128s
 [root@Test ~]# echo $?
 0
 [root@Test ~]#
-```
+~~~
 
 * 5.安装nodejs
 
 为什么要安装nodejs呢，因为jekyll要依赖它，不安装会报错，下面是我没安装，常试直接运行的结果 
 
-```
+~~~
 [root@Test tmp]# jekyll  new myblog
 /usr/local/rvm/gems/ruby-2.2.1/gems/execjs-2.4.0/lib/execjs/runtimes.rb:45:in `autodetect': Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)
 	from /usr/local/rvm/gems/ruby-2.2.1/gems/execjs-2.4.0/lib/execjs.rb:5:in `<module:ExecJS>'
@@ -390,11 +390,11 @@ sys	0m2.128s
 	from /usr/local/rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `eval'
 	from /usr/local/rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `<main>'
 [root@Test tmp]#  
-```
+~~~
 
 安装nodejs
 
-```
+~~~
 [root@Test tmp]#  yum -y nodejs
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -460,20 +460,20 @@ Dependency Installed:
 Complete!
 [root@Test tmp]#
 
-```
+~~~
 
 * 6.生成blog
 
-```
+~~~
 [root@Test tmp]# jekyll  new myblog
 New jekyll site installed in /root/tmp/myblog. 
 [root@Test tmp]# 
-```
+~~~
 
 
 * 7.运行jekyll server
 
-```
+~~~
 [root@Test tmp]# cd myblog/
 [root@Test myblog]# jekyll  serve
 Configuration file: /root/tmp/myblog/_config.yml
@@ -485,7 +485,7 @@ Configuration file: /root/tmp/myblog/_config.yml
 Configuration file: /root/tmp/myblog/_config.yml
     Server address: http://127.0.0.1:4000/
   Server running... press ctrl-c to stop.
-```
+~~~
 
 于是使用firefox打开 http://127.0.0.1:4000/ 就会显现
 
