@@ -292,6 +292,9 @@ MySQL Replication Health is OK.
 [mysql@s script]$ 
 ~~~
 
+####进行在线切换
+
+
 确认无误后进行手动切换
 
 ~~~
@@ -860,6 +863,9 @@ Tue Mar 31 19:28:07 2015 - [info] Starting ping health check on m1(192.168.75.11
 Tue Mar 31 19:28:07 2015 - [info] Ping(SELECT) succeeded, waiting until MySQL doesn't respond..
 [mysql@s ~]$ 
 ~~~
+
+
+####停库切换
 
 停止m1上的mysql，模拟一次数据库宕机
 
