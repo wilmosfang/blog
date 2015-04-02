@@ -363,8 +363,8 @@ mysql>
 
 > **Note:** **RESET MASTER**和**PURGE BINARY LOGS**有以下两点不同
 >
->* 1. **RESET MASTER**会移除掉index文件中的所有日志，然后只留下一个空的以**.000001**结尾的日志文件，但是**PURGE BINARY LOGS**不会重设后缀
->* 2. **RESET MASTER**不是设计来用在有任何slave正在运行的情况下，但**PURGE BINARY LOGS**是设计来在此种情况下使用的，当slave的复制正在运行时使用**PURGE BINARY LOGS**也是安全的
+>* 1.**RESET MASTER**会移除掉index文件中的所有日志，然后只留下一个空的以**.000001**结尾的日志文件，但是**PURGE BINARY LOGS**不会重设后缀
+>* 2.**RESET MASTER**不是设计来用在有任何slave正在运行的情况下，但**PURGE BINARY LOGS**是设计来在此种情况下使用的，当slave的复制正在运行时使用**PURGE BINARY LOGS**也是安全的
 
 **RESET MASTER**在第一次设置master和slave的情况下非常有用，可以按照下面的步骤进行检查：
 
