@@ -37,7 +37,7 @@ Physical id 和 core id不一定是连续的
 #### 总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数 = 物理CPU个数 X 每个物理CPU线程数 = 总线程数
 
 
-![cpuinfo](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/cpuinfo/cpuinfo.gif)
+![cpuinfo](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/cpuinfo/cpuinfo.png)
 
 
 ---
