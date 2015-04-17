@@ -32,16 +32,6 @@ Physical id 和 core id不一定是连续的
 ---
 
 
-#### 总物理核数 = 物理CPU个数 X 每颗物理CPU的核数 
-
-#### 总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数 = 物理CPU个数 X 每个物理CPU线程数 = 总线程数
-
-
-![cpuinfo](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/cpuinfo/cpuinfo.png)
-
-
----
-
 查看方法 
 -
 
@@ -237,6 +227,13 @@ cpu cores  位于相同物理封装中的内核数量。
 
 >拥有相同 physical id 的所有逻辑处理器共享同一个物理插座。每个 physical id 代表一个唯一的物理封装。Siblings 表示位于这一物理封装上的逻辑处理器的数量。它们可能支持也可能不支持超线程（HT）技术。每个 core id 均代表一个唯一的处理器内核。所有带有相同 core id 的逻辑处理器均位于同一个处理器内核上。如果有一个以上逻辑处理器拥有相同的 core id 和 physical id，则说明系统支持超线程（HT）技术。如果有两个或两个以上的逻辑处理器拥有相同的 physical id，但是 core id 不同，则说明这是一个多内核处理器。cpu cores 条目也可以表示是否支持多内核。
 
+
+#### 总物理核数 = 物理CPU个数 X 每颗物理CPU的核数 
+
+#### 总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数 = 物理CPU个数 X 每个物理CPU线程数 = 总线程数
+
+
+![cpuinfo](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/cpuinfo/cpuinfo.png)
 
 ---
 
