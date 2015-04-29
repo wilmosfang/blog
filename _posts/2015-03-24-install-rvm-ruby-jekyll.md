@@ -397,7 +397,7 @@ sys	0m2.128s
 安装nodejs
 
 ~~~
-[root@Test tmp]#  yum -y nodejs
+[root@Test tmp]#  yum -y install nodejs 
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
 Loading mirror speeds from cached hostfile
