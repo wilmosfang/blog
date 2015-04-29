@@ -275,13 +275,13 @@ be eligible for hot fixes, and boost your team's productivity.
 
 
 
-使用下面命令设定root密码
+使用 **/etc/init.d/mysql  start** 启动数据库,然后使用下面命令设定root密码
 
 ~~~
 [root@m1 mysql]# mysqladmin  -u root password 'mysql'
 ~~~
 
-启动mysql，使用之前设置的密码进行登录
+重新启动mysql，使用之前设置的密码进行登录
 
 ~~~
 [root@m1 mysql]# /etc/init.d/mysql  start
