@@ -477,7 +477,7 @@ New jekyll site installed in /root/tmp/myblog.
 
 ~~~
 [root@Test tmp]# cd myblog/
-[root@Test myblog]# jekyll  serve
+[root@Test myblog]# jekyll  server
 Configuration file: /root/tmp/myblog/_config.yml
             Source: /root/tmp/myblog
        Destination: /root/tmp/myblog/_site
