@@ -166,4 +166,12 @@ rtt min/avg/max/mdev = 7.585/7.615/7.653/0.113 ms
 * **ip route del default**
 * **ip route add default via 192.168.1.254 dev em1**
 
+
+总体分三部
+-
+
+* 1.打开内核参数 **net.ipv4.ip_forward** 允许转发
+* 2.打开 **filter** 表 **FORWARD** 链内网端口的转发
+* 3.打开 **nat** 表 **POSTROUTING** 链的定向地址伪装
+
 ---
