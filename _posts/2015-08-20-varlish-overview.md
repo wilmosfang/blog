@@ -602,7 +602,7 @@ varnish>
 ~~~
 
 其它的命令可以参阅 [The Varnish Reference Manual][The Varnish Reference Manual]
-
+更为全面地交代了Varnish的工作原理和http请求的基础知识 [Welcome to the Varnish Book][varnish.book]
 
 ---
 
@@ -618,3 +618,4 @@ varnish>
 [varnishtop]:  https://www.varnish-cache.org/docs/4.0/reference/varnishtop.html
 [varnishadm]:  https://www.varnish-cache.org/docs/4.0/reference/varnishadm.html
 [The Varnish Reference Manual]:  https://www.varnish-cache.org/docs/4.0/reference/index.html#reference-index
+[varnish.book]: https://www.varnish-software.com/book/4.0/
