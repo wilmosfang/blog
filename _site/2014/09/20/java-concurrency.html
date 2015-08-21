@@ -49,7 +49,28 @@
 
 <p>第一是继承 Thread 类，实现 run 方法，并创建子类对象。</p>
 
-<pre><code class="language-java">	public void startThreadUseSubClass() {
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
+<span class="c">#</span>
+<span class="c"># This script will be executed *after* all the other init scripts.</span>
+<span class="c"># You can put your own initialization stuff in here if you don&#39;t</span>
+<span class="c"># want to do the full Sys V style init stuff.</span>
+
+touch /var/lock/subsys/local
+
+
+
+        public void startThreadUseSubClass<span class="o">()</span> <span class="o">{</span>
+                class MyThread extends Thread <span class="o">{</span>
+                        public void run<span class="o">()</span> <span class="o">{</span>
+                                System.out.println<span class="o">(</span><span class="s2">&quot;start thread using Subclass of Thread&quot;</span><span class="o">)</span><span class="p">;</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+
+                MyThread <span class="nv">thread</span> <span class="o">=</span> new MyThread<span class="o">()</span><span class="p">;</span>
+                thread.start<span class="o">()</span><span class="p">;</span>
+        <span class="o">}</span></code></pre></div>
+
+<pre><code class="language-ruby">	public void startThreadUseSubClass() {
 		class MyThread extends Thread {
 			public void run() {
 				System.out.println("start thread using Subclass of Thread");

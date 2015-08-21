@@ -11,12 +11,19 @@ comments: true
 
 ---
 
+
+* TOC
+{:toc}
+
+
+---
+
 安装
 -
 
 下载并安装 **varnish** 的 **[repo][varnish.repo]**
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# wget  https://repo.varnish-cache.org/redhat/varnish-4.0.el6.rpm 
 --2015-08-19 22:11:24--  https://repo.varnish-cache.org/redhat/varnish-4.0.el6.rpm
 Resolving repo.varnish-cache.org... 194.31.39.155
@@ -56,11 +63,11 @@ varnish-libs.x86_64                         4.0.3-1.el6                  varnish
 varnish-libs-devel.i686                     2.1.5-5.el6                  epel   
 varnish-libs-devel.x86_64                   4.0.3-1.el6                  varnish-4.0
 [root@h101 varnish]# 
-~~~
+{% endhighlight %}
 
 安装 **varnish**
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# yum -y install  varnish 
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -161,7 +168,7 @@ Dependency Installed:
 
 Complete!
 [root@h101 varnish]# 
-~~~
+{% endhighlight %}
 
 ---
 
@@ -170,7 +177,7 @@ Complete!
 
 **varnish** 提供的内容
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# rpm -ql varnish
 /etc/logrotate.d/varnish
 /etc/rc.d/init.d/varnish
@@ -214,11 +221,11 @@ Complete!
 /var/lib/varnish
 /var/log/varnish
 [root@h101 varnish]# 
-~~~
+{% endhighlight %}
 
 **varnish** 的核心内容
 
-~~~
+{% highlight bash %}
 /etc/sysconfig/varnish
 /etc/varnish/default.vcl
 /usr/bin/varnishadm
@@ -230,7 +237,7 @@ Complete!
 /usr/bin/varnishtop
 /usr/sbin/varnish_reload_vcl
 /usr/sbin/varnishd
-~~~
+{% endhighlight %}
 
 Item     | Explain
 -------- | ---
@@ -253,7 +260,7 @@ Item     | Explain
 
 修改 **/etc/varnish/default.vcl** 
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# vim /etc/varnish/default.vcl
 [root@h101 varnish]# grep -v "#" /etc/varnish/default.vcl  
 
@@ -273,11 +280,11 @@ sub vcl_backend_response {
 sub vcl_deliver {
 }
 [root@h101 varnish]# 
-~~~
+{% endhighlight %}
 
 重新加载 **VCL**
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# /etc/init.d/varnish reload 
 Loading vcl from /etc/varnish/default.vcl
 Current running config name is reload_2015-08-19T22:45:05
@@ -292,7 +299,7 @@ active          0 reload_2015-08-19T22:46:38
 
 Done
 [root@h101 varnish]# 
-~~~
+{% endhighlight %}
 
 使用浏览器访问 **http://192.168.100.101:6081/** 或 **http://127.0.0.1:6081/**
 
@@ -310,7 +317,7 @@ Done
 
 将其中的 **VARNISH_LISTEN_PORT=6081** 改为 **VARNISH_LISTEN_PORT=80**
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# vim /etc/sysconfig/varnish
 [root@h101 varnish]# grep -v "^#"  /etc/sysconfig/varnish  | cat -s 
 
@@ -345,29 +352,29 @@ DAEMON_OPTS="-a ${VARNISH_LISTEN_ADDRESS}:${VARNISH_LISTEN_PORT} \
              -s ${VARNISH_STORAGE}"
 
 [root@h101 varnish]# 
-~~~
+{% endhighlight %}
 
 使用 **/etc/init.d/varnish restart** 重启服务
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# /etc/init.d/varnish restart 
 Stopping Varnish Cache:                                    [  OK  ]
 Starting Varnish Cache:                                    [  OK  ]
 [root@h101 varnish]#
-~~~
+{% endhighlight %}
 
 > **Tip:** 这种情况下用 **/etc/init.d/varnish reload** 是无法重新加载配置的
 
 这时系统里多出了 **80** 端口
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# netstat  -ant  | grep :80
 tcp        0      0 0.0.0.0:80                  0.0.0.0:*                   LISTEN      
 tcp        1      1 192.168.1.130:34104         103.245.222.133:80          LAST_ACK    
 tcp        1      0 192.168.1.130:59686         140.207.194.83:80           CLOSE_WAIT  
 tcp        0      0 :::80                       :::*                        LISTEN      
 [root@h101 varnish]# 
-~~~
+{% endhighlight %}
 
 再次使用浏览器访问 **http://192.168.100.101/** 或 **http://127.0.0.1/** 就可以获得 **www.boohee.com** 的主页内容
 
@@ -412,7 +419,7 @@ VCL
 
 能产生下列效果的统计直方图
 
-~~~
+{% highlight bash %}
 1:1, n = 35                                                                                                                 h101.temp
 
 
@@ -439,7 +446,7 @@ VCL
                                                              ######     #
 +-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------
 |1e-6         |1e-5         |1e-4         |1e-3         |1e-2         |1e-1         |1e0          |1e1          |1e2
-~~~
+{% endhighlight %}
 
 ---
 
@@ -448,7 +455,7 @@ VCL
 
 可以产生如下效果的日志
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# varnishlog 
 *   << BeReq    >> 32778     
 -   Begin          bereq 32777 pass
@@ -470,7 +477,7 @@ VCL
 ...
 ...
 
-~~~
+{% endhighlight %}
 
 ---
 
@@ -479,7 +486,7 @@ VCL
 
 可以产生下列格式的日志
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# varnishncsa 
 192.168.100.1 - - [20/Aug/2015:00:12:43 +0800] "GET http://192.168.100.101/ HTTP/1.1" 200 5634 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36"
 192.168.100.1 - - [20/Aug/2015:00:12:53 +0800] "GET http://192.168.100.101/forums/ HTTP/1.1" 200 8854 "http://192.168.100.101/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36"
@@ -487,7 +494,7 @@ VCL
 192.168.100.1 - - [20/Aug/2015:00:12:59 +0800] "GET http://192.168.100.101/food/ HTTP/1.1" 200 6379 "http://192.168.100.101/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36"
 ...
 ...
-~~~
+{% endhighlight %}
 
 
 ---
@@ -497,7 +504,7 @@ VCL
 
 可以产生下列形式的统计
 
-~~~
+{% highlight bash %}
 Uptime mgt:   0+01:08:38                                                                                                Hitrate n:       10       18       18
 Uptime child: 0+01:08:38                                                                                                   avg(n):   0.0000   0.0000   0.0000
 
@@ -513,7 +520,7 @@ MAIN.fetch_length                                                               
 ...
 ...
 
-~~~
+{% endhighlight %}
 
 ---
 
@@ -523,7 +530,7 @@ MAIN.fetch_length                                                               
 可以产生下列形式的 **top** 统计信息
 
 
-~~~
+{% highlight bash %}
 list length 275                                                                                                                                    h101.temp
 
      3.20 VCL_return     fetch
@@ -549,7 +556,7 @@ list length 275                                                                 
      1.73 ReqStart	 192.168.100.1 57938
 ...
 ...
-~~~
+{% endhighlight %}
 
 ---
 
@@ -558,7 +565,7 @@ list length 275                                                                 
 
 会提供一个交互界面，可用于对运行中的 **varnish** ，进行交互式管理
 
-~~~
+{% highlight bash %}
 [root@h101 varnish]# varnishadm 
 200        
 -----------------------------
@@ -599,7 +606,7 @@ ban <field> <operator> <arg> [&& <field> <oper> <arg>]...
 ban.list
 
 varnish> 
-~~~
+{% endhighlight %}
 
 其它的命令可以参阅 [The Varnish Reference Manual][The Varnish Reference Manual]
 

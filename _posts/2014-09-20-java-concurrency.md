@@ -22,7 +22,31 @@ comments: true
 
 第一是继承 Thread 类，实现 run 方法，并创建子类对象。
 
-~~~java
+{% highlight bash  %}
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+
+
+
+        public void startThreadUseSubClass() {
+                class MyThread extends Thread {
+                        public void run() {
+                                System.out.println("start thread using Subclass of Thread");
+                        }
+                }
+
+                MyThread thread = new MyThread();
+                thread.start();
+        }
+{% endhighlight %}
+
+
+~~~ruby
 	public void startThreadUseSubClass() {
 		class MyThread extends Thread {
 			public void run() {
@@ -34,6 +58,7 @@ comments: true
 		thread.start();
 	}
 ~~~
+
 
 另一种是传递给 Thread 构造函数一个 Runnable 对象。
 
