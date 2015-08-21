@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Mysql Monitoring 
+title: Mysql 监控 
 comments: true
 ---
 

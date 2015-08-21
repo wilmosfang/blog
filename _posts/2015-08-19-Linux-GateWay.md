@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Linux GateWay 
+title: Linux 网关 
 comments: true
 ---
 

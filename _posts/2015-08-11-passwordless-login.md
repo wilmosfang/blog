@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 密码管理方法
+title: 证书管理碉堡机
 comments: true
 ---
 
@@ -202,6 +202,21 @@ Administrator. It usually boils down to these three things:
 [sudo] password for test: 
 [root@h102 ~]#
 ~~~
+
+关闭密码登录
+-
+
+对于其它被管理机，如不直接提供对外服务，尽量避免配置Public IP,并且使用下面方法关闭 **sshd** 的密码登录
+
+~~~
+sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+/etc/init.d/sshd  restart
+~~~
+
+> **Note:** 重启服务才能使配置生效，但在重启之前，一定要确认使用证书可以认证登录,或者旁边多开着一个已登录的终端，否则除了跑机房通过 **console** 没有别的办法可以远程登录，所有的远程登录权限配置，防火墙配置都要注意此类问题
+
+---
+
 
 使用方法
 -

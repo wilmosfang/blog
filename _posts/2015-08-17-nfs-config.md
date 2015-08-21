@@ -1,6 +1,6 @@
 ---
 layout: default
-title: NFS config
+title: NFS 配置
 comments: true
 ---
 

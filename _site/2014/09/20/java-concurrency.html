@@ -28,6 +28,18 @@
         <h1>
 <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a> 测试文档 Java 中的并发 
         </h1>
+<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">如何创建一个线程</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">结束线程</a></li>
+  <li><a href="#wait--sleep" id="markdown-toc-wait--sleep">wait 与 sleep</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">线程池</a>    <ul>
+      <li><a href="#section-3" id="markdown-toc-section-3">好处</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">使用</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">原理</a></li>
+    </ul>
+  </li>
+</ul>
+
 <h2 id="section">如何创建一个线程</h2>
 
 <p>按 Java 语言规范中的说法，创建线程只有一种方式，就是创建一个 Thread 对象。而从 HotSpot 虚拟机的角度看，创建一个虚拟机线程
@@ -128,16 +140,15 @@
 
 <p>JDK 的 java.util.concurrent.Executors 类提供了几个静态的方法，用于创建不同类型的线程池。</p>
 
-<pre><code class="language-java">ExecutorService service = Executors.newFixedThreadPool(10);
-ArrayList&lt;Future&lt;Integer&gt;&gt; results = new ArrayList&lt;&gt;();
-for (int i = 0; i &lt; 14; i++) {
-	Future&lt;Integer&gt; r = service.submit(new Callable&lt;Integer&gt;() {
-		public Integer call() {
-		return new Random().nextInt();
-	});
-	results.add(r);
-}
-</code></pre>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">ExecutorService</span> <span class="n">service</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Future</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">results</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">14</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+	<span class="n">Future</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="k">new</span> <span class="n">Callable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="n">Integer</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
+	<span class="o">});</span>
+	<span class="n">results</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+<span class="o">}</span></code></pre></div>
 
 <p><code>newFixedThreadPool</code> 可以创建固定数目的线程，一旦创建不会自动销毁线程，即便长期没有任务。除非显式关闭线程池。如果任务队列中有任务，就取出任务执行。</p>
 
