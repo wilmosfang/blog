@@ -1,5 +1,5 @@
 username: wilmosfang
-baseurl: /blog
+baseurl: /  
 markdown: kramdown
 safe: false
 highlighter: pygments
