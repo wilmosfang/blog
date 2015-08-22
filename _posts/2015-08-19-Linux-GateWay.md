@@ -16,16 +16,16 @@ comments: true
 
 调整内核参数 **net.ipv4.ip_forward** 开启转发
 
-~~~
+{% highlight bash %}
 [root@linux-gateway ~]# grep  forward  /etc/sysctl.conf 
 # Controls IP packet forwarding
 net.ipv4.ip_forward = 1
 [root@linux-gateway ~]# 
-~~~
+{% endhighlight %}
 
 **sysctl -p** 使其生效，然后使用 **sysctl -a** 来进行确认
 
-~~~
+{% highlight bash %}
 [root@linux-gateway ~]# sysctl  -a | grep  forwarding
 net.ipv4.conf.all.forwarding = 1
 net.ipv4.conf.all.mc_forwarding = 0
@@ -56,7 +56,7 @@ net.ipv6.conf.em3.mc_forwarding = 0
 net.ipv6.conf.em4.forwarding = 0
 net.ipv6.conf.em4.mc_forwarding = 0
 [root@linux-gateway ~]# 
-~~~
+{% endhighlight %}
 
 
 ---
@@ -66,21 +66,21 @@ net.ipv6.conf.em4.mc_forwarding = 0
 
 查看内网网卡
 
-~~~
+{% highlight bash %}
 [root@linux-gateway ~]# ip a | grep 168
     inet 192.168.1.254/24 brd 192.168.1.255 scope global em1
 [root@linux-gateway ~]# 
-~~~
+{% endhighlight %}
 
 内网网卡为 **em1**
 
 查看默认路由，与出口网卡
 
-~~~
+{% highlight bash %}
 [root@linux-gateway ~]# ip route | grep default 
 default via 180.140.110.123 dev em2 
 [root@linux-gateway ~]# 
-~~~
+{% endhighlight %}
 
 出口网卡为 **em2**
 
@@ -89,17 +89,17 @@ default via 180.140.110.123 dev em2
 * **filter** 表上接受来自 **em1** 的 **FORWARD** 请求
 * **nat** 表的 **POSTROUTING** 链上打开来自内网出口为 **em2** 的地址伪装，即 **SNAT** 
 
-~~~
+{% highlight bash %}
 [root@linux-gateway ~]# iptables -A FORWARD -i em1 -j ACCEPT
 [root@linux-gateway ~]# iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o em2 -j MASQUERADE 
-~~~
+{% endhighlight %}
 
 方法二：通过配置文件修改
 
 可以在 **/etc/sysconfig/iptables** 中的 **filter** 和 **nat** 部分进行配置
 
 
-~~~
+{% highlight bash %}
 *nat
 :PREROUTING ACCEPT [3370:177472]
 :POSTROUTING ACCEPT [32:1664]
@@ -117,7 +117,7 @@ COMMIT
 #-A FORWARD -j REJECT --reject-with icmp-host-prohibited 
 -A FORWARD -i em1 -j ACCEPT 
 COMMIT
-~~~
+{% endhighlight %}
 
 使用 **/etc/init.d/iptables  reload** 重新加载 **iptables**
 
@@ -128,16 +128,16 @@ COMMIT
 
 在想要连接外网的服务器上删除原有路由，添加新路由
 
-~~~
+{% highlight bash %}
 [root@db-server ~]# ip route | grep default
 default via 192.168.1.1 dev em1 
 [root@db-server ~]# ip route del default 
 [root@db-server ~]# ip route add default via 192.168.1.254 dev em1
-~~~
+{% endhighlight %}
 
 测试连接
 
-~~~
+{% highlight bash %}
 [root@db-server ~]# ping www.baidu.com
 PING www.a.shifen.com (58.217.200.13) 56(84) bytes of data.
 64 bytes from 58.217.200.13: icmp_seq=1 ttl=51 time=7.59 ms
@@ -150,7 +150,7 @@ PING www.a.shifen.com (58.217.200.13) 56(84) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 4621ms
 rtt min/avg/max/mdev = 7.585/7.615/7.653/0.113 ms
 [root@db-server ~]# 
-~~~
+{% endhighlight %}
 
 ---
 
