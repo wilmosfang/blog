@@ -74,7 +74,7 @@ touch /var/lock/subsys/local
 {% endhighlight %}
 
 
-{% highlight bash  %}
+{% highlight verilog  %}
 [gituser@tools tmp]# 
 [gituser@tools tmp]$ 
 [gituser@tools tmp]$ ls

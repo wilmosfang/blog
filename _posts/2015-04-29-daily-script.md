@@ -362,13 +362,14 @@ lala
 
 \#one line program
 
-{% highlight bash %}
+
+{% highlight perl %}
 perl -lne 'print $1 if (/(\b\S+map\S+\b)/)' tm |grep srw | sort -u
 cat jjkk  | grep -E 'Hostname:|Function:'| perl -nle 'print $1.$2 if(/(Hostname:|ID:|Function:|Description:|Test URI:|Ping Test:|Nukit:|ValidateInternals:|Special:|Rank:|Bladecenter:).*>([^<>]+)(<\/\w+>)+$/) '| sed 's/&nbsp;//'
 cat jjkk  | grep -E 'Hostname:|ID:|Function:|Description:|Test URI:|Ping Test:|Nukit:|ValidateInternals:|Special:|Rank:|Bladecenter:'| perl -nle 'print $1.$2 if(/(Hostname:|ID:|Function:|Description:|Test URI:|Ping Test:|Nukit:|ValidateInternals:|Special:|Rank:|Bladecenter:).*>([^<>]+)(<\/\w+>)+$/) '
 perl -nle 's/(^\s+|\s+$)//g;print $_ unless (/^$/)' jk
 perl -nle 's/(^\s+|\s+$)//g;' -e  'print $_ unless (/^$/)' jk
-
+perl -i.bak  -p -e 'BEGIN{$flag=2}  if (/^~~~/ and $flag == 2) {s/^~~~/startflag/ ; $flag=3 } ; if (/^~~~/ and $flag == 3) {s/^~~~/endflag/ ; $flag=2 }'   jk.md
 {% endhighlight %}
 
 ---

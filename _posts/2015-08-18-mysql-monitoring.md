@@ -11,8 +11,18 @@ comments: true
 
 ---
 
-环境
-=
+
+#概要
+
+* TOC
+{:toc}
+
+---
+
+#内容
+
+##环境
+
 
 在 **Centos 6.7** 下面 运行着 **mysql 5.6.25** ([percona][percona] 版本)
 
