@@ -23,7 +23,7 @@ comments: true
 
 on m1
 
-~~~
+{% highlight bash %}
 [mysql@m1 ~]$ ip a 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -96,10 +96,10 @@ Master_SSL_Verify_Server_Cert: No
 | read_only     | ON    |
 +---------------+-------+
 [mysql@m1 ~]$ 
-~~~
+{% endhighlight %}
 on m2
 
-~~~
+{% highlight bash %}
 [mysql@m2 ~]$ ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -134,11 +134,11 @@ on m2
 | read_only     | OFF   |
 +---------------+-------+
 [mysql@m2 ~]$ 
-~~~
+{% endhighlight %}
 
 on s
 
-~~~
+{% highlight bash %}
 [mysql@s script]$ ip a 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -211,11 +211,11 @@ Master_SSL_Verify_Server_Cert: No
 | read_only     | ON    |
 +---------------+-------+
 [mysql@s script]$ 
-~~~
+{% endhighlight %}
 
 在s上进行复制检查
 
-~~~
+{% highlight bash %}
 [mysql@s script]$ masterha_check_repl --conf=/etc/app1.cnf 
 Tue Mar 31 19:03:18 2015 - [info] Reading default configuratoins from /etc/masterha_default.cnf..
 Tue Mar 31 19:03:18 2015 - [info] Reading application default configurations from /etc/app1.cnf..
@@ -290,14 +290,14 @@ Tue Mar 31 19:03:29 2015 - [info] Got exit code 0 (Not master dead).
 
 MySQL Replication Health is OK.
 [mysql@s script]$ 
-~~~
+{% endhighlight %}
 
 ####进行在线切换
 
 
 确认无误后进行手动切换
 
-~~~
+{% highlight bash %}
 [mysql@s script]$ masterha_master_switch --master_state=alive --conf=/etc/app1.cnf  --new_master_host=m1 --interactive=0
 Tue Mar 31 19:04:58 2015 - [info] MHA::MasterRotate version 0.53.
 Tue Mar 31 19:04:58 2015 - [info] Starting online master switch..
@@ -390,13 +390,13 @@ Tue Mar 31 19:05:01 2015 - [info]
 Tue Mar 31 19:05:01 2015 - [info]  m1: Resetting slave info succeeded.
 Tue Mar 31 19:05:01 2015 - [info] Switching master to m1(192.168.75.11:3306) completed successfully.
 [mysql@s script]$ 
-~~~
+{% endhighlight %}
 
 切换成功
 
 检查发现s已经自动指向了新的master m1
 
-~~~
+{% highlight bash %}
 [mysql@s script]$ F_rs.bash 
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
@@ -453,13 +453,13 @@ Master_SSL_Verify_Server_Cert: No
 | read_only     | ON    |
 +---------------+-------+
 [mysql@s script]$ 
-~~~
+{% endhighlight %}
 
 
 
 m2的ip已经没有了
 
-~~~
+{% highlight bash %}
 [mysql@m2 ~]$ ip a 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -479,11 +479,11 @@ m2的ip已经没有了
 [mysql@m2 ~]$ ps -ef | grep keep 
 mysql     3644  3097  0 19:10 pts/0    00:00:00 grep keep
 [mysql@m2 ~]$
-~~~
+{% endhighlight %}
 
 m1获得ip
 
-~~~
+{% highlight bash %}
 [mysql@m1 ~]$ ip a 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -502,7 +502,7 @@ m1获得ip
     inet6 fe80::20c:29ff:fe25:abf6/64 scope link 
        valid_lft forever preferred_lft forever
 [mysql@m1 ~]$ 
-~~~
+{% endhighlight %}
 
 
 
@@ -519,7 +519,7 @@ m1获得ip
 
 on m1
 
-~~~
+{% highlight bash %}
 [mysql@m1 ~]$ ps -ef | grep keep 
 root     12605     1  0 18:50 ?        00:00:00 /usr/sbin/keepalived -D
 root     12606 12605  0 18:50 ?        00:00:00 /usr/sbin/keepalived -D
@@ -559,11 +559,11 @@ mysql    14615 12622  0 19:22 pts/2    00:00:00 grep keep
 | read_only     | OFF   |
 +---------------+-------+
 [mysql@m1 ~]$ 
-~~~
+{% endhighlight %}
 
 on m2
 
-~~~
+{% highlight bash %}
 [mysql@m2 ~]$ ps -ef | grep keep 
 root      3751     1  0 19:21 ?        00:00:00 /usr/sbin/keepalived -D
 root      3752  3751  0 19:21 ?        00:00:00 /usr/sbin/keepalived -D
@@ -641,11 +641,11 @@ Master_SSL_Verify_Server_Cert: No
 | read_only     | ON    |
 +---------------+-------+
 [mysql@m2 ~]$ 
-~~~
+{% endhighlight %}
 
 on s
 
-~~~
+{% highlight bash %}
 [mysql@s ~]$ F_rs.bash 
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
@@ -775,25 +775,25 @@ Tue Mar 31 19:24:29 2015 - [info] Got exit code 0 (Not master dead).
 
 MySQL Replication Health is OK.
 [mysql@s ~]$ 
-~~~
+{% endhighlight %}
 
 
 在s上启动后台监控，监视master的健康状态
 
-~~~
+{% highlight bash %}
 [mysql@s ~]$ nohup   masterha_manager --conf=/etc/app1.cnf  --ignore_last_failover  & 
 [1] 4446
 [mysql@s ~]$ nohup: ignoring input and appending output to `nohup.out'
 
 [mysql@s ~]$ 
-~~~
+{% endhighlight %}
 
 > **Note:**  **--ignore_last_failover** 一定要加 ，否则即便系统状态是正常的也不能切换，因为mha的机制是发现8小时内有切换，就不会再次切换，这个机制是为避免新的master短时间内再次切换的一种保护措施 ，也可以不使用这个参数 而将**~/mha/app1/app1.failover.complete**这个文件手动删除
 
 
 > **Tip:** 可以使用**~/mha/app1/manager.log**这个日志文件来监视状态，也可以获知当前做了什么事
 
-~~~
+{% highlight bash %}
 [mysql@s ~]$ cat  mha/app1/manager.log
 Tue Mar 31 19:27:56 2015 - [info] MHA::MasterMonitor version 0.53.
 Tue Mar 31 19:27:56 2015 - [info] Dead Servers:
@@ -862,22 +862,22 @@ Tue Mar 31 19:28:07 2015 - [warning] secondary_check_script is not defined. It i
 Tue Mar 31 19:28:07 2015 - [info] Starting ping health check on m1(192.168.75.11:3306)..
 Tue Mar 31 19:28:07 2015 - [info] Ping(SELECT) succeeded, waiting until MySQL doesn't respond..
 [mysql@s ~]$ 
-~~~
+{% endhighlight %}
 
 
 ####停库切换
 
 停止m1上的mysql，模拟一次数据库宕机
 
-~~~
+{% highlight bash %}
 [root@m1 log]# /etc/init.d/mysql  stop 
 Shutting down MySQL...                                     [  OK  ]
 [root@m1 log]# 
-~~~
+{% endhighlight %}
 
 发现m1的ip已经移除
 
-~~~
+{% highlight bash %}
 [root@m1 log]# ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -897,12 +897,12 @@ Shutting down MySQL...                                     [  OK  ]
 [root@m1 log]# ps -ef | grep keep 
 root     16448  2438  0 19:47 pts/0    00:00:00 grep keep
 [root@m1 log]#
-~~~
+{% endhighlight %}
 
 
 ip已经飘移到了m2上
 
-~~~
+{% highlight bash %}
 [mysql@m2 ~]$ ip a 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -937,11 +937,11 @@ ip已经飘移到了m2上
 | read_only     | OFF   |
 +---------------+-------+
 [mysql@m2 ~]$ 
-~~~
+{% endhighlight %}
 
 s也自动指向了新的master 
 
-~~~
+{% highlight bash %}
 [mysql@s ~]$ F_rs.bash 
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
@@ -998,11 +998,11 @@ Master_SSL_Verify_Server_Cert: No
 | read_only     | ON    |
 +---------------+-------+
 [mysql@s ~]$ 
-~~~
+{% endhighlight %}
 
 这是从日志中截取的failover 报告
 
-~~~
+{% highlight bash %}
 ----- Failover Report -----
 
 app1: MySQL Master failover m1 to m2 succeeded
@@ -1022,7 +1022,7 @@ Generating relay diff files from the latest slave succeeded.
 s: OK: Applying all logs succeeded. Slave started, replicating from m2.
 m2: Resetting slave info succeeded.
 Master failover to m2(192.168.75.12:3306) completed successfully.
-~~~
+{% endhighlight %}
 
 致此mha的两种failover模式已经通过检测，事实上生产环境非常复杂，在具体环境中还要具体分析，比如流量大到一定程度时，迁移如何，不断有大量新的数据正在写入时，迁移又如何，还得进行更充分的测试
 

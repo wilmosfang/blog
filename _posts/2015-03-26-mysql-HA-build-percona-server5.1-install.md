@@ -70,11 +70,11 @@ Keepalived v1.2.13 (10/15,2014)
 |m2|192.168.75.11|slave|v1.2.13|null|CentOS6.6|node|
 |s|192.168.75.13|slave|null|null|CentOS6.6|node,manager|
 
-~~~
+{% highlight bash %}
 m1 	192.168.75.11 	192.168.66.66
 |-m2	192.168.75.12
 `-s	192.168.75.13
-~~~
+{% endhighlight %}
 
 切换后状态 : 切换后m1从集群中移出，原来的后备master m2 升级为主master，原来的s将主指向m2，继续作为库，浮动IP飘到m2上，这个过程是由mha软件自动来完成
 
@@ -85,10 +85,10 @@ m1 	192.168.75.11 	192.168.66.66
 |m2|192.168.75.11|master|v1.2.13|192.168.66.66|CentOS6.6|node|
 |s|192.168.75.13|slave|null|null|CentOS6.6|node,manager|
 
-~~~
+{% highlight bash %}
 m2	192.168.75.12 	192.168.66.66
 `s	192.168.75.13
-~~~
+{% endhighlight %}
 
 
 
@@ -98,7 +98,7 @@ m2	192.168.75.12 	192.168.66.66
 
 系统环境
 
-~~~
+{% highlight bash %}
 [root@m1 ~]# lsb_release  -a 
 LSB Version:	:base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
 Distributor ID:	CentOS
@@ -112,11 +112,11 @@ Kernel \r on an \m
 [root@m1 ~]# uname -a 
 Linux m1 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
 [root@m1 ~]#
-~~~
+{% endhighlight %}
 
 检查系统防火墙
 
-~~~
+{% highlight bash %}
 [root@m1 tmp]# iptables -L
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
@@ -131,13 +131,13 @@ target     prot opt source               destination
 Chain OUTPUT (policy ACCEPT)
 target     prot opt source               destination
 [root@m1 tmp]#
-~~~
+{% endhighlight %}
 
 这个防火墙设置会使数据库主备复制失败，为了简便，直接关掉
 
 >更安全的做法是开3306端口
 
-~~~
+{% highlight bash %}
 [root@m1 tmp]# /etc/init.d/iptables  stop
 iptables: Setting chains to policy ACCEPT: filter [  OK  ]
 iptables: Flushing firewall rules: [  OK  ]
@@ -156,11 +156,11 @@ target     prot opt source               destination
 iptables        0:off   1:off   2:on    3:on    4:on    5:on    6:off
 [root@m1 tmp]# chkconfig iptables off
 [root@m1 tmp]#
-~~~
+{% endhighlight %}
 
 同样检查SELINUX，关闭SELINUX
 
-~~~
+{% highlight bash %}
 [root@m1 tmp]# getenforce
 Enforcing
 [root@m1 tmp]# setenforce 0
@@ -177,14 +177,14 @@ Permissive
 touch /var/lock/subsys/local
 setenforce 0 
 [root@m1 tmp]#
-~~~
+{% endhighlight %}
 
 >关闭selinux也可以修改**/etc/selinux/config**,设置**SELINUX=disabled**,这个要重启后才可以生效
 
 
 参照[Percona Yum Repo][percona yum]配置本地yum库
 
-~~~
+{% highlight bash %}
 [root@m1 tmp]# wget http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm 
 [root@m1 tmp]# ls
 percona-release-0.1-3.noarch.rpm
@@ -193,13 +193,13 @@ warning: percona-release-0.1-3.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 
 Preparing...                ########################################### [100%]
    1:percona-release        ########################################### [100%]
 [root@m1 tmp]#
-~~~
+{% endhighlight %}
 
 安装percona server 5.1 ,系统自动解决了依赖关系，安装了Percona-Server-client-51
 
 这两个包，都需要安装
 
-~~~
+{% highlight bash %}
 [root@m1 tmp]# yum install  Percona-Server-server-51.x86_64
 ...
 ...
@@ -215,7 +215,7 @@ Replaced:
 
 Complete!
 [root@m1 tmp]# 
-~~~
+{% endhighlight %}
 
 配置/etc/my.cnf文件
 
@@ -231,7 +231,7 @@ Complete!
 
 初始化数据库
 
-~~~
+{% highlight bash %}
 [root@m1 tmp]# mysql_install_db --defaults-file=/etc/my.cnf
 Installing MySQL system tables...
 OK
@@ -271,19 +271,19 @@ be eligible for hot fixes, and boost your team's productivity.
 [root@m1 tmp]# echo $?
 0
 [root@m1 tmp]#
-~~~
+{% endhighlight %}
 
 
 
 使用 **/etc/init.d/mysql  start** 启动数据库,然后使用下面命令设定root密码
 
-~~~
+{% highlight bash %}
 [root@m1 mysql]# mysqladmin  -u root password 'mysql'
-~~~
+{% endhighlight %}
 
 重新启动mysql，使用之前设置的密码进行登录
 
-~~~
+{% highlight bash %}
 [root@m1 mysql]# /etc/init.d/mysql  start
 Starting MySQL (Percona Server)[  OK  ]
 [root@m1 mysql]# mysql -u root -p
@@ -315,12 +315,12 @@ Grants for root@localhost: GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDE
 1 row in set (0.00 sec)
 
 mysql> 
-~~~
+{% endhighlight %}
 
 导入一些数据到库中
 
 
-~~~
+{% highlight bash %}
 mysql> use test;
 Database changed
 mysql> \! ls
@@ -368,11 +368,11 @@ mysql> select count(*) from books ;
 1 row in set (0.00 sec)
 
 mysql>
-~~~
+{% endhighlight %}
 
 创建用户repl，用来进行主备同步，这个操作在m1和m2上都要做
 
-~~~
+{% highlight bash %}
 mysql> grant replication slave on *.* to 'repl@'192.168.75.%' identified by 'repl';
 Query OK, 0 rows affected (0.00 sec)
 
@@ -380,13 +380,13 @@ mysql> flush privileges;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql>
-~~~
+{% endhighlight %}
 
 设置主备复制
 
 安装好percona server 5.1 后，登入mysql 在m2和s上执行如下操作
 
-~~~
+{% highlight bash %}
 mysql> STOP SLAVE;
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 
@@ -445,11 +445,11 @@ Query OK, 0 rows affected (0.01 sec)
 mysql>
 
 
-~~~
+{% endhighlight %}
 
 创建用户mhauser，来进行主备切换的必要操作，由mha来调用
 
-~~~
+{% highlight bash %}
 mysql> grant select , insert , update , delete , create, drop , super , process on *.* to 'mhauser@'192.168.75.%' identified by 'xxx';
 Query OK, 0 rows affected (0.01 sec)
 
@@ -457,11 +457,11 @@ mysql> flush privileges;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> 
-~~~
+{% endhighlight %}
 
 因为同步的原因，此时m1,m2,s上都有mhauser这个用户，可以登入到m2与s上进行检查，也顺便检查主备同步的效果
 
-~~~
+{% highlight bash %}
 mysql> select * from mysql.user where user='mhauser'\G
 *************************** 1. row ***************************
                  Host: 192.168.75.%
@@ -506,11 +506,11 @@ Create_tmp_table_priv: N
 1 row in set (0.00 sec)
 
 mysql> 
-~~~
+{% endhighlight %}
 
 确保m1配置如下
 
-~~~
+{% highlight bash %}
 +-----------------+-------+
 | Variable_name   | Value |
 +-----------------+-------+
@@ -521,11 +521,11 @@ mysql>
 +---------------+-------+
 | read_only     | OFF   |
 +---------------+-------+
-~~~
+{% endhighlight %}
 
 m2和s配置如下
 
-~~~
+{% highlight bash %}
 +-----------------+-------+
 | Variable_name   | Value |
 +-----------------+-------+
@@ -536,7 +536,7 @@ m2和s配置如下
 +---------------+-------+
 | read_only     |  ON   |
 +---------------+-------+
-~~~
+{% endhighlight %}
 
 致此，mysql这边的配置已经完成
 

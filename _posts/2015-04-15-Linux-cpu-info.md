@@ -37,23 +37,23 @@ Physical id 和 core id不一定是连续的
 
 查看物理CPU个数
 
-~~~
+{% highlight bash %}
 [root@Test ~]# cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
 2
 [root@Test ~]#
-~~~
+{% endhighlight %}
 
 查看每个物理CPU中core的个数(即核数)
 
-~~~
+{% highlight bash %}
 [root@Test ~]# cat /proc/cpuinfo| grep "cpu cores"| uniq
 cpu cores	: 1
 [root@Test ~]#
-~~~
+{% endhighlight %}
 
 查看core的个数，同时查看一个core的线程数
 
-~~~
+{% highlight bash %}
 [test@test ~]$ cat /proc/cpuinfo  | grep 'core id'| sort  | uniq -c  
       2 core id		: 0
       2 core id		: 1
@@ -62,38 +62,38 @@ cpu cores	: 1
       2 core id		: 4
       2 core id		: 5
 [test@test ~]$ 
-~~~
+{% endhighlight %}
 
 查看一个socket中的线程数
 
-~~~
+{% highlight bash %}
 [test@test ~]$ cat /proc/cpuinfo| grep "siblings" | sort | uniq 
 siblings	: 12
 [test@test ~]$
-~~~
+{% endhighlight %}
 
 查看是否启用超线程
 
 >若是cpu cores数量和siblings数量一致，则没有启用超线程，不然超线程被启用，倍数就是超线程倍数
 
-~~~
+{% highlight bash %}
 [test@test ~]$ cat /proc/cpuinfo | grep -e "cpu cores"  -e "siblings" | sort | uniq
 cpu cores	: 6
 siblings	: 12
 [test@test ~]$ 
-~~~
+{% endhighlight %}
 
 查看逻辑CPU的个数(超线程总数)
 
-~~~
+{% highlight bash %}
 [root@Test ~]# cat /proc/cpuinfo| grep "processor"| wc -l 
 2
 [root@Test ~]#
-~~~
+{% endhighlight %}
 
 查看CPU型号
 
-~~~
+{% highlight bash %}
 [root@Test ~]# cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c 
       2  QEMU Virtual CPU version (cpu64-rhel6)
 [root@Test ~]# 
@@ -103,7 +103,7 @@ siblings	: 12
 [root@abc ~]# dmidecode -s processor-version 
 Intel(R) Xeon(R) CPU E31225 @ 3.10GHz
 [root@abc ~]# 
-~~~
+{% endhighlight %}
 
 
 ---
@@ -114,18 +114,18 @@ Intel(R) Xeon(R) CPU E31225 @ 3.10GHz
 
 查看内核信息
 
-~~~
+{% highlight bash %}
 [root@Test ~]# uname -a 
 Linux Test 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
 [root@Test ~]# 
-~~~
+{% endhighlight %}
 
 
 查看版信息
 
 >redhat和centos中有此命令
 
-~~~
+{% highlight bash %}
 [root@Test ~]# lsb_release -a 
 LSB Version:	:base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
 Distributor ID:	CentOS
@@ -133,38 +133,38 @@ Description:	CentOS release 6.6 (Final)
 Release:	6.6
 Codename:	Final
 [root@Test ~]# 
-~~~
+{% endhighlight %}
 
 查看版本信息
 
-~~~
+{% highlight bash %}
 [root@Test ~]# cat /etc/issue
 CentOS release 6.6 (Final)
 Kernel \r on an \m
 
 [root@Test ~]# 
-~~~
+{% endhighlight %}
 
 查看cpu运行模式
 
-~~~
+{% highlight bash %}
 [root@Test ~]# getconf LONG_BIT
 64
 [root@Test ~]# 
-~~~
+{% endhighlight %}
 
 64bit支持
 
-~~~
+{% highlight bash %}
 [root@Test ~]# cat /proc/cpuinfo | grep flags | grep ' lm '
 flags		: fpu de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pse36 clflush mmx fxsr sse sse2 syscall nx lm unfair_spinlock pni cx16 hypervisor lahf_lm
 flags		: fpu de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pse36 clflush mmx fxsr sse sse2 syscall nx lm unfair_spinlock pni cx16 hypervisor lahf_lm
 [root@Test ~]# 
-~~~
+{% endhighlight %}
 
 cpu概要信息
 
-~~~
+{% highlight bash %}
 [root@Test ~]# lscpu 
 Architecture:          x86_64
 CPU op-mode(s):        32-bit, 64-bit
@@ -188,11 +188,11 @@ L1i cache:             32K
 L2 cache:              4096K
 NUMA node0 CPU(s):     0,1
 [root@Test ~]# 
-~~~
+{% endhighlight %}
 
 查看机器型号
 
-~~~
+{% highlight bash %}
 [root@Test ~]# dmidecode | grep "Product Name" 
 	Product Name: KVM
 [root@Test ~]# 
@@ -204,7 +204,7 @@ NUMA node0 CPU(s):     0,1
 	Product Name: PowerEdge R620
 	Product Name: 0D2D5F
 [root@test ~]# 
-~~~
+{% endhighlight %}
 
 
 
@@ -240,7 +240,7 @@ cpu cores  位于相同物理封装中的内核数量。
 附
 =
 
-~~~
+{% highlight bash %}
 以上各项的含义如下：
 processor　：体系中逻辑处理核的编号。对于单核处理器，则课认为是其CPU编号，对于多核处理惩罚器则可所以物理核、或者应用超线程技巧虚拟的逻辑核
 vendor_id　：CPU制造商      
@@ -303,5 +303,5 @@ lm： “Long Mode，” which means the chip supports the AMD64 instruction set
 tm： “Thermal Monitor” Thermal throttling with IDLE instructions. Usually hardware controlled in response to CPU temperature.
 tm2： “Thermal Monitor 2″ Decrease speed by reducing multipler and vcore.
 est： “Enhanced SpeedStep”
-~~~
+{% endhighlight %}
 

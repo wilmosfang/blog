@@ -85,7 +85,7 @@ Redis 2.8 的这个部分重同步特性会用到一个新增的 PSYNC 内部命
 
 关于这两个参数的说明, **redis.conf** 中已经有了详细的说明：
 
-~~~
+{% highlight bash %}
 # Replication SYNC strategy: disk or socket.
 #
 # -------------------------------------------------------
@@ -129,7 +129,7 @@ repl-diskless-sync no
 # it entirely just set it to 0 seconds and the transfer will start ASAP.
 repl-diskless-sync-delay 5
 
-~~~
+{% endhighlight %}
 
 
 ---
@@ -148,7 +148,7 @@ repl-diskless-sync-delay 5
 
 **master** 上没有 **rdb** 文件
 
-~~~
+{% highlight bash %}
 [root@m1 ~]# ls
 anaconda-ks.cfg  Downloads           log       Public              redis.conf      redis_slave_on_m1.conf  Videos
 Desktop          install.log         Music     redis-3.0.0         redis.log       Templates
@@ -163,11 +163,11 @@ Documents        install.log.syslog  Pictures  redis-3.0.0.tar.gz  redis-new.con
 6) "d"
 127.0.0.1:6379>
 
-~~~
+{% endhighlight %}
 
 在 **slave** 上执行 **slaveof 192.168.75.11 6379** 命令，可以看到空白的库有了数据 
 
-~~~
+{% highlight bash %}
 [root@m2 tmp]# telnet localhost 6379 
 Trying ::1...
 Connected to localhost.
@@ -192,11 +192,11 @@ $1
 a
 $1
 8
-~~~
+{% endhighlight %}
 
 **master** 上也多了一个 **dump.rdb** 文件
 
-~~~
+{% highlight bash %}
 127.0.0.1:6379> keys * 
 1) "b"
 2) "a"
@@ -212,11 +212,11 @@ anaconda-ks.cfg  Downloads    install.log.syslog  Pictures     redis-3.0.0.tar.g
 Desktop          dump.rdb     log                 Public       redis.conf          redis_slave_on_m1.conf  Videos
 Documents        install.log  Music               redis-3.0.0  redis.log           Templates
 [root@m1 ~]# 
-~~~
+{% endhighlight %}
 
 **slave** 在退出后，也会在本地产生一个 **rdb** 文件，这个文件就是库的一个快照，下次启动后用来恢复内存状态
 
-~~~
+{% highlight bash %}
 shutdown   
 Connection closed by foreign host.
 [root@m2 tmp]# ps -ef | grep redis
@@ -228,13 +228,13 @@ mha4mysql-manager-0.53-0.el6.noarch.rpm  my.cnf.leopard.bak  redis-3.0.0.tar.gz
 mha4mysql-manager-0.53.tar.gz            my.cnfrrrccc        redis.conf
 mha4mysql-node-0.53-0.el6.noarch.rpm     my.cnf.tt           redisnew.conf
 [root@m2 tmp]# 
-~~~
+{% endhighlight %}
 
 如果删掉这个 **rdb** 文件，数据就会丢失
 
 > 同步实际上是从 **client** 端发送了一个 **SYNC** 命令
 
-~~~
+{% highlight bash %}
 [root@m2 tmp]# rm dump.rdb 
 rm: remove regular file `dump.rdb'? y
 [root@m2 tmp]# ls
@@ -287,19 +287,19 @@ mha4mysql-manager-0.53-0.el6.noarch.rpm  my.cnf.leopard.bak  redis-3.0.0.tar.gz
 mha4mysql-manager-0.53.tar.gz            my.cnfrrrccc        redis.conf
 mha4mysql-node-0.53-0.el6.noarch.rpm     my.cnf.tt           redisnew.conf
 [root@m2 tmp]# 
-~~~
+{% endhighlight %}
 
 
 ### 写在配置文件中
 
 上面一种方法会在当前运行状态中生效，一旦重启，将不再同步，要想在重启后依然有效，只用在配置文件中加下面一行
 
-~~~
+{% highlight bash %}
 [root@m2 tmp]# grep slaveof redis.conf 
 # Master-Slave replication. Use slaveof to make a Redis instance a copy of
 slaveof m1 6379
 [root@m2 tmp]# 
-~~~
+{% endhighlight %}
 
 ---
 
@@ -312,7 +312,7 @@ Slave的只读特性
 
 ### 只读特性
 
-~~~
+{% highlight bash %}
 [root@m2 tmp]# redis-cli 
 127.0.0.1:6379> KEYS * 
 (empty list or set)
@@ -328,19 +328,19 @@ OK
 127.0.0.1:6379> set jj jj 
 (error) READONLY You can't write against a read only slave.
 127.0.0.1:6379> 
-~~~
+{% endhighlight %}
 
 该模式为从服务器的默认模式
 
-~~~
+{% highlight bash %}
 [root@m2 tmp]# grep slave-read-only redisnew.conf
 slave-read-only yes
 [root@m2 tmp]# 
-~~~
+{% endhighlight %}
 
 停止同步
 
-~~~
+{% highlight bash %}
 127.0.0.1:6379> config get slave*
 1) "slave-priority"
 2) "100"
@@ -358,11 +358,11 @@ OK
 1) "slaveof"
 2) ""
 127.0.0.1:6379> 
-~~~
+{% endhighlight %}
 
 停止同步后又可以写入了
 
-~~~
+{% highlight bash %}
 127.0.0.1:6379> config get slaveof
 1) "slaveof"
 2) ""
@@ -371,13 +371,13 @@ OK
 127.0.0.1:6379> get abc 
 "iii"
 127.0.0.1:6379>  
-~~~
+{% endhighlight %}
 
 但是这个特性可以被在线修改
 
 ### 在线关闭Slave只读
 
-~~~
+{% highlight bash %}
 127.0.0.1:6379> SLAVEOF m1 6379
 OK
 127.0.0.1:6379> set iii abc 
@@ -395,7 +395,7 @@ OK
 127.0.0.1:6379> get iii 
 "abc"
 127.0.0.1:6379> 
-~~~
+{% endhighlight %}
 
 > 既然从服务器上的写数据会被重同步数据覆盖， 也可能在从服务器重启时丢失， 那么为什么要让一个从服务器变得可写呢？
 原因是， 一些不重要的临时数据， 仍然是可以保存在从服务器上面的。 比如说， 客户端可以在从服务器上保存主服务器的可达性（reachability）信息， 从而实现故障转移（failover）策略。
@@ -406,11 +406,11 @@ OK
 
 和复制一样，运行时的配置在重启后将丢失，要想重启后依然生效，得修改配置文件
 
-~~~
+{% highlight bash %}
 [root@m2 tmp]# grep slave-read-only redisnew.conf
 slave-read-only no
 [root@m2 tmp]# 
-~~~
+{% endhighlight %}
 
 ---
 
@@ -424,7 +424,7 @@ redis设计之初就没有过多的考虑安全问题，所以默认情况下，
 
 但是可以通过 **requirepass** 配置一下简单的认证
 
-~~~
+{% highlight bash %}
 127.0.0.1:6379> CONFIG GET requ*
 1) "requirepass"
 2) ""
@@ -451,21 +451,21 @@ OK
 127.0.0.1:6379> ping
 PONG
 127.0.0.1:6379> 
-~~~
+{% endhighlight %}
 
 这时master进行一个更新，slave无法同步
 
 **master side**
 
-~~~
+{% highlight bash %}
 127.0.0.1:6379> set ui ui 
 OK
 127.0.0.1:6379> 
-~~~
+{% endhighlight %}
 
 **slave side**
 
-~~~
+{% highlight bash %}
 127.0.0.1:6379> get ui 
 (nil)
 127.0.0.1:6379> CONFIG set masterauth 123456
@@ -473,7 +473,7 @@ OK
 127.0.0.1:6379> get ui 
 "ui"
 127.0.0.1:6379> 
-~~~
+{% endhighlight %}
 
 > 通过 **CONFIG set masterauth 123456** 可以配置master密码，以顺利进行连接
 
@@ -483,20 +483,20 @@ OK
 
 **master side**
 
-~~~
+{% highlight bash %}
 [root@m1 ~]# grep requirepass redis.conf 
 # If the master is password protected (using the "requirepass" configuration
 requirepass 123456
 [root@m1 ~]# 
-~~~
+{% endhighlight %}
 
 **slave side**
 
-~~~
+{% highlight bash %}
 [root@m2 tmp]# grep masterauth redis.conf 
 masterauth 123456
 [root@m2 tmp]# 
-~~~
+{% endhighlight %}
 
 ---
 
@@ -505,14 +505,14 @@ masterauth 123456
 
 下面两个参数是用来限制 **master** 写操作的:
 
-~~~
+{% highlight bash %}
 127.0.0.1:6379> CONFIG GET min*
 1) "min-slaves-to-write"
 2) "0"
 3) "min-slaves-max-lag"
 4) "10"
 127.0.0.1:6379> 
-~~~
+{% endhighlight %}
 
 由于暂时用不到这个特性，所以，只是对文档进行翻译，没有用试验验证
 

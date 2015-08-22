@@ -12,7 +12,7 @@ comments: true
 
 下面配置很少，但是花了我整整一个下午的时间排错，其根本原因不是配置错误，而是与**Network Manager**服务的冲突，关掉它这个世界立刻变得平静而祥和
 
-~~~bash
+{% highlight bash %}bash
 
 [test@test network-scripts]$ grep -v "#" ifcfg-eth0 | cat -s 
 
@@ -42,7 +42,7 @@ ifup br0
 [test@test network-scripts]$ 
 
 
-~~~
+{% endhighlight %}
 
 之所以在rc.local中添加**ifup br0**，是因为操作系统重启后理应自动启动的**br0**会启动不了，所以使用这个方法来确保启动
 
@@ -50,7 +50,7 @@ ifup br0
 
 下面是重启网络后的效果
 
-~~~bash
+{% highlight bash %}bash
 
 [root@test ~]# /etc/init.d/network  restart 
 Shutting down interface br0:                               [  OK  ]
@@ -130,7 +130,7 @@ vnet0     Link encap:Ethernet  HWaddr FE:54:00:12:1E:4A
        valid_lft forever preferred_lft forever
 [root@test ~]# 
 
-~~~
+{% endhighlight %}
 
 ##补充
 
@@ -138,7 +138,7 @@ selinux有时也会造成影响，需要关闭
 
 查看方法
 
-~~~bash
+{% highlight bash %}bash
 [root@test ~]# sestatus  -v 
 SELinux status:                 disabled
 [root@test ~]# getenforce 
@@ -160,13 +160,13 @@ SELINUXTYPE=targeted
 
 [root@test ~]# 
 
-~~~
+{% endhighlight %}
 
 临时关闭方法 
 
-~~~bash
+{% highlight bash %}bash
 
 setenforce 0
 
-~~~
+{% endhighlight %}
 

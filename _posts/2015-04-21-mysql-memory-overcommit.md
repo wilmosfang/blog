@@ -21,18 +21,18 @@ comments: true
 
 下面是 **top** 出来的信息，只截取了关键部分
 
-~~~
+{% highlight bash %}
   PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                   
 14769 mysql     15   0 42.1g  37g 4792 S 58.1 79.5  25660:41 mysqld  
-~~~
+{% endhighlight %}
 
 **innodb_buffer_pool_size** 只设定了 **20G**
 
-~~~
+{% highlight bash %}
 [root@abc ~]# grep  innodb_buffer_pool_size /etc/my.cnf 
 innodb_buffer_pool_size = 20G
 [root@abc ~]# 
-~~~
+{% endhighlight %}
 
 加上其它七七八八的参数总量也绝不会超过25G，那怎么会有那么大的差距呢？
 
@@ -70,7 +70,7 @@ standard Unix diff, there is no output if there are no differences.
 
 ### 使用 **pmap** 生成mysql内存使用报表
 
-~~~
+{% highlight bash %}
 [root@abc ~]# pmap -x 14769 
 14769:   /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --user=mysql --log-error=/var/lib/mysql/abc.err --open-files-limit=8192 --pid-file=/var/lib/mysql/abc.pid --socket=/var/lib/mysql/mysql.sock --port=3306
 Address           Kbytes     RSS   Dirty Mode   Mapping
@@ -97,11 +97,11 @@ Address           Kbytes     RSS   Dirty Mode   Mapping
 ffffffffff600000    8192       0       0 -----    [ anon ]
 ----------------  ------  ------  ------
 total kB        44114104 39346676 39341556
-~~~
+{% endhighlight %}
 
 对这个报表作一个排序，会获得更多信息
 
-~~~
+{% highlight bash %}
 [root@abc ~]# pmap -x 14769 | sort -nk 2 
 ----------------  ------  ------  ------
 14769:   /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --user=mysql --log-error=/var/lib/mysql/abc.err --open-files-limit=8192 --pid-file=/var/lib/mysql/abc.pid --socket=/var/lib/mysql/mysql.sock --port=3306
@@ -120,7 +120,7 @@ total kB        44112060 39341308 39336188
 000000000adbf000 9284740 7801584 7801544 rw---    [ anon ]
 00002adf8a981000 22243496 22221844 22221652 rw---    [ anon ]
 [root@abc ~]# 
-~~~
+{% endhighlight %}
 
 我注意到最后两项(内存消耗最大两项)，分别是 **21.19G** (22221844K/1024/1024) 和 **7.44G** (7801584K/1024/1024)怎么会有这么多的内存消耗呢~~非常奇怪!
 
@@ -133,7 +133,7 @@ total kB        44112060 39341308 39336188
 
 还有一个数据库可以正常工作，于是我打算拿它作为基准进行对比
 
-~~~
+{% highlight bash %}
 [root@abc ~]# pt-config-diff h=10.0.0.1 h=10.0.0.2 --user=testuser --password=testuser
 12 config differences
 Variable                  abc            def
@@ -151,11 +151,11 @@ slave_skip_errors         ALL                       OFF
 slow_query_log_file       abc-slow.log   def-slow.log
 tmpdir                    /tmp                      /mysqldata/mysqltmp
 [root@abc ~]#
-~~~
+{% endhighlight %}
 
 由于 **innodb_buffer_pool_size** 和 **query_cache_size** 都是我手动配置的，所以这个差异报告让我立刻注意到了 **innodb_ibuf_max_size**
 
-~~~
+{% highlight bash %}
 [root@abc ~]# grep  query_cache_size /etc/my.cnf 
 query_cache_size = 256M
 [root@abc ~]# grep  innodb_buffer_pool_size /etc/my.cnf
@@ -170,11 +170,11 @@ query_cache_size = 128M
 innodb_buffer_pool_size = 9G
 [root@def ~]# grep  innodb_ibuf_max_size  /etc/my.cnf
 [root@def ~]# 
-~~~
+{% endhighlight %}
 
 **innodb_ibuf_max_size** 这个参数我并没配置，但它默认存在于我的系统中
 
-~~~
+{% highlight bash %}
 mysql> show variables like "%innodb_ibuf_max_size%";
 +----------------------+-------------+
 | Variable_name        | Value       |
@@ -184,7 +184,7 @@ mysql> show variables like "%innodb_ibuf_max_size%";
 1 row in set (0.00 sec)
 
 mysql> 
-~~~
+{% endhighlight %}
 
 ---
 
@@ -193,12 +193,12 @@ mysql>
 
 因为这个参数占用了那么多的内存
 
-~~~
+{% highlight bash %}
 21474836480/10737418240
 2.000000000
 9663676416/4831838208
 2.000000000
-~~~
+{% endhighlight %}
 
 发现都正好是 **innodb_buffer_pool_size** 的一半，于是开始查文档弄清楚 **innodb_ibuf_max_size** 参数的意义
 
@@ -250,10 +250,10 @@ If you have very fast storage (ie storage with RAM-level speed, not just a RAID 
 
 * 使用工具来查看有没有严重的参数配置错误
 
-~~~
+{% highlight bash %}
 pt-variable-advisor 10.0.0.1   --user testuser --password testuser
 pt-mysql-summary  --user=testuser --password=testuser
-~~~
+{% endhighlight %}
 
 * 查看分析各种buffer，cache ，Qcache ，connections ，Thread ，sort 参数配置与比值，企图找出不合理的地方
 

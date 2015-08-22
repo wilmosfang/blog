@@ -46,7 +46,7 @@ touch /var/lock/subsys/local
 {% endhighlight %}
 
 
-~~~ruby
+{% highlight bash %}ruby
 	public void startThreadUseSubClass() {
 		class MyThread extends Thread {
 			public void run() {
@@ -57,12 +57,12 @@ touch /var/lock/subsys/local
 		MyThread thread = new MyThread();
 		thread.start();
 	}
-~~~
+{% endhighlight %}
 
 
 另一种是传递给 Thread 构造函数一个 Runnable 对象。
 
-~~~java
+{% highlight bash %}java
 	public void startThreadUseRunnalbe() {
 		Thread thread = new Thread(new Runnable() {
 			public void run() {
@@ -71,7 +71,7 @@ touch /var/lock/subsys/local
 		});
 		thread.start();
 	}
-~~~
+{% endhighlight %}
 
 
 {% highlight bash  %}
@@ -102,7 +102,7 @@ touch /var/lock/subsys/local
 当然， Runnalbe 对象，也不是只有这一种形式，例如如果我们想要线程执行时返回一个值，就需要用到另一种 Runnalbe 对象，它
 对原来的 Runnalbe 对象进行了包装。
 
-~~~java
+{% highlight bash %}java
 	public void startFutureTask() {
 		FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
 			public Integer call() {
@@ -121,7 +121,7 @@ touch /var/lock/subsys/local
 			e.printStackTrace();
 		}
 	}
-~~~
+{% endhighlight %}
 
 ## 结束线程
 

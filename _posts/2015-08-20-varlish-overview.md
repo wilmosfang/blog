@@ -11,12 +11,17 @@ comments: true
 
 ---
 
+#概要
+
 
 * TOC
 {:toc}
 
 
 ---
+
+#内容
+
 
 安装
 -
@@ -411,11 +416,11 @@ VCL
 
 ---
 
-常用命令浅析
--
+#常用命令浅析
 
-[varnishhist][varnishhist]
--
+
+##[varnishhist][varnishhist]
+
 
 能产生下列效果的统计直方图
 
@@ -450,8 +455,8 @@ VCL
 
 ---
 
-[varnishlog][varnishlog]
--
+##[varnishlog][varnishlog]
+
 
 可以产生如下效果的日志
 
@@ -481,8 +486,8 @@ VCL
 
 ---
 
-[varnishncsa][varnishncsa]
--
+##[varnishncsa][varnishncsa]
+
 
 可以产生下列格式的日志
 
@@ -499,8 +504,8 @@ VCL
 
 ---
 
-[varnishstat][varnishstat]
--
+##[varnishstat][varnishstat]
+
 
 可以产生下列形式的统计
 
@@ -524,8 +529,8 @@ MAIN.fetch_length                                                               
 
 ---
 
-[varnishtop][varnishtop]
--
+##[varnishtop][varnishtop]
+
 
 可以产生下列形式的 **top** 统计信息
 
@@ -560,7 +565,7 @@ list length 275                                                                 
 
 ---
 
-###[varnishadm][varnishadm]
+##[varnishadm][varnishadm]
 
 
 会提供一个交互界面，可用于对运行中的 **varnish** ，进行交互式管理

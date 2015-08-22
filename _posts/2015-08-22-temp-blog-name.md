@@ -10,13 +10,15 @@ comments: true
 
 ---
 
-#要点
+#概要
 
 * TOC
 {:toc}
 
 
 ---
+
+#内容
 
 #一级内容标题
 
@@ -52,9 +54,9 @@ touch /var/lock/subsys/local
 > **Tip:**
 
 
-~~~
+{% highlight bash %}
 just for test
-~~~
+{% endhighlight %}
 
 
 > **Note:**
@@ -63,6 +65,9 @@ just for test
 
 #总结
 
+---
+
+#附录
 
 ---
 

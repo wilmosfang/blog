@@ -24,7 +24,7 @@ comments: true
 
 配置host到m1，m2，s
 
-~~~
+{% highlight bash %}
 [root@m1 tmp]# cat /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
@@ -32,7 +32,7 @@ comments: true
 192.168.75.12 m2
 192.168.75.13 s
 [root@m1 tmp]# 
-~~~
+{% endhighlight %}
 
 下载必要的安装包，并且拷贝到m2和s上去
 
@@ -40,7 +40,7 @@ comments: true
 >
 >[epel的下载地址][epel rpm]
 
-~~~
+{% highlight bash %}
 [root@m1 tmp]# ls 
 epel-release-6-8.noarch2.rpm             my.cnf
 mha4mysql-manager-0.53-0.el6.noarch.rpm  my.cnf.tt
@@ -60,16 +60,16 @@ sending incremental file list
 sent 215 bytes  received 12 bytes  50.44 bytes/sec
 total size is 250732  speedup is 1104.55
 [root@m1 tmp]# 
-~~~
+{% endhighlight %}
 给m1,m2,s都安装上epel库
 
-~~~
+{% highlight bash %}
 [root@localhost tmp]# rpm -ivh epel-release-6-8.noarch2.rpm
 warning: epel-release-6-8.noarch2.rpm: Header V3 RSA/SHA1 Signature, key ID c105b9de: NOKEY
 Preparing...                ########################################### [100%]
    1:epel-release           ########################################### [100%]
 [root@localhost tmp]#
-~~~
+{% endhighlight %}
 
 根据角色的不同 , 为m1,m2,s分别安装下列mha软件
 
@@ -83,16 +83,16 @@ mha-node 的安装有如下[依赖][mha install]
 
 >mha的相关资料都托管在google code上，目前得有相应的代理或vpn进行翻墙操作才能阅览，这是[mha的软件依赖和安装方法][mha install] 
 
-~~~
+{% highlight bash %}
 [root@localhost tmp]# rpm -ivh mha4mysql-node-0.53-0.el6.noarch.rpm
 error: Failed dependencies:
         perl(DBD::mysql) is needed by mha4mysql-node-0.53-0.el6.noarch
 [root@localhost tmp]#
-~~~
+{% endhighlight %}
 
 解决依赖后，可以正常安装
 
-~~~
+{% highlight bash %}
 [root@localhost tmp]# yum install perl-DBD-MySQL
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -107,11 +107,11 @@ Complete!
 Preparing...                ########################################### [100%]
    1:mha4mysql-node         ########################################### [100%]
 [root@localhost tmp]# 
-~~~
+{% endhighlight %}
 
 mha-manager 依赖mha-node ，安装完node后还有如下[依赖][mha install]
 
-~~~
+{% highlight bash %}
 [root@localhost tmp]# rpm -ivh mha4mysql-manager-0.53-0.el6.noarch.rpm
 error: Failed dependencies:
         perl(Config::Tiny) is needed by mha4mysql-manager-0.53-0.el6.noarch
@@ -120,13 +120,13 @@ error: Failed dependencies:
         perl(Log::Dispatch::Screen) is needed by mha4mysql-manager-0.53-0.el6.noarch
         perl(Parallel::ForkManager) is needed by mha4mysql-manager-0.53-0.el6.noarch
 [root@localhost tmp]# 
-~~~
+{% endhighlight %}
 
 解决依赖后，可以正常安装
 
 >这个操作只在s上进行，manager 这个角色起监视和管控的作用，可以是一台备库，也可以专门拿一台没有安装数据库的机器，软件本身的运行并不基于数据库
 
-~~~
+{% highlight bash %}
 [root@localhost tmp]# yum -y install perl-Config-Tiny   perl-Log-Dispatch  perl-Parallel-ForkManager
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -153,7 +153,7 @@ Complete!
 Preparing...                ########################################### [100%]
    1:mha4mysql-manager      ########################################### [100%]
 [root@localhost tmp]#
-~~~
+{% endhighlight %}
 
 软件安装完成，开始进行系统配置 
 
@@ -168,20 +168,20 @@ mha需要一个有拷贝binlog权限的用户可以对其它机器进行password
 
 在安装percona server的过程中，系统自动为软件创建了一个mysql用户，可是这个用户的家在**/var/lib/mysql**中，mysql的默认根目录，一个奇怪的地方
 
-~~~
+{% highlight bash %}
 [root@localhost tmp]# grep mysql /etc/passwd
 mysql:x:496:493:Percona Server:/var/lib/mysql:/bin/bash
 [root@localhost tmp]# su - mysql
 -bash-4.1$ ls
 ibdata1  ib_logfile0  ib_logfile1  localhost.localdomain.pid  mysql  mysql.sock  test
 -bash-4.1$
-~~~
+{% endhighlight %}
 
 可不可以直接在里面安家呢，还真不可以，因为我试过，使用证书认证的过程中会产生一个**.ssh**的目录，而mysql是个很傻的数据库，它会把数据目录里的所有文件夹都当作自己的一个数据库，数据目录又默认是使用的mysql根，结果数据库里就会产生一个类似**#mysql50#.ssh**的奇怪库，它会导致复制异常，并报错
 
 所以我手动给它创建了一个家，这个要在三台机器上都进行操作
 
-~~~
+{% highlight bash %}
 [root@localhost tmp]# mkdir /home/mysql
 [root@localhost tmp]# cp /etc/skel/.* /home/mysql/
 cp: omitting directory `/etc/skel/.'
@@ -190,20 +190,20 @@ cp: omitting directory `/etc/skel/.gnome2'
 cp: omitting directory `/etc/skel/.mozilla'
 [root@localhost tmp]# chown  -R mysql.mysql /home/mysql/
 [root@localhost tmp]# chmod -R 700 /home/mysql/
-~~~
+{% endhighlight %}
 
 将**/etc/passwd**中**mysql**的家**/var/lib/mysql**改为**/home/mysql** , 然后以**mysql**身份登录
 
-~~~
+{% highlight bash %}
 [root@localhost tmp]# su - mysql
 [mysql@localhost ~]$ ls -a
 .  ..  .bash_logout  .bash_profile  .bashrc
 [mysql@localhost ~]$
-~~~
+{% endhighlight %}
 
 生成RSA证书
 
-~~~
+{% highlight bash %}
 [mysql@localhost ~]$ ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/mysql/.ssh/id_rsa):
@@ -227,11 +227,11 @@ The key's randomart image is:
 |                 |
 +-----------------+
 [mysql@localhost ~]$
-~~~
+{% endhighlight %}
 
 相互之间拷贝证书，无密码登录
 
-~~~
+{% highlight bash %}
 [mysql@localhost ~]$ ssh-copy-id  -i .ssh/id_rsa.pub  mysql@m2
 mysql@m2's password:
 Now try logging into the machine, with "ssh 'mysql@m2'", and check in:
@@ -254,7 +254,7 @@ Now try logging into the machine, with "ssh 'mysql@s'", and check in:
 to make sure we haven't added extra keys that you weren't expecting.
 
 [mysql@localhost ~]$
-~~~
+{% endhighlight %}
 
 其它两台也一样，要三方互拷自己的公钥
 
@@ -267,7 +267,7 @@ mha有两个配置文件 :
 全局配置文件 **/etc/masterha_default.cnf**  
 
 
-~~~
+{% highlight bash %}
 [mysql@s ~]$ cat /etc/masterha_default.cnf 
 [server default]
 user=mhauser
@@ -281,7 +281,7 @@ master_ip_online_change_script= /home/mysql/mha/script/master_ip_online_change
 # report_script= /script/masterha/send_report
 [mysql@s ~]$ 
 
-~~~
+{% endhighlight %}
 
 全局配置文件中设定了:
 
@@ -301,7 +301,7 @@ binlog目录 , 如果所有server的binlog目录路径一样，可以在此统�
 
 应用配置文件 **/etc/app1.cnf**
 
-~~~
+{% highlight bash %}
 [mysql@s ~]$ cat /etc/app1.cnf 
 [server default]
 manager_workdir=/home/mysql/mha/app1
@@ -320,7 +320,7 @@ hostname=s
 no_master=1
 
 [mysql@s ~]$
-~~~
+{% endhighlight %}
 应用配置文件里设定了:
 
 manager工作目录，这是一个本地目录
@@ -334,7 +334,7 @@ manager日志存放路径
 
 拷完后有一个mha脚本可以进行验证，只有通过ssh检查才能进行下一步，因为mha的整个机制都是建立在此之上
 
-~~~
+{% highlight bash %}
 [mysql@s ~]$ masterha_check_ssh --conf=/etc/app1.cnf 
 Sat Mar 28 04:10:09 2015 - [info] Reading default configuratoins from /etc/masterha_default.cnf..
 Sat Mar 28 04:10:09 2015 - [info] Reading application default configurations from /etc/app1.cnf..
@@ -357,13 +357,13 @@ Sat Mar 28 04:10:12 2015 - [debug]  Connecting via SSH from mysql@s(192.168.75.1
 Sat Mar 28 04:10:14 2015 - [debug]   ok.
 Sat Mar 28 04:10:14 2015 - [info] All SSH connection tests passed successfully.
 [mysql@s ~]$ 
-~~~
+{% endhighlight %}
 
 如果没能通过检测，可以根据日志进行排错
 
 然后进行复制检查
 
-~~~
+{% highlight bash %}
 [mysql@s ~]$ masterha_check_repl --conf=/etc/app1.cnf 
 Sat Mar 28 04:49:47 2015 - [info] Reading default configuratoins from /etc/masterha_default.cnf..
 Sat Mar 28 04:49:47 2015 - [info] Reading application default configurations from /etc/app1.cnf..
@@ -438,7 +438,7 @@ Sat Mar 28 04:49:58 2015 - [info] Got exit code 0 (Not master dead).
 
 MySQL Replication Health is OK.
 [mysql@s ~]$ 
-~~~
+{% endhighlight %}
 
 这里有一个**[warning] shutdown_script is not defined.**的警告，由于我们暂时不考虑fense的情况，就让它警告吧，不影响使用
 

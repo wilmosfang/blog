@@ -70,29 +70,29 @@ touch /var/lock/subsys/local
                 thread.start<span class="o">()</span><span class="p">;</span>
         <span class="o">}</span></code></pre></div>
 
-<pre><code class="language-ruby">	public void startThreadUseSubClass() {
-		class MyThread extends Thread {
-			public void run() {
-				System.out.println("start thread using Subclass of Thread");
-			}
-		}
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ruby
+	public void startThreadUseSubClass<span class="o">()</span> <span class="o">{</span>
+		class MyThread extends Thread <span class="o">{</span>
+			public void run<span class="o">()</span> <span class="o">{</span>
+				System.out.println<span class="o">(</span><span class="s2">&quot;start thread using Subclass of Thread&quot;</span><span class="o">)</span><span class="p">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
 
-		MyThread thread = new MyThread();
-		thread.start();
-	}
-</code></pre>
+		MyThread <span class="nv">thread</span> <span class="o">=</span> new MyThread<span class="o">()</span><span class="p">;</span>
+		thread.start<span class="o">()</span><span class="p">;</span>
+	<span class="o">}</span></code></pre></div>
 
 <p>另一种是传递给 Thread 构造函数一个 Runnable 对象。</p>
 
-<pre><code class="language-java">	public void startThreadUseRunnalbe() {
-		Thread thread = new Thread(new Runnable() {
-			public void run() {
-				System.out.println("start thread using runnable");
-			}
-		});
-		thread.start();
-	}
-</code></pre>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">java
+	public void startThreadUseRunnalbe<span class="o">()</span> <span class="o">{</span>
+		Thread <span class="nv">thread</span> <span class="o">=</span> new Thread<span class="o">(</span>new Runnable<span class="o">()</span> <span class="o">{</span>
+			public void run<span class="o">()</span> <span class="o">{</span>
+				System.out.println<span class="o">(</span><span class="s2">&quot;start thread using runnable&quot;</span><span class="o">)</span><span class="p">;</span>
+			<span class="o">}</span>
+		<span class="o">})</span><span class="p">;</span>
+		thread.start<span class="o">()</span><span class="p">;</span>
+	<span class="o">}</span></code></pre></div>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">[</span>gituser@tools tmp<span class="o">]</span><span class="c"># </span>
 <span class="o">[</span>gituser@tools tmp<span class="o">]</span><span class="nv">$ </span>
@@ -120,25 +120,25 @@ touch /var/lock/subsys/local
 <p>当然， Runnalbe 对象，也不是只有这一种形式，例如如果我们想要线程执行时返回一个值，就需要用到另一种 Runnalbe 对象，它
 对原来的 Runnalbe 对象进行了包装。</p>
 
-<pre><code class="language-java">	public void startFutureTask() {
-		FutureTask&lt;Integer&gt; task = new FutureTask&lt;&gt;(new Callable&lt;Integer&gt;() {
-			public Integer call() {
-				return 1;
-			}
-		});
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">java
+	public void startFutureTask<span class="o">()</span> <span class="o">{</span>
+		FutureTask&lt;Integer&gt; <span class="nv">task</span> <span class="o">=</span> new FutureTask&lt;&gt;<span class="o">(</span>new Callable&lt;Integer&gt;<span class="o">()</span> <span class="o">{</span>
+			public Integer call<span class="o">()</span> <span class="o">{</span>
+				<span class="k">return</span> 1<span class="p">;</span>
+			<span class="o">}</span>
+		<span class="o">})</span><span class="p">;</span>
 
-		new Thread(task).start();
+		new Thread<span class="o">(</span>task<span class="o">)</span>.start<span class="o">()</span><span class="p">;</span>
 
-		try {
-			Integer result = task.get();
-			System.out.println("future result " + result);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-	}
-</code></pre>
+		try <span class="o">{</span>
+			Integer <span class="nv">result</span> <span class="o">=</span> task.get<span class="o">()</span><span class="p">;</span>
+			System.out.println<span class="o">(</span><span class="s2">&quot;future result &quot;</span> + result<span class="o">)</span><span class="p">;</span>
+		<span class="o">}</span> catch <span class="o">(</span>InterruptedException e<span class="o">)</span> <span class="o">{</span>
+			e.printStackTrace<span class="o">()</span><span class="p">;</span>
+		<span class="o">}</span> catch <span class="o">(</span>ExecutionException e<span class="o">)</span> <span class="o">{</span>
+			e.printStackTrace<span class="o">()</span><span class="p">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span></code></pre></div>
 
 <h2 id="section-1">结束线程</h2>
 
