@@ -23,12 +23,18 @@ comments: true
 
 ---
 
-安装Redis
--
+
+#概要
+
+* TOC
+{:toc}
+
+
+---
 
 Redis 是日前我遇到过的安装最简单的数据库
 
-### 下载安装包
+## 下载安装包
 
 [Redis的安装包地址][redis download] 
 
@@ -54,7 +60,7 @@ Desktop          Downloads  install.log.syslog  Music  Public    Templates      
 [root@m1 ~]# 
 {% endhighlight %}
 
-### 解压并编译
+## 解压并编译
 
 {% highlight bash %}
 [root@m1 ~]# tar zxvf redis-3.0.0.tar.gz 
@@ -93,7 +99,7 @@ make[1]: Leaving directory `/root/redis-3.0.0/src'
 [root@m1 redis-3.0.0]# 
 {% endhighlight %}
 
-###拷贝脚本
+##拷贝脚本
 
 
 src下会多出几个脚本
@@ -163,7 +169,7 @@ redis-server
 >  >
 >  >[root@m1 redis-3.0.0]# 
 
-###运行redis server
+##运行redis server
 
 
 **redis-server** 的使用方法 
@@ -236,7 +242,7 @@ tcp        0      0 :::6379                     :::*                        LIST
 [root@m1 redis-3.0.0]# 
 {% endhighlight %}
 
-###连入redis server
+##连入redis server
 
 可以使用 **redis-cli** 连接 redis server , 然后完成各种操作
 

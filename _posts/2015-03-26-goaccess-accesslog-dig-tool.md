@@ -10,6 +10,18 @@ Web运维难免涉及到access log的分析工作,虽然使用awk可以实现绝
 
 在网上经过一翻搜索后，发现了一款分析软件[GoAccess](http://goaccess.io/),非常好用，可以自动生成报表，结合一下其它工具，可以定期给自己发一个access log分析报表
 
+
+---
+
+#概要
+
+* TOC
+{:toc}
+
+
+---
+
+
 ##安装GoAccess
 
 如果配置了epel库，可以直接使用yum安装，过程非常简单
@@ -92,6 +104,7 @@ Copyright (C) 2009-2014 GNU GPL'd, by Gerardo Orellana
 * 2.弹出一个交互窗口
 
 {% highlight bash %}
+GoAccess  
                        +--------------------------------------------------+
                        | Log Format Configuration                         |
                        | [SPACE] to toggle - [ENTER] to proceed           |
@@ -109,11 +122,13 @@ Copyright (C) 2009-2014 GNU GPL'd, by Gerardo Orellana
                        | Date Format - [d] to add/edit format             |
                        |                                                  |
                        +--------------------------------------------------+
+
 {% endhighlight %}
 
 * 3.选择一种格式，由于我的access.log最匹配第一种格式，于是选择了它，这是goaccess能进行正常解析的基础
 
 {% highlight bash %}
+GoAccess
                        +--------------------------------------------------+
                        | Log Format Configuration                         |
                        | [SPACE] to toggle - [ENTER] to proceed           |
@@ -131,6 +146,7 @@ Copyright (C) 2009-2014 GNU GPL'd, by Gerardo Orellana
                        | Date Format - [d] to add/edit format             |
                        | %d/%b/%Y                                         |
                        +--------------------------------------------------+
+
 
 {% endhighlight %}
 
@@ -235,7 +251,7 @@ Copyright (C) 2009-2014 GNU GPL'd, by Gerardo Orellana
 ![goaccess-code](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/goaccess/goaccess-code.png)
 
 
-##附
+#附
 
 参考链接
 

@@ -19,6 +19,15 @@ comments: true
 
 ---
 
+
+#概要
+
+* TOC
+{:toc}
+
+
+---
+
 安装mha
 -
 
@@ -456,12 +465,12 @@ MySQL Replication Health is OK.
 
 我会在下一节中结合**keepalived**进行阐释
 
-这里是[mha的wiki][mha wiki] , 里面有对mha的详细介绍，不过，极有可能，你打不开，原因是被墙了，想获取真知，想想办法吧 ^_^
+这里是[mha的wiki][mha wiki] , 里面有对mha的详细介绍，不过，极有可能，你打不开，原因是被墙了，想获取真知，想想办法吧
 
 ---
 
 [Mha]:http://code.google.com/p/mysql-master-ha/
-[mha1]:http://wilmosfang.github.io/blog/2015/03/26/mysql-HA-build-percona-server5.1-install.html
+[mha1]:http://soft.dog/2015/03/26/mysql-HA-build-percona-server5.1-install.html
 [epel rpm]:http://rpmfind.net/linux/rpm2html/search.php?query=epel&submit=Search+...
 [mha install]:https://code.google.com/p/mysql-master-ha/wiki/Installation
 [mha requirements]:https://code.google.com/p/mysql-master-ha/wiki/Requirements

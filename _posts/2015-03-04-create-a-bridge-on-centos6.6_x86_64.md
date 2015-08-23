@@ -8,6 +8,17 @@ comments: true
 
 大部分玩**KVM**的人一定都会遇到同一个问题，那就是给当前系统创建一个**Bridge**(Bridge 可以理解为软件模拟出的网桥，网桥又可以理解为简单的交换机，如果还不明白建议用Baidu去Google一把)
 
+---
+
+#概要
+
+* TOC
+{:toc}
+
+
+---
+
+
 ##配置
 
 下面配置很少，但是花了我整整一个下午的时间排错，其根本原因不是配置错误，而是与**Network Manager**服务的冲突，关掉它这个世界立刻变得平静而祥和
@@ -132,7 +143,7 @@ vnet0     Link encap:Ethernet  HWaddr FE:54:00:12:1E:4A
 
 {% endhighlight %}
 
-##补充
+#注意
 
 selinux有时也会造成影响，需要关闭
 

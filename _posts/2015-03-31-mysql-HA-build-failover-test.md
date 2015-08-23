@@ -15,6 +15,15 @@ comments: true
 
 ---
 
+
+#概要
+
+* TOC
+{:toc}
+
+
+---
+
 ##在线迁移测试 
 
 使用**masterha_master_switch**进行在线切换
@@ -1029,7 +1038,7 @@ Master failover to m2(192.168.75.12:3306) completed successfully.
 在此只是将mha的基本框架进行了搭建，基本功能进行了展示
 
 
-[mha3]:http://wilmosfang.github.io/blog/2015/03/30/mysql-HA-build-keepalived-install-and-config.html
+[mha3]:http://soft.dog/2015/03/30/mysql-HA-build-keepalived-install-and-config.html
 
 
 

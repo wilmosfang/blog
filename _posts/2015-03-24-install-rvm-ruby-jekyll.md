@@ -16,6 +16,15 @@ comments: true
 
 这里涉及到rvm,ruby,gem和jekyll的安装,绝对干货,因为里面已经包含了几个我踩的坑,坑对面的屌丝看过来,看过来,看过来……这里有表演很精彩……
 
+---
+
+#概要
+
+* TOC
+{:toc}
+
+
+---
 
 ##系统环境
 
@@ -499,8 +508,9 @@ Configuration file: /root/tmp/myblog/_config.yml
 
 感觉棒棒哒！！
 
+---
 
-##总结
+#总结
 
 * 1.安装gcc
 * 2.安装rvm
@@ -510,7 +520,9 @@ Configuration file: /root/tmp/myblog/_config.yml
 * 6.生成blog
 * 7.运行jekyll server 
 
-##注意
+---
+
+#注意
 
 * 1.尽量使用rvm,这是一款ruby神器
 * 2.使用合适的安装源,别让自己的青春虚度

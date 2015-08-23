@@ -17,6 +17,12 @@ keepalived和LVS配合使用是开源界比较流行的LB解决方案，keepaliv
 >当前最新版本是[1.2.15][keepalived download] 发布于2014.12.21 
 
 
+#概要
+
+* TOC
+{:toc}
+
+
 ---
 
 架构图
@@ -389,7 +395,7 @@ MHA Manager 会调用 **master_ip_failover_script** 三次
 ---
 
 
-[mha2]:http://wilmosfang.github.io/blog/2015/03/27/mysql-HA-build-mha-install-and-config.html
+[mha2]:http://soft.dog/2015/03/27/mysql-HA-build-mha-install-and-config.html
 [keepalived]:http://www.keepalived.org/
 [keepalived download]:http://www.keepalived.org/download.html
 

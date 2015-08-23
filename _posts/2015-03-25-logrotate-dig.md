@@ -8,6 +8,17 @@ comments: true
 
 有一天发现自动生成的文件归档和cron job中的时间不一致，于是想弄清原因，最后找到了原因，是由系统下面logrotate来负责生成的，下面对logrotate的执行时间进行探源。
 
+
+---
+
+#概要
+
+* TOC
+{:toc}
+
+
+---
+
 ##Centos5 与Centos6的区别
 
 这是Centos5下面的crontab文件
