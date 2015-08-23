@@ -494,3 +494,12 @@ ps faux   | grep "sshd" | grep -v 'grep' | awk 'BEGIN{sum=0;}{sum=sum+$6;}END{pr
 ps faux  | awk 'BEGIN{sum=0}{sum=sum+$6}END{print sum/1024}'
 {% endhighlight %}
 
+
+---
+
+[jekyll]
+-
+
+{% highlight bash %}
+jekyll server  --host 0.0.0.0 --port 8080
+{% endhighlight %}
