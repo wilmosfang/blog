@@ -434,6 +434,11 @@ testvpn  pptpd  testvpnabc *
 [root@pptp-server ~]# 
 {% endhighlight %}
 
+> **Tip:**  
+> 1. 密码是可以在线修改的
+> 2. 密码可以使用字母大小写Aa!@$%^&*()-_+={}[];':"<>,.?\|不能使用#\
+> (密码纯是人肉测出来的)
+
 
 ##启动服务
 
