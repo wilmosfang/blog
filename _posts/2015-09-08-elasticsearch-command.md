@@ -232,7 +232,7 @@ epoch      timestamp cluster status node.total node.data shards pri relo init un
 host          ip            heap.percent ram.percent load node.role master name      
 esvm01        10.10.10.200           23          78 0.05 d         *      ES esvm01 
 esvm02        10.10.10.201           20          39 0.01 d         m      ES esvm02 
-esvm03 10.10.10.203             49          24 0.01 d         m      ES esvm03 
+esvm03 	      10.10.10.203           49          24 0.01 d         m      ES esvm03 
 [root@esvm03 ~]# 
 {% endhighlight %}
 
