@@ -245,7 +245,7 @@ esvm03 10.10.10.203             49          24 0.01 d         m      ES esvm03
 shards disk.used disk.avail disk.total disk.percent host          ip            node      
     13    20.9gb    274.2gb    295.2gb            7 esvm01        10.10.10.200 ES esvm01 
     14    15.6gb     82.7gb     98.4gb           15 esvm02        10.10.10.201 ES esvm02 
-    13   100.5gb      1.6tb      1.6tb            5 esvm03 10.10.10.203   ES esvm03 
+    13   100.5gb      1.6tb      1.6tb            5 esvm03 	  10.10.10.203 ES esvm03 
 [root@esvm03 ~]# 
 {% endhighlight %}
 
@@ -273,7 +273,7 @@ green  bet_orders   5   1      96720           17     93.2mb         46.6mb
 id                     host          ip            node      total created_at 
 sp7UBOgfSGKJaw_XPhyu-Q esvm02        10.10.10.201 ES esvm02 3.3mb      3.3mb 
 LNX8Y35TTEarNaW8zZYVeQ esvm01        10.10.10.200 ES esvm01 4.4mb      4.4mb 
-NeyBeQw1Qn6jsuJInDxJCQ esvm03 10.10.10.203   ES esvm03    0b         0b 
+NeyBeQw1Qn6jsuJInDxJCQ esvm03 	     10.10.10.203 ES esvm03    0b         0b 
 [root@esvm03 ~]# 
 {% endhighlight %}
 
@@ -320,41 +320,41 @@ ES esvm03 analysis-mmseg NA      j
 {% highlight bash %}
 [root@esvm03 ~]# curl 'localhost:9200/_cat/recovery?v'
 index      shard time  type       stage source_host target_host   repository snapshot files files_percent bytes     bytes_percent 
-users      0     405   relocation done  esvm01      esvm03 n/a        n/a      28    100.0%        1176005   100.0%        
+users      0     405   relocation done  esvm01      esvm03        n/a        n/a      28    100.0%        1176005   100.0%        
 users      0     52    replica    done  esvm01      esvm02        n/a        n/a      1     100.0%        1176005   100.0%        
-users      1     358   relocation done  esvm01      esvm03 n/a        n/a      39    100.0%        1194365   100.0%        
+users      1     358   relocation done  esvm01      esvm03 	  n/a        n/a      39    100.0%        1194365   100.0%        
 users      1     64    replica    done  esvm01      esvm02        n/a        n/a      1     100.0%        1194365   100.0%        
-users      2     671   replica    done  esvm01      esvm03 n/a        n/a      26    100.0%        1177678   100.0%        
+users      2     671   replica    done  esvm01      esvm03 	  n/a        n/a      26    100.0%        1177678   100.0%        
 users      2     6     gateway    done  esvm01      esvm01        n/a        n/a      0     0.0%          0         0.0%          
-users      3     385   replica    done  esvm01      esvm03 n/a        n/a      14    100.0%        1168462   100.0%        
+users      3     385   replica    done  esvm01      esvm03 	  n/a        n/a      14    100.0%        1168462   100.0%        
 users      3     29    gateway    done  esvm01      esvm01        n/a        n/a      0     0.0%          0         0.0%          
 users      4     5     gateway    done  esvm01      esvm01        n/a        n/a      0     0.0%          0         0.0%          
 users      4     66    replica    done  esvm01      esvm02        n/a        n/a      1     100.0%        1187941   100.0%        
-topics     0     514   replica    done  esvm01      esvm03 n/a        n/a      32    100.0%        1611760   100.0%        
+topics     0     514   replica    done  esvm01      esvm03   	  n/a        n/a      32    100.0%        1611760   100.0%        
 topics     0     5     gateway    done  esvm01      esvm01        n/a        n/a      0     0.0%          0         0.0%          
-topics     1     1096  relocation done  esvm01      esvm03 n/a        n/a      38    100.0%        1612483   100.0%        
+topics     1     1096  relocation done  esvm01      esvm03 	  n/a        n/a      38    100.0%        1612483   100.0%        
 topics     1     203   replica    done  esvm01      esvm02        n/a        n/a      17    100.0%        1459163   100.0%        
-topics     2     725   relocation done  esvm01      esvm03 n/a        n/a      20    100.0%        1606817   100.0%        
+topics     2     725   relocation done  esvm01      esvm03 	  n/a        n/a      20    100.0%        1606817   100.0%        
 topics     2     161   replica    done  esvm01      esvm02        n/a        n/a      14    100.0%        1466632   100.0%        
 topics     3     4     gateway    done  esvm01      esvm01        n/a        n/a      0     0.0%          0         0.0%          
 topics     3     94    replica    done  esvm01      esvm02        n/a        n/a      7     100.0%        1469455   100.0%        
 topics     4     4     gateway    done  esvm01      esvm01        n/a        n/a      0     0.0%          0         0.0%          
 topics     4     445   replica    done  esvm01      esvm02        n/a        n/a      7     100.0%        1480195   100.0%        
-posts      0     25371 relocation done  esvm01      esvm03 n/a        n/a      190   100.0%        422296109 100.0%        
+posts      0     25371 relocation done  esvm01      esvm03	  n/a        n/a      190   100.0%        422296109 100.0%        
 posts      0     906   replica    done  esvm01      esvm02        n/a        n/a      56    100.0%        369011722 100.0%        
-posts      1     32351 replica    done  esvm01      esvm03 n/a        n/a      202   100.0%        422354945 100.0%        
+posts      1     32351 replica    done  esvm01      esvm03 	  n/a        n/a      202   100.0%        422354945 100.0%        
 posts      1     853   gateway    done  esvm01      esvm01        n/a        n/a      60    100.0%        13380484  100.0%        
-posts      2     24603 replica    done  esvm01      esvm03 n/a        n/a      178   100.0%        422154544 100.0%        
+posts      2     24603 replica    done  esvm01      esvm03 	  n/a        n/a      178   100.0%        422154544 100.0%        
 posts      2     723   gateway    done  esvm01      esvm01        n/a        n/a      48    100.0%        26706801  100.0%        
 posts      3     905   gateway    done  esvm01      esvm01        n/a        n/a      52    100.0%        26862482  100.0%        
 posts      3     1396  replica    done  esvm01      esvm02        n/a        n/a      57    100.0%        368898357 100.0%        
 posts      4     236   gateway    done  esvm01      esvm01        n/a        n/a      64    100.0%        26563718  100.0%        
 posts      4     1324  replica    done  esvm01      esvm02        n/a        n/a      51    100.0%        368808964 100.0%        
-bet_orders 0     10210 replica    done  esvm01      esvm03 n/a        n/a      23    100.0%        4884128   100.0%        
+bet_orders 0     10210 replica    done  esvm01      esvm03 	  n/a        n/a      23    100.0%        4884128   100.0%        
 bet_orders 0     14    gateway    done  esvm01      esvm01        n/a        n/a      0     0.0%          0         0.0%          
-bet_orders 1     1446  relocation done  esvm01      esvm03 n/a        n/a      39    100.0%        4897417   100.0%        
+bet_orders 1     1446  relocation done  esvm01      esvm03 	  n/a        n/a      39    100.0%        4897417   100.0%        
 bet_orders 1     80    replica    done  esvm01      esvm02        n/a        n/a      1     100.0%        4438870   100.0%        
-bet_orders 2     3378  relocation done  esvm01      esvm03 n/a        n/a      36    100.0%        4874906   100.0%        
+bet_orders 2     3378  relocation done  esvm01      esvm03 	  n/a        n/a      36    100.0%        4874906   100.0%        
 bet_orders 2     126   replica    done  esvm01      esvm02        n/a        n/a      1     100.0%        4441795   100.0%        
 bet_orders 3     3     gateway    done  esvm01      esvm01        n/a        n/a      0     0.0%          0         0.0%          
 bet_orders 3     206   replica    done  esvm01      esvm02        n/a        n/a      1     100.0%        4435120   100.0%        
@@ -372,7 +372,7 @@ bet_orders 4     59    replica    done  esvm01      esvm02        n/a        n/a
 host          ip            bulk.active bulk.queue bulk.rejected index.active index.queue index.rejected search.active search.queue search.rejected 
 esvm01        10.10.10.200           0          0             0            0           0              0             0            0               0 
 esvm02        10.10.10.201           0          0             0            0           0              0             0            0               0 
-esvm03 10.10.10.203             0          0             0            0           0              0             0            0               0 
+esvm03        10.10.10.203           0          0             0            0           0              0             0            0               0 
 [root@esvm03 ~]# 
 {% endhighlight %}
 
@@ -385,43 +385,43 @@ esvm03 10.10.10.203             0          0             0            0         
 index      shard prirep state      docs   store ip            node      
 topics     4     p      STARTED   13804   1.5mb 10.10.10.200 ES esvm01 
 topics     4     r      STARTED   13804   1.5mb 10.10.10.201 ES esvm02 
-topics     0     r      STARTED   13804   1.5mb 10.10.10.203   ES esvm03 
+topics     0     r      STARTED   13804   1.5mb 10.10.10.203 ES esvm03 
 topics     0     p      STARTED   13804   1.5mb 10.10.10.200 ES esvm01 
 topics     3     p      STARTED   13803   1.5mb 10.10.10.200 ES esvm01 
 topics     3     r      STARTED   13803   1.5mb 10.10.10.201 ES esvm02 
-topics     1     p      STARTED   13802   1.5mb 10.10.10.203   ES esvm03 
+topics     1     p      STARTED   13802   1.5mb 10.10.10.203 ES esvm03 
 topics     1     r      STARTED   13802   1.5mb 10.10.10.201 ES esvm02 
-topics     2     p      STARTED   13804   1.5mb 10.10.10.203   ES esvm03 
+topics     2     p      STARTED   13804   1.5mb 10.10.10.203 ES esvm03 
 topics     2     r      STARTED   13804   1.5mb 10.10.10.201 ES esvm02 
 users      4     p      STARTED    3378   1.1mb 10.10.10.200 ES esvm01 
 users      4     r      STARTED    3378   1.1mb 10.10.10.201 ES esvm02 
-users      0     p      STARTED    3352   1.1mb 10.10.10.203   ES esvm03 
+users      0     p      STARTED    3352   1.1mb 10.10.10.203 ES esvm03 
 users      0     r      STARTED    3352   1.1mb 10.10.10.201 ES esvm02 
-users      3     r      STARTED    3358   1.1mb 10.10.10.203   ES esvm03 
+users      3     r      STARTED    3358   1.1mb 10.10.10.203 ES esvm03 
 users      3     p      STARTED    3358   1.1mb 10.10.10.200 ES esvm01 
-users      1     p      STARTED    3371   1.1mb 10.10.10.203   ES esvm03 
+users      1     p      STARTED    3371   1.1mb 10.10.10.203 ES esvm03 
 users      1     r      STARTED    3371   1.1mb 10.10.10.201 ES esvm02 
-users      2     r      STARTED    3351   1.1mb 10.10.10.203   ES esvm03 
+users      2     r      STARTED    3351   1.1mb 10.10.10.203 ES esvm03 
 users      2     p      STARTED    3351   1.1mb 10.10.10.200 ES esvm01 
 posts      4     p      STARTED 2953598 408.8mb 10.10.10.200 ES esvm01 
 posts      4     r      STARTED 2953598 410.4mb 10.10.10.201 ES esvm02 
-posts      0     p      STARTED 2952734 410.8mb 10.10.10.203   ES esvm03 
+posts      0     p      STARTED 2952734 410.8mb 10.10.10.203 ES esvm03 
 posts      0     r      STARTED 2952734 410.8mb 10.10.10.201 ES esvm02 
 posts      3     p      STARTED 2951829 410.7mb 10.10.10.200 ES esvm01 
 posts      3     r      STARTED 2951829 410.7mb 10.10.10.201 ES esvm02 
-posts      1     r      STARTED 2953276 410.9mb 10.10.10.203   ES esvm03 
+posts      1     r      STARTED 2953276 410.9mb 10.10.10.203 ES esvm03 
 posts      1     p      STARTED 2953277   411mb 10.10.10.200 ES esvm01 
-posts      2     r      STARTED 2951441 410.6mb 10.10.10.203   ES esvm03 
+posts      2     r      STARTED 2951441 410.6mb 10.10.10.203 ES esvm03 
 posts      2     p      STARTED 2951441 410.7mb 10.10.10.200 ES esvm01 
 bet_orders 4     p      STARTED   19351   9.3mb 10.10.10.200 ES esvm01 
 bet_orders 4     r      STARTED   19351   9.3mb 10.10.10.201 ES esvm02 
-bet_orders 0     r      STARTED   19351   9.3mb 10.10.10.203   ES esvm03 
+bet_orders 0     r      STARTED   19351   9.3mb 10.10.10.203 ES esvm03 
 bet_orders 0     p      STARTED   19351   9.3mb 10.10.10.200 ES esvm01 
 bet_orders 3     p      STARTED   19351   9.3mb 10.10.10.200 ES esvm01 
 bet_orders 3     r      STARTED   19351   9.3mb 10.10.10.201 ES esvm02 
-bet_orders 1     p      STARTED   19350   9.3mb 10.10.10.203   ES esvm03 
+bet_orders 1     p      STARTED   19350   9.3mb 10.10.10.203 ES esvm03 
 bet_orders 1     r      STARTED   19350   9.3mb 10.10.10.201 ES esvm02 
-bet_orders 2     p      STARTED   19350   9.3mb 10.10.10.203   ES esvm03 
+bet_orders 2     p      STARTED   19350   9.3mb 10.10.10.203 ES esvm03 
 bet_orders 2     r      STARTED   19350   9.3mb 10.10.10.201 ES esvm02 
 [root@esvm03 ~]# 
 {% endhighlight %}
