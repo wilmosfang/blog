@@ -1,6 +1,6 @@
 ---
 layout: default
-title: RabbitMQ集群
+title: RabbitMQ集群I
 comments: true
 ---
 
