@@ -1,12 +1,12 @@
 /* @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700); */
 html {
-  background: #6C7989;
-  background: #6c7989 -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6c7989), color-stop(100%, #434b55)) fixed;
-  background: #6c7989 -webkit-linear-gradient(#6c7989, #434b55) fixed;
-  background: #6c7989 -moz-linear-gradient(#6c7989, #434b55) fixed;
-  background: #6c7989 -o-linear-gradient(#6c7989, #434b55) fixed;
-  background: #6c7989 -ms-linear-gradient(#6c7989, #434b55) fixed;
-  background: #6c7989 linear-gradient(#6c7989, #434b55) fixed;
+  background: #000000;
+  background: #000000 -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #0642FA)) fixed;
+  background: #000000 -webkit-linear-gradient(#000000, #0642FA) fixed;
+  background: #000000 -moz-linear-gradient(#000000, #0642FA) fixed;
+  background: #000000 -o-linear-gradient(#000000, #0642FA) fixed;
+  background: #000000 -ms-linear-gradient(#000000, #0642FA) fixed;
+  background: #000000 linear-gradient(#000000, #0642FA) fixed;
 }
 
 body {
@@ -69,12 +69,12 @@ header {
   border-bottom: 1px solid #B2D2E1;
 }
 header h1 {
-  margin: 0;
+  /* margin: 0; */
   padding: 0;
-  font-size: 24px;
+  font-size: 48px;
   line-height: 1.2;
   color: #069;
-  text-shadow: rgba(255, 255, 255, 0.9) 0 1px 0;
+  /* text-shadow: rgba(255, 255, 255, 0.9) 0 1px 0; */
 }
 header.without-description h1 {
   margin: 10px 0;
@@ -108,40 +108,46 @@ header ul {
   height: 38px;
   padding: 1px 0;
   background: #5198DF;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #77b9fb), color-stop(100%, #3782cd));
-  background: -webkit-linear-gradient(#77b9fb, #3782cd);
-  background: -moz-linear-gradient(#77b9fb, #3782cd);
-  background: -o-linear-gradient(#77b9fb, #3782cd);
-  background: -ms-linear-gradient(#77b9fb, #3782cd);
-  background: linear-gradient(#77b9fb, #3782cd);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #1000FD));
+  background: -webkit-linear-gradient(#000000, #1000FD);
+  background: -moz-linear-gradient(#000000, #1000FD);
+  background: -o-linear-gradient(#000000, #1000FD);
+  background: -ms-linear-gradient(#000000, #1000FD);
+  background: linear-gradient(#000000, #1000FD);
   border-radius: 5px;
+  /* 
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
   box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
+  */
   width: auto;
 }
 header ul:before {
   content: '';
   position: absolute;
   z-index: -1;
-  left: -5px;
-  top: -4px;
-  right: -5px;
+  left: -6px;
+  top: -6px;
+  right: -6px;
   bottom: -6px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   border-radius: 8px;
+  /*
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0, inset rgba(255, 255, 255, 0.7) 0 -1px 0;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0, inset rgba(255, 255, 255, 0.7) 0 -1px 0;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0, inset rgba(255, 255, 255, 0.7) 0 -1px 0;
+  */
 }
 header ul li {
   width: 79px;
   float: left;
+  /*
   border-right: 1px solid #3A7CBE;
+  */
   height: 38px;
 }
 header ul li.single {
