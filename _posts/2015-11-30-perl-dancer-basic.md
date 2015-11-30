@@ -739,9 +739,9 @@ tcp        0      0 0.0.0.0:5000                0.0.0.0:*                   LIST
 [TEST::APP:7832] core @2015-11-27 17:41:17> Entering hook core.app.before_request in (eval 66) l. 1
 [TEST::APP:7832] core @2015-11-27 17:41:17> Entering hook core.app.after_request in (eval 66) l. 1
 192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET / HTTP/1.1" 200 5237 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
-192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /css/style.css HTTP/1.1" 200 2850 "http://192.168.1.45:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
-192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /images/perldancer-bg.jpg HTTP/1.1" 200 7125 "http://192.168.1.45:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
-192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /images/perldancer.jpg HTTP/1.1" 200 2240 "http://192.168.1.45:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /css/style.css HTTP/1.1" 200 2850 "http://192.168.20.105:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /images/perldancer-bg.jpg HTTP/1.1" 200 7125 "http://192.168.20.105:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /images/perldancer.jpg HTTP/1.1" 200 2240 "http://192.168.20.105:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
 {% endhighlight %}
 
 
@@ -1430,7 +1430,7 @@ post '/check_backup' => sub{
 		$tmp_resault .= "error receiver! pleaes retype!!!";
 		last;
 		}
-		$tmp_resault .=`/home/dancer/bin/D_check_backup_for_db.pl  -p /home/dancer/bin/.passfile/panda_pass `;
+		$tmp_resault .=`/home/dancer/bin/D_check_backup_for_db.pl  -p /home/dancer/bin/.passfile/abc_pass `;
 	}
 	return  '<pre>'.$tmp_resault.'</pre>';
 	
