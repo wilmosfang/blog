@@ -205,7 +205,7 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 其目的是为了适应新的主机环境，并且避免与master的server-id冲突
 
 {% highlight bash %}
-[root@upgrade-slave etc]# diff /tmp/old.mysql.cnf /tmp/new.mysql.cnf 
+[root@upgrade-slave etc]# diff /tmp/new.mysql.cnf /tmp/old.mysql.cnf 
 27d26
 < relay-log=relay-bin
 30c29
