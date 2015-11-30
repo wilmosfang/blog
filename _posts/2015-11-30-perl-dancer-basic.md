@@ -1388,6 +1388,28 @@ Lockfile removed.
 
 ##MVC
 
+
+MVC(Model-View-Controller) 是一种架构，或者说是设计理念，不同语言有不同的实现，遵循此架构会有很多好处，但详细探讨已经超出了主题，有机会再聊
+
+下面是大体的数据流向图
+
+{% highlight bash %}
+MVC
+   +------------------------+ 
+   |                        V 
++------+    +----+    +----------+     +-----+     +--+
+|client|<---|view|<---|controller|<--->|model|<--->|DB|
++------+    +----+    +----------+     +-----+     +--+
+{% endhighlight %}
+
+也有如此的
+
+![dancer_4.png](/images/dancer/dancer_4.png)
+
+
+---
+
+
 ###添加控制逻辑[C]
 
 在dancer中 **`TEST-APP/lib/TEST/APP.pm`** 是起控制作用的，在 **true** 之前添加以下几行
@@ -1436,6 +1458,7 @@ Type your Email address here...
 {% endhighlight %}
 
 ---
+
 
 ###添加功能逻辑[M]
 
