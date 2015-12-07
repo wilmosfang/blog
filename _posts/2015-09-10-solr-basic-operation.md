@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Solr基础操作
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

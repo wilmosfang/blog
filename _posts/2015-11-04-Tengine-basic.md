@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Tengine基础
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

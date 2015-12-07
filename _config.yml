@@ -1,6 +1,20 @@
-username: wilmosfang
-baseurl: 
-markdown: kramdown
-safe: false
-highlighter: pygments
 title: 镜缘浮影
+email: yyghdfz@163.com 
+description: 小人本住在 苏州的城外 家里有屋又有田 生活乐无边
+baseurl: 
+username: wilmosfang
+github_username:  wilmosfang
+permalink: /:year/:month/:day/:title/
+safe: false
+markdown: kramdown
+highlighter: pygments
+paginate: 10
+paginate_path: "page:num"
+
+# 本地用rouge, github上用pygments
+# highlighter: pygments
+# highlighter: rouge
+# highlighter: false
+# baseurl: ""  #the subpath of the site, e.g. /blog/
+# url: "http://yourdomain.com"  #the base url of the site
+# twitter_username:

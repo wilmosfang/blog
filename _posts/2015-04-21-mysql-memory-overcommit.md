@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Percona Server  5.1 内存过量消耗分析
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

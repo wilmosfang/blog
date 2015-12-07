@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: mha 切换(操作流程建议)
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

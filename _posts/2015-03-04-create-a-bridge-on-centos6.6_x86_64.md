@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: 在Centos6.6中创建一个Bridge
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

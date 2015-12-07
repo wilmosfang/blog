@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: mysql 5.1升级到5.6
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Temp Blog Name
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

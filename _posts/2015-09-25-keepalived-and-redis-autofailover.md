@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Keepalived 实现 Redis AutoFailover (RedisHA)
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: RabbitMQ管理
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

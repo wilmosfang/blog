@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Daily Script
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

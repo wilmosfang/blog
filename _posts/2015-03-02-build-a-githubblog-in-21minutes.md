@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: 21分钟搭建一个GitHub Blog
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

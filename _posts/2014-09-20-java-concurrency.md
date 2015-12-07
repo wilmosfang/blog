@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: 测试文档
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

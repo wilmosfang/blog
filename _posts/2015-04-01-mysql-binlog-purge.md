@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Mysql binlog 清理方法
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

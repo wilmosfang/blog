@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: 证书管理碉堡机
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

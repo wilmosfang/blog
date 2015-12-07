@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Mysql MHA 搭建 (三) keepalived 1.2.13 安装 
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

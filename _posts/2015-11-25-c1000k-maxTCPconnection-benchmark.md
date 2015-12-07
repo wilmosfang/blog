@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: c1000k TCP 连接上限测试
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

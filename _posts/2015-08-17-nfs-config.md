@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: NFS 配置
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

@@ -1,47 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>{{site.title}}</title>
 
-    <link rel="stylesheet" href="{{site.baseurl}}/stylesheets/styles.css">
-    <link rel="stylesheet" href="{{site.baseurl}}/stylesheets/pygment_trac.css">
-    <script src="{{site.baseurl}}/javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  {% include head.html %}
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
   <body>
-    <div class="wrapper">
-      <header>
-      <h1><a href="http://soft.dog/">{{site.title}}</a></h1>
-        <p>小人本住在 苏州的城外 家里有屋又有田 生活乐无边</p>
-        <p class="view"><a href="http://soft.dog/">Back to home </a></p>
-        <ul>
-          <li><a href="http://soft.dog/">Back To <strong>Home</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a> {{ page.title }} 
-        </h1>
-{{ content }}
-      </section>
-      
-      <section class="comments">
-        {% if page.comments %}
+
+    {% include header.html %}
+
+
+    <div id="main" class="container main">
+      {{ content }}
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+<!-- disqus comments start  -->
+<!--      <div class="post-area post comment"> 
+        {% if page.comments %} 
           {% include comments.ext %}
         {% endif %}
-      </section>
-    </div>
-    <footer>
-      <p>Blog maintained by <strong>{{site.username}}</strong></p>
-      <p><a href="http://soft.dog/">Back to Home</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+      </div>  
+-->
+<!-- disqus comments end -->
+
+    {% include footer.html %}
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"flash"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
   </body>
 </html>

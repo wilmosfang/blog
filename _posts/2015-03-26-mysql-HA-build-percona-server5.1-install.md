@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Mysql MHA 搭建 (一) percona5.1 安装
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

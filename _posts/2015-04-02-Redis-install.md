@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Redis 3.0.0 安装
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

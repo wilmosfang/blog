@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: GoAccess access日志分析工具
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

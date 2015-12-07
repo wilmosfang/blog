@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: BGP数据中心鉴别方法
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

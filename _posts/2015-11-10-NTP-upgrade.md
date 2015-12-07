@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: NTP升级
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

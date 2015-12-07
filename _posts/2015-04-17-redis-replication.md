@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Redis 复制
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Linux CPU info
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

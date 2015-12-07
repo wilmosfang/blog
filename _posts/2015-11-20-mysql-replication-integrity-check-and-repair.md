@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Mysql复制数据一致性检查
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

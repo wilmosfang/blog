@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: 使用XtraBackup创建mysql slave 
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

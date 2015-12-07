@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Linux 网关 
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

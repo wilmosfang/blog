@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: 安装jekyll (include rvm,ruby,gem)
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

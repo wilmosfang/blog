@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Centos6下logrotate探源
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: ZooKeeper 基础
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Mysql MHA 搭建 (四) mha failover 测试
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Mysql 监控 
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

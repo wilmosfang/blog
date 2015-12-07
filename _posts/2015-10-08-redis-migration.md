@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Redis 迁移(操作流程建议)
+categories: linux
+excerpt: follow me
 comments: true
 ---
 

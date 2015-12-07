@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
 title: Varnish 基础概览
+categories: linux
+excerpt: follow me
 comments: true
 ---
 
