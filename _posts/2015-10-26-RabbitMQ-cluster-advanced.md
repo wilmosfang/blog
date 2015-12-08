@@ -1,7 +1,7 @@
 ---
 layout: post
 title: RabbitMQ集群II
-categories: linux
+categories: linux rabbitmq cluster
 excerpt: follow me
 comments: true
 ---

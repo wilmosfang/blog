@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Andriod客户端创建VPN连接
-categories: linux
+categories: linux vpn
 excerpt: follow me
 comments: true
 ---

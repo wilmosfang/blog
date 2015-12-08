@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux 搭建 VPN
-categories: linux
+categories: linux vpn
 excerpt: follow me
 comments: true
 ---

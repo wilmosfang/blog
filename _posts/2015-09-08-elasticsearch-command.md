@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Elasticsearch 常用命令
-categories: linux
+categories: linux elasticsearch nosql
 excerpt: follow me
 comments: true
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Snort 基础
-categories: linux
+categories: linux snort security
 excerpt: follow me
 comments: true
 ---

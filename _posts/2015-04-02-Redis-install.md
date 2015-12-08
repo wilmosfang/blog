@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Redis 3.0.0 安装
-categories: linux
+categories: linux redis nosql
 excerpt: follow me
 comments: true
 ---

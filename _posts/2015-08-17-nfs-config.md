@@ -1,7 +1,7 @@
 ---
 layout: post
 title: NFS 配置
-categories: linux
+categories: linux nfs
 excerpt: follow me
 comments: true
 ---

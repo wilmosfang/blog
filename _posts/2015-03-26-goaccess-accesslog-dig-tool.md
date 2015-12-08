@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GoAccess access日志分析工具
-categories: linux
+categories: linux log
 excerpt: follow me
 comments: true
 ---

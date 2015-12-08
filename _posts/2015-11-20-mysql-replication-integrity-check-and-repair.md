@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mysql复制数据一致性检查
-categories: linux
+categories: linux mysql admintools 
 excerpt: follow me
 comments: true
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mysql MHA 搭建 (一) percona5.1 安装
-categories: linux
+categories: linux mysql mha cluster
 excerpt: follow me
 comments: true
 ---

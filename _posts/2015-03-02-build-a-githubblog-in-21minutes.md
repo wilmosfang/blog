@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 21分钟搭建一个GitHub Blog
-categories: linux
+categories: linux git jekyll
 excerpt: follow me
 comments: true
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SSDB基础
-categories: linux
+categories: linux nosql ssdb cluster
 excerpt: follow me
 comments: true
 ---

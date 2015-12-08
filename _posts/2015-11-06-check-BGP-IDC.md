@@ -1,7 +1,7 @@
 ---
 layout: post
 title: BGP数据中心鉴别方法
-categories: linux
+categories: linux network
 excerpt: follow me
 comments: true
 ---

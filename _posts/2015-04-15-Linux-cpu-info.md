@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux CPU info
-categories: linux
+categories: linux monitoring
 excerpt: follow me
 comments: true
 ---

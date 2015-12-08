@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Redis 复制
-categories: linux
+categories: linux redis nosql
 excerpt: follow me
 comments: true
 ---

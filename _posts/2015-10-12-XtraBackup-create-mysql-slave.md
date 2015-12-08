@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 使用XtraBackup创建mysql slave 
-categories: linux
+categories: linux  mysql admintools
 excerpt: follow me
 comments: true
 ---

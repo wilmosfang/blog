@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mysql MHA 搭建 (二) mha0.53 安装
-categories: linux
+categories: linux mha mysql ssh cluster 
 excerpt: follow me
 comments: true
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 在Centos6.6中创建一个Bridge
-categories: linux
+categories: linux network
 excerpt: follow me
 comments: true
 ---

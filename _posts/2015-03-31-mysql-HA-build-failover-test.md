@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mysql MHA 搭建 (四) mha failover 测试
-categories: linux
+categories: linux mha mysql  keepalived cluster
 excerpt: follow me
 comments: true
 ---

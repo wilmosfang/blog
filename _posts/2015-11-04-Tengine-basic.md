@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tengine基础
-categories: linux
+categories: linux nginx 
 excerpt: follow me
 comments: true
 ---

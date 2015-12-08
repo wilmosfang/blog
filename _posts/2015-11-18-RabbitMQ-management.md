@@ -1,7 +1,7 @@
 ---
 layout: post
 title: RabbitMQ管理
-categories: linux
+categories: linux rabbitmq python ruby
 excerpt: follow me
 comments: true
 ---
@@ -347,7 +347,7 @@ Listing vhosts ...
 
 生产脚本
 
-{% highlight bash %}
+{% highlight python %}
 [root@h102 python]# cat p.py 
 #!/usr/bin/env python
 import pika
@@ -368,7 +368,7 @@ connection.close()
 
 消费脚本
 
-{% highlight bash %}
+{% highlight python %}
 [root@h102 python]# cat c.py 
 #!/usr/bin/env python
 import pika
@@ -539,7 +539,7 @@ mq_learning_q	1
 
 生产脚本
 
-{% highlight bash %}
+{% highlight ruby %}
 [root@h102 ruby]# cat p.rb 
 #!/usr/bin/env ruby
 ## encoding: utf-8
@@ -559,13 +559,13 @@ conn.close
 
 > **Tip:** 要连接远程的服务器只用修改下面的代码就可以了,相关的配置可以参考 **[bunny的API文档][bunny_api]**
 
-{% highlight bash %}
+{% highlight ruby %}
 conn = Bunny.new(:host => "192.168.1.20",:user => "test", :password => "test")
 {% endhighlight %}
 
 消费脚本
 
-{% highlight bash %}
+{% highlight ruby %}
 [root@h102 ruby]# cat c.rb 
 #!/usr/bin/env ruby
 ## encoding: utf-8

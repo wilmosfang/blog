@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Daily Script
-categories: linux
+categories: linux script
 excerpt: follow me
 comments: true
 ---

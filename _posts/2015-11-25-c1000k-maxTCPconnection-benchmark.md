@@ -1,7 +1,7 @@
 ---
 layout: post
 title: c1000k TCP 连接上限测试
-categories: linux
+categories: linux benchmark
 excerpt: follow me
 comments: true
 ---

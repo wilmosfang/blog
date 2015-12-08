@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Centos6下logrotate探源
-categories: linux
+categories: linux log
 excerpt: follow me
 comments: true
 ---

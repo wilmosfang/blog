@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Temp Blog Name
-categories: linux
+categories: linux template
 excerpt: follow me
 comments: true
 ---

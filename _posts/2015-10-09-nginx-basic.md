@@ -1,7 +1,7 @@
 ---
 layout: post
 title: nginx基础
-categories: linux
+categories: linux nginx upgrade
 excerpt: follow me
 comments: true
 ---

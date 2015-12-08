@@ -1,7 +1,7 @@
 ---
 layout: post
 title: qshell基础
-categories: linux
+categories: linux admintools
 excerpt: follow me
 comments: true
 ---
@@ -149,7 +149,9 @@ qshell v1.6.0
 
 ---
 
-###[account][account]
+###account
+
+[account][account]
 
 设置或显示当前用户的AccessKey和SecretKey
 
@@ -166,7 +168,9 @@ AccessKey: ELUs327kxVPJrGCXqWae9yioc0xYZyrIpbM6Wh6x SecretKey: LVzZY2SqOQ_I_kM1n
 
 ---
 
-###[zone][zone]
+###zone
+
+[zone][zone]
 
 切换当前设置帐号所在的机房区域，仅账号拥有该指定区域机房时有效
 
@@ -177,7 +181,9 @@ Current zone: nb
 {% endhighlight %}
 
 
-###[listbucket][listbucket]
+###listbucket
+
+[listbucket][listbucket]
 
 列举七牛空间里面的所有文件
 
@@ -190,7 +196,9 @@ ux/20140618/qiniutest-shop_video_001.MP4	24559427	lpb0Xu_Drayb851dgWn7RBPqcu-s	1
 
 ---
 
-###[buckets][buckets]
+###buckets
+
+[buckets][buckets]
 
 
 获取当前账号下所有的空间名称
@@ -209,7 +217,9 @@ qiniucloudtest
 
 ---
 
-###[domains][domains]
+###domains
+
+[domains][domains]
 
 获取指定空间的所有关联域名
 
@@ -226,7 +236,9 @@ video.qiniutest.cn
 
 ---
 
-###[qetag][qetag]
+###qetag
+
+[qetag][qetag]
 
 根据七牛的qetag算法来计算文件的hash
 
@@ -238,7 +250,10 @@ Flxstje1T4ojLoOe0G4HjI_WJuVl
 
 ---
 
-###[ip][ip]
+###ip
+
+
+[ip][ip]
 
 根据淘宝的公开API查询ip地址的地理位置
 
@@ -256,7 +271,10 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 ---
 
-###[d2ts][d2ts]
+###d2ts
+
+
+[d2ts][d2ts]
 
 将日期转为timestamp(单位秒)
 
@@ -268,7 +286,9 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 ---
 
-###[ts2d][ts2d]
+###ts2d
+
+[ts2d][ts2d]
 
 将timestamp(单位秒)转为UTC+8:00中国日期，主要用来检查上传策略的deadline参数
 
@@ -281,7 +301,9 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 ---
 
-###[stat][stat]
+###stat
+
+[stat][stat]
 
 查询七牛空间中一个文件的基本信息
 
@@ -299,7 +321,10 @@ MimeType:           video/mp4
 
 ---
 
-###[tns2d][tns2d]
+###tns2d
+
+
+[tns2d][tns2d]
 
 将timestamp(单位100纳秒)转为UTC+8:00中国日期
 
@@ -312,7 +337,10 @@ MimeType:           video/mp4
 
 ---
 
-###[qupload][qupload]
+###qupload
+
+
+[qupload][qupload]
 
 同步数据到七牛空间， 带同步进度信息，和数据上传完整性检查
 
@@ -356,7 +384,10 @@ MimeType:           video/mp4
 
 ---
 
-###[qdownload][qdownload]
+###qdownload
+
+
+[qdownload][qdownload]
 
 
 从七牛空间同步数据到本地，支持只同步某些前缀的文件，支持增量同步
@@ -401,7 +432,11 @@ MimeType:           video/mp4
 
 ---
 
-###[delete][delete]
+###delete
+
+
+
+[delete][delete]
 
 删除七牛空间中的一个文件
 
@@ -413,7 +448,10 @@ Done!
 
 ---
 
-###[move][move]
+###move
+
+
+[move][move]
 
 移动或重命名七牛空间中的一个文件
 
@@ -425,7 +463,10 @@ Done!
 
 ---
 
-###[copy][copy]
+###copy
+
+
+[copy][copy]
 
 移动或重命名七牛空间中的一个文件
 
@@ -437,7 +478,10 @@ Done!
 
 ---
 
-###[chgm][chgm]
+###chgm
+
+
+[chgm][chgm]
 
 
 修改七牛空间中的一个文件的MimeType
@@ -458,7 +502,10 @@ MimeType:           image/jpeg
 
 ---
 
-###[fetch][fetch]
+###fetch
+
+
+[fetch][fetch]
 
 从Internet上抓取一个资源并存储到七牛空间中
 
@@ -487,7 +534,9 @@ FrUHIqhkDDd77-AtiDcOwi94YIeM
 
 ---
 
-###[batchdelete][batchdelete]
+###batchdelete
+
+[batchdelete][batchdelete]
 
 批量删除七牛空间中的文件，可以直接根据listbucket的结果来删除
 
@@ -516,7 +565,9 @@ All deleted!
 
 ---
 
-###[batchcopy][batchcopy]
+###batchcopy
+
+[batchcopy][batchcopy]
 
 批量复制七牛空间中的文件到另一个空间
 
@@ -543,7 +594,9 @@ All Copyed!
 
 ---
 
-###[dircache][dircache]
+###dircache
+
+[dircache][dircache]
 
 输出本地指定路径下所有的文件列表
 

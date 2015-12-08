@@ -1,7 +1,7 @@
 ---
 layout: post
 title: perl dancer 基础
-categories: linux
+categories: linux perl dancer
 excerpt: follow me
 comments: true
 ---

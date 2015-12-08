@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Varnish 基础概览
-categories: linux
+categories: linux varnish 
 excerpt: follow me
 comments: true
 ---

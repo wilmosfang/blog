@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ZooKeeper 基础
-categories: linux
+categories: linux zookeeper
 excerpt: follow me
 comments: true
 ---

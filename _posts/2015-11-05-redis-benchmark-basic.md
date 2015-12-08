@@ -1,7 +1,7 @@
 ---
 layout: post
 title: redis-benchmark 基础
-categories: linux
+categories: linux redis nosql benchmark
 excerpt: follow me
 comments: true
 ---

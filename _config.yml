@@ -8,7 +8,7 @@ permalink: /:year/:month/:day/:title/
 safe: false
 markdown: kramdown
 highlighter: pygments
-paginate: 10
+paginate: 15
 paginate_path: "page:num"
 
 # 本地用rouge, github上用pygments

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mysql 监控 
-categories: linux
+categories: linux mysql monitoring
 excerpt: follow me
 comments: true
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 安装jekyll (include rvm,ruby,gem)
-categories: linux
+categories: linux rvm ruby jekyll
 excerpt: follow me
 comments: true
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: memcached基础
-categories: linux
+categories: linux memcached
 excerpt: follow me
 comments: true
 ---

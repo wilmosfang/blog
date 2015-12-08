@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Solr基础操作
-categories: linux
+categories: linux solr nosql
 excerpt: follow me
 comments: true
 ---

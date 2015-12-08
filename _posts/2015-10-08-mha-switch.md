@@ -1,7 +1,7 @@
 ---
 layout: post
 title: mha 切换(操作流程建议)
-categories: linux
+categories: linux mha mysql cluster
 excerpt: follow me
 comments: true
 ---

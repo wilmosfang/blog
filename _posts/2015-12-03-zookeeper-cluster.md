@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ZooKeeper 集群
-categories: linux
+categories: linux zookeeper cluster
 excerpt: follow me
 comments: true
 ---

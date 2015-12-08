@@ -1,7 +1,7 @@
 ---
 layout: post
 title: RabbitMQ基础 
-categories: linux
+categories: linux rabbitmq
 excerpt: follow me
 comments: true
 ---

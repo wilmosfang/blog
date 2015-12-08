@@ -1,7 +1,7 @@
 ---
 layout: post
 title: mysql 5.1升级到5.6
-categories: linux
+categories: linux mysql upgrade
 excerpt: follow me
 comments: true
 ---

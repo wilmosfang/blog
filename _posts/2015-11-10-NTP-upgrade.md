@@ -1,7 +1,7 @@
 ---
 layout: post
 title: NTP升级
-categories: linux
+categories: linux upgrade ntp
 excerpt: follow me
 comments: true
 ---

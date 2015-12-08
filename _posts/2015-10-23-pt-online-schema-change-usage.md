@@ -1,7 +1,7 @@
 ---
 layout: post
 title: pt-online-schema-change 使用基础 
-categories: linux
+categories: linux admintools mysql
 excerpt: follow me
 comments: true
 ---
