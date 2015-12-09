@@ -43,7 +43,7 @@ comments: true
 ##手动切换操作手顺
 
 
-* 1.关掉后台切换监控 **masterha_stop --conf=/etc/app1.cnf** 
+* 1.关掉后台切换监控 **`masterha_stop --conf=/etc/app1.cnf`** 
 * 2.检查数据库运行状态
 * 3.检查数据库参数
 * 4.检查keepalived工作状态，ip挂载情况
@@ -64,6 +64,22 @@ comments: true
 * 19.恢复mha架构(参考前面步骤)
 * 20.进行后台mha监控
 * 21.监控观察
+
+
+---
+
+##可能涉及到的命令
+
+* **`masterha_check_status  --conf=/etc/app1.cnf`**
+* **`masterha_stop  --conf=/etc/app1.cnf`**
+* **`masterha_check_repl --conf=/etc/app1.cnf`**
+* **`nohup   masterha_manager --conf=/etc/app1.cnf  --ignore_last_failover  &`**
+* **`masterha_master_switch --master_state=alive --conf=/etc/app1.cnf  --new_master_host=m1 --interactive=0`**
+* **`purge_relay_logs --user=root --password=xxxx  --workdir=/data/relay_tmp/`**
+* **`show slave status\G`**
+* **`show master status;`**
+* **`show variables like 'relay_log_purge';`**
+* **`show variables like 'read_only';`**
 
 
 ---
