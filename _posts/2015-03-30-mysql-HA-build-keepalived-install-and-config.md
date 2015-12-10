@@ -209,7 +209,7 @@ Stopping keepalived: [  OK  ]
 
 在末尾添加如下几行
 
-{% highlight bash %}bash
+{% highlight bash %}
 #mysql sudo keepalived
 Host_Alias HOSTKEEP =192.168.75.11
 Cmnd_Alias COMKEEP = /etc/init.d/keepalived stop , /etc/init.d/keepalived start , /etc/init.d/keepalived restart
@@ -228,12 +228,12 @@ USERKEEP  HOSTKEEP=(ALL)  NOPASSWD:COMKEEP
 
 同时，注释掉配置中下面这行
 
-{% highlight bash %}bash
+{% highlight bash %}
 #Defaults    requiretty
 {% endhighlight %}
 或者也可以使用下面方式，使之无效
 
-{% highlight bash %}bash
+{% highlight bash %}
 Defaults    !requiretty
 {% endhighlight %}
 
@@ -303,7 +303,7 @@ total 32
 
 因为我们不必要创建新用户，故注释掉第**83**行和**88**行
 
-{% highlight bash %}bash
+{% highlight bash %}
  83       #FIXME_xxx_create_user( $new_master_handler->{dbh} );
  84       $new_master_handler->enable_log_bin_local();
  85       $new_master_handler->disconnect();
@@ -314,7 +314,7 @@ total 32
 
 修改第**73**和**74**行
 
-{% highlight bash %}bash
+{% highlight bash %}
  73       $new_master_handler->connect( $new_master_ip, $new_master_port, "root",
  74         "rootpass", 1 );
 {% endhighlight %}
@@ -323,7 +323,7 @@ total 32
 改为我们之前在数据库中设置的**mhauser**的用户名和密码
 
 
-{% highlight bash %}bash
+{% highlight bash %}
  73       $new_master_handler->connect( $new_master_ip, $new_master_port, "mhauser",
  74         "xxx", 1 );
 {% endhighlight %}
@@ -332,7 +332,7 @@ total 32
 
 在原来**89**行的地方加入一条脚本
 
-{% highlight bash %}bash
+{% highlight bash %}
  88       #FIXME_xxx;
  89       `/usr/bin/ssh -t  mysql\@${orig_master_ip} "sudo /etc/init.d/keepalived stop"`;
  90       $exit_code = 0;
@@ -359,7 +359,7 @@ MHA Manager 会调用 **master_ip_failover_script** 三次
 
 注释掉第**142**行**237**行
 
-{% highlight bash %}perl
+{% highlight bash %}
 142       #FIXME_xxx_drop_app_user($orig_master_handler);
 ...
 ...
@@ -369,7 +369,7 @@ MHA Manager 会调用 **master_ip_failover_script** 三次
 修改第**122，123，136，137，227，228**行，使用mhauser的用户名**mhauser**和他的密码**xxx**替换掉**root**和**rootpass**
 
 
-{% highlight bash %}perl
+{% highlight bash %}
 122       $new_master_handler->connect( $new_master_ip, $new_master_port, "root",
 123         "rootpass", 1 );
 ...
