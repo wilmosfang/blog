@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  mysql 迁移最佳实践
+title:  mysql 迁移
 categories: linux mysql upgrade keepalived
 excerpt: 安全高效地进行mysql的迁移与slave升级，迁移过程与检查流程
 comments: true
