@@ -2,7 +2,7 @@
 layout: post
 title:  mysql 迁移
 categories: linux mysql upgrade keepalived
-excerpt: 安全高效地进行mysql的迁移与slave升级，迁移过程与检查流程
+excerpt: 安全高效地进行mysql迁移与slave升级，重在迁移过程与检查流程
 comments: true
 ---
 
@@ -15,7 +15,7 @@ comments: true
 有了keepalived和mysql upgrade的技术作基础，可以结合两者完成无逢升级
 
 
-下面分享一下我的 **Best Practice Of Mysql Upgrade**
+下面分享一下我的 **Best Practice Of Mysql Migration**
 
 		
 		
