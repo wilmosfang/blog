@@ -212,7 +212,7 @@ Stopping keepalived: [  OK  ]
 {% highlight bash %}
 #mysql sudo keepalived
 Host_Alias HOSTKEEP =192.168.75.11
-Cmnd_Alias COMKEEP = /etc/init.d/keepalived stop , /etc/init.d/keepalived start , /etc/init.d/keepalived restart
+Cmnd_Alias COMKEEP = /etc/init.d/keepalived stop , /etc/init.d/keepalived start , /etc/init.d/keepalived restart , /etc/init.d/keepalived reload ## reload is used to check connection error
 User_Alias USERKEEP = mysql
 USERKEEP  HOSTKEEP=(ALL)  NOPASSWD:COMKEEP
 {% endhighlight %}
