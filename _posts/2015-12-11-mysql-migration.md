@@ -81,7 +81,7 @@ vrrp_instance VI_3 {
 
 ---
 
-##时间选择在业务低点
+##切换时间选择在业务低点
 
 一般选择业务低点进行数据库操作，目的是为了降低业务风险，和数据丢失的风险
 
@@ -89,7 +89,7 @@ vrrp_instance VI_3 {
 
 ---
 
-##关闭集群mha
+##关闭原集群mha
 
 由于集群软件在侦测到主服务器失效后会干预相关资源，造成备机身份切换和IP飘移，为了避免这种影响，要关掉集群
 
@@ -171,12 +171,16 @@ root     28544  0.0  0.0 103244   864 pts/0    S+   00:28   0:00                
 
 ---
 
-##再次检查，这是最后一次备份原数据的机会 
+##再次检查,确认备份数据
+
+这是最后一次备份原数据的机会 
 
 
 ---
 
-##切换keepalived:变更原master keepalived优先级，重载，切换
+##切换keepalived ip
+
+变更新master keepalived优先级，重载的方式切换
 
 {% highlight bash %}
 [root@new-master ~]# vim /etc/keepalived/keepalived.conf
@@ -211,9 +215,11 @@ Shutting down MySQL........................................[  OK  ].
 
 ---
 
-##在销毁slave和原master前，这是最后一次可以备份原数据
+##确认备份数据 
 
+在销毁slave和原master前，这是最后一次可以备份原库统计数据的机会
 
+生产数据已经陈旧，不一致了
 
 确认后可以进行下一步
 
@@ -239,7 +245,9 @@ xtrabackup: Generating a list of tablespaces
 
 ---
 
-##销毁slave数据库，如果有足够空间，可以备到一个目录，没有则可以直接删
+##销毁slave数据库
+
+如果有足够空间，可以备到一个目录，没有则可以直接删
 
 
 {% highlight bash %}
@@ -269,7 +277,7 @@ new-master:/data/nfs
 
 ---
 
-##更新mysql版本
+##更新slave mysql版本
 
 {% highlight bash %}
 [root@slave02 src]# rpm -e Percona-Server-client-51-5.1.73-rel14.11.603.rhel6.x86_64 Percona-Server-server-51-5.1.73-rel14.11.603.rhel6.x86_64 Percona-Server-shared-51-5.1.73-rel14.11.603.rhel6.x86_64  
@@ -376,7 +384,7 @@ See http://www.percona.com/doc/percona-server/5.6/management/udf_percona_toolkit
 
 ---
 
-##备份my.cnf 替换配置文件
+##备份替换my.cnf配置文件
 
 {% highlight bash %}
 [root@slave02 etc]# mv my.cnf my.old.2015.12.09.backup
@@ -441,7 +449,7 @@ Starting Zabbix agent:                                     [  OK  ]
 
 ---
 
-##修改zabbix过期时间
+##修改zabbix统计数据过期时间
 
 {% highlight bash %}
 [root@new-master mysql]# vim  /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh
@@ -454,7 +462,7 @@ Starting Zabbix agent:                                     [  OK  ]
 
 ---
 
-##percona-xtrabackup:安装
+##安装percona-xtrabackup
 
 
 {% highlight bash %}
@@ -753,7 +761,7 @@ drwxr-xr-x 16 mysql mysql 20480 Dec  9 03:08 /data/mysql/
 
 ---
 
-##启动mysql，开启同步
+##启动mysql并且开启同步
 
 {% highlight bash %}
 [root@slave02 mysql]# mysql -u root -p 
