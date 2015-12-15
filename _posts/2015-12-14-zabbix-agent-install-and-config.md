@@ -409,7 +409,25 @@ Starting Zabbix agent:                                     [  OK  ]
 
 到此，基础工作已经完成，在此前提下，配置  **[Templates][templates]**，创建 **[Graphs][graphs]** ，拼接 **[Screens][screens]** 就可以展示出非常炫目的dashboard效果
 
+---
 
+#命令总结
+
+* **`wget http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm`**
+* **`zabbix_get -s zbx-target -p 10050 -k "system.cpu.load[all,avg1]"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "system.cpu.load[all,avg5]"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "system.cpu.load[all,avg15]"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "net.tcp.listen[10050]"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "net.tcp.listen[10051]"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "system.boottime"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "agent.version"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "net.if.discovery"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "system.cpu.discovery"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "system.sw.arch"`**
+* **`cat port.discovery.bash `**
+* **`cat userparameter_DIY.conf `**
+* **`zabbix_get -s zbx-target -p 10050 -k "port.discovery"`**
+* **`zabbix_get -s zbx-target -p 10050 -k "mem.used"`**
 
 
 ---

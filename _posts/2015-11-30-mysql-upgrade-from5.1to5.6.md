@@ -56,6 +56,21 @@ upgrade-slave:/data/nfs
 
 ---
 
+###停止集群
+
+如果有集群如mha，要停止集群，因为备份结束时会产生一个长锁，集群软件侦测到一定时间里没响应会认为master发生了故障，从而触发迁移，这不是我们想看到的~因为这会导致新恢复出来的数据不一致
+
+所以有集群的情况下，最好停止集群
+
+> **Tip:** 如果是mha，可以参考以下命令
+
+{% highlight bash %}
+masterha_check_status --conf=/etc/app1.cnf
+masterha_stop  --conf=/etc/app1.cnf
+{% endhighlight %}
+
+---
+
 ###开始备份
 
 
@@ -220,6 +235,45 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 > server-id = 3
 [root@upgrade-slave etc]#
 {% endhighlight %}
+
+> **Tip:**  根据具体情况，有时 **tmpdir** 也要根据环境进行设置，修改完成后，最好进行再次确认，合适的配置可以减少errlog里的报错，和重新调试的时间
+
+
+---
+
+##备份完成
+
+通过观察 **masterdb.full.backup.log** 可以知道备份是否完成
+
+通常备份完成会产生 **innobackupex: completed OK!** 的输出
+
+---
+
+##恢复集群
+
+是时候恢复集群了，让集群重新担当起失效检查和故障转移的职责
+
+> **Tip:** 如果是mha，可以参考以下命令
+
+{% highlight bash %}
+nohup  masterha_manager --conf=/etc/app1.cnf  --ignore_last_failover  &
+{% endhighlight %}
+
+
+---
+
+##安装xtrabackup
+
+
+{% highlight bash %}
+[root@upgrade-slave percona.51]# rpm -ivh  xtrabackup-1.6.7-356.rhel6.x86_64.rpm 
+warning: xtrabackup-1.6.7-356.rhel6.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID cd2efd2a: NOKEY
+Preparing...                ########################################### [100%]
+   1:xtrabackup             ########################################### [100%]
+[root@upgrade-slave percona.51]# 
+{% endhighlight %}
+
+尽量安装版本相近的xtrabackup,可以有效避免一些兼容性问题
 
 ---
 

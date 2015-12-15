@@ -190,6 +190,7 @@ Option	| Comment
 `--nocheck-binlog-format`  | 不对binlog_format进行检查
 `--replicate`| 将结果存入指定的表中
 `--tables` | 指定要检查的表，可以是一个列表，使用逗号分割
+`--databases` | 指定要检查的库，可以是一个列表，使用逗号分割
 `h=xxx,u=xxx` | DSN选项,h代表host,u代表用户名,使用逗号分割
 `--ask-pass`| 使用提示密码的方式连接数据库，而不是使用DSN指定，更安全
 
