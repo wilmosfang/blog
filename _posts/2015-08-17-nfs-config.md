@@ -371,13 +371,16 @@ MOUNTD_PORT=892
 
 {% highlight bash %}
 -A INPUT -i em1 -p tcp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT
+-A INPUT -i em1 -p udp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT
 {% endhighlight %}
 
 或者直接输入
 
-**iptables -A INPUT -i em1 -p tcp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT**
+**`iptables -A INPUT -i em1 -p tcp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT`**
+**`iptables -A INPUT -i em1 -p udp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT`**
 
-> **Tip:** **iptables** 的配配置需要root的权限
+> **Tip:** **iptables** 的配配置需要root的权限，不加udp的部分，会导致部分client无法正常showmount和挂载
+
 
 ---
 
@@ -472,7 +475,9 @@ NFS的启动信息默认会写到 **/var/log/messages** 里
 
 **rpcinfo  -p \| grep -E '(rquota\|mount\|nlock)'**
 
-**iptables -A INPUT -i em1 -p tcp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT**
+**`iptables -A INPUT -i em1 -p tcp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT`**
+
+**`iptables -A INPUT -i em1 -p udp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT`**
 
 **mount -t nfs -o intr nfs-server:/data/nfs /mnt/nfs/**
 

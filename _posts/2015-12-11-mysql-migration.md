@@ -31,23 +31,93 @@ comments: true
 
 ---
 
+##准备工作
+
+下面步骤最好作为准备工作，提前完成，这样可以更有效进行切换，和减少窗口期
+
+* **挂载NFS**
+* **安装软件包的收集(mysql,xtrabackup,keepalived)**
+* **安装keepalived**
+* **窗口选择与提前通知**
+* **确认备份数据**
+* **监控代理安装与配置**
+* **代理(zabbix)权限准备**
+* **监控工具准备**
+* **操作命令准备**
+* **安装xtrabackup**
+* **准备新版配置文件my.cnf**
+
+---
+
 ##挂载NFS
 
 用于备份重建slave
 
+{% highlight bash %}
+[root@new-slave ~]# yum clean all 
+Loaded plugins: fastestmirror
+Cleaning repos: base epel extras newrelic updates
+Cleaning up Everything
+Cleaning up list of fastest mirrors
+[root@new-slave ~]# yum install nfs-utils rpcbind
+...
+...
+Installed:
+  nfs-utils.x86_64 1:1.2.3-64.el6                              rpcbind.x86_64 0:0.2.0-11.el6                             
+
+Dependency Installed:
+  keyutils.x86_64 0:1.4-5.el6        libevent.x86_64 0:1.4.13-4.el6          libgssglue.x86_64 0:0.1-11.el6            
+  libtirpc.x86_64 0:0.2.1-10.el6     nfs-utils-lib.x86_64 0:1.1.5-11.el6     python-argparse.noarch 0:1.2.1-2.1.el6    
+
+Dependency Updated:
+  keyutils-libs.x86_64 0:1.4-5.el6                         keyutils-libs-devel.x86_64 0:1.4-5.el6                        
+
+Complete!
+[root@new-slave ~]# showmount  -e new-master
+Export list for new-master:
+/data/nfs 10.0.0.10,10.0.0.11,10.0.0.13
+[root@new-slave ~]# cd /data/
+[root@new-slave data]# mount -t nfs -o intr new-master:/data/nfs /data/nfs/ 
+[root@new-slave data]# df -h | grep nfs 
+new-master:/data/nfs
+                      548G   46G  475G   9% /data/nfs
+[root@new-slave data]# 
+{% endhighlight %}
 
 ---
 
 
-##新版master上启动keepalived
+##新版master上安装并启动keepalived
 
+安装并启动keepalived
+
+{% highlight bash %}
+[root@new-master ~]# yum -y install  keepalived.x86_64
+...
+...
+[root@new-master ~]# cd /etc/keepalived/
+[root@new-master keepalived]# cp keepalived.conf keepalived.conf.bak.201512xx
+[root@new-master keepalived]# > keepalived.conf
+[root@new-master keepalived]# vim keepalived.conf
+[root@new-master keepalived]# vim /etc/sysconfig/iptables
+[root@new-master keepalived]# grep 18 /etc/sysconfig/iptables 
+-A INPUT -d 224.0.0.18 -j ACCEPT
+[root@new-master keepalived]# /etc/init.d/iptables  reload 
+iptables: Trying to reload firewall rules:                 [  OK  ]
+[root@new-master keepalived]# iptables -L -nv  | grep 224 
+    0     0 ACCEPT     all  --  *      *       0.0.0.0/0            224.0.0.18          
+[root@new-master keepalived]# /etc/init.d/keepalived start 
+Starting keepalived:                                       [  OK  ]
+[root@new-master keepalived]# 
+{% endhighlight %}
+
+确认配置
 
 {% highlight bash %}
 [testuser@new-master ~]$ ps faux | grep keep  | grep -v grep 
 root      73609  0.0  0.0 110276  1144 ?        Ss   Sep25   2:17 /usr/sbin/keepalived -D
 root      73610  0.0  0.0 112500  2908 ?        S    Sep25   2:21  \_ /usr/sbin/keepalived -D
 root      73611  0.0  0.0 112484  2064 ?        S    Sep25  18:15  \_ /usr/sbin/keepalived -D
-[testuser@new-master ~]$ 
 [testuser@new-master ~]$ cat /etc/keepalived/keepalived.conf
 ! Configuration File for keepalived
 
@@ -427,6 +497,8 @@ See http://www.percona.com/doc/percona-server/5.6/management/udf_percona_toolkit
 [testuser@slave01 etc]$ 
 {% endhighlight %}
 
+innodb_additional_mem_pool_size  也已经被弃用了,如果有要注释掉
+
 
 ---
 
@@ -598,8 +670,7 @@ sys	7m44.089s
 {% highlight bash %}
 [root@slave01 nfs]# which innobackupex 
 /usr/bin/innobackupex
-[root@slave01 nfs]# time nohup /usr/bin/innobackupex --apply-log
-/data/nfs/test_full_backup/2015-12-09_00-53-03/
+[root@slave01 nfs]# time nohup /usr/bin/innobackupex --apply-log /data/nfs/test_full_backup/2015-12-09_00-53-03/
 nohup: ignoring input and appending output to `nohup.out'
 
 real	1m43.335s
@@ -613,8 +684,7 @@ sys	0m9.147s
 ##恢复数据
 
 {% highlight bash %}
-[root@slave01 data]# time nohup /usr/bin/innobackupex --copy-back
-/data/nfs/test_full_backup/2015-12-09_00-53-03/ >> restore.log  2>&1   &  
+[root@slave01 data]# time nohup /usr/bin/innobackupex --copy-back /data/nfs/test_full_backup/2015-12-09_00-53-03/ >> restore.log  2>&1   &  
 [1] 12635
 [root@slave01 data]# 
 [root@slave01 data]# tail -f restore.log 
@@ -975,4 +1045,46 @@ mysql>
 
 ##重建mha
 
+---
 
+
+* **`yum clean all`**
+* **`yum install nfs-utils rpcbind`**
+* **`showmount  -e new-master`**
+* **`mount -t nfs -o intr new-master:/data/nfs /data/nfs/`**
+* **`df -h | grep nfs`**
+* **`yum -y install  keepalived.x86_64`**
+* **`vim keepalived.conf`**
+* **`vim /etc/sysconfig/iptables`**
+* **`grep 18 /etc/sysconfig/iptables`**
+* **`/etc/init.d/iptables  reload`**
+* **`iptables -L -nv  | grep 224`**
+* **`/etc/init.d/keepalived start`**
+* **`cat /etc/keepalived/keepalived.conf`**
+* **`masterha_check_status --conf=/etc/app1.cnf`**
+* **`masterha_stop --conf=/etc/app1.cnf`**
+* **`/etc/init.d/keepalived reload ; watch -n .2 ip a`**
+* **`time nohup /usr/bin/innobackupex --defaults-file=/etc/my.cnf --user=root --password=xxxxxxxxxx /data/nfs/test_full_backup    >>  /data/nfs/full_backup.log 2>&1  &`**
+* **`tail -f full_backup.log`**
+* **`rm -rf *`**
+* **`rpm -e Percona-Server-client-51-5.1.73-rel14.11.603.rhel6.x86_64 Percona-Server-server-51-5.1.73-rel14.11.603.rhel6.x86_64 Percona-Server-shared-51-5.1.73-rel14.11.603.rhel6.x86_64   --nodeps`**
+* **`wget http://mirror.centos.org/centos/6/os/x86_64/Packages/numactl-2.0.9-2.el6.x86_64.rpm`**
+* **`rpm -ivh  numactl-2.0.9-2.el6.x86_64.rpm`**
+* **`rpm -ivh  Percona-Server-client-56-5.6.27-rel75.0.el6.x86_64.rpm Percona-Server-server-56-5.6.27-rel75.0.el6.x86_64.rpm Percona-Server-shared-56-5.6.27-rel75.0.el6.x86_64.rpm`**
+* **`mv my.cnf my.old.2015.12.09.backup`**
+* **`diff /tmp/old /tmp/new`**
+* **`id zabbix`**
+* **`/etc/init.d/zabbix-agent restart`**
+* **`zabbix_get -s new-master -p 10050 -k "mysql.slowlog[100,/var/lib/mysql/new-master-slow.log]"`**
+* **`vim  /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh`**
+* **`grep 120  /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh`**
+* **`yum install libev`**
+* **`rpm -e xtrabackup-1.6.7-356.rhel6.x86_64`**
+* **`rpm -ivh  percona-xtrabackup-2.3.2-1.el6.x86_64.rpm`**
+* **`innobackupex --version`**
+* **`time nohup /usr/bin/innobackupex --apply-log /data/nfs/test_full_backup/2015-12-09_00-53-03/`**
+* **`time nohup /usr/bin/innobackupex --copy-back /data/nfs/test_full_backup/2015-12-09_00-53-03/ >> restore.log  2>&1   &`**
+* **`tail -f restore.log`**
+* **`watch -n 2 du -sh /data/mysql/`**
+* **`cat xtrabackup_binlog_pos_innodb`**
+* **`chown  -R mysql.mysql /var/lib/mysql/`**
