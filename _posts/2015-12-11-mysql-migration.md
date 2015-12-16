@@ -1048,6 +1048,9 @@ mysql>
 ---
 
 
+
+#命令汇总
+
 * **`yum clean all`**
 * **`yum install nfs-utils rpcbind`**
 * **`showmount  -e new-master`**
