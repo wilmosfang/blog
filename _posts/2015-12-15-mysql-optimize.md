@@ -4,7 +4,6 @@ title:  Mysql 优化存储
 categories: linux  mysql 
 excerpt: 使用optimize table对数据库进行优化
 comments: true
-date:   2015-12-15 17:37:00
 ---
 
 
