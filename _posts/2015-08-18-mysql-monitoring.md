@@ -368,8 +368,8 @@ Starting Zabbix agent:                                     [  OK  ]
 
 ---
 
-总结
-=
+#总结
+
 
 *  安装插件包 **percona-zabbix-templates**
 *  拷贝配置 **userparameter_percona_mysql.conf**
@@ -378,6 +378,30 @@ Starting Zabbix agent:                                     [  OK  ]
 *  给 **zabbix** 赋权
 *  从 **zabbix-server** 进行连接测试
 *  添加模板
+
+
+---
+
+#命令汇总
+
+
+* **`mysql -V `**
+* **`cp /var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf  /etc/zabbix/zabbix_agentd.d/`**
+* **`cat /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php.cnf`**
+* **`/var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh gg `**
+* **`yum install php php-mysql `**
+* **`cat /tmp/localhost-mysql_cacti_stats.txt`**
+* **`cat /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh`**
+* **`sudo -u zabbix -H /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh running-slave `**
+* **`sudo -u zabbix -H /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh gg`**
+* **`chown  zabbix.zabbix /tmp/localhost-mysql_cacti_stats.txt  `**
+* **`mkdir /home/zabbix`**
+* **`cp /etc/skel/.*  /home/zabbix/`**
+* **`chown -R zabbix.zabbix /home/zabbix/`**
+* **`vim .my.cnf`**
+* **`zabbix_get -s mysql-server -p 10050 -k "MySQL.running-slave" `**
+* **`zabbix_get -s mysql-server -p 10050 -k "MySQL.Threads-connected" `**
+* **`zabbix_get -s mysql-server -p 10050 -k "MySQL.max-connections" `**
 
 ---
 
