@@ -2,6 +2,7 @@
 layout: post
 title: RabbitMQ基础 
 categories: linux rabbitmq
+wc: 775 2425 30842
 excerpt: follow me
 comments: true
 ---

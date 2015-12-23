@@ -2,6 +2,7 @@
 layout: post
 title: RabbitMQ集群I
 categories: linux rabbitmq cluster
+wc: 541 1398 16216
 excerpt: follow me
 comments: true
 ---

@@ -2,6 +2,7 @@
 layout: post
 title: 使用XtraBackup创建mysql slave 
 categories: linux  mysql admintools
+wc: 1206 4769 52759
 excerpt: follow me
 comments: true
 ---

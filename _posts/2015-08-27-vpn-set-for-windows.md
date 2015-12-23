@@ -2,6 +2,7 @@
 layout: post
 title: Windows客户端创建VPN连接
 categories: linux vpn
+wc: 92 76 2039
 excerpt: follow me
 comments: true
 ---

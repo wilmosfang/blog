@@ -2,6 +2,7 @@
 layout: post
 title:  Zabbix Agent 安装
 categories: linux monitoring zabbix 
+wc: 443 1534 20654
 excerpt: zabbix agent 的安装过程
 comments: true
 date:   2015-12-14 17:52:00

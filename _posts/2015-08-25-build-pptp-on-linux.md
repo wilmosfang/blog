@@ -2,6 +2,7 @@
 layout: post
 title: Linux 搭建 VPN
 categories: linux vpn
+wc: 572 2298 23699
 excerpt: follow me
 comments: true
 ---

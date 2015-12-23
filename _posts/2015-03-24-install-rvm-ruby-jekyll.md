@@ -2,6 +2,7 @@
 layout: post
 title: 安装jekyll (include rvm,ruby,gem)
 categories: linux rvm ruby jekyll
+wc: 531 1714 19693
 excerpt: follow me
 comments: true
 ---

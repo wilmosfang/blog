@@ -2,6 +2,7 @@
 layout: post
 title: Mysql binlog 清理方法
 categories: linux mysql 
+wc: 426 1812 15866
 excerpt: follow me
 comments: true
 ---

@@ -2,6 +2,7 @@
 layout: post
 title: Percona Server  5.1 内存过量消耗分析
 categories: linux mysql troubleshooting
+wc: 301 894 10541
 excerpt: follow me
 comments: true
 ---

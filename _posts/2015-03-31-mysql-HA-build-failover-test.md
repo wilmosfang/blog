@@ -2,6 +2,7 @@
 layout: post
 title: Mysql MHA 搭建 (四) mha failover 测试
 categories: linux mha mysql  keepalived cluster
+wc: 1046 5200 49647
 excerpt: follow me
 comments: true
 ---

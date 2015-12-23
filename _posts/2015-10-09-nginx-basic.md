@@ -2,6 +2,7 @@
 layout: post
 title: nginx基础
 categories: linux nginx upgrade
+wc: 1092 4425 43801
 excerpt: follow me
 comments: true
 ---

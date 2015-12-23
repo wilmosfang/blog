@@ -2,6 +2,7 @@
 layout: post
 title: redis-benchmark 基础
 categories: linux redis nosql benchmark
+wc: 739 2451 17797
 excerpt: follow me
 comments: true
 ---

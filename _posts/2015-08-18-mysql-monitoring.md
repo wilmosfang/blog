@@ -2,6 +2,7 @@
 layout: post
 title: Mysql 监控 
 categories: linux monitoring zabbix mysql
+wc: 413 1448 16383
 excerpt: 使用Zabbix监控Mysql的方法 
 comments: true
 date:   2015-08-18 00:00:00

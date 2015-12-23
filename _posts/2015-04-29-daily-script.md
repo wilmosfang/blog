@@ -2,6 +2,7 @@
 layout: post
 title: Daily Script
 categories: linux script
+wc: 507 1628 13033
 excerpt: follow me
 comments: true
 ---

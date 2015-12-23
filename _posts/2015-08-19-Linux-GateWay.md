@@ -2,6 +2,7 @@
 layout: post
 title: Linux 网关 
 categories: linux
+wc: 187 523 4829
 excerpt: follow me
 comments: true
 ---

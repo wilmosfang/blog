@@ -2,6 +2,7 @@
 layout: post
 title: Mac客户端创建VPN连接
 categories: linux vpn
+wc: 68 60 1463
 excerpt: follow me
 comments: true
 ---

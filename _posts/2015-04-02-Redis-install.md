@@ -2,6 +2,7 @@
 layout: post
 title: Redis 3.0.0 安装
 categories: linux redis nosql
+wc: 397 1335 12997
 excerpt: follow me
 comments: true
 ---

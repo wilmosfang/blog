@@ -2,6 +2,7 @@
 layout: post
 title: ZooKeeper 集群
 categories: linux zookeeper cluster
+wc: 701 2633 32235
 excerpt: follow me
 comments: true
 ---

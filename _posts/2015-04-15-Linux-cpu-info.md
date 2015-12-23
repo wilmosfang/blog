@@ -2,6 +2,7 @@
 layout: post
 title: Linux CPU info
 categories: linux monitoring
+wc: 315 1070 10097
 excerpt: follow me
 comments: true
 ---

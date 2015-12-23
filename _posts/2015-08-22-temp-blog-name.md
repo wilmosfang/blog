@@ -2,6 +2,7 @@
 layout: post
 title: Temp Blog Name
 categories: linux template
+wc: 76 106 782
 excerpt: follow me
 comments: true
 ---

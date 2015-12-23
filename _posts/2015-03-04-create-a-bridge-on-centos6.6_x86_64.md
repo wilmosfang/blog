@@ -2,6 +2,7 @@
 layout: post
 title: 在Centos6.6中创建一个Bridge
 categories: linux network
+wc: 185 609 6762
 excerpt: follow me
 comments: true
 ---

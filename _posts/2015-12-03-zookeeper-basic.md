@@ -2,6 +2,7 @@
 layout: post
 title: ZooKeeper 基础
 categories: linux zookeeper
+wc: 641 1999 19836
 excerpt: follow me
 comments: true
 ---

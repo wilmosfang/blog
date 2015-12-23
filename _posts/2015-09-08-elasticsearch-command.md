@@ -2,6 +2,7 @@
 layout: post
 title: Elasticsearch 常用命令
 categories: linux elasticsearch nosql
+wc: 470 1680 17300
 excerpt: follow me
 comments: true
 ---

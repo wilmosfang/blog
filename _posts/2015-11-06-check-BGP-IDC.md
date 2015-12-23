@@ -2,6 +2,7 @@
 layout: post
 title: BGP数据中心鉴别方法
 categories: linux network
+wc: 743 2168 22352
 excerpt: follow me
 comments: true
 ---

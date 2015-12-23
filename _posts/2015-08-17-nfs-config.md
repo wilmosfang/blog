@@ -2,6 +2,7 @@
 layout: post
 title: NFS 配置
 categories: linux nfs
+wc: 485 1341 14805
 excerpt: follow me
 comments: true
 ---

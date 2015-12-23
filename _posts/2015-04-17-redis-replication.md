@@ -2,6 +2,7 @@
 layout: post
 title: Redis 复制
 categories: linux redis nosql
+wc: 579 1478 16982
 excerpt: follow me
 comments: true
 ---

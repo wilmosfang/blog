@@ -2,6 +2,7 @@
 layout: post
 title: RabbitMQ管理
 categories: linux rabbitmq python ruby
+wc: 792 2157 21196
 excerpt: follow me
 comments: true
 ---

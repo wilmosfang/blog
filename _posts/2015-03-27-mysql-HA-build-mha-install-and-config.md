@@ -2,6 +2,7 @@
 layout: post
 title: Mysql MHA 搭建 (二) mha0.53 安装
 categories: linux mha mysql ssh cluster 
+wc: 480 1782 20916
 excerpt: follow me
 comments: true
 ---

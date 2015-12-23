@@ -2,6 +2,7 @@
 layout: post
 title: perl dancer 基础
 categories: linux perl dancer
+wc: 1577 6327 64750
 excerpt: follow me
 comments: true
 ---

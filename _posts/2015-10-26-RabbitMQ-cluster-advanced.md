@@ -2,6 +2,7 @@
 layout: post
 title: RabbitMQ集群II
 categories: linux rabbitmq cluster
+wc: 468 1901 21208
 excerpt: follow me
 comments: true
 ---

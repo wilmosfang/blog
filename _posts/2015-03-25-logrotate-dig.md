@@ -2,6 +2,7 @@
 layout: post
 title: Centos6下logrotate探源
 categories: linux log
+wc: 749 3635 28148
 excerpt: follow me
 comments: true
 ---

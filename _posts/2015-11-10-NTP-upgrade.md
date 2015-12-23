@@ -2,6 +2,7 @@
 layout: post
 title: NTP升级
 categories: linux upgrade ntp
+wc: 664 3060 25495
 excerpt: follow me
 comments: true
 ---

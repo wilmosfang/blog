@@ -2,6 +2,7 @@
 layout: post
 title: memcached基础
 categories: linux memcached
+wc: 1133 4849 46722
 excerpt: follow me
 comments: true
 ---

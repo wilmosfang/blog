@@ -2,6 +2,7 @@
 layout: post
 title: SSDB基础
 categories: linux nosql ssdb cluster
+wc: 668 2128 19836
 excerpt: follow me
 comments: true
 ---
