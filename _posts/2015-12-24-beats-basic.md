@@ -2,7 +2,7 @@
 layout: post
 title:  Beats 基础
 categories: linux elasticsearch logstash beats filebeat
-wc: 
+wc: 383  1241 13946 
 excerpt:  Beats 基础概念与使用方法
 comments: true
 ---
