@@ -3,7 +3,7 @@ layout: post
 title: memcached基础
 categories: linux memcached
 wc: 1133 4849 46722
-excerpt: follow me
+excerpt: memcached 的安装、基础管理命令、基本操作命令、状态查看
 comments: true
 ---
 
@@ -1130,5 +1130,27 @@ Connection closed by foreign host.
 
 ---
 
+#命令汇总
+
+* **`wget  http://www.memcached.org/files/memcached-1.4.24.tar.gz`**
+* **`tar -zxvf memcached-1.4.24.tar.gz`**
+* **`cd memcached-1.4.24`**
+* **`./configure`**
+* **`rpm -ql  libevent-1.4.13-4.el6.x86_64`**
+* **`yum -y install libevent-devel.x86_64`**
+* **`./configure`**
+* **`make`**
+* **`make install`**
+* **`ll /usr/local/bin/ | grep memcached`**
+* **`/usr/local/bin/memcached  -h`**
+* **`/usr/local/bin/memcached  -d  -m 1024 -p 12345 -u cc -c 512 -t 10`**
+* **`kill  8732`**
+* **`netstat  -ant | grep 12345`**
+* **`pstree -p  8835`**
+* **`ps -mp 8835`**
+* **`telnet localhost 12354`**
+
+
+---
 
 [memcached]:http://memcached.org/

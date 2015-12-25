@@ -24,7 +24,7 @@ comments: true
 
 下面是它们之间的关系
 
-![beats-logstash.png](/images/beat/beats-logstash.png)
+![beats-logstash.png](/images/beats/beats-logstash.png)
 
 关于 **[Beats][beats]** 的更详细信息可以参考 **[Beats Platform][beats_doc]**
 
@@ -57,11 +57,11 @@ comments: true
 
 beats platform
 
-![beats-platform.png](/images/beat/beats-platform.png)
+![beats-platform.png](/images/beats/beats-platform.png)
 
 filebeat
 
-![filebeat.png](/images/beat/filebeat.png)
+![filebeat.png](/images/beats/filebeat.png)
 
 
 
