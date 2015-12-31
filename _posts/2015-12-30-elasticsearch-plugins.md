@@ -2,7 +2,7 @@
 layout: post
 title:  Elasticsearch Plugins
 categories: linux elasticsearch 
-wc: 228  451 5984 
+wc: 273  588 7336 
 excerpt:  elasticsearch 插件的相关基础
 comments: true
 ---
@@ -195,12 +195,52 @@ drwxr-xr-x 5 root root 4096 Dec 30 22:04 head
 
 于是使用网页浏览 **`http://localhost:9200/_plugin/head/`** 就可以看到下列界面
 
-![es_plugin_head.png](/images/es_plugin_head.png)
+
+![es_plugin_head.png](/images/es_plugin/es_plugin_head.png)
 
 通过点击不同选项卡，和不同分片，可以看到相关信息
 
 
-目前只能使用localhost进行访问，我尝试了使用主机ip进行访问，但失败了，具体原因还在测查
+目前只能使用localhost进行访问，下面打开外部的访问
+
+---
+
+##外部访问
+
+修改配置使其可以从外部访问
+
+**network.host** 可以绑定IP到主机IP，也可以对所有 **0.0.0.0** 打开
+
+
+{% highlight bash %}
+[root@h102 elasticsearch]# vim elasticsearch.yml
+[root@h102 elasticsearch]# grep host elasticsearch.yml | grep -v "^#"
+network.host: 0.0.0.0 
+[root@h102 elasticsearch]# /etc/init.d/elasticsearch  restart 
+Stopping elasticsearch:                                    [  OK  ]
+Starting elasticsearch:                                    [  OK  ]
+[root@h102 elasticsearch]# 
+{% endhighlight %}
+
+
+打开防火墙
+
+{% highlight bash %}
+[root@h102 ~]# grep 9200 /etc/sysconfig/iptables 
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 9200 -j ACCEPT 
+[root@h102 ~]# /etc/init.d/iptables reload 
+iptables: Trying to reload firewall rules:                 [  OK  ]
+[root@h102 ~]# iptables -L -nv | grep 9200
+    0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:9200 
+[root@h102 ~]# 
+{% endhighlight %}
+
+现在可以从外面进行访问了
+
+![es_plugin_head2.png](/images/es_plugin/es_plugin_head2.png)
+
+
+
 
 ---
 
@@ -208,18 +248,24 @@ drwxr-xr-x 5 root root 4096 Dec 30 22:04 head
 #命令汇总
 
 
-
-* **`rpm -qa | grep elast`**
 * **`rpm -ql elasticsearch-2.1.1-1.noarch | grep plugin`**
 * **`/usr/share/elasticsearch/bin/plugin -h`**
 * **`/usr/share/elasticsearch/bin/plugin list -h`**
 * **`/usr/share/elasticsearch/bin/plugin remove -h`**
 * **`/usr/share/elasticsearch/bin/plugin list`**
+* **`ll  /usr/share/elasticsearch/plugins`**
 * **`/usr/share/elasticsearch/bin/plugin install -h`**
 * **`/usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head`**
 * **`echo $?`**
 * **`/usr/share/elasticsearch/bin/plugin list`**
 * **`ll  /usr/share/elasticsearch/plugins`**
+* **`vim elasticsearch.yml`**
+* **`grep host elasticsearch.yml | grep -v "^#"`**
+* **`/etc/init.d/elasticsearch  restart`**
+* **`grep 9200 /etc/sysconfig/iptables`**
+* **`/etc/init.d/iptables reload`**
+* **`iptables -L -nv | grep 9200`**
+
 
 
 
