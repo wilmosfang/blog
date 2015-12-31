@@ -2,8 +2,8 @@
 layout: post
 title: Mysql MHA 搭建 (四) mha failover 测试
 categories: linux mha mysql  keepalived cluster
-wc: 1046 5200 49647
-excerpt: follow me
+wc: 1064  5236 50029
+excerpt: mha的主动被动切换测试
 comments: true
 ---
 
@@ -1040,6 +1040,23 @@ Master failover to m2(192.168.75.12:3306) completed successfully.
 
 在此只是将mha的基本框架进行了搭建，基本功能进行了展示
 
+
+
+---
+
+#命令汇总
+
+
+* **`masterha_check_repl --conf=/etc/app1.cnf`**
+* **`masterha_master_switch --master_state=alive --conf=/etc/app1.cnf  --new_master_host=m1 --interactive=0`**
+* **`ps -ef | grep keep`**
+* **`ip a`**
+* **`F_rs.bash`**
+* **`nohup   masterha_manager --conf=/etc/app1.cnf  --ignore_last_failover  &`**
+* **`cat  mha/app1/manager.log`**
+
+
+---
 
 [mha3]:http://soft.dog/2015/03/30/mysql-HA-build-keepalived-install-and-config.html
 

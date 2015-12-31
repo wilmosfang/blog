@@ -69,8 +69,9 @@ comments: true
 
 ---
 
-##可能涉及到的命令
+#可能涉及到的命令
 
+* **`masterha_check_ssh  --conf=/etc/app1.cnf`**
 * **`masterha_check_status  --conf=/etc/app1.cnf`**
 * **`masterha_stop  --conf=/etc/app1.cnf`**
 * **`masterha_check_repl --conf=/etc/app1.cnf`**
