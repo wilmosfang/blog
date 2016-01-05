@@ -378,10 +378,10 @@ yellow open   .kibana               1   1         94            0    102.3kb    
 
 ---
 
-##线程模型
+##流水线模型
 
 
-当前的 **Logstash ** 是这样的处理模型
+当前的 **Logstash** 是这样的处理模型
 
 {% highlight bash %}
 input threads | filter worker threads | output worker
