@@ -387,6 +387,11 @@ yellow open   .kibana               1   1         94            0    102.3kb    
 input threads | filter worker threads | output worker
 {% endhighlight %}
 
+
+
+![deploy_2.png](/images/logstash/deploy_2.png)
+
+
 **Filter** 是可选项，如果没关于 **Filter** 的定义 ,就是如下模型
 
 
@@ -394,7 +399,10 @@ input threads | filter worker threads | output worker
 input threads | output worker
 {% endhighlight %}
 
-![basic_logstash_pipeline.png](/images/elk/basic_logstash_pipeline.png)
+
+![deploy_1.png](/images/logstash/deploy_1.png)
+
+
 
 
 ---
