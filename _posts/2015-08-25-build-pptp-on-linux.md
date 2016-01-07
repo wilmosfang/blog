@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Linux 搭建 VPN
-categories: linux vpn
-wc: 572 2298 23699
-excerpt: follow me
+categories: linux network vpn
+wc: 579  2406 24418
+excerpt: Linux 下搭建 pptp VPN 的方法
 comments: true
 ---
 
@@ -543,30 +543,36 @@ Aug 25 00:40:35 pptp-server pptpd[10177]: CTRL: Client 103.240.124.15 control co
 
 ---
 
-#总结
+#命令汇总
 
-**yum -y install ppp**
-
-**yum -y  install  pptpd**
-
-**net.ipv4.ip_forward**
-
-**/etc/pptpd.conf**
-
-**/etc/ppp/options.pptpd**
-
-**/etc/ppp/chap-secrets**
-
-**iptables -A INPUT -p gre -j ACCEPT**
-
-**iptables -A INPUT -p tcp -m tcp --dport 1723 -j ACCEPT**
-
-**iptables -t nat -A POSTROUTING -s 192.168.123.0/24 -o eth0 -j MASQUERADE**
-
-**/etc/init.d/pptpd  start**
-
-**chkconfig  pptpd on**
-
+* **`yum install ppp`**
+* **`yum list all | grep -i pptp`**
+* **`yum -y  install  pptpd.x86_64`**
+* **`sysctl  -a | grep forward`**
+* **`vim /etc/sysctl.conf`**
+* **`grep forward /etc/sysctl.conf`**
+* **`sysctl  -p`**
+* **`sysctl  -a | grep forward`**
+* **`grep -v "^#"  /etc/pptpd.conf  | cat -s`**
+* **`cat /etc/resolv.conf`**
+* **`grep -v "^#"  /etc/ppp/options.pptpd  | cat -s`**
+* **`iptables --flush POSTROUTING --table nat`**
+* **`iptables --flush FORWARD`**
+* **`iptables -A INPUT -p gre -j ACCEPT`**
+* **`iptables -A INPUT -p tcp -m tcp --dport 1723 -j ACCEPT`**
+* **`iptables -t nat -A POSTROUTING -s 192.168.123.0/24 -o eth0 -j MASQUERADE`**
+* **`/etc/init.d/iptables  save`**
+* **`vim /etc/sysconfig/iptables`**
+* **`/etc/init.d/iptables  reload`**
+* **`iptables -L -nv`**
+* **`iptables -L -nv -t nat`**
+* **`cat /etc/ppp/chap-secrets`**
+* **`/etc/init.d/iptables  restart`**
+* **`/etc/init.d/pptpd  start`**
+* **`chkconfig  --list | grep -E "(pptp|iptables)"`**
+* **`chkconfig  iptables on`**
+* **`chkconfig  pptpd on`**
+* **`ip a`**
 
 ---
 

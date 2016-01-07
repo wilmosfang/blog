@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Linux 网关 
-categories: linux
-wc: 187 523 4829
-excerpt: follow me
+categories: linux network
+wc: 190  543 4998
+excerpt: 使用Linux搭建网关服务器
 comments: true
 ---
 
@@ -168,15 +168,17 @@ rtt min/avg/max/mdev = 7.585/7.615/7.653/0.113 ms
 总结
 =
 
-* **net.ipv4.ip_forward = 1**
-*  **iptables -A FORWARD -i em1 -j ACCEPT**
-*  **iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o em2 -j MASQUERADE**
-*  **-A POSTROUTING -s 192.168.1.0/24 -o em2 -j MASQUERADE**
-*  **-A FORWARD -i em1 -j ACCEPT**
-*  **/etc/init.d/iptables  reload**
-* **ip route del default**
-* **ip route add default via 192.168.1.254 dev em1**
-
+* **`net.ipv4.ip_forward = 1`**
+* **`grep  forward  /etc/sysctl.conf`**
+* **`sysctl  -a | grep  forwarding`**
+* **`ip route | grep default`**
+* **`iptables -A FORWARD -i em1 -j ACCEPT`**
+* **`iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o em2 -j MASQUERADE`**
+* **`-A POSTROUTING -s 192.168.1.0/24 -o em2 -j MASQUERADE`**
+* **`-A FORWARD -i em1 -j ACCEPT`**
+* **`/etc/init.d/iptables  reload`**
+* **`ip route del default`**
+* **`ip route add default via 192.168.1.254 dev em1`**
 
 总体分三部
 -
