@@ -2,8 +2,8 @@
 layout: post
 title: RabbitMQ管理
 categories: linux rabbitmq python ruby
-wc: 792 2157 21196
-excerpt: follow me
+wc: 793  2165 21319
+excerpt: rabbitmqctl 命令的使用，用户管理，访问控制，Python Ruby 连接 RabbitMQ ,日志与状态的查看
 comments: true
 ---
 

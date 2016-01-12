@@ -133,6 +133,8 @@ nav{
 	-webkit-transition:0.4s ease;
 	-moz-transition:0.4s ease;
 	-o-transition:0.4s ease;
+	width: 50%;
+    	float: left;
 }
 .categories-list-item:last-of-type{
 	border-bottom:none; 
