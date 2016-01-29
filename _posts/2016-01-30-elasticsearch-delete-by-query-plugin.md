@@ -159,7 +159,7 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 
 ---
 
-###重启ES服务
+##重启ES服务
 
 安装后得重启，否则不会生效，如果是一个集群，那每一个节点安装完插件后都得重启
 
