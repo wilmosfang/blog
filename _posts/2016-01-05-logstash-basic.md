@@ -2,13 +2,12 @@
 layout: post
 title:  Logstash  基础
 categories: linux logstash elasticsearch
-wc: 706  2265 30073 
-excerpt:  Logstash 基础概念与使用方法
+wc: 718  2270 30257 
+excerpt:  logstash 的安装，基础测试，关闭步骤，系统日志处理，多行日志处理，filebeat对接，管道模型，es的简单检索
 comments: true
 ---
 
 
----
 
 #前言
 
@@ -152,6 +151,10 @@ Logstash startup completed
 ...
 ...
 {% endhighlight %}
+
+---
+
+##elasticsearch中检索
 
 
 使用下面的方式进行检索

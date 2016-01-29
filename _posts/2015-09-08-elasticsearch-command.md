@@ -2,12 +2,11 @@
 layout: post
 title: Elasticsearch 常用命令
 categories: linux elasticsearch nosql
-wc: 470 1680 17300
-excerpt: follow me
+wc: 485  1717 17870
+excerpt: es的配置，防火墙，启停，常用命令 
 comments: true
 ---
 
----
 
 #前言
 
@@ -460,7 +459,22 @@ curl -XPOST 'http://localhost:9200/_cluster/nodes/_shutdown'
 curl -XPOST 'http://localhost:9200/_cluster/nodes/_all/_shutdown'
 {% endhighlight %}
 
+---
 
+#命令汇总
+
+
+* **`curl localhost:9200/_cat/health?v`**
+* **`curl localhost:9200/_cat/nodes?v`**
+* **`curl 'localhost:9200/_cat/allocation?v'`**
+* **`curl localhost:9200/_cat/indices?v`**
+* **`curl 'localhost:9200/_cat/fielddata?v'`**
+* **`curl 'localhost:9200/_cat/master?v'`**
+* **`curl 'localhost:9200/_cat/pending_tasks?v'`**
+* **`curl 'localhost:9200/_cat/plugins?v'`**
+* **`curl 'localhost:9200/_cat/recovery?v'`**
+* **`curl localhost:9200/_cat/thread_pool?v`**
+* **`curl localhost:9200/_cat/shards?v`**
 
 
 ---
