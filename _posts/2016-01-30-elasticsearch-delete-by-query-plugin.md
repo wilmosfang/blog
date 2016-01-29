@@ -41,8 +41,6 @@ comments: true
 * TOC
 {:toc}
 
-[toc]
-
 
 ---
 
