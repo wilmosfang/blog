@@ -1,6 +1,6 @@
 ---
 layout: post
-title:    etcd 基础
+title: etcd 基础
 categories:  linux etcd
 wc: 853  2527 41364 
 excerpt: 下载安装，服务运行，存取测试，单点集群，获取版本信息，关键字操作，统计信息等相关API
@@ -9,7 +9,9 @@ comments: true
 
 
 
-#前言
+# 前言
+
+
 
 **[etcd][etcd]** 是一个分布式的，一致性键值存储，主要用于共享配置和服务发现
 
