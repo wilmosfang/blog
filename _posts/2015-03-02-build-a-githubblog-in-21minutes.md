@@ -7,7 +7,7 @@ excerpt: follow me
 comments: true
 ---
 
-##前言
+## 前言
 
 喜欢写Blog的人，会经历三个阶段。
 
@@ -19,7 +19,7 @@ comments: true
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

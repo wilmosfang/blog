@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 
 **[Percona Toolkit][percona-toolkit]** 是一系列进行mysql管理的工具，强大而高效，可以完成很多复杂的工作，是mysql数据库运维工程师居家旅行必备的良品。
@@ -28,7 +28,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

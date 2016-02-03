@@ -9,7 +9,7 @@ comments: true
 
 
 
-#前言
+# 前言
 
 
 **[Kibana][kibana]** 是设计用来与Elasticsearch配合进行数据分析与数据可视化的开源软件
@@ -25,7 +25,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

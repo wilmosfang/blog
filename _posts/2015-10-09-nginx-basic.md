@@ -9,7 +9,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 **[Nginx][nginx]** ("engine x") 是一个高性能的 HTTP 和反向代理服务器
 
@@ -26,7 +26,7 @@ comments: true
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

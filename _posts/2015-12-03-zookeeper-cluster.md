@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 
 **[ZooKeeper][zookeeper]** 本身就是为分布式应用服务的，为了确保高可用所以很少使用 **Standalone** 模式，而更多是使用集群模式运行
@@ -29,7 +29,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 
 mysql 升级过程中出现了general_log的缺失，下面分享一下处理过程
@@ -19,7 +19,7 @@ mysql 升级过程中出现了general_log的缺失，下面分享一下处理过
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

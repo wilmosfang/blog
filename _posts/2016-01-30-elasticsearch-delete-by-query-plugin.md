@@ -9,7 +9,7 @@ comments: true
 
 
 
-#前言
+# 前言
 
 
 **[Elasticsearch][elasticsearch]** 的使用过程中常常要删除具备一定特性的一批数据(documents)
@@ -36,7 +36,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

@@ -9,7 +9,7 @@ comments: true
 
 
 
-#前言
+# 前言
 
 
 **[RabbitMQ ][rabbitmq]** 有灵活的插件机制，启用 **[rabbitmq-management][rabbitmq_management]** 就可以对服务进行监控和管理
@@ -30,7 +30,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

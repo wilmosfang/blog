@@ -11,7 +11,7 @@ comments: true
 
 
 
-##前言
+## 前言
 
 我前面有一篇文章可以[21分钟搭建一个GitHub Blog](http://wilmosfang.github.io/blog/2015/03/02/build-a-githubblog-in-21minutes.html)
 
@@ -21,7 +21,7 @@ comments: true
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

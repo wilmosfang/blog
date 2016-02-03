@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 
 **[ssdb][ssdb]** 是一个高性能支持丰富数据结构的 NoSQL 数据库, 用于替代 Redis.
@@ -30,7 +30,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

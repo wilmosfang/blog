@@ -7,13 +7,13 @@ excerpt: 我的blog模板与书写规范，检查与处理流程
 comments: true
 ---
 
-#前言
+# 前言
 
 用于以后的 **blog** 行文规范
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

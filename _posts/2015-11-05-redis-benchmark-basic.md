@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 **[redis-benchmark][redis-benchmark]** 是官方自带的 [Redis][redis]性能测试工具，可以有效的测试[Redis][redis]服务的性能。
 
@@ -20,7 +20,7 @@ comments: true
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

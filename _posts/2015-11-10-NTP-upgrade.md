@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 **[NTP][ntp]** (Network Time Protocol) 是网络系统中用来协同时间的关键服务，它的作用就是用来同步时间
 
@@ -23,7 +23,7 @@ comments: true
  
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

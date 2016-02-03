@@ -8,7 +8,7 @@ comments: true
 ---
 
 
-#前言
+# 前言
 
 **[Elasticsearch][elasticsearch]** 是一个使用得非常广泛的分布式全文检索数据库
 
@@ -24,7 +24,7 @@ comments: true
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

@@ -9,7 +9,7 @@ comments: true
 
 
 
-#前言
+# 前言
 
 **[Zabbix][zabbix]** 是一个高效的开源监控解决方案
 
@@ -22,7 +22,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

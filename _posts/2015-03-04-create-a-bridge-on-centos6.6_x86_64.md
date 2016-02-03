@@ -7,13 +7,13 @@ excerpt: follow me
 comments: true
 ---
 
-##前言
+## 前言
 
 大部分玩**KVM**的人一定都会遇到同一个问题，那就是给当前系统创建一个**Bridge**(Bridge 可以理解为软件模拟出的网桥，网桥又可以理解为简单的交换机，如果还不明白建议用Baidu去Google一把)
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

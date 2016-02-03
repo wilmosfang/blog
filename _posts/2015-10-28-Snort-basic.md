@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 **[Snort][snort]** 是一款开源的IDS/IPS(Intrusion Detection/Prevention System)软件
 
@@ -20,7 +20,7 @@ comments: true
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

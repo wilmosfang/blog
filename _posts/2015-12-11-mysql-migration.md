@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 
 有了keepalived和mysql upgrade的技术作基础，可以结合两者完成无逢升级
@@ -23,7 +23,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

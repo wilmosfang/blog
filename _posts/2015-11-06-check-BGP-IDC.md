@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 BGP(Border Gateway Protocol)是一种在自治系统之间动态交换路由信息的路由协议。
 
@@ -28,7 +28,7 @@ BGP双线优点：
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

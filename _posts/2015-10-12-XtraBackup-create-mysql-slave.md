@@ -9,7 +9,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 **[XtraBackup][percona-xtrabackup]** 是 **[percona][percona]** 出的一款mysql备份工具，可以使用它对mysql进行高效备份
 
@@ -19,7 +19,7 @@ comments: true
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 
 Mysql长期使用会产生碎片，使用 **optimize table** 可以有效减少碎片
@@ -29,7 +29,7 @@ Mysql长期使用会产生碎片，使用 **optimize table** 可以有效减少�
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

@@ -9,7 +9,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 **[Redis][redis]** 是一个开源的, BSD 许可的, key-value 缓存和存储
 
@@ -35,7 +35,7 @@ Keepalived + Redis 的实现方式并非官方HA方案，在监控与失效切�
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}

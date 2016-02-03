@@ -10,7 +10,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 
 **[c1000k][c1000k]** 是一套用来测试本地OS TCP连接上限的C/S小工具。
@@ -25,7 +25,7 @@ comments: true
 ---
 
 
-#概要
+# 概要
 
 * TOC
 {:toc}

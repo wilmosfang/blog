@@ -9,7 +9,7 @@ comments: true
 
 ---
 
-#前言
+# 前言
 
 如果使用的 **[mha][mha]** 构建mysql集群，由于各种原因会遇到需要进行迁移的情况
 
@@ -19,7 +19,7 @@ comments: true
 
 ---
 
-#概要
+# 概要
 
 * TOC
 {:toc}
