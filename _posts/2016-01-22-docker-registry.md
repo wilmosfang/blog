@@ -41,7 +41,7 @@ comments: true
 
 ---
 
-##依赖
+## 依赖
 
 Registry 要求构建在不小于 **1.6.0** 版本的 Docker 引擎上
 
@@ -50,10 +50,10 @@ Registry 要求构建在不小于 **1.6.0** 版本的 Docker 引擎上
 
 ---
 
-##Registry的创建与销毁
+## Registry的创建与销毁
 
 
-###创建运行Registry
+### 创建运行Registry
 
 {% highlight bash %}
 [root@h103 ~]# docker run -d -p 5000:5000 --name registry registry:2
@@ -80,7 +80,7 @@ Status: Downloaded newer image for registry:2
 
 ---
 
-###从Docker Hub拉取镜像
+### 从Docker Hub拉取镜像
 
 {% highlight bash %}
 [root@h103 ~]# docker pull ubuntu
@@ -108,7 +108,7 @@ hello-world         latest              0a6ba66e537a        3 months ago        
 
 ---
 
-###镜像打标
+### 镜像打标
 
 {% highlight bash %}
 [root@h103 ~]# docker images
@@ -132,7 +132,7 @@ hello-world                   latest              0a6ba66e537a        3 months a
 
 ---
 
-###推送镜像到Registry
+### 推送镜像到Registry
 
 
 {% highlight bash %}
@@ -149,7 +149,7 @@ latest: digest: sha256:a27637294694a32300c5a9b94c9078709ec75216dd875fbdbc89acb0e
 
 ---
 
-###从Registry拉取镜像
+### 从Registry拉取镜像
 
 
 {% highlight bash %}
@@ -165,7 +165,7 @@ Status: Image is up to date for localhost:5000/myfirstimage:latest
 
 ---
 
-###销毁Registry
+### 销毁Registry
 
 
 registry和其它实例没有任何区别，使用stop然后rm就可以便捷地进行销毁
@@ -189,7 +189,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ---
 
 
-##部署本地Registry服务
+## 部署本地Registry服务
 
 {% highlight bash %}
 [root@h103 ~]# docker run -d -p 5000:5000 --restart=always --name registry registry:2
@@ -248,7 +248,7 @@ registry
 
 ---
 
-###存储
+### 存储
 
 
 默认情况下，registry 中的数据是以docker卷的形式存在于本地文件系统
@@ -345,10 +345,10 @@ data/
 
 ---
 
-##部署远程Registry服务
+## 部署远程Registry服务
 
 
-###创建自签名证书
+### 创建自签名证书
 
 
 {% highlight bash %}
@@ -398,7 +398,7 @@ total 12
 {% endhighlight %}
 
 
-###运行Registry
+### 运行Registry
 
 {% highlight bash %}
 [root@h104 ~]# docker ps -a 
@@ -415,7 +415,7 @@ b578e321f33f        registry:2          "/bin/registry /etc/d"   6 seconds ago  
 
 
 
-###尝试push一个镜像
+### 尝试push一个镜像
 
 
 先tag一些镜像出来
@@ -446,7 +446,7 @@ hello-world                   latest              0a6ba66e537a        3 months a
 
 再次尝试push
 
-####报错1
+#### 报错1
 
 {% highlight bash %}
 [root@h103 ~]# docker push h104:5000/ubuntu
@@ -485,7 +485,7 @@ v2 ping attempt failed with error: Get https://h104:5000/v2/: tls: oversized rec
 
 ---
 
-####报错234
+#### 报错234
 
 
 {% highlight bash %}
@@ -635,7 +635,7 @@ Status: Image is up to date for docker-registry:5000/ubuntu:latest
 
 ---
 
-####其它报错
+#### 其它报错
 
 
 类似于下面两种
@@ -742,7 +742,7 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 
 ---
 
-##Registry负载均衡
+## Registry负载均衡
 
 
 目前可以使用多个容器共享存储的方式来实现负载均衡
@@ -756,14 +756,14 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 
 ---
 
-##访问控制
+## 访问控制
 
 可以使用本地基础认证在TLS加密的基础上进行更细粒度的访问控制
 
 这个机制和http的基础认证是一样的，由于是简单密码，明文传送，所以只有ssl加密的环境中才有安全保障
 
 
-###创建密码文件
+### 创建密码文件
 
 首先创建一个密码文件
 
@@ -783,7 +783,7 @@ testuser:$2y$05$.NF64Yoz4W/VCfM1RrkBw.CT7ji3TbzdgBWjIH6X60MMgNFC.vIy.
 [root@docker ~]#
 {% endhighlight %}
 
-###创建一个registry
+### 创建一个registry
 
 这个registry
 
@@ -813,7 +813,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 [root@docker ~]#
 {% endhighlight %}
 
-###尝试push一个镜像
+### 尝试push一个镜像
 
 {% highlight bash %}
 [root@h104 ~]# docker push docker:5000/ubuntu 
@@ -825,7 +825,7 @@ Head https://docker:5000/v2/ubuntu/blobs/sha256:a3ed95caeb02ffe68cdd9fd84406680a
 
 报错是因为没有进行认证
 
-###进行认证
+### 进行认证
 
 {% highlight bash %}
 [root@h104 ~]# docker login docker:5000
@@ -847,7 +847,7 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 
 ---
 
-##使用Compose构建容器
+## 使用Compose构建容器
 
 **[Docker Compose][compose]** 是一个docker容器编排工具，可以有效完成多容器对接和组合等工作
 
@@ -859,7 +859,7 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 
 以后有机会再进行深入研究
 
-###下载安装Compose
+### 下载安装Compose
 
 可以使用下面两种方法进行安装
 
@@ -882,7 +882,7 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 {% endhighlight %}
 
 
-###Compose软件基础信息
+### Compose软件基础信息
 
 {% highlight bash %}
 [root@docker ~]# ls
@@ -938,7 +938,7 @@ Commands:
 
 ---
 
-###编辑docker-compose.yml
+### 编辑docker-compose.yml
 
 
 {% highlight bash %}
@@ -967,7 +967,7 @@ ERROR: yaml.scanner.ScannerError: mapping values are not allowed here
 [root@docker ~]# 
 {% endhighlight %}
 
-####报错1
+#### 报错1
 
 * 原因是 docker-compose.yml 中格式不对
 * 解决办法调整格式，加上空格
@@ -1005,7 +1005,7 @@ Service 'registry2' configuration key 'environment' contains an invalid type, it
 {% endhighlight %}
 
 
-####报错2
+#### 报错2
 
 * 原因是 docker-compose.yml 中environment部分格式不对
 * 解决办法：调整格式，加上空格
@@ -1072,7 +1072,7 @@ Nmap done: 1 IP address (1 host up) scanned in 5.00 seconds
 [root@h104 ~]# 
 {% endhighlight %}
 
-####报错3
+#### 报错3
 
 * 原因是配置中端口映射不对
 * 解决办法：调整port map 为 5002:5000
@@ -1182,7 +1182,7 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 
 ---
 
-#命令汇总
+# 命令汇总
 
 {% highlight bash %}
 docker run -d -p 5000:5000 --name registry registry:2

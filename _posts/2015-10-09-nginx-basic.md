@@ -36,7 +36,7 @@ comments: true
 
 ---
 
-##下载
+## 下载
 
 
 
@@ -60,9 +60,9 @@ nginx-1.9.5.tar.gz
 
 ---
 
-##安装
+## 安装
 
-###解压
+### 解压
 
 {% highlight bash %}
 [root@h102 src]# tar -zxvf nginx-1.9.5.tar.gz 
@@ -98,7 +98,7 @@ nginx-1.9.5  nginx-1.9.5.tar.gz
 
 ---
 
-###配置
+### 配置
 
 
 {% highlight bash %}
@@ -209,7 +209,7 @@ statically from the source with nginx by using --with-pcre=<path> option.
 [root@h102 nginx-1.9.5]# 
 {% endhighlight %}
 
-####报错1
+#### 报错1
 
 **the HTTP rewrite module requires the PCRE library**
 
@@ -220,7 +220,7 @@ statically from the source with nginx by using --with-pcre=<path> option.
 * 1.使用 **--without-http_rewrite_module** 不添加此模块
 * 2.安装 **PCRE** 模块到系统中(其实是安装此模块的开发包)
 
-####解决依赖
+#### 解决依赖
 
 由此可见 **pcre** 已经在系统中有安装，只是它的开发包没有
 
@@ -599,7 +599,7 @@ Configuration summary
 
 ---
 
-###编译
+### 编译
 
 {% highlight bash %}
 [root@h102 nginx-1.9.5]# make 
@@ -638,7 +638,7 @@ make[1]: Leaving directory `/usr/local/src/nginx-1.9.5'
 
 ---
 
-###安装
+### 安装
 
 
 {% highlight bash %}
@@ -677,7 +677,7 @@ make[1]: Leaving directory `/usr/local/src/nginx-1.9.5'
 
 ---
 
-##Nginx操作
+## Nginx操作
 
 
 nginx的目录结构
@@ -714,7 +714,7 @@ nginx的目录结构
 
 ---
 
-###启动
+### 启动
 
 查看配置
 
@@ -777,11 +777,11 @@ nobody   11757  0.0  0.0  24728  1244 ?        S    15:23   0:00  \_ nginx: work
 
 ---
 
-###停止
+### 停止
 
 nginx是通过给Nginx主进程发系统信号的方式来停止的
 
-####从容停止
+#### 从容停止
 
 {% highlight bash %}
 [root@h102 logs]# ps faux | grep nginx 
@@ -794,7 +794,7 @@ root     11914  0.0  0.0 103256   824 pts/0    S+   15:32   0:00          \_ gre
 [root@h102 logs]# 
 {% endhighlight %}
 
-####快速停止
+#### 快速停止
 
 {% highlight bash %}
 [root@h102 logs]# ps faux | grep nginx 
@@ -819,7 +819,7 @@ root     11964  0.0  0.0 103256   828 pts/0    S+   15:43   0:00          \_ gre
 [root@h102 logs]# 
 {% endhighlight %}
 
-####强制停止
+#### 强制停止
 
 
 {% highlight bash %}
@@ -838,7 +838,7 @@ nobody   11972  0.0  0.0  24728  1340 ?        S    15:45   0:00 nginx: worker p
 
 ---
 
-###检查配置
+### 检查配置
 
 重启之前最好先检查一下配置，避免由于配置不合理而导致的服务不可用
 
@@ -870,7 +870,7 @@ nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
 
 ---
 
-###重启
+### 重启
 
 {% highlight bash %}
 [root@h102 nginx]# ps fuax | grep nginx 
@@ -887,7 +887,7 @@ nobody   60962  0.0  0.0  24732  1364 ?        S    16:40   0:00  \_ nginx: work
 
 ---
 
-##Nginx信号控制
+## Nginx信号控制
 
   
 信号     | 控制
@@ -900,10 +900,10 @@ nobody   60962  0.0  0.0  24732  1364 ?        S    16:40   0:00  \_ nginx: work
 **WINCH** | 从容关闭工作进程
 
 
-##Nginx 版本变更
+## Nginx 版本变更
 
 
-###准备好另一个版本的Nginx
+### 准备好另一个版本的Nginx
 
 
 根据上面的步骤准备好另一个版本的Nginx
@@ -964,7 +964,7 @@ nobody    5501  0.0  0.0  24728  1244 ?        S    20:01   0:00  \_ nginx: work
 
 ---
 
-###替换Nginx可执行文件
+### 替换Nginx可执行文件
 
 {% highlight bash %}
 [root@h102 sbin]# ls
@@ -984,7 +984,7 @@ configure arguments:
 [root@h102 sbin]# 
 {% endhighlight %}
 
-###使用新版本Nginx测试配置
+### 使用新版本Nginx测试配置
 
 
 {% highlight bash %}
@@ -994,7 +994,7 @@ nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
 [root@h102 sbin]# 
 {% endhighlight %}
 
-###平滑替换Nginx可执行程序
+### 平滑替换Nginx可执行程序
 
 {% highlight bash %}
 [root@h102 sbin]# kill -USR2 `cat /usr/local/nginx/logs/nginx.pid`
@@ -1022,7 +1022,7 @@ nobody    5653  0.0  0.0  24740  1252 ?        S    20:23   0:00      \_ nginx: 
 此时两个master并存
 
 
-###从容关闭旧版本Nginx worker进程
+### 从容关闭旧版本Nginx worker进程
 
 
 {% highlight bash %}
@@ -1045,7 +1045,7 @@ nobody    5653  0.0  0.0  24740  1532 ?        S    20:23   0:00      \_ nginx: 
 
 ---
 
-###重新启动旧版本Nginx worker进程
+### 重新启动旧版本Nginx worker进程
 
 
 {% highlight bash %}
@@ -1061,7 +1061,7 @@ nobody    5746  0.0  0.0  24728  1244 ?        S    20:49   0:00  \_ nginx: work
 
 ---
 
-###彻底关闭旧版本Nginx worker进程
+### 彻底关闭旧版本Nginx worker进程
 
 {% highlight bash %}
 [root@h102 sbin]# kill -WINCH `cat /usr/local/nginx/logs/nginx.pid.oldbin` 

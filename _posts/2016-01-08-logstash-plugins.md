@@ -34,9 +34,9 @@ comments: true
 
 ---
 
-##plugin命令
+## plugin命令
 
-###获取帮助
+### 获取帮助
 
 
 {% highlight bash %}
@@ -75,7 +75,7 @@ Options:
 
 ---
 
-###plugin list
+### plugin list
 
 {% highlight bash %}
 [root@h102 ~]# /opt/logstash/bin/plugin list 
@@ -215,7 +215,7 @@ logstash-codec-rubydebug
 
 ---
 
-###plugin uninstall
+### plugin uninstall
 
 
 {% highlight bash %}
@@ -231,7 +231,7 @@ Options:
 [root@h102 ~]# 
 {% endhighlight %}
 
-####修改镜像源
+#### 修改镜像源
 
 {% highlight bash %}
 [root@h102 logstash]# cd /opt/logstash/
@@ -304,7 +304,7 @@ logstash-input-kafka
 
 ---
 
-###plugin install
+### plugin install
 
 
 {% highlight bash %}
@@ -335,7 +335,7 @@ logstash-output-kafka
 
 ---
 
-###plugin update
+### plugin update
 
 
 {% highlight bash %}
@@ -630,7 +630,7 @@ logstash-patterns-core (2.0.2)
 
 ---
 
-###plugin pack
+### plugin pack
 
 
 {% highlight bash %}
@@ -654,7 +654,7 @@ Generated at /opt/logstash/plugins_package.tar.gz
 
 ---
 
-###plugin unpack
+### plugin unpack
 
 
 {% highlight bash %}
@@ -695,7 +695,7 @@ logstash-input-twitter
 
 ---
 
-##其它plugin
+## 其它plugin
 
 
 其它plugin可以参考下面链接
@@ -710,7 +710,7 @@ logstash-input-twitter
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`/opt/logstash/bin/plugin --help`**
 * **`/opt/logstash/bin/plugin list --help`**

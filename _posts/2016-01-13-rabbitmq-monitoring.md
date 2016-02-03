@@ -38,7 +38,7 @@ comments: true
 
 ---
 
-##启用插件
+## 启用插件
 
 
 RabbitMQ 有插件机制，从而可以动态灵活地扩展功能和特性
@@ -170,9 +170,9 @@ tcp        0      0 0.0.0.0:15672               0.0.0.0:*                   LIST
 
 ---
 
-##https安全防护
+## https安全防护
 
-###创建认证密码
+### 创建认证密码
 
 {% highlight bash %}
 [nginx@new-mq-node pass]$ pwd
@@ -188,7 +188,7 @@ mqmonitor:mqdhK69Oo2JQA
 > **Note:** 这里的认证密码要和mq中监控用户的一样，否则第一次正确输入后可以看到MQ的认证窗口，但在第二次认证过程中，nginx会到自己的基本认证文件中去找对应用户从而导致跳转失败，可以在错误日志中看到对应信息
 
 
-###修改nginx配置
+### 修改nginx配置
 
 
 {% highlight bash %}
@@ -231,7 +231,7 @@ mqmonitor:mqdhK69Oo2JQA
 
 ---
 
-###打开防火墙
+### 打开防火墙
 
 
 打开本地(RabbitMQ Server)防火墙
@@ -269,7 +269,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 ---
 
 
-###检查和重载nginx服务
+### 检查和重载nginx服务
 
 {% highlight bash %}
 [root@new-mq-node nginx]# netstat  -ant | grep 1443
@@ -288,7 +288,7 @@ tcp        0      0 0.0.0.0:1443                0.0.0.0:*                   LIST
 
 ---
 
-###配置DNAT
+### 配置DNAT
 
 {% highlight bash %}
 [root@net-border ~]#  iptables -L -nv  -t nat | grep 1443
@@ -304,7 +304,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ---
 
-##访问控制
+## 访问控制
 
 管理插件在已有的RabbitMQ权限模型上进行了扩展，通过分配标签来为用户赋权
 
@@ -383,7 +383,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 
 
-###创建用户
+### 创建用户
 
 {% highlight bash %}
 [root@rabbitmq ~]# rabbitmqctl  list_users
@@ -400,7 +400,7 @@ mqmonitor	[]
 [root@rabbitmq ~]#
 {% endhighlight %}
 
-###用户赋权
+### 用户赋权
 
 {% highlight bash %}
 [root@rabbitmq ~]# rabbitmqctl set_user_tags mqmonitor monitoring
@@ -416,7 +416,7 @@ mqmonitor	[monitoring]
 
 ---
 
-##进行访问
+## 进行访问
 
 
 因为是自签名证书，所以第一次访问时会弹出警告
@@ -443,7 +443,7 @@ mqmonitor	[monitoring]
 
 ---
 
-##创建集群
+## 创建集群
 
 
 当前的集群为单节点
@@ -460,7 +460,7 @@ Cluster status of node 'rabbit@rabbitmq' ...
 
 > **Tip:** 也可以在管理界面里看得到
 
-###安装Rabbitmq
+### 安装Rabbitmq
 
 {% highlight bash %}
 [root@new-mq-node nginx]# yum install erlang
@@ -493,7 +493,7 @@ rabbitmq-server-3.5.6-1.noarch
 
 {% endhighlight %}
 
-###同步 Erlang cookie
+### 同步 Erlang cookie
 
 集群中node必须使用相同的cookie才能相互通讯
 
@@ -509,7 +509,7 @@ ABCDEFGGTESTGNUMPXYZ
 > **Note:** 一定要确保所有node上的cookie内容相同，并且为所有者只读
 
 
-####报错
+#### 报错
 
 
 如果 **.erlang.cookie** 不为所有者只读，启动时会报如下错误
@@ -567,7 +567,7 @@ tcp        0      0 :::5672                     :::*                        LIST
 
 ---
 
-###打开防火墙
+### 打开防火墙
 
 需要打开以下端口以供访问
 
@@ -596,7 +596,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ---
 
-###加入集群
+### 加入集群
 
 当前状态
 
@@ -647,7 +647,7 @@ Cluster status of node 'rabbit@new-mq-node' ...
 
 ---
 
-###开启管理插件
+### 开启管理插件
 
 {% highlight bash %}
 [root@new-mq-node rabbitmq]# rabbitmq-plugins list
@@ -735,7 +735,7 @@ tcp        0      0 0.0.0.0:15672               0.0.0.0:*                   LIST
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`rabbitmq-plugins -h`**
 * **`rabbitmq-plugins enable rabbitmq_management`**

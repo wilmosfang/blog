@@ -31,10 +31,10 @@ comments: true
 ---
 
 
-##备份
+## 备份
 	
 
-###挂载备份目录
+### 挂载备份目录
 
 挂载目标服务器(就是要创建成slave的mysql服务器)NFS
 
@@ -57,7 +57,7 @@ upgrade-slave:/data/nfs
 
 ---
 
-###停止集群
+### 停止集群
 
 如果有集群如mha，要停止集群，因为备份结束时会产生一个长锁，集群软件侦测到一定时间里没响应会认为master发生了故障，从而触发迁移，这不是我们想看到的~因为这会导致新恢复出来的数据不一致
 
@@ -72,7 +72,7 @@ masterha_stop  --conf=/etc/app1.cnf
 
 ---
 
-###开始备份
+### 开始备份
 
 
 {% highlight bash %}
@@ -83,7 +83,7 @@ masterha_stop  --conf=/etc/app1.cnf
 
 ---
 
-##下载两种版本mysql
+## 下载两种版本mysql
 
 分别下载同版本mysql，和目标版本(高版本)mysql
 
@@ -144,7 +144,7 @@ Percona-Server-shared-56-5.6.27-rel75.0.el6.x86_64.rpm                          
 
 ---
 
-##安装同版本mysql
+## 安装同版本mysql
 
 安装与原数据库相同版本的mysql
 
@@ -198,7 +198,7 @@ See http://www.percona.com/doc/percona-server/5.1/management/udf_percona_toolkit
 
 ---
 
-##备份并清空数据目录
+## 备份并清空数据目录
 
 备份并清空 **/var/lib/mysql**  (也就是mysql的数据目录)，不清空在之后的恢复过程中会报错
 
@@ -216,7 +216,7 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 
 ---
 
-##修改配置文件
+## 修改配置文件
 
 将原来的配置文件进行局部修改，主要为以下几点
 
@@ -242,7 +242,7 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 
 ---
 
-##备份完成
+## 备份完成
 
 通过观察 **masterdb.full.backup.log** 可以知道备份是否完成
 
@@ -250,7 +250,7 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 
 ---
 
-##恢复集群
+## 恢复集群
 
 是时候恢复集群了，让集群重新担当起失效检查和故障转移的职责
 
@@ -263,7 +263,7 @@ nohup  masterha_manager --conf=/etc/app1.cnf  --ignore_last_failover  &
 
 ---
 
-##安装xtrabackup
+## 安装xtrabackup
 
 
 {% highlight bash %}
@@ -278,7 +278,7 @@ Preparing...                ########################################### [100%]
 
 ---
 
-##应用日志(恢复准备)
+## 应用日志(恢复准备)
 
 准备恢复
 
@@ -294,7 +294,7 @@ sys	0m5.878s
 
 ---
 
-##恢复数据
+## 恢复数据
 
 {% highlight bash %}
 [root@upgrade-slave nfs]# time nohup  innobackupex  --copy-back  masterdb.full.backup/2015-11-25_21-25-02/  >> /tmp/fullcopyback.log  2>&1   & 
@@ -329,7 +329,7 @@ sys	4m54.254s
 
 ---
 
-##修改权限
+## 修改权限
 
 {% highlight bash %}
 [root@upgrade-slave ~]# cd /var/lib/mysql/
@@ -384,7 +384,7 @@ drwxr-xr-x. 2 mysql mysql       4096 Nov 26 20:11 test
 
 ---
 
-##启动服务
+## 启动服务
 
 {% highlight bash %}
 [root@upgrade-slave lib]# /etc/init.d/mysql  start 
@@ -451,7 +451,7 @@ InnoDB: Compressed tables use zlib 1.2.3
 
 ---
 
-##停止mysql
+## 停止mysql
 
 {% highlight bash %}
 [root@upgrade-slave mysql]# /etc/init.d/mysql stop 
@@ -461,7 +461,7 @@ Shutting down MySQL.                                       [  OK  ]
 
 ---
 
-##创建当前快照
+## 创建当前快照
 
 便于恢复到当前状态
 
@@ -503,7 +503,7 @@ tmpfs                  63G     0   63G   0% /dev/shm
 
 ---
 
-##检查mysql状态
+## 检查mysql状态
 
 {% highlight bash %}
 [root@upgrade-slave src]# ps faux | grep mysql 
@@ -519,7 +519,7 @@ MySQL is not running                                       [FAILED]
 
 ---
 
-##升级新版本mysql
+## 升级新版本mysql
 
 其实就是替换成新版本的软件
 
@@ -562,7 +562,7 @@ See http://www.percona.com/doc/percona-server/5.6/management/udf_percona_toolkit
 
 ---
 
-##尝试启动数据库
+## 尝试启动数据库
 
 {% highlight bash %}
 [root@upgrade-slave mysql]# /etc/init.d/mysql  start 
@@ -659,7 +659,7 @@ Starting MySQL (Percona Server)............The server quit [FAILED]updating PID 
 
 ---
 
-##修改配置文件my.cnf
+## 修改配置文件my.cnf
 
 {% highlight bash %}
 [root@upgrade-slave ~]# diff /tmp/old.my.cnf /tmp/new.my.cnf
@@ -684,7 +684,7 @@ Starting MySQL (Percona Server)............The server quit [FAILED]updating PID 
 
 ---
 
-##尝试启动mysql
+## 尝试启动mysql
 
 
 {% highlight bash %}
@@ -813,7 +813,7 @@ mysql>
 
 ---
 
-##进行mysql_upgrade
+## 进行mysql_upgrade
 
 必须是实例正在运行的状态下使用upgrade
 
@@ -876,7 +876,7 @@ sys	0m0.038s
 
 ---
 
-##重启mysql
+## 重启mysql
 
 {% highlight bash %}
 [root@upgrade-slave ~]# /etc/init.d/mysql  stop 
@@ -888,7 +888,7 @@ Starting MySQL (Percona Server)...........                 [  OK  ]
 
 ---
 
-##检查日志
+## 检查日志
 
 {% highlight bash %}
 151126 21:49:21 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
@@ -925,7 +925,7 @@ schema的结构报错已经消失了，启动正常
 
 ---
 
-##同步数据库
+## 同步数据库
 
 {% highlight bash %}
 mysql> show master status;
@@ -1191,7 +1191,7 @@ mysql>
 
 ---
 
-##检查数据一致性
+## 检查数据一致性
 
 同步完成后，检查一致性，抽查一个关键表
 

@@ -31,10 +31,10 @@ comments: true
 ---
 
 
-##自定义Jenkins镜像
+## 自定义Jenkins镜像
 
 
-###准备构建环境
+### 准备构建环境
 
 在构建环境中准备相应的证书文件和插件信息
 
@@ -60,7 +60,7 @@ total 16
 
 ---
 
-###创建Dockerfile
+### 创建Dockerfile
 
 
 {% highlight bash %}
@@ -97,7 +97,7 @@ total 20
 
 ---
 
-###构建镜像
+### 构建镜像
 
 
 {% highlight bash %}
@@ -149,7 +149,7 @@ hello-world                   latest              0a6ba66e537a        3 months a
 
 ---
 
-##推送镜像
+## 推送镜像
 
 {% highlight bash %}
 [root@docker build]# docker tag ci-infrastructure/jnkns-img  docker:5000/ci/jnkns-img
@@ -210,7 +210,7 @@ latest: digest: sha256:613ef35ff2fff0a26bab66dd9213463b034d4e536e9a6d52cbaeacb76
 ---
 
 
-##拉取镜像
+## 拉取镜像
 
 
 可以使用其它的机器通过 **docker pull** 来测试一下上传的镜像
@@ -246,7 +246,7 @@ hello-world                   latest              0a6ba66e537a        3 months a
 
 ---
 
-##通过镜像运行容器
+## 通过镜像运行容器
 
 {% highlight bash %}
 [root@h104 ~]#  docker run -p 1973:1973 --name jenkins01 docker:5000/ci/jnkns-img 
@@ -279,7 +279,7 @@ Caused by: java.io.FileNotFoundException: /var/lib/jenkins/cert (Permission deni
 [root@h104 ~]# 
 {% endhighlight %}
 
-###报错
+### 报错
 
 出现了报错
 
@@ -419,7 +419,7 @@ tcp6       0      0 :::8080                 :::*                    LISTEN
 
 ---
 
-##访问Jenkins
+## 访问Jenkins
 
 
 ![jenkins1.png](/images/registry/jenkins1.png)
@@ -444,7 +444,7 @@ role-strategy:2.2.0
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`cat plugins`**
 * **`vim Dockerfile`**

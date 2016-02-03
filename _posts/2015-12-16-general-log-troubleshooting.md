@@ -27,7 +27,7 @@ mysql 升级过程中出现了general_log的缺失，下面分享一下处理过
 
 ---
 
-##什么是general_log
+## 什么是general_log
 
 目前的mysql提供了两种查询日志， 这两种查询日志为 **普通日志（general log）** 和 **慢速日志（slow log）**
 
@@ -108,7 +108,7 @@ mysql>
 
 ---
 
-##报错
+## 报错
 
 在5.1->5.6升级过程中，执行upgrade之后产生如下报错
 
@@ -283,7 +283,7 @@ mysql>
 
 ---
 
-##进行手动修复
+## 进行手动修复
 
 {% highlight bash %}
 [root@upgrade-slave mysql]# touch general_log.CSV
@@ -300,7 +300,7 @@ mysql>
 
 ---
 
-##再次尝试升级
+## 再次尝试升级
 
 
 {% highlight bash %}
@@ -358,7 +358,7 @@ sys	0m0.066s
 
 ---
 
-##repair table
+## repair table
 
 {% highlight bash %}
 [root@upgrade-slave ~]# mysql -u root -p 
@@ -526,7 +526,7 @@ Starting MySQL (Percona Server)...[  OK  ]
 
 ---
 
-#命令汇总
+# 命令汇总
 
 
 * **`time mysql_upgrade -u root -p`**
@@ -541,9 +541,9 @@ Starting MySQL (Percona Server)...[  OK  ]
 
 ---
 
-#附
+# 附
 
-##The General Query Log
+## The General Query Log
 
 **[The General Query Log][query-log]**
 
@@ -594,7 +594,7 @@ One implication of the introduction of password rewriting in MySQL 5.6.3 is that
 {% endhighlight %}
 
 
-##log-output
+## log-output
 
 
 | `Command-Line Format`     |`--log-output=name` | |
@@ -609,7 +609,7 @@ One implication of the introduction of password rewriting in MySQL 5.6.3 is that
 |||NONE|
 
 
-##Selecting General Query and Slow Query Log Output Destinations
+## Selecting General Query and Slow Query Log Output Destinations
 
 **[Selecting General Query and Slow Query Log Output Destinations][log-destinations]**
 

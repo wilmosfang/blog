@@ -53,7 +53,7 @@ Zookeeper 特点：
 
 ---
 
-##下载
+## 下载
 
 这是 **[版本信息][zookeeper_download]**  和 **[镜像站点][zookeeper_mirror]**
 
@@ -80,7 +80,7 @@ total 17288
 
 ---
 
-##安装
+## 安装
 
 
 解压
@@ -133,10 +133,10 @@ clientPort=2181
 
 ---
 
-##服务操作
+## 服务操作
 
 
-###启动服务
+### 启动服务
 
 {% highlight bash %}
 [root@h101 zookeeper-3.4.6]# cp conf/zoo_sample.cfg conf/zoo.cfg
@@ -155,7 +155,7 @@ root      5516  1.5  2.4 2094296 46252 pts/2   Sl   21:58   0:01 java -Dzookeepe
 
 ---
 
-###服务状态
+### 服务状态
 
 
 {% highlight bash %}
@@ -166,7 +166,7 @@ Mode: standalone
 [root@h101 zookeeper-3.4.6]# 
 {% endhighlight %}
 
-###重启服务
+### 重启服务
 
 
 {% highlight bash %}
@@ -184,7 +184,7 @@ Starting zookeeper ... STARTED
 
 
 
-###停止服务
+### 停止服务
 
 {% highlight bash %}
 [root@h101 zookeeper-3.4.6]# bin/zkServer.sh stop
@@ -203,7 +203,7 @@ root      5853  0.0  0.0 103256   836 pts/2    S+   22:11   0:00          \_ gre
 
 ---
 
-##客户端连接
+## 客户端连接
 
 
 
@@ -267,9 +267,9 @@ ZooKeeper -server host:port cmd args
 
 ---
 
-##常用命令
+## 常用命令
 
-###ls
+### ls
 
 类似linux里的ls
 
@@ -281,7 +281,7 @@ ZooKeeper -server host:port cmd args
 
 ---
 
-###creat
+### creat
 
 创建znode
 
@@ -299,7 +299,7 @@ Created /abc
 
 ---
 
-###get
+### get
 
 
 获取znode内容
@@ -363,7 +363,7 @@ numChildren|The number of children of this znode.
 
 
 
-###set
+### set
 
 设置znode内容
 
@@ -398,7 +398,7 @@ numChildren = 0
 
 ---
 
-###delete
+### delete
 
 删除znode
 
@@ -418,7 +418,7 @@ Arguments are not valid : /
 
 ---
 
-###history
+### history
 
 可以像shell一样上下翻命令，也可使用history查看历史命令
 
@@ -441,7 +441,7 @@ Arguments are not valid : /
 
 ---
 
-###stat
+### stat
 
 感觉和get没有太大差别，只是少了内容数据
 
@@ -477,7 +477,7 @@ numChildren = 0
 
 ---
 
-###ls2
+### ls2
 
 ls2 就是携带了stat信息的ls
 
@@ -502,7 +502,7 @@ numChildren = 0
 
 ---
 
-###rmr 
+### rmr 
 
 递归删除
 
@@ -532,7 +532,7 @@ Node not empty: /def
 
 ---
 
-###close
+### close
 
 主动断开当前连接
 
@@ -551,7 +551,7 @@ Not connected
 
 ---
 
-###connect
+### connect
 
 连接服务
 
@@ -576,7 +576,7 @@ WatchedEvent state:SyncConnected type:None path:null
 
 ---
 
-###quit
+### quit
 
 退出
 
@@ -591,7 +591,7 @@ Quitting...
 
 ---
 
-###redo
+### redo
 
 再次执行之前命令
 

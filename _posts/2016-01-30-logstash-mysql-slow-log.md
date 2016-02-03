@@ -107,7 +107,7 @@ SELECT COUNT(*) FROM `bill`  WHERE `bill`.`type` IN ('manu_title') AND ( bill.re
 
 ---
 
-##环境
+## 环境
 
 * percona server 5.6.27-75.0
 * elasticsearch 2.1.1
@@ -119,7 +119,7 @@ SELECT COUNT(*) FROM `bill`  WHERE `bill`.`type` IN ('manu_title') AND ( bill.re
 
 ---
 
-##logstash配置
+## logstash配置
 
 {% highlight bash %}
 [root@h102 etc]# cat  logstash-multiline.conf 
@@ -156,7 +156,7 @@ output {
 [root@h102 etc]# 
 {% endhighlight %}
 
-###检测配置
+### 检测配置
 
 {% highlight bash %}
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-multiline.conf -t 
@@ -164,7 +164,7 @@ Configuration OK
 [root@h102 etc]# 
 {% endhighlight %}
 
-###运行logstash
+### 运行logstash
 
 {% highlight bash %}
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-multiline.conf 
@@ -175,7 +175,7 @@ Logstash startup completed
 ...
 {% endhighlight %}
 
-###输入测试
+### 输入测试
 
 
 随便在终端中贴入一段日志，要求完全覆盖完整的一条，然后观察输出
@@ -230,9 +230,9 @@ Logstash startup completed
 
 ---
 
-##配置分析
+## 配置分析
 
-###input
+### input
 
 {% highlight bash %}
 input {
@@ -265,7 +265,7 @@ Item     | Comment
 
 ---
 
-###filter 
+### filter 
 
 {% highlight bash %}
 filter {
@@ -302,7 +302,7 @@ Item     | Comment
 
 ---
 
-###output 
+### output 
 
 
 {% highlight bash %}
@@ -365,7 +365,7 @@ Item     | Comment
 
 ---
 
-#命令汇总
+# 命令汇总
 
 
 * **`cat  logstash-multiline.conf`**
@@ -374,7 +374,7 @@ Item     | Comment
 
 ---
 
-#附
+# 附
 
 
 这里预定义了一些正则表达式如：**USER、IP、NUMBER**

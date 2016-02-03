@@ -38,7 +38,7 @@ comments: true
 
 ---
 
-##伪集群模式
+## 伪集群模式
 
 所谓 **伪集群** 其实就是在同一台机器上运行多个server，从而构成集群，这类集群可以展示集群的逻辑特性
 
@@ -46,7 +46,7 @@ comments: true
 
 ---
 
-###拷贝目录
+### 拷贝目录
 
 停掉应用后将 **zookeeper-3.4.6** 目录拷贝两份
 
@@ -61,7 +61,7 @@ drwxr-xr-x 10 root root     4096 Dec  3 19:24 zookeeper-3.4.6.2
 
 ---
 
-###修改配置
+### 修改配置
 
 {% highlight bash %}
 [root@h101 zk]# cat zookeeper-3.4.6/conf/zoo.cfg 
@@ -120,7 +120,7 @@ clientPort|服务监听端口
 server.X=A:B:C|X代表serverid，要求dataDir/myid(需要另外手动创建)里包含相同数字;A代表server所在的IP地址;B代表server之间交换信息使用的端口; C代表server之间选举leader时所使用的端口
 
 
-###建数据目录
+### 建数据目录
 
 {% highlight bash %}
 [root@h101 zk]# ll -d /tmp/zookeeper*
@@ -132,7 +132,7 @@ drwxr-xr-x 3 root root 4096 Dec  3 19:33 /tmp/zookeeper2
 
 ---
 
-###创建 **myid** 文件
+### 创建 **myid** 文件
 
 {% highlight bash %}
 [root@h101 zk]# ll /tmp/zookeeper*/myid
@@ -148,7 +148,7 @@ drwxr-xr-x 3 root root 4096 Dec  3 19:33 /tmp/zookeeper2
 
 ---
 
-###启动集群
+### 启动集群
 
 分别启动服务
 
@@ -212,7 +212,7 @@ root      5549  0.3  2.8 2103548 53900 pts/0   Sl   19:33   0:10 java -Dzookeepe
 
 ---
 
-###连接服务
+### 连接服务
 
 {% highlight bash %}
 [root@h101 zk]# zookeeper-3.4.6/bin/zkCli.sh  -server localhost:2180
@@ -321,7 +321,7 @@ numChildren = 0
 {% endhighlight %}
 
 
-###依次关掉服务
+### 依次关掉服务
 
 当前状态
 
@@ -419,12 +419,12 @@ Mode: leader
 
 ---
 
-##集群模式
+## 集群模式
 
 
 集群模式在配置上与之前的没有本质区别，唯一区别就是server分布在了不同的物理服务器上
 
-###修改配置
+### 修改配置
 
 {% highlight bash %}
 [root@h101 zk]# cat zookeeper-3.4.6-real/conf/zoo.cfg 
@@ -442,7 +442,7 @@ server.202=192.168.100.202:8000:8100
 
 ---
 
-###拷贝目录
+### 拷贝目录
 
 {% highlight bash %}
 [root@h101 zk]# rsync  -av zookeeper-3.4.6-real root@192.168.100.102:/root/zk/zookeeper-3.4.6-real/
@@ -489,7 +489,7 @@ total size is 38865680  speedup is 1.00
 
 ---
 
-###创建dataDir和myid
+### 创建dataDir和myid
 
 {% highlight bash %}
 [root@h101 zk]# mkdir  /tmp/zookeeper101
@@ -508,7 +508,7 @@ total size is 38865680  speedup is 1.00
 
 ---
 
-###开启防火墙
+### 开启防火墙
 
 
 在每台服务器的 **/etc/sysconfig/iptables** 中加入以下几行
@@ -539,7 +539,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ---
 
-###启动服务
+### 启动服务
 
 {% highlight bash %}
 [root@h101 zk]# zookeeper-3.4.6-real/bin/zkServer.sh start 
@@ -588,7 +588,7 @@ Mode: leader
 
 ---
 
-###连接测试 
+### 连接测试 
 
 
 {% highlight bash %}

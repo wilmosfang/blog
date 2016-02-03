@@ -25,7 +25,7 @@ Web运维难免涉及到access log的分析工作,虽然使用awk可以实现绝
 ---
 
 
-##安装GoAccess
+## 安装GoAccess
 
 如果配置了epel库，可以直接使用yum安装，过程非常简单
 
@@ -95,7 +95,7 @@ Copyright (C) 2009-2014 GNU GPL'd, by Gerardo Orellana
 当前的最新版本是0.9
 
 
-##终端生成报表
+## 终端生成报表
 
 * 1.命令行键入 **goaccess -f access.log**
 
@@ -231,7 +231,7 @@ GoAccess
 是不是很强大，至少我是这么觉得的，下面展示更强大的显示效果
 
 
-##生成html报告
+## 生成html报告
 
 
 * 1.命令行键入 **goaccess -f access.log  --date-format='%d/%b/%Y'  --log-format='%h %^[%d:%^] "%r" %s %b "%R" "%u"' > abc.html**
@@ -254,7 +254,7 @@ GoAccess
 ![goaccess-code](https://raw.githubusercontent.com/wilmosfang/blog/gh-pages/images/goaccess/goaccess-code.png)
 
 
-#附
+# 附
 
 参考链接
 

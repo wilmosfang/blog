@@ -32,7 +32,7 @@ comments: true
 
 ---
 
-##安装
+## 安装
 
 使用 **`curl -L http://cpanmin.us | perl - --sudo Dancer2`** 进行安装
 
@@ -639,7 +639,7 @@ Successfully installed Dancer2-0.163000
 
 ---
 
-##创建一个应用
+## 创建一个应用
 
 首先创建一个用户(最好不要使用root的身份运行web app)
 
@@ -704,7 +704,7 @@ TEST-APP
 
 ---
 
-##启动应用
+## 启动应用
 
 使用 **`plackup -r bin/app.psgi`** 启动应用
 
@@ -750,7 +750,7 @@ tcp        0      0 0.0.0.0:5000                0.0.0.0:*                   LIST
 
 ---
 
-##目录结构
+## 目录结构
 
 {% highlight bash %}
 [dancer@dancer-test TEST-APP]$ ls
@@ -798,9 +798,9 @@ bin  config.yml  cpanfile  environments  lib  Makefile.PL  MANIFEST  MANIFEST.SK
 
 ---
 
-##安装Expect模块
+## 安装Expect模块
 
-###配置cpan
+### 配置cpan
 
 首先要配置cpan
 
@@ -1052,7 +1052,7 @@ cpan[2]>
 
 ---
 
-###安装Expect
+### 安装Expect
 
 
 可以使用下面方法安装
@@ -1389,7 +1389,7 @@ Lockfile removed.
 
 ---
 
-##MVC
+## MVC
 
 
 MVC(Model-View-Controller) 是一种架构，或者说是设计理念，不同语言有不同的实现，遵循此架构会有很多好处，但详细探讨已经超出了主题，有机会再聊
@@ -1413,7 +1413,7 @@ MVC
 ---
 
 
-###添加控制逻辑[C]
+### 添加控制逻辑[C]
 
 在dancer中 **`TEST-APP/lib/TEST/APP.pm`** 是起控制作用的，在 **true** 之前添加以下几行
 
@@ -1442,7 +1442,7 @@ post '/check_backup' => sub{
 
 ---
 
-###添加展示层[V]
+### 添加展示层[V]
 
 在dancer中 **`TEST-APP/views/`** 是控制显示的，创建 **TEST-APP/views/check_class/check_database_backup.tt**
 
@@ -1463,7 +1463,7 @@ Type your Email address here...
 ---
 
 
-###添加功能逻辑[M]
+### 添加功能逻辑[M]
 
 {% highlight bash %}
 [dancer@dancer-test bin]$ cat D_check_backup_for_db.pl 
@@ -1552,7 +1552,7 @@ exit  0;
 
 ---
 
-##访问测试
+## 访问测试
 
 在本地浏览器中输入 **http://ip:5000/check_backup** 进行访问测试
 

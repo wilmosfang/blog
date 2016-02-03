@@ -25,7 +25,7 @@ VPN (Virtual Private Network) 虚拟私有网络 (也有叫虚拟专用网络的
 
 ---
 
-##环境
+## 环境
 
 内核版本 **2.6.32-504.el6.x86_64** 
 
@@ -41,7 +41,7 @@ Kernel \r on an \m
 [root@pptp-server ~]# 
 {% endhighlight %}
 
-##安装ppp软件包
+## 安装ppp软件包
 
 {% highlight bash %}
 [root@pptp-server ~]# yum install ppp 
@@ -108,7 +108,7 @@ Complete!
 {% endhighlight %}
 
 
-##安装pptpd软件包
+## 安装pptpd软件包
 
 {% highlight bash %}
 [root@pptp-server ~]# yum list all | grep -i pptp 
@@ -161,7 +161,7 @@ Complete!
 {% endhighlight %}
 
 
-##打开内核参数 **net.ipv4.ip_forward**
+## 打开内核参数 **net.ipv4.ip_forward**
 
 
 {% highlight bash %}
@@ -232,7 +232,7 @@ net.ipv6.conf.eth0.mc_forwarding = 0
 {% endhighlight %}
 
 
-##配置pptpd
+## 配置pptpd
 
 {% highlight bash %}
 [root@pptp-server ~]# grep -v "^#"  /etc/pptpd.conf  | cat -s 
@@ -278,7 +278,7 @@ ms-dns  10.10.10.5  #add local dns server
 
 
 
-##配置防火墙
+## 配置防火墙
 
 配置之前
 
@@ -425,7 +425,7 @@ Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
 {% endhighlight %}
 
 
-##创建vpn账户
+## 创建vpn账户
 
 {% highlight bash %}
 [root@pptp-server ~]# vim /etc/ppp/chap-secrets 
@@ -443,7 +443,7 @@ testvpn  pptpd  testvpnabc *
 > (密码纯是人肉测出来的)
 
 
-##启动服务
+## 启动服务
 
 {% highlight bash %}
 [root@pptp-server ~]# /etc/init.d/iptables  restart 
@@ -543,7 +543,7 @@ Aug 25 00:40:35 pptp-server pptpd[10177]: CTRL: Client 103.240.124.15 control co
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`yum install ppp`**
 * **`yum list all | grep -i pptp`**

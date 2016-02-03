@@ -28,7 +28,7 @@ comments: true
 
 ---
 
-##安装redis
+## 安装redis
 
 
 下载，解压然后编译
@@ -58,7 +58,7 @@ redis-server
 
 ---
 
-##运行redis服务
+## 运行redis服务
 
 
 {% highlight bash %}
@@ -72,7 +72,7 @@ root      5380  0.4  0.3 137444  7480 ?        Ssl  20:45   0:00 /usr/local/src/
 ---
 
 
-##redis-benchmark
+## redis-benchmark
 
 
 {% highlight bash %}
@@ -153,9 +153,9 @@ Option     | Comment
 
 ---
 
-##性能测试
+## 性能测试
 
-###默认测试
+### 默认测试
 
 默认配置是
 
@@ -404,7 +404,7 @@ MSET (10 keys)
 
 ---
 
-###指定主机，端口，请求数，并发数测试
+### 指定主机，端口，请求数，并发数测试
 
 {% highlight bash %}
 [root@h102 src]# ./redis-benchmark -h localhost -p 6379 -n 100000 -c 20
@@ -610,7 +610,7 @@ MSET (10 keys)
 
 ---
 
-###使用SET测试来填充1000000keys
+### 使用SET测试来填充1000000keys
 
 {% highlight bash %}
 [root@h102 src]# ./redis-benchmark -t set -n 1000000 -r 100000000
@@ -647,7 +647,7 @@ MSET (10 keys)
 
 ---
 
-###使用CSV的输出来测试本地服务的几种调用
+### 使用CSV的输出来测试本地服务的几种调用
 
 
 {% highlight bash %}
@@ -661,7 +661,7 @@ MSET (10 keys)
 
 ---
 
-###测试指定的命令
+### 测试指定的命令
 
 {% highlight bash %}
 [root@h102 src]# ./redis-benchmark -r 10000 -n 10000 eval 'return redis.call("ping")' 0
@@ -684,7 +684,7 @@ MSET (10 keys)
 
 ---
 
-###使用10000个随机元素填充一个列表
+### 使用10000个随机元素填充一个列表
 
 {% highlight bash %}
 [root@h102 src]# ./redis-benchmark -r 10000 -n 10000 lpush mylist __rand_int__
@@ -710,7 +710,7 @@ MSET (10 keys)
 
 ---
 
-#命令汇总
+# 命令汇总
 
 
 * wget http://download.redis.io/releases/redis-3.0.5.tar.gz

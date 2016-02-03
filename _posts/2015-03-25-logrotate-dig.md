@@ -22,7 +22,7 @@ comments: true
 
 ---
 
-##Centos5 与Centos6的区别
+## Centos5 与Centos6的区别
 
 这是Centos5下面的crontab文件
 
@@ -229,7 +229,7 @@ total 44
 {% endhighlight %}
 这么一条龙下来，已经对logrotate的执行时间点有了一个直观的感受
 
-#附:
+# 附:
 
 下面是logrotate的man page,上面的各种参数就可以扫盲了
 

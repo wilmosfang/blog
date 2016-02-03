@@ -32,7 +32,7 @@ comments: true
 
 ---
 
-##依赖
+## 依赖
 
 * **Logstash** requires **Java 7** or later
 
@@ -41,7 +41,7 @@ comments: true
 
 ---
 
-###检查java版本
+### 检查java版本
 
 {% highlight bash %}
 [root@h102 ELK]# java -version
@@ -55,13 +55,13 @@ OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 
 ---
 
-##安装方法
+## 安装方法
 
 可以参考 **[Package Repositories][install]**
 
 ---
 
-##基础测试
+## 基础测试
 
 {% highlight bash %}
 [root@h102 ~]# /opt/logstash/bin/logstash -e 'input { stdin { } } output { stdout {} }'
@@ -83,7 +83,7 @@ Logstash shutdown completed
 
 ---
 
-##高级Logstash管道
+## 高级Logstash管道
 
 大多数情况下Logstash有不止一个输入与输出，在配置更为复杂的情况下使用配置文件进行行为设定
 
@@ -154,7 +154,7 @@ Logstash startup completed
 
 ---
 
-##elasticsearch中检索
+## elasticsearch中检索
 
 
 使用下面的方式进行检索
@@ -229,7 +229,7 @@ Logstash startup completed
 
 ---
 
-##Filebeat
+## Filebeat
 
 
 **[Filebeat][filebeat]** 是一个轻量友好的工具，用来从目标服务器中收集文本日志然后然后转发给 **Logstash** 实例进行处理，其实就是一个 **Logstash** 的轻量前端文本收集代理
@@ -365,7 +365,7 @@ yellow open   .kibana               1   1         94            0    102.3kb    
 
 ---
 
-##关闭步骤
+## 关闭步骤
 
 关闭一个正在运行的 **logstash** 包含以下三步
 
@@ -381,7 +381,7 @@ yellow open   .kibana               1   1         94            0    102.3kb    
 
 ---
 
-##流水线模型
+## 流水线模型
 
 
 当前的 **Logstash** 是这样的处理模型
@@ -410,7 +410,7 @@ input threads | output worker
 
 ---
 
-##处理系统日志
+## 处理系统日志
 
 
 可以在配置中加入判断与处理逻辑
@@ -576,7 +576,7 @@ ES里也有了数据
 
 ---
 
-##多行日志事件
+## 多行日志事件
 
 
 类似于mysql slow log 这一类的日志并非一次一行，而是多行
@@ -677,7 +677,7 @@ l10 FROM t1 WHERE id =  '43';
 
 ---
 
-#命令总结
+# 命令汇总
 
 
 * **`java -version`**

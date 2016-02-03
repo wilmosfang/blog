@@ -22,10 +22,10 @@ comments: true
 ---
 
 
-##准备
+## 准备
 
 
-###堡垒机两台
+### 堡垒机两台
 
 
 | HOST| PassLogin | PublicIP|PrivateIP|
@@ -35,7 +35,7 @@ comments: true
 
 > **Tip:** 之所以用两台是为了避免单点故障而登不上所有的机器
 
-###被管理机若干台
+### 被管理机若干台
 
 
 | HOST| PassLogin | PublicIP|PrivateIP|
@@ -48,11 +48,11 @@ comments: true
 
 ---
 
-##操作
+## 操作
 
 
 
-###创建用户
+### 创建用户
 
 
 操作范围：ALL
@@ -61,7 +61,7 @@ comments: true
 [root@h101 ~]# useradd test 
 {% endhighlight %}
 
-###设置密码
+### 设置密码
 
 
 操作范围：ALL
@@ -77,7 +77,7 @@ passwd: all authentication tokens updated successfully.
 [root@h101 ~]# 
 {% endhighlight %}
 
-###生成密钥
+### 生成密钥
 
 
 操作范围：a,b(所有堡垒机)
@@ -108,7 +108,7 @@ The key's randomart image is:
 [test@h101 ~]$
 {% endhighlight %}
 
-###创建.ssh目录
+### 创建.ssh目录
 
 
 操作范围：c,d(所有被管理机)
@@ -121,7 +121,7 @@ drwx------. 2 test test 4096 Jun 11 14:45 .ssh/
 [test@h102 ~]$ 
 {% endhighlight %}
 
-###导入证书
+### 导入证书
 
 
 操作范围：c,d(所有被管理机)
@@ -136,7 +136,7 @@ drwx------. 2 test test 4096 Jun 11 14:45 .ssh/
 [test@h102 .ssh]$ 
 {% endhighlight %}
 
-###验证无密码登录
+### 验证无密码登录
 
 
 操作范围：a,b(任意一台堡垒机)
@@ -182,7 +182,7 @@ Host key verification failed.
 
 解决办法是清掉 **known_hosts** 中的这条记录，让它重新接受
 
-###添加sudo权限
+### 添加sudo权限
 
 
 操作范围：ALL
@@ -198,7 +198,7 @@ User_Alias USERSU = test
 USERSU  ALL=(root)  COMSU
 {% endhighlight %}
 
-###测试sudo权限
+### 测试sudo权限
 
 
 操作范围：ALL(任意一台机器)
@@ -218,7 +218,7 @@ Administrator. It usually boils down to these three things:
 [root@h102 ~]#
 {% endhighlight %}
 
-###关闭密码登录
+### 关闭密码登录
 
 
 对于其它被管理机，如不直接提供对外服务，尽量避免配置Public IP,并且使用下面方法关闭 **sshd** 的密码登录
@@ -233,7 +233,7 @@ sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_
 ---
 
 
-###使用方法
+### 使用方法
 
 
 本地生成一个证书，然后加入到堡垒机的 **authorized_keys** 中，然后使用证书书登录堡垒机
@@ -243,7 +243,7 @@ sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_
 
 ---
 
-#注意事项
+# 注意
 
 
 * 定期更换被管理机证书（两到三个月）

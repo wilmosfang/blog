@@ -44,7 +44,7 @@ comments: true
 
 ---
 
-##背景
+## 背景
 
 
 ES版本为2.1.1
@@ -89,7 +89,7 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 [root@esdbqp bin]# 
 {% endhighlight %}
 
-###报错1
+### 报错1
 
 当前尝试使用 **Delete By Query API**
 
@@ -130,7 +130,7 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 
 ---
 
-##安装插件
+## 安装插件
 
 {% highlight bash %}
 [root@esdbqp bin]#  /usr/share/elasticsearch/bin/plugin list
@@ -153,13 +153,13 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 [root@esdbqp bin]# 
 {% endhighlight %}
 
-###报错2
+### 报错2
 
 > **Tip:**  由于网络原因，有时一次可能安装不成功，所以可以多试两次
 
 ---
 
-##重启ES服务
+## 重启ES服务
 
 安装后得重启，否则不会生效，如果是一个集群，那每一个节点安装完插件后都得重启
 
@@ -177,12 +177,12 @@ Starting elasticsearch:                                    [  OK  ]
 
 ---
 
-##调用API
+## 调用API
 
 刚才启动后，因为插件还没完全加载，如果立即调用 **Delete By Query API** 虽然不会报最前面的错，但是也不会反馈想要的结果
 
 
-###报错3
+### 报错3
 
 一般会反馈如下结果
 
@@ -560,7 +560,7 @@ Starting elasticsearch:                                    [  OK  ]
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`curl "http://localhost:9200/filebeat-*/_search?pretty=true&q=tags:multiline"`**
 * **`/usr/share/elasticsearch/bin/plugin install delete-by-query`**
@@ -576,9 +576,9 @@ Starting elasticsearch:                                    [  OK  ]
 
 ---
 
-#附
+# 附
 
-##删除插件
+## 删除插件
 
 {% highlight bash %}
 [root@esdbqp bin]# /usr/share/elasticsearch/bin/plugin list

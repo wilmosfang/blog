@@ -35,7 +35,7 @@ logstash提供了一种判断机制来对不同内容进行判断，然后分别
 
 ---
 
-##软件版本
+## 软件版本
 
 * percona server 5.6.27-75.0 #是这个版本产生的慢日志，其它版本使用下面的正则，不一定能正常解析
 * elasticsearch 2.1.1
@@ -45,7 +45,7 @@ logstash提供了一种判断机制来对不同内容进行判断，然后分别
 
 ---
 
-##logstash配置
+## logstash配置
 
 
 {% highlight bash %}
@@ -122,7 +122,7 @@ output {
 
 ---
 
-##mysql slowlog的filebeat配置
+## mysql slowlog的filebeat配置
 
 {% highlight bash %}
 [hunter@mysql-slow-log src]$ cat /etc/filebeat/filebeat.yml  | grep -v "#" | grep -v "^$"
@@ -153,7 +153,7 @@ logging:
 
 ---
 
-##nginx accesslog的filebeat配置
+## nginx accesslog的filebeat配置
 
 {% highlight bash %}
 [root@nginx-accesslog filebeat]# cat /etc/filebeat/filebeat.yml  | grep -v "#" | grep -v "^$"
@@ -201,7 +201,7 @@ Starting filebeat: FATAL: kernel too old
 
 ---
 
-##启动顺序(建议)
+## 启动顺序(建议)
 
 
 * 检查 logstash 配置(确保端口没有被占用，使用 **`-t`** 参数对语法进行检查)
@@ -216,7 +216,7 @@ Starting filebeat: FATAL: kernel too old
 ---
 
 
-#命令汇总
+# 命令汇总
 
 * **`cat filebeat-logstash-es.conf`**
 * **`cat /etc/filebeat/filebeat.yml  | grep -v "#" | grep -v "^$"`**

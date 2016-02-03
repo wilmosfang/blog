@@ -32,13 +32,13 @@ comments: true
 
 ---
 
-##环境要求
+## 环境要求
 
 相关的软硬件需求相对琐碎可以参考 **[Requirements] [requirements]**
 
 ---
 
-##安装zabbix软件仓库
+## 安装zabbix软件仓库
 
 {% highlight bash %}
 [root@zabbix-server zabbix]# wget http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
@@ -65,7 +65,7 @@ Preparing...                ########################################### [100%]
 
 ---
 
-##安装Zabbix软件包
+## 安装Zabbix软件包
 
 
 {% highlight bash %}
@@ -242,14 +242,14 @@ Complete!
 
 ---
 
-##初始化数据库
+## 初始化数据库
 
 zabbix的数据需要存到数据库
 
 我选择mysql进行存储，mysql的安装过程就不在这里浪费篇幅了
 
 
-###创建zabbix数据库
+### 创建zabbix数据库
 
 {% highlight bash %}
 [root@zabbix-server zabbix]# mysql -u root -p 
@@ -291,7 +291,7 @@ Bye
 [root@zabbix-server zabbix]# 
 {% endhighlight %}
 
-###导入初始schema与数据
+### 导入初始schema与数据
 
 
 初始化数据在 **`/usr/share/doc/zabbix-server-mysql-2.4.7/create/`** 中
@@ -319,7 +319,7 @@ Enter password:
 
 ---
 
-##配置zabbix server
+## 配置zabbix server
 
 确保如下参数已经正确配置
 
@@ -390,7 +390,7 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
 
 ---
 
-##配置前端php
+## 配置前端php
 
 
 将 **date.timezone** 配置成正确的时区 **Asia/Shanghai**
@@ -410,7 +410,7 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
 
 ---
 
-##打开防火墙
+## 打开防火墙
 
 
 允许web访问
@@ -435,7 +435,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ---
 
-##启动服务
+## 启动服务
 
 
 分别启动 **httpd** 和 **zabbix-server**
@@ -452,7 +452,7 @@ Starting Zabbix server:                                    [  OK  ]
 
 ---
 
-##进行访问
+## 进行访问
 
 
 * 1.欢迎界面
@@ -485,7 +485,7 @@ Starting Zabbix server:                                    [  OK  ]
 ![zabbix7.png](/images/zabbix/zabbix7.png)
 
 
-###登录界面
+### 登录界面
 
 
 ![zabbix8.png](/images/zabbix/zabbix8.png)
@@ -497,7 +497,7 @@ Starting Zabbix server:                                    [  OK  ]
 
 ---
 
-###报错
+### 报错
 
 
 ![zabbix10.png](/images/zabbix/zabbix10.png)
@@ -534,7 +534,7 @@ SELINUXTYPE=targeted
 ---
 
 
-#命令汇总
+# 命令汇总
 
 * **`wget http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm`**
 * **`rpm -ivh zabbix-release-2.4-1.el6.noarch.rpm`**

@@ -31,7 +31,7 @@ keepalived和LVS配合使用是开源界比较流行的LB解决方案，keepaliv
 架构图
 -
 
-####切换前
+#### 切换前
 
 |Host| IP | VIP   |Role|
 |:---|:---:|:---:|---:|
@@ -39,7 +39,7 @@ keepalived和LVS配合使用是开源界比较流行的LB解决方案，keepaliv
 |m2|192.168.75.12|standby|Backup|
 |s|192.168.75.13|null|null|
 
-####切换后
+#### 切换后
 
 |Host| IP | VIP   |Role|
 |:---|:---:|:---:|---:|
@@ -265,7 +265,7 @@ Defaults    !requiretty
 
 ---
 
-###master\_ip\_failover
+### master\_ip\_failover
 
 这个脚本在**mha4mysql-manager-0.53.tar.gz**中有模板
 
@@ -354,7 +354,7 @@ MHA Manager 会调用 **master_ip_failover_script** 三次
 
 ---
 
-###master\_ip\_online\_change
+### master\_ip\_online\_change
 
 与**master_ip_failover**类似，只是**master_ip_online_change**是用来负责计划性切换的，比如硬件升级，数据库升级，例行停机等等，这时mysql master还是正常工作的状态，所以也叫**alive failover**
 

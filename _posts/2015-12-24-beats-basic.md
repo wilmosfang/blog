@@ -53,7 +53,7 @@ comments: true
 
 ---
 
-##架构
+## 架构
 
 beats platform
 
@@ -74,7 +74,7 @@ filebeat是构建于beats之上的，应用于日志收集场景的实现
 
 ---
 
-##安装
+## 安装
 
 {% highlight bash %}
 [root@h102 filebeat]# curl -L -O https://download.elastic.co/beats/filebeat/filebeat-1.0.1-x86_64.rpm
@@ -97,7 +97,7 @@ Preparing...                ########################################### [100%]
 
 ---
 
-##配置
+## 配置
 
 
 {% highlight bash %}
@@ -152,7 +152,7 @@ logging:
 
 ---
 
-##导入索引模板到ES
+## 导入索引模板到ES
 
 {% highlight bash %}
 [root@h102 filebeat]# ls
@@ -168,7 +168,7 @@ filebeat.template.json  filebeat.yml
 
 ---
 
-##运行filebeat 
+## 运行filebeat 
 
 {% highlight bash %}
 [root@h102 filebeat]# /etc/init.d/filebeat start 
@@ -217,7 +217,7 @@ filebeat-god,2852 -r / -n -p /var/run/filebeat.pid -- /usr/bin/filebeat -c /etc/
 
 ---
 
-##配置与运行logstash
+## 配置与运行logstash
 
 {% highlight bash %}
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-filebeat-es-simple.conf -t 
@@ -285,7 +285,7 @@ root      3518 12.9  9.5 2516488 183444 pts/3  Sl+  22:53   0:36          \_ /us
 
 ---
 
-##查看信息
+## 查看信息
 
 
 logstash的配置中加入了 **stdout {codec=>rubydebug}** 是为了方便在终端监视信息(在实际应用中完全没有必要)，经过一番刷屏，最终停了下来
@@ -350,7 +350,7 @@ yellow open   .kibana               1   1          2            0      8.3kb    
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`curl -L -O https://download.elastic.co/beats/filebeat/filebeat-1.0.1-x86_64.rpm`**
 * **`sha1sum filebeat-1.0.1-x86_64.rpm`**

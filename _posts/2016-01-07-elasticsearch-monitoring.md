@@ -31,7 +31,7 @@ comments: true
 
 ---
 
-##安装插件
+## 安装插件
 
 
 {% highlight bash %}
@@ -58,11 +58,11 @@ drwxr-xr-x 5 bhuser bhuser 4096 Jan  6 19:22 head
 
 ---
 
-##安装web服务器
+## 安装web服务器
 
 这里使用 **Tengine-2.1.2** 是淘宝在 nginx 基础上打包的开源web服务器，详细可以参阅 **[Tengine][tengine]**
 
-###依赖包
+### 依赖包
 
 安装之前要确保以下软件包已经安装
 
@@ -76,7 +76,7 @@ openssl.x86_64
 openssl-devel.x86_64
 {% endhighlight %}
 
-###下载Tengine
+### 下载Tengine
 
 {% highlight bash %}
 [root@es_node src]# wget http://tengine.taobao.org/download/tengine-2.1.2.tar.gz
@@ -96,7 +96,7 @@ Saving to: “tengine-2.1.2.tar.gz”
 [root@es_node src]# 
 {% endhighlight %}
 
-###解压编译与安装
+### 解压编译与安装
 
 {% highlight bash %}
 [root@es_node src]# tar -zxvf tengine-2.1.2.tar.gz 
@@ -182,7 +182,7 @@ drwxr-xr-x 2 root root 4096 Jan  6 19:46 sbin
 
 ---
 
-##创建自签名证书
+## 创建自签名证书
 
 {% highlight bash %}
 [root@es_node tengine-2.1.2]# cd /usr/local/nginx/
@@ -235,7 +235,7 @@ total 12
 
 ---
 
-##创建nginx用户
+## 创建nginx用户
 
 {% highlight bash %}
 [root@es_node cert]# useradd nginx 
@@ -252,7 +252,7 @@ total 12
 
 ---
 
-##生成认证密码
+## 生成认证密码
 
 {% highlight bash %}
 [nginx@es_node nginx]$ ll
@@ -275,7 +275,7 @@ test:esPl/R9yBFjpA
 
 ---
 
-##修改nginx配置
+## 修改nginx配置
 
 修改nginx配置文件
 
@@ -334,7 +334,7 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 
 ---
 
-##打开防火墙
+## 打开防火墙
 
 {% highlight bash %}
 [root@es_node nginx]# iptables -L -nv | grep 443
@@ -350,7 +350,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ---
 
-##配置DNAT
+## 配置DNAT
 
 
 作为边界的网关服务器，要打开内核转发和iptables转发
@@ -373,7 +373,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ---
 
-##开启nginx服务
+## 开启nginx服务
 
 
 {% highlight bash %}
@@ -388,7 +388,7 @@ nginx     4624  0.0  0.0  46688  1836 ?        S    22:17   0:00  \_ nginx: work
 [root@es_node nginx]# 
 {% endhighlight %}
 
-##进行访问
+## 进行访问
 
 **`https://ip:2443/_plugin/head/`**
 
@@ -419,7 +419,7 @@ Chrome也是一样
 
 
 
-#命令汇总
+# 命令汇总
 
 * **`/data/ES/bin/plugin install mobz/elasticsearch-head`**
 * **`/data/ES/bin/plugin -l`**

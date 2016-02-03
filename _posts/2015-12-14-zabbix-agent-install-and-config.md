@@ -36,7 +36,7 @@ date:   2015-12-14 17:52:00
 ---
 
 
-##获取zabbix仓库
+## 获取zabbix仓库
 
 {% highlight bash %}
 [root@zbx-target src]# wget http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
@@ -63,7 +63,7 @@ Preparing...                ########################################### [100%]
 
 ---
 
-##使用yum安装zabbix-agent
+## 使用yum安装zabbix-agent
 
 {% highlight bash %}
 [root@zbx-target src]# yum list all | grep zabbix
@@ -159,7 +159,7 @@ Complete!
 
 ---
 
-##目录结构
+## 目录结构
 
 
 {% highlight bash %}
@@ -181,7 +181,7 @@ Complete!
 
 ---
 
-##修改配置
+## 修改配置
 
 原本的配置 
 
@@ -215,7 +215,7 @@ Include=/etc/zabbix/zabbix_agentd.d/
 
 ---
 
-##打开防火墙
+## 打开防火墙
 
 
 {% highlight bash %}
@@ -233,7 +233,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ---
 
-##启动zabbix-agent
+## 启动zabbix-agent
 
 {% highlight bash %}
 [root@zbx-target zabbix]# /etc/init.d/zabbix-agent start 
@@ -266,7 +266,7 @@ zabbix-agent   	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 
 ---
 
-##使用zabbix-server测试连接
+## 使用zabbix-server测试连接
 
 {% highlight bash %}
 [root@zbx-server script]# zabbix_get -s zbx-target -p 10050 -k "system.cpu.load[all,avg1]"
@@ -299,7 +299,7 @@ Zabbix中已经集成了大量的常用监控条目，不用过多配置就可�
 
 ---
 
-##添加监控脚本
+## 添加监控脚本
 
 
 虽然Zabbix直接集成和覆盖了很多我们的监控对象，但有时官方提供的条目无法满足我们的个性化需求，这时需要自定义一些脚本，获取信息以让zabbix可以接受并处理
@@ -355,7 +355,7 @@ zabbix   26934  0.0  0.0  77344  1128 ?        S    17:02   0:00  \_ zabbix_agen
 
 ---
 
-##配置监控插件
+## 配置监控插件
 
 {% highlight bash %}
 [root@zbx-target zabbix_agentd.d]# vim userparameter_DIY.conf
@@ -412,7 +412,7 @@ Starting Zabbix agent:                                     [  OK  ]
 
 ---
 
-#命令总结
+# 命令汇总
 
 * **`wget http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm`**
 * **`zabbix_get -s zbx-target -p 10050 -k "system.cpu.load[all,avg1]"`**

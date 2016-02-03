@@ -29,7 +29,7 @@ comments: true
 
 ---
 
-##下载
+## 下载
 
 
 {% highlight bash %}
@@ -84,7 +84,7 @@ qshell_windows_amd64.exe: PE32+ executable for MS Windows (console) Mono/.Net as
 `qshell_windows_amd64.exe`  |  64位windows
 
 
-##常用命令
+## 常用命令
 
 
 {% highlight bash %}
@@ -150,7 +150,7 @@ qshell v1.6.0
 
 ---
 
-###account
+### account
 
 [account][account]
 
@@ -169,7 +169,7 @@ AccessKey: ELUs327kxVPJrGCXqWae9yioc0xYZyrIpbM6Wh6x SecretKey: LVzZY2SqOQ_I_kM1n
 
 ---
 
-###zone
+### zone
 
 [zone][zone]
 
@@ -182,7 +182,7 @@ Current zone: nb
 {% endhighlight %}
 
 
-###listbucket
+### listbucket
 
 [listbucket][listbucket]
 
@@ -197,7 +197,7 @@ ux/20140618/qiniutest-shop_video_001.MP4	24559427	lpb0Xu_Drayb851dgWn7RBPqcu-s	1
 
 ---
 
-###buckets
+### buckets
 
 [buckets][buckets]
 
@@ -218,7 +218,7 @@ qiniucloudtest
 
 ---
 
-###domains
+### domains
 
 [domains][domains]
 
@@ -237,7 +237,7 @@ video.qiniutest.cn
 
 ---
 
-###qetag
+### qetag
 
 [qetag][qetag]
 
@@ -251,7 +251,7 @@ Flxstje1T4ojLoOe0G4HjI_WJuVl
 
 ---
 
-###ip
+### ip
 
 
 [ip][ip]
@@ -272,7 +272,7 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 ---
 
-###d2ts
+### d2ts
 
 
 [d2ts][d2ts]
@@ -287,7 +287,7 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 ---
 
-###ts2d
+### ts2d
 
 [ts2d][ts2d]
 
@@ -302,7 +302,7 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 ---
 
-###stat
+### stat
 
 [stat][stat]
 
@@ -322,7 +322,7 @@ MimeType:           video/mp4
 
 ---
 
-###tns2d
+### tns2d
 
 
 [tns2d][tns2d]
@@ -338,7 +338,7 @@ MimeType:           video/mp4
 
 ---
 
-###qupload
+### qupload
 
 
 [qupload][qupload]
@@ -385,7 +385,7 @@ MimeType:           video/mp4
 
 ---
 
-###qdownload
+### qdownload
 
 
 [qdownload][qdownload]
@@ -433,7 +433,7 @@ MimeType:           video/mp4
 
 ---
 
-###delete
+### delete
 
 
 
@@ -449,7 +449,7 @@ Done!
 
 ---
 
-###move
+### move
 
 
 [move][move]
@@ -464,7 +464,7 @@ Done!
 
 ---
 
-###copy
+### copy
 
 
 [copy][copy]
@@ -479,7 +479,7 @@ Done!
 
 ---
 
-###chgm
+### chgm
 
 
 [chgm][chgm]
@@ -503,7 +503,7 @@ MimeType:           image/jpeg
 
 ---
 
-###fetch
+### fetch
 
 
 [fetch][fetch]
@@ -535,7 +535,7 @@ FrUHIqhkDDd77-AtiDcOwi94YIeM
 
 ---
 
-###batchdelete
+### batchdelete
 
 [batchdelete][batchdelete]
 
@@ -566,7 +566,7 @@ All deleted!
 
 ---
 
-###batchcopy
+### batchcopy
 
 [batchcopy][batchcopy]
 
@@ -595,7 +595,7 @@ All Copyed!
 
 ---
 
-###dircache
+### dircache
 
 [dircache][dircache]
 
@@ -621,7 +621,7 @@ qshell_windows_386.exe	8027136	14471460520916193
 ---
 
 
-###其它命令
+### 其它命令
 
 可以直接在qshell后面加一个命令，然后不指定参数，来查看其用法
 

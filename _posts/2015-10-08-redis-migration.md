@@ -28,7 +28,7 @@ comments: true
 
 ---
 
-##准备
+## 准备
 
 由于redis的内存特性，迁移过程中避免数据丢失，最好准备两台服务器作为备用
 
@@ -41,7 +41,7 @@ backup c (backup of b)
 
 ---
 
-##启动一个新redis实例b
+## 启动一个新redis实例b
 
 > **Tip:**  假定当前master为实例a
 
@@ -64,7 +64,7 @@ redis-server  /etc/redis/redis6379.conf
 ---
 
 
-##安装keepalived
+## 安装keepalived
 
 在 a  b 上安装keepalived
 
@@ -83,7 +83,7 @@ nmap -R -vv -T4 -p 1  192.168.1.20/24   | grep 'host down'
 
 ---
 
-##修改iptables
+## 修改iptables
 
 加入如下配置到b和c 的filter表，然后reload
 
@@ -97,7 +97,7 @@ nmap -R -vv -T4 -p 1  192.168.1.20/24   | grep 'host down'
 
 ---
 
-##b同步到a
+## b同步到a
 
 选择业务低峰点操作
 
@@ -117,7 +117,7 @@ info replication
 
 ---
 
-##关闭slave只读
+## 关闭slave只读
 
 在b上关闭slave只读
 
@@ -129,7 +129,7 @@ CONFIG SET slave-read-only no
 
 ---
 
-##切换keepalived，发布到新VIP
+## 切换keepalived，发布到新VIP
 
 
 1.切换keepalived，把ip切换到b (可以通过调整优先级，然后reload)
@@ -140,7 +140,7 @@ CONFIG SET slave-read-only no
 
 ---
 
-##断开同步
+## 断开同步
 
 观察一段时间，注意以下几个方面
 

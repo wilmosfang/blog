@@ -32,7 +32,7 @@ NFS依赖于RPC(Remote Procedure Call)，也就是NFS服务运行之前，要确
 
 ---
 
-##包
+## 包
 
 
 RPC 服务：rpcbind (Centos6.x 下) / portmap (Centos5.x 下)
@@ -63,7 +63,7 @@ portmap-4.0-65.2.2.1
 
  ---
 
-##权限
+## 权限
 
 
 服务端和客户端都是根据用户名来查UID，GID然后通过UID，GID来判别读写权限
@@ -77,7 +77,7 @@ portmap-4.0-65.2.2.1
 
 ---
 
-##配置
+## 配置
 
 
 NFS配置文件
@@ -103,7 +103,7 @@ NFS使用 **/etc/exports** 作为配置文件
 
 ---
 
-##启动服务
+## 启动服务
 
 
 分别启动下面几个服务
@@ -260,7 +260,7 @@ program 100003 version 4 ready and waiting
 
 ---
 
-##查看NFS共享
+## 查看NFS共享
 
 
 使用 **showmount** 查看NFS共享
@@ -299,7 +299,7 @@ All mount points on nfs-server:
 
 ---
 
-##重载NFS配置
+## 重载NFS配置
 
 
 使用 **exportfs** 对NFS进行重载
@@ -326,7 +326,7 @@ Export list for nfs-server:
 
 ---
 
-##NFS防火墙
+## NFS防火墙
 
 由于 **RPC** 类的服务，都会随机注册端口，这样就给防火墙的设置造成了困扰，NFS 提供了一个配置文件，可以将要申请注册的端口进行固定~
 
@@ -385,7 +385,7 @@ MOUNTD_PORT=892
 
 ---
 
-##客户端挂载
+## 客户端挂载
 
 
 确保 **/etc/init.d/portmap** (Centos 5.x) 或 **/etc/init.d/rpcbind** (Centos 6.x)

@@ -24,7 +24,7 @@ date:   2015-08-18 00:00:00
 ---
 
 
-##环境
+## 环境
 
 
 在 **Centos 6.7** 下面 运行着 **mysql 5.6.25** ([percona][percona] 版本)
@@ -369,7 +369,7 @@ Starting Zabbix agent:                                     [  OK  ]
 
 ---
 
-#总结
+# 总结
 
 
 *  安装插件包 **percona-zabbix-templates**
@@ -383,7 +383,7 @@ Starting Zabbix agent:                                     [  OK  ]
 
 ---
 
-#命令汇总
+# 命令汇总
 
 
 * **`mysql -V `**

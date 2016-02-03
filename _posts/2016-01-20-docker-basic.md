@@ -48,7 +48,7 @@ comments: true
 
 ---
 
-##依赖
+## 依赖
 
 Docker需要运行在 **CentOS 7.X** 上 (这是以CentOS为演示平台)
 
@@ -97,10 +97,10 @@ No packages marked for update
 ---
 
 
-##使用yum安装Docker
+## 使用yum安装Docker
 
 
-###添加yum仓库
+### 添加yum仓库
 
 {% highlight bash %}
 [root@h103 ~]# ll /etc/yum.repos.d/
@@ -149,7 +149,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 {% endhighlight %}
 
 
-###安装Docker
+### 安装Docker
 
 {% highlight bash %}
 [root@h103 ~]# yum install docker-engine
@@ -257,7 +257,7 @@ Complete!
 
 ---
 
-###启动Docker
+### 启动Docker
 
 {% highlight bash %}
 [root@h103 ~]# service docker start
@@ -339,7 +339,7 @@ work as a drop-in replacement for sysvinit.
 
 ---
 
-###检查Docker
+### 检查Docker
 
 {% highlight bash %}
 [root@h103 ~]# docker run hello-world
@@ -375,7 +375,7 @@ For more examples and ideas, visit:
 
 ---
 
-##使用脚本安装Docker
+## 使用脚本安装Docker
 
 
 确保Docker已经删除的情况下，执行如下命令
@@ -485,7 +485,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 
 ---
 
-##创建docker组
+## 创建docker组
 
 * Docker不是使用的TCP端口，而是使用的Unix Socket来监听请求
 * 默认情况下Docker Socket的拥有者是root
@@ -553,7 +553,7 @@ For more examples and ideas, visit:
 
 ---
 
-##设定开机启动
+## 设定开机启动
 
 
 {% highlight bash %}
@@ -661,9 +661,9 @@ docker.socket                               enabled
 
 ---
 
-##卸载Docker
+## 卸载Docker
 
-###列出安装包
+### 列出安装包
 
 
 {% highlight bash %}
@@ -674,7 +674,7 @@ docker-engine-selinux.noarch          1.9.1-1.el7.centos             @dockerrepo
 {% endhighlight %}
 
 
-###删除软件包
+### 删除软件包
 
 
 {% highlight bash %}
@@ -717,7 +717,7 @@ Complete!
 
 
 
-###删除数据
+### 删除数据
 
 
 {% highlight bash %}
@@ -749,7 +749,7 @@ du: cannot access ‘/var/lib/docker’: No such file or directory
 ---
 
 
-#命令汇总
+# 命令汇总
 
 
 * **`hostnamectl`**
@@ -780,9 +780,9 @@ du: cannot access ‘/var/lib/docker’: No such file or directory
 
 ---
 
-#附
+# 附
 
-##systemctl用法小结
+## systemctl用法小结
 
 
 CLI     | COMMENT

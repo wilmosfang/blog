@@ -30,7 +30,7 @@ MQ可以使架构变得松耦合，从而更有弹性，更灵活，是SOA架构
 
 ---
 
-##安装
+## 安装
 
 **[RabbitMQ][rabbitmq]** 是由 **[Erlang][erlang]** 语言构建的，所以先要安装 **Erlang** 
 
@@ -142,7 +142,7 @@ Complete!
 
 ---
 
-###安装 RabbitMQ Server
+### 安装 RabbitMQ Server
 
 下载 **[RabbitMQ Server][install-rpm]** 安装包
 
@@ -177,9 +177,9 @@ Preparing...                ########################################### [100%]
 
 ---
 
-##基础操作
+## 基础操作
 
-###启动服务
+### 启动服务
 
 {% highlight bash %}
 [root@h102 ~]# /etc/init.d/rabbitmq-server  status 
@@ -252,7 +252,7 @@ Status of node rabbit@h102 ...
 
 ---
 
-###停止服务
+### 停止服务
 
 {% highlight bash %}
 [root@h102 ~]# /etc/init.d/rabbitmq-server stop 
@@ -282,7 +282,7 @@ current node details:
 
 ---
 
-###查看限制
+### 查看限制
 
 
 使用 **cat /proc/$RABBITMQ_BEAM_PROCESS_PID/limits** 可以看到限制
@@ -338,11 +338,11 @@ tcp        0      0 :::5672                     :::*                        LIST
 
 ---
 
-##rabbitmqctl基础操作
+## rabbitmqctl基础操作
 
 日常管理主要使用 **[rabbitmqctl][rabbitmqctl]**  
 
-###关闭node
+### 关闭node
 
 {% highlight bash %}
 [root@h102 rabbitmq]# rabbitmqctl  stop 
@@ -374,7 +374,7 @@ current node details:
 
 ---
 
-###关闭RabbitMQ 应用
+### 关闭RabbitMQ 应用
 
 {% highlight bash %}
 [root@h102 rabbitmq]# rabbitmqctl  status
@@ -497,7 +497,7 @@ tcp        0      0 192.168.100.102:54922       192.168.100.102:25672       TIME
 
 ---
 
-###开启RabbitMQ 应用
+### 开启RabbitMQ 应用
 
 
 {% highlight bash %}
@@ -637,7 +637,7 @@ tcp        0      0 :::5672                     :::*                        LIST
 
 ---
 
-###重置node
+### 重置node
 
 {% highlight bash %}
 [root@h102 rabbitmq]# rabbitmqctl  reset 
@@ -680,7 +680,7 @@ Resetting Rabbit
 
 ---
 
-###强制重置node
+### 强制重置node
 
 
 也必须先停掉应用，否则无法成功
@@ -708,7 +708,7 @@ Resetting Rabbit forcefully
 
 ---
 
-###轮转日志 
+### 轮转日志 
 
 当前状态
 

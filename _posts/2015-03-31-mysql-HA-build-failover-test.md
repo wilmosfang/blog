@@ -27,11 +27,11 @@ comments: true
 
 ---
 
-##在线迁移测试 
+## 在线迁移测试 
 
 使用**masterha_master_switch**进行在线切换
 
-####迁移前检查
+#### 迁移前检查
 
 on m1
 
@@ -304,7 +304,7 @@ MySQL Replication Health is OK.
 [mysql@s script]$ 
 {% endhighlight %}
 
-####进行在线切换
+#### 进行在线切换
 
 
 确认无误后进行手动切换
@@ -520,12 +520,12 @@ m1获得ip
 
 ---
 
-##故障转移测试 
+## 故障转移测试 
 
 使用**masterha_manager**进行故障转移测试 
 
 
-####迁移前检查
+#### 迁移前检查
 
 >**Note :** 要将候选master的keepalived优先级降低，然后启动，以免夺走master ip
 
@@ -877,7 +877,7 @@ Tue Mar 31 19:28:07 2015 - [info] Ping(SELECT) succeeded, waiting until MySQL do
 {% endhighlight %}
 
 
-####停库切换
+#### 停库切换
 
 停止m1上的mysql，模拟一次数据库宕机
 
@@ -1044,7 +1044,7 @@ Master failover to m2(192.168.75.12:3306) completed successfully.
 
 ---
 
-#命令汇总
+# 命令汇总
 
 
 * **`masterha_check_repl --conf=/etc/app1.cnf`**

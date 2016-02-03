@@ -34,7 +34,7 @@ comments: true
 
 ---
 
-##下载
+## 下载
 
 
 **Kibana** 的 **[下载地址][kibana_download]**
@@ -64,7 +64,7 @@ Saving to: “kibana-4.3.1-linux-x64.tar.gz”
 
 ---
 
-##解压安装
+## 解压安装
 
 
 非常简单，只用解压，就相当于安装了
@@ -129,7 +129,7 @@ kibana-4.3.1-linux-x64/config/
 
 ---
 
-##配置
+## 配置
 
 修改 **config/kibana.yml** 中的 **elasticsearch** 配置
 
@@ -148,7 +148,7 @@ elasticsearch.url: "http://h102:9200"
 
 ---
 
-##启动
+## 启动
 
 
 直接使用 **bin/kibana** 就可以启动服务到前台运行
@@ -182,7 +182,7 @@ elasticsearch.url: "http://h102:9200"
 
 ---
 
-##访问
+## 访问
 
 
 在浏览器中输入 **http://192.168.100.101:5601/** 就可以成功访问了
@@ -195,7 +195,7 @@ elasticsearch.url: "http://h102:9200"
 
 ---
 
-##导入实验数据
+## 导入实验数据
 
 
 准备数据
@@ -338,7 +338,7 @@ yellow open   shakespeare                       5   1     111396            0   
 
 ---
 
-##简单使用
+## 简单使用
 
 由于kibana是一个数据可视化工具，绝大部操作都是在 WEB GUI 里完成，如果使用Blog的形式进行展示会产生大量的截图，并且文字描述起来比较吃力，此类最好的演示形式其实是视频，但由于条件有限，这里只给出官方文档的链接
 
@@ -365,7 +365,7 @@ yellow open   shakespeare                       5   1     111396            0   
 
 ---
 
-##高级使用
+## 高级使用
 
 
 想更深入地了解每一个功能细节，还是要看看高级用法
@@ -432,7 +432,7 @@ kibana也有插件机制，目前来看还是比较方便的，只是没有 **li
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz`**
 * **`sha1sum kibana-4.3.1-linux-x64.tar.gz`**

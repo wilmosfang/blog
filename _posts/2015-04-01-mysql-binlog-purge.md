@@ -100,9 +100,9 @@ Range|0 .. 99
 清理方法 
 -
 
-###手动清理
+### 手动清理
 
-####使用PURGE BINARY LOGS进行清理
+#### 使用PURGE BINARY LOGS进行清理
 
 {% highlight bash %}
 mysql> help purge 
@@ -369,7 +369,7 @@ mysql>
 
 ---
 
-####使用RESET MASTER进行清理
+#### 使用RESET MASTER进行清理
 
 **RESET MASTER**会删除index文件中所有的binary log，重新设置binary log为空，创建新的binary log，这条语句适合在第一次master运行启动后，不太适合在生产环境中已经运行了好久的情况下。
 
@@ -393,7 +393,7 @@ mysql>
 
 ---
 
-###自动清理
+### 自动清理
 
 可以使用**expire_logs_days**系统变量来设定日志过期时间，自动删除过期日志，如果环境中有复制，注意要设定合适的值，这个值要大于最坏情况下slave可能落后于master的天数。
 

@@ -34,7 +34,7 @@ comments: true
 
 ---
 
-##下载源码包
+## 下载源码包
 
 
 
@@ -53,7 +53,7 @@ Saving to: “memcached-1.4.24.tar.gz”
 
 ---
 
-##解压
+## 解压
 
 {% highlight bash %}
 [root@h101 src]# ls
@@ -77,7 +77,7 @@ memcached-1.4.24  memcached-1.4.24.tar.gz
 
 ---
 
-##安装
+## 安装
 
 此时直接配置会出错
 
@@ -225,7 +225,7 @@ checking for libevent directory... configure: error: libevent is required.  You 
 
 ---
 
-###解决依赖
+### 解决依赖
 
 {% highlight bash %}
 [root@h101 memcached-1.4.24]# yum -y install libevent-devel.x86_64  
@@ -301,7 +301,7 @@ Complete!
 [root@h101 memcached-1.4.24]# 
 {% endhighlight %}
 
-###安装
+### 安装
 
 {% highlight bash %}
 [root@h101 memcached-1.4.24]# ./configure 
@@ -496,7 +496,7 @@ make[1]: Leaving directory `/usr/local/src/memcached-1.4.24'
 
 ---
 
-##启动
+## 启动
 
 
 以下为 **memcached** 的参数
@@ -608,7 +608,7 @@ Option     | Comment
 
 
 
-##停止
+## 停止
 
 停止是比较简单粗暴的，直接使用kill
 
@@ -627,7 +627,7 @@ root      8825  0.0  0.0 103252   828 pts/0    S+   15:49   0:00  |       \_ gre
 
 ---
 
-##进程状态检查
+## 进程状态检查
 
 
 使用下列方法可以检查线程数量
@@ -695,10 +695,10 @@ memcached(8917)─┬─{memcached}(8918)
 
 ---
 
-##常用命令
+## 常用命令
 
 
-###telnet
+### telnet
 
 使用 **telnet** 连接实例
 
@@ -715,7 +715,7 @@ ERROR
 
 ---
 
-###stats
+### stats
 
 查看状态
 
@@ -778,7 +778,7 @@ END
 
 ---
 
-####stats items
+#### stats items
 
 {% highlight bash %}
 stats items
@@ -801,7 +801,7 @@ END
 
 ---
 
-####stats cachedump slab\_id limit\_num
+#### stats cachedump slab\_id limit\_num
 
  查看内容
 
@@ -820,7 +820,7 @@ END
 
 ---
 
-####stats slabs/sizes/reset
+#### stats slabs/sizes/reset
 
 {% highlight bash %}
 stats slabs
@@ -855,7 +855,7 @@ RESET
 
 ---
 
-###version
+### version
 
 {% highlight bash %}
 version
@@ -864,7 +864,7 @@ VERSION 1.4.24
 
 ---
 
-###存储命令
+### 存储命令
 
 存储命令的格式：
 
@@ -887,7 +887,7 @@ bytes	|存储字节数
 data block|存储的数据块（可直接理解为key-value结构中的value）
 
 
-####set/get
+#### set/get
 
 设定KEY 而不论是否存在
 
@@ -920,7 +920,7 @@ END
 
 ---
 
-####delete 
+#### delete 
 
 删除存在的KEY
 
@@ -939,7 +939,7 @@ NOT_FOUND
 
 ---
 
-####add
+#### add
 
 添加不存在的KEY
 
@@ -964,7 +964,7 @@ END
 ---
 
 
-####replace
+#### replace
 
 替换已存在的KEY
 
@@ -988,7 +988,7 @@ ERROR
 
 ---
 
-####gets
+#### gets
 
 查看修改tag
 
@@ -1017,7 +1017,7 @@ END
 
 ---
 
-####cas
+#### cas
 
 cas即checked and set的意思，只有当最后一个参数和gets所获取的参数匹配时才能存储，否则返回“EXISTS”
 
@@ -1045,7 +1045,7 @@ END
 
 ---
 
-####append
+#### append
 
 在现有的缓存数据后添加缓存数据，如现有缓存的key不存在服务器响应为ERROR
 
@@ -1067,7 +1067,7 @@ ERROR
 
 ---
 
-####prepend
+#### prepend
 
 和append非常类似，但它的作用是在现有的缓存数据前添加缓存数据
 
@@ -1090,7 +1090,7 @@ ERROR
 
 ---
 
-####flush_all
+#### flush_all
 
 flush\_all 实际上没有立即释放项目所占用的内存，而是在随后陆续有新的项目被储存时执行（这是由memcached的懒惰检测和删除机制决定的）。
 
@@ -1117,7 +1117,7 @@ END
 
 ---
 
-###quit
+### quit
 
 {% highlight bash %}
 ERROR
@@ -1130,7 +1130,7 @@ Connection closed by foreign host.
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`wget  http://www.memcached.org/files/memcached-1.4.24.tar.gz`**
 * **`tar -zxvf memcached-1.4.24.tar.gz`**

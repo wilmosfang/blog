@@ -29,10 +29,10 @@ comments: true
 
 ---
 
-##安装
+## 安装
 
 
-###下载软件包
+### 下载软件包
 
 {% highlight bash %}
 [root@h101 src]# wget https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz 
@@ -75,10 +75,10 @@ Saving to: “snort-2.9.7.6.tar.gz.1”
 
 ---
 
-###安装软件包
+### 安装软件包
 
 
-####安装daq-2.0.6
+#### 安装daq-2.0.6
 
 {% highlight bash %}
 [root@h101 snort]# ll
@@ -104,7 +104,7 @@ drwxr-xr-x 6 1000 1000    4096 Jul 17 05:06 daq-2.0.6
 [root@h101 snort]# 
 {% endhighlight %}
 
-#####安装报错一
+##### 安装报错一
 
 {% highlight bash %}
 [root@h101 snort]# cd daq-2.0.6
@@ -241,7 +241,7 @@ Complete!
 
 ---
 
-#####安装报错二
+##### 安装报错二
 
 {% highlight bash %}
 [root@h101 daq-2.0.6]# ./configure
@@ -614,7 +614,7 @@ make[1]: Leaving directory `/tmp/snort/daq-2.0.6'
 
 ---
 
-####安装snort-2.9.7.6
+#### 安装snort-2.9.7.6
 
 {% highlight bash %}
 [root@h101 snort]# tar -zxvf snort-2.9.7.6.tar.gz 
@@ -651,7 +651,7 @@ drwxr-xr-x 10 root root    4096 Aug 28 13:54 snort-2.9.7.6
 [root@h101 snort]# 
 {% endhighlight %}
 
-#####安装报错一
+##### 安装报错一
 
 {% highlight bash %}
 [root@h101 snort-2.9.7.6]# ./configure  --enable-sourcefire 
@@ -751,7 +751,7 @@ Complete!
 
 ---
 
-#####安装报错二
+##### 安装报错二
 
 {% highlight bash %}
 [root@h101 snort-2.9.7.6]# ./configure  --enable-sourcefire 
@@ -838,7 +838,7 @@ Complete!
 {% endhighlight %}
 
 
-#####安装报错三
+##### 安装报错三
 
 
 {% highlight bash %}
@@ -1289,7 +1289,7 @@ make[1]: Leaving directory `/tmp/snort/snort-2.9.7.6'
 [root@h101 snort-2.9.7.6]# 
 {% endhighlight %}
 
-####包依赖总结
+#### 包依赖总结
 
 
 snort-2.9.7.6 依赖以下安装包
@@ -1305,7 +1305,7 @@ daq-2.0.6 依赖以下安装包
 flex.x86_64  flex-devel.x86_64  bison.x86_64  bison-devel.x86_64  libpcap.x86_64  libpcap-devel.x86_64
 {% endhighlight %}
 
-#####汇总解决依赖
+##### 汇总解决依赖
 
 {% highlight bash %}
 yum install flex.x86_64  flex-devel.x86_64  bison.x86_64  bison-devel.x86_64  libpcap.x86_64  libpcap-devel.x86_64  pcre.x86_64  pcre-devel.x86_64   libdnet.x86_64   libdnet-devel.x86_64   zlib.x86_64  zlib-devel.x86_64 

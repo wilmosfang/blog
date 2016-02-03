@@ -37,7 +37,7 @@ BGP双线优点：
 
 ---
 
-##鉴别方法 
+## 鉴别方法 
 
 主要分三步：
 
@@ -47,7 +47,7 @@ BGP双线优点：
 
 ---
 
-###查询AS号
+### 查询AS号
 
 
 使用traceroute命令查询网站IP/域名对应的AS号
@@ -101,7 +101,7 @@ traceroute to 103.21.118.104 (103.21.118.104), 30 hops max, 60 byte packets
 
 ---
 
-###查询出口IP归属
+### 查询出口IP归属
 
 使用whois命令查询AS号的出口IP归属
 
@@ -181,7 +181,7 @@ netname:        ANCHNET
 
 ---
 
-###查询AS是几线BGP
+### 查询AS是几线BGP
 
 
 
@@ -216,10 +216,10 @@ source:         APNIC
 
 ---
 
-##其它案例
+## 其它案例
 
 
-###上海有孚BGP
+### 上海有孚BGP
 
 {% highlight bash %}
 [root@h101 ~]# traceroute -A  175.102.17.5
@@ -363,7 +363,7 @@ source:       APNIC
 ---
 
 
-###上海Ucloud BGP
+### 上海Ucloud BGP
 
 {% highlight bash %}
 [root@h101 ~]# traceroute -A  101.52.131.7 
@@ -474,7 +474,7 @@ source:         APNIC
 
 ---
 
-###北京Ucloud BGP
+### 北京Ucloud BGP
 
 {% highlight bash %}
 [root@h101 ~]# traceroute -A  120.132.92.156 
@@ -612,7 +612,7 @@ source:         APNIC
 
 ---
 
-###广东Ucloud BGP
+### 广东Ucloud BGP
 
 {% highlight bash %}
 [root@h101 ~]# traceroute -A  114.119.43.116 
@@ -721,7 +721,7 @@ source:         APNIC
 
 被防火墙阻截，但AS17816是一个双线BGP
 
-###结论
+### 结论
   
 
 只有北京Ucloud是多线BGP，其它都不是
@@ -730,7 +730,7 @@ source:         APNIC
 
 ---
 
-#命令汇总
+# 命令汇总
 
 
 * traceroute -A  103.21.118.104

@@ -34,7 +34,7 @@ comments: true
 
 ---
 
-##安装
+## 安装
 
 
 最新版的安装
@@ -123,7 +123,7 @@ Complete!
 
 ---
 
-##依赖
+## 依赖
 
 Jenkins 的运行需要 Java 环境 ，**`yum install jenkins`** 并不检查并且强制要求  java 已经正确安装，正常安装完jenkins并不代表其可以正常运行，使用下面的方式来确认当前环境下java的版本
 
@@ -159,7 +159,7 @@ OpenJDK 64-Bit Server VM (build 24.79-b02, mixed mode)
 
 ---
 
-##防火墙
+## 防火墙
 
 {% highlight bash %}
 [root@h101 ~]# vim /etc/sysconfig/iptables
@@ -178,9 +178,9 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ---
 
-##启停
+## 启停
 
-###启动
+### 启动
 
 {% highlight bash %}
 [root@h101 ~]# /etc/init.d/jenkins start 
@@ -205,7 +205,7 @@ tcp        0      0 ::ffff:192.168.100.101:8080 ::ffff:192.168.100.1:58628  TIME
 *  日志会被记到 **/var/log/jenkins/jenkins.log** 中
 
 
-###配置
+### 配置
 
 {% highlight bash %}
 [root@h101 ~]# grep -v "^#" /etc/sysconfig/jenkins  | grep -v "^$"
@@ -230,11 +230,11 @@ JENKINS_ARGS=""
 {% endhighlight %}
 
 
-###操作界面
+### 操作界面
 
 ![jenkins1.png](/images/jenkins.png)
 
-###停止
+### 停止
 
 {% highlight bash %}
 [root@h101 ~]# /etc/init.d/jenkins stop 
@@ -245,7 +245,7 @@ root      4079  0.0  0.0 103256   828 pts/0    S+   20:34   0:00  |       \_ gre
 [root@h101 ~]#  
 {% endhighlight %}
 
-###开机启动
+### 开机启动
 
 
 {% highlight bash %}
@@ -262,7 +262,7 @@ Jenkins 会作为一个后台服务在系统启动时启动
 
 ---
 
-#命令汇总
+# 命令汇总
 
 * **`wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo`**
 * **`rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key`**

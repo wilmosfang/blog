@@ -32,7 +32,7 @@ comments: true
 
 ---
 
-##准备工作
+## 准备工作
 
 下面步骤最好作为准备工作，提前完成，这样可以更有效进行切换，和减少窗口期
 
@@ -50,7 +50,7 @@ comments: true
 
 ---
 
-##挂载NFS
+## 挂载NFS
 
 用于备份重建slave
 
@@ -88,7 +88,7 @@ new-master:/data/nfs
 ---
 
 
-##新版master上安装并启动keepalived
+## 新版master上安装并启动keepalived
 
 安装并启动keepalived
 
@@ -152,7 +152,7 @@ vrrp_instance VI_3 {
 
 ---
 
-##切换时间选择在业务低点
+## 切换时间选择在业务低点
 
 一般选择业务低点进行数据库操作，目的是为了降低业务风险，和数据丢失的风险
 
@@ -160,7 +160,7 @@ vrrp_instance VI_3 {
 
 ---
 
-##关闭原集群mha
+## 关闭原集群mha
 
 由于集群软件在侦测到主服务器失效后会干预相关资源，造成备机身份切换和IP飘移，为了避免这种影响，要关掉集群
 
@@ -179,7 +179,7 @@ mysql    27192  0.0  0.0 103244   864 pts/2    S+   00:23   0:00                
 
 ---
 
-##关闭原slave上keepalived
+## 关闭原slave上keepalived
 
 
 此目的是为了减少三个keepalived之间协商优先级的时间
@@ -242,14 +242,14 @@ root     28544  0.0  0.0 103244   864 pts/0    S+   00:28   0:00                
 
 ---
 
-##再次检查,确认备份数据
+## 再次检查,确认备份数据
 
 这是最后一次备份原数据的机会 
 
 
 ---
 
-##切换keepalived ip
+## 切换keepalived ip
 
 变更新master keepalived优先级，重载的方式切换
 
@@ -264,7 +264,7 @@ root     28544  0.0  0.0 103244   864 pts/0    S+   00:28   0:00                
 
 ---
 
-##从两边密切监控观察检查应用与数据库状态
+## 从两边密切监控观察检查应用与数据库状态
 
 
 使用netstat 观察到数据库的连接比如 **:3306**
@@ -286,7 +286,7 @@ Shutting down MySQL........................................[  OK  ].
 
 ---
 
-##确认备份数据 
+## 确认备份数据 
 
 在销毁slave和原master前，这是最后一次可以备份原库统计数据的机会
 
@@ -296,7 +296,7 @@ Shutting down MySQL........................................[  OK  ].
 
 ---
 
-##备份新master以便重建
+## 备份新master以便重建
 
 
 {% highlight bash %}
@@ -316,7 +316,7 @@ xtrabackup: Generating a list of tablespaces
 
 ---
 
-##销毁slave数据库
+## 销毁slave数据库
 
 如果有足够空间，可以备到一个目录，没有则可以直接删
 
@@ -348,7 +348,7 @@ new-master:/data/nfs
 
 ---
 
-##更新slave mysql版本
+## 更新slave mysql版本
 
 {% highlight bash %}
 [root@slave02 src]# rpm -e Percona-Server-client-51-5.1.73-rel14.11.603.rhel6.x86_64 Percona-Server-server-51-5.1.73-rel14.11.603.rhel6.x86_64 Percona-Server-shared-51-5.1.73-rel14.11.603.rhel6.x86_64  
@@ -455,7 +455,7 @@ See http://www.percona.com/doc/percona-server/5.6/management/udf_percona_toolkit
 
 ---
 
-##备份替换my.cnf配置文件
+## 备份替换my.cnf配置文件
 
 {% highlight bash %}
 [root@slave02 etc]# mv my.cnf my.old.2015.12.09.backup
@@ -503,7 +503,7 @@ innodb_additional_mem_pool_size  也已经被弃用了,如果有要注释掉
 
 ---
 
-##将zabbit加入mysql组以方便监控
+## 将zabbit加入mysql组以方便监控
 
 
 {% highlight bash %}
@@ -522,7 +522,7 @@ Starting Zabbix agent:                                     [  OK  ]
 
 ---
 
-##修改zabbix统计数据过期时间
+## 修改zabbix统计数据过期时间
 
 {% highlight bash %}
 [root@new-master mysql]# vim  /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh
@@ -535,7 +535,7 @@ Starting Zabbix agent:                                     [  OK  ]
 
 ---
 
-##安装percona-xtrabackup
+## 安装percona-xtrabackup
 
 
 {% highlight bash %}
@@ -642,7 +642,7 @@ slave上确保安装好 **percona-xtrabackup** 软件
 ---
 
 
-##备份完成
+## 备份完成
 
 {% highlight bash %}
 xtrabackup: Creating suspend file '/data/nfs/test_full_backup/2015-12-09_00-53-03/xtrabackup_log_copied' with pid '80799'
@@ -666,7 +666,7 @@ sys	7m44.089s
 
 ---
 
-##准备恢复
+## 准备恢复
 
 {% highlight bash %}
 [root@slave01 nfs]# which innobackupex 
@@ -682,7 +682,7 @@ sys	0m9.147s
 
 ---
 
-##恢复数据
+## 恢复数据
 
 {% highlight bash %}
 [root@slave01 data]# time nohup /usr/bin/innobackupex --copy-back /data/nfs/test_full_backup/2015-12-09_00-53-03/ >> restore.log  2>&1   &  
@@ -736,7 +736,7 @@ Original data directory /var/lib/mysql is not empty!
 
 ---
 
-##监测进展
+## 监测进展
 
 {% highlight bash %}
 [root@slave02 data]# watch -n 2 du -sh /data/mysql/
@@ -746,7 +746,7 @@ Original data directory /var/lib/mysql is not empty!
 
 ---
 
-##恢复完成
+## 恢复完成
 
 
 {% highlight bash %}
@@ -773,7 +773,7 @@ sys	19m4.516s
 
 ---
 
-##修改权限
+## 修改权限
 
 
 {% highlight bash %}
@@ -832,7 +832,7 @@ drwxr-xr-x 16 mysql mysql 20480 Dec  9 03:08 /data/mysql/
 
 ---
 
-##启动mysql并且开启同步
+## 启动mysql并且开启同步
 
 {% highlight bash %}
 [root@slave02 mysql]# mysql -u root -p 
@@ -1044,13 +1044,13 @@ mysql>
 
 ---
 
-##重建mha
+## 重建mha
 
 ---
 
 
 
-#命令汇总
+# 命令汇总
 
 * **`yum clean all`**
 * **`yum install nfs-utils rpcbind`**

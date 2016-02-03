@@ -52,7 +52,7 @@ comments: true
 
 ---
 
-##承前
+## 承前
 
 完成上一篇《Beats 基础》后再看ES里的信息
 
@@ -71,7 +71,7 @@ yellow open   .kibana               1   1          2            0      8.3kb    
 
 ---
 
-##下载beats dashboards
+## 下载beats dashboards
 
 {% highlight bash %}
 [root@h102 ~]# mkdir beats-dashboards
@@ -99,7 +99,7 @@ total 764
 
 ---
 
-##解压并导入
+## 解压并导入
 
 
 {% highlight bash %}
@@ -487,7 +487,7 @@ done
 
 ---
 
-##选择默认索引
+## 选择默认索引
 
 此时进入 **[Settings]** 的 **[indices]** 中就可以看到除了第一次打开 **kibana** 时创建的 **`logstash-*`** 外还多了几个 **Index Patterns** ，**`[filebeat-]YYYY.MM.DD`** 、 **`[packetbeat-]YYYY.MM.DD`** 、  **`[topbeat-]YYYY.MM.DD`** 是从 **beats-dashboards** 导入的
 
@@ -501,7 +501,7 @@ done
 
 ---
 
-##Dashboard
+## Dashboard
 
 由于导入 **beats-dashboards** 
 
@@ -520,7 +520,7 @@ done
 
 ---
 
-#命令总结
+# 命令汇总
 
 * **`curl -L -O http://download.elastic.co/beats/dashboards/beats-dashboards-1.0.1.tar.gz`**
 * **`du -sh beats-dashboards-1.0.1.tar.gz`**

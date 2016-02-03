@@ -37,7 +37,7 @@ Mysql长期使用会产生碎片，使用 **optimize table** 可以有效减少�
 
 ---
 
-##检查一致性
+## 检查一致性
 
 操作之前进行一致性检查，以确保主备一致
 
@@ -106,7 +106,7 @@ Complete!
 
 ---
 
-##获取一致性检查结果
+## 获取一致性检查结果
 
 **[percona-toolkit][percona-toolkit]** 中提供一个叫 **[pt-table-sync][pt-table-sync]** 的工具，可以获取一致性检查结果
 
@@ -126,7 +126,7 @@ Enter password for opti-slave: [root@opti-master checkdb]#
 
 ---
 
-##停止复制
+## 停止复制
 
 在待优化的slave上停止复制
 
@@ -139,7 +139,7 @@ mysql> stop slave;
 
 ---
 
-##生成优化语句
+## 生成优化语句
 
 {% highlight bash %}
 mysql> select concat('optimize table ',TABLE_SCHEMA,'.',TABLE_NAME,';')  from information_schema.TABLES where (ENGINE='MyISAM' or ENGINE='InnoDB') and TABLE_SCHEMA!='information_schema' and TABLE_SCHEMA!='mysql'  into  outfile  "/tmp/optimize.sql";
@@ -166,7 +166,7 @@ optimize table azheng_db.rule_feedbacks;
 
 ---
 
-##执行优化
+## 执行优化
 
 
 {% highlight bash %}
@@ -210,7 +210,7 @@ mysql>
 
 ---
 
-##优化脚本
+## 优化脚本
 
 一般此过程会非常漫长，可以写一个脚本来后台运行，或简单的控制一下IO
 
@@ -241,7 +241,7 @@ time nohup bash opti.bash  >> /path/to/optimize.log   2>&1 &
 
 ---
 
-##恢复备份
+## 恢复备份
 
 优化完成后，立刻恢复备份
 
@@ -255,7 +255,7 @@ start slave;
 
 ---
 
-#命令总结
+# 命令汇总
 
 
 * **`pt-table-checksum --nocheck-replication-filters --nocheck-binlog-format --replicate=ptcheck.checksum --databases youku_db,jd_db,elearning_db,bat_db   h=opti-master,u=ptcheck --ask-pass`**

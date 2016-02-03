@@ -34,7 +34,7 @@ MQ可以使架构变得松耦合，从而更有弹性，更灵活，是SOA架构
 
 ---
 
-##准备备用节点
+## 准备备用节点
 
 
 具体安装过程可以参考 **[RabbitMQ安装][install]** 
@@ -48,7 +48,7 @@ rpm -ivh rabbitmq-server-3.5.6-1.noarch.rpm
 
 {% endhighlight %}
 
-##启动节点
+## 启动节点
 
 {% highlight bash %}
 [root@h101 ~]# /etc/init.d/rabbitmq-server start 
@@ -102,9 +102,9 @@ Status of node rabbit@h101 ...
 
 ---
 
-###还有两种启动方式
+### 还有两种启动方式
 
-####前台启动
+#### 前台启动
 
 
 {% highlight bash %}
@@ -123,7 +123,7 @@ Status of node rabbit@h101 ...
 
 如果当前窗口终结，则这个服务会退出
 
-####后台启动
+#### 后台启动
 
 
 {% highlight bash %}
@@ -140,7 +140,7 @@ Warning: PID file not written; -detached was passed.
 ---
 
 
-##同步 Erlang cookie
+## 同步 Erlang cookie
 
 
 集群中node必须使用相同的cookie才能相互通讯
@@ -169,7 +169,7 @@ root@h102's password:
 
 ---
 
-##查看集群状态
+## 查看集群状态
 
 
 {% highlight bash %}
@@ -191,7 +191,7 @@ Cluster status of node rabbit@h102 ...
 
 ---
 
-##创建集群
+## 创建集群
 
 首先关掉本地应用 **rabbitmqctl  stop_app**
 
@@ -306,7 +306,7 @@ Cluster status of node rabbit@h102 ...
 
 ---
 
-##重启集群node
+## 重启集群node
 
 加入集群的节点可以任意关停、下线或宕机
 
@@ -405,10 +405,10 @@ Cluster status of node rabbit@h101 ...
 
 ---
 
-##拆分集群
+## 拆分集群
 
 
-###本地退出
+### 本地退出
 
 有时我们有必要从集群中移出某个node，分三步
 
@@ -463,7 +463,7 @@ Cluster status of node rabbit@h101 ...
 [root@h101 ~]# 
 {% endhighlight %}
 
-###远程剔除
+### 远程剔除
 
 有些不响应的node,一段时间里无法交互，可以远程的方式，从集群中剔除
 

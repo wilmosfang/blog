@@ -32,7 +32,7 @@ comments: true
 ---
 
 
-##下载
+## 下载
 
 **[下载地址][ntp_download]**
 
@@ -88,7 +88,7 @@ ntp-4.2.8p4.tar.gz.md5: ASCII text
 
 ---
 
-##安装
+## 安装
 
 详细的安装方法可以参考 [安装NTP][ntp_build]
 
@@ -214,7 +214,7 @@ Please send bug reports to:  <http://bugs.ntp.org, bugs@ntp.org>
 
 ---
 
-##升级
+## 升级
 
 当前版还是 **Ver. 4.2.6p5**
 
@@ -343,13 +343,13 @@ Try 'ntpd --help' for more information.
 
 ---
 
-###报错
+### 报错
 
 原因是配置过程中少加了一些权限特性
 
 ---
 
-####解决方法一
+#### 解决方法一
 
 去掉用户和组的参数，再次启动
 
@@ -465,7 +465,7 @@ synchronised to NTP server (202.118.1.130) at stratum 3
 
 ---
 
-####解决方法二
+#### 解决方法二
 
 
 重编译，并且配置时加入参数 **`--enable-clockctl`**
@@ -641,7 +641,7 @@ synchronised to NTP server (202.118.1.81) at stratum 3
 
 
 
-#命令汇总
+# 命令汇总
 
 
 * ./configure    --enable-clockctl 

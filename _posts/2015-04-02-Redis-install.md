@@ -102,7 +102,7 @@ make[1]: Leaving directory `/root/redis-3.0.0/src'
 [root@m1 redis-3.0.0]# 
 {% endhighlight %}
 
-##拷贝脚本
+## 拷贝脚本
 
 
 src下会多出几个脚本
@@ -172,7 +172,7 @@ redis-server
 >  >
 >  >[root@m1 redis-3.0.0]# 
 
-##运行redis server
+## 运行redis server
 
 
 **redis-server** 的使用方法 
@@ -245,7 +245,7 @@ tcp        0      0 :::6379                     :::*                        LIST
 [root@m1 redis-3.0.0]# 
 {% endhighlight %}
 
-##连入redis server
+## 连入redis server
 
 可以使用 **redis-cli** 连接 redis server , 然后完成各种操作
 

@@ -39,7 +39,7 @@ comments: true
 
 ---
 
-##下载和安装
+## 下载和安装
 
 
 使用下面的方法进行安装
@@ -178,9 +178,9 @@ drwxrwxrwx 2 root root    4096 Nov 24 19:41 var_slave
 
 ---
 
-##启动和停止 
+## 启动和停止 
 
-###前台运行
+### 前台运行
 
 这种模式下会占用当前的terminal
 
@@ -286,7 +286,7 @@ root     10734 10446 10747  0   14 20:29 pts/1    Sl+    0:00 ./ssdb-server ssdb
 
 ---
 
-###停止服务
+### 停止服务
 
 {% highlight bash %}
 [root@h101 ssdb]# ./ssdb-server  ssdb.conf  -s stop 
@@ -299,7 +299,7 @@ Copyright (c) 2012-2015 ssdb.io
 
 ---
 
-###后台运行
+### 后台运行
 
 这种方式不会占用当前terminal，关闭当前terminal也不会导致服务退出
 
@@ -317,7 +317,7 @@ ssdb-server───13*[{ssdb-server}]
 
 ---
 
-###客户端连接
+### 客户端连接
 
 
 {% highlight bash %}
@@ -364,7 +364,7 @@ ssdb 127.0.0.1:8888>
 
 ---
 
-###发送信号终止服务
+### 发送信号终止服务
 
 {% highlight bash %}
 [root@h101 ssdb]# ps faux | grep ssdb | grep -v grep 
@@ -379,7 +379,7 @@ cat: var/ssdb.pid: No such file or directory
 
 ---
 
-###SSDB 启动脚本
+### SSDB 启动脚本
 
 修改 **configs** 配置，使其指向正确的位置
 
@@ -417,7 +417,7 @@ SSDB相关命令可以参阅[SSDB命令][ssdb_command]
 
 ---
 
-##master-master
+## master-master
 
 config on h101
 
@@ -627,7 +627,7 @@ ssdb h102:1234>
 
 ---
 
-##限制
+## 限制
 
 Item     | Comment
 -------- | ---
@@ -640,7 +640,7 @@ Item     | Comment
 命令最多参数个数	|所有参数加起来体积不超过 31MB 大小
 
 
-###内存占用
+### 内存占用
 
 一个 ssdb-server 实例占用的内存瞬时(有可能, 而且即使达到, 也只是持续短时间)最高达到(MB):
 

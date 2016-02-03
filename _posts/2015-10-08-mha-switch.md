@@ -27,7 +27,7 @@ comments: true
 
 ---
 
-##检查列表
+## 检查列表
 
 
 在进行切换之前一定要对数据库状态进行检查，下面是检查列表：
@@ -41,7 +41,7 @@ comments: true
 
 ---
 
-##手动切换操作手顺
+## 手动切换操作手顺
 
 
 * 1.关掉后台切换监控 **`masterha_stop --conf=/etc/app1.cnf`** 
@@ -69,7 +69,7 @@ comments: true
 
 ---
 
-#可能涉及到的命令
+# 命令汇总
 
 * **`masterha_check_ssh  --conf=/etc/app1.cnf`**
 * **`masterha_check_status  --conf=/etc/app1.cnf`**

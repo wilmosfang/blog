@@ -43,7 +43,7 @@ Keepalived + Redis 的实现方式并非官方HA方案，在监控与失效切�
 
 ---
 
-##下载redis源码包
+## 下载redis源码包
 
 
 {% highlight bash %}
@@ -66,7 +66,7 @@ redis-3.0.4.tar.gz
 
 ---
 
-##安装redis
+## 安装redis
 
 
 解压redis源码包
@@ -95,7 +95,7 @@ redis-3.0.4  redis-3.0.4.tar.gz
 {% endhighlight %}
 
 
-###报错一
+### 报错一
 
 
 {% highlight bash %}
@@ -229,7 +229,7 @@ Complete!
 
 ---
 
-###报错二
+### 报错二
 
 {% highlight bash %}
 [root@temp redis-3.0.4]# pwd
@@ -462,7 +462,7 @@ make[1]: Leaving directory `/usr/local/src/redis-3.0.4/src'
 
 ---
 
-##运行redis
+## 运行redis
 
 修改配置并运行 **redis**
 
@@ -534,7 +534,7 @@ root      6985  0.4  0.0 127840  1912 ?        Ssl  16:01   0:00 src/redis-serve
 ---
 
 
-##安装keepalived
+## 安装keepalived
 
 {% highlight bash %}
 [root@temp ~]# yum -y install  keepalived.x86_64   
@@ -578,7 +578,7 @@ Complete!
 [root@temp ~]# 
 {% endhighlight %}
 
-##修改/etc/hosts
+## 修改/etc/hosts
 
 
 
@@ -604,9 +604,9 @@ HOSTNAME=redis-b.temp
 {% endhighlight %}
 
 
-##故障检查与切换脚本
+## 故障检查与切换脚本
 
-###redis_check.sh
+### redis_check.sh
 
 redis状态检查脚本，两个节点上的一样
 
@@ -628,7 +628,7 @@ fi
 
 ---
 
-###redis_master.sh
+### redis_master.sh
 
 master状态切换脚本，两个节点上一样
 
@@ -652,7 +652,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[master] wait other slave connect..
 
 ---
 
-###redis_backup.sh
+### redis_backup.sh
 
 backup状态切换脚本，不同之处在于互指对方为master
 
@@ -697,7 +697,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[backup] wait other connect...." >>
 
 ---
 
-###redis_fault.sh
+### redis_fault.sh
 
 fault状态切换脚本，不同之处在于互指对方为master
 
@@ -740,7 +740,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[fault] being fault status" >> $LOG
 
 ---
 
-###redis_stop.sh
+### redis_stop.sh
 
 stop状态切换脚本，不同之处在于互指对方为master
 
@@ -781,7 +781,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[stop] being slave status" >> $LOGF
 
 ---
 
-##keepalived.conf 
+## keepalived.conf 
 
 keepalived 配置
 
@@ -886,7 +886,7 @@ priority 的范围是 1-255
 
 ---
 
-##启动顺序
+## 启动顺序
 
 这个redis+keepalived 集群的启动顺序相当有讲究，否则会出意外
 
@@ -904,9 +904,9 @@ priority 的范围是 1-255
 
 ---
 
-##一次模拟切换
+## 一次模拟切换
 
-###当前状态
+### 当前状态
 
 
 redis-b 是master 
@@ -966,7 +966,7 @@ repl_backlog_histlen:0
 {% endhighlight %}
 
 
-###模拟故障发生
+### 模拟故障发生
 
 {% highlight bash %}
 [root@redis-b keepalived]# redis-cli shutdown 
@@ -975,7 +975,7 @@ Could not connect to Redis at 127.0.0.1:6379: Connection refused
 [root@redis-b keepalived]# 
 {% endhighlight %}
 
-###发生自动切换
+### 发生自动切换
 
 redis-a 的日志中产生了数据
 

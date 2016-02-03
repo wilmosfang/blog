@@ -41,7 +41,7 @@ comments: true
 
 ---
 
-##Plugin管理
+## Plugin管理
 
 
 {% highlight bash %}
@@ -131,7 +131,7 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 
 ---
 
-##plugin的目录
+## plugin的目录
 
 plugin默认地址为安装目录的 **./plugins** 
 
@@ -164,7 +164,7 @@ plugin.mandatory: mapper-attachments,lang-python
 
 ---
 
-##安装plugin
+## 安装plugin
 
 详细的安装方法可以使用下面命令进行查看，也可以参考 **[plugin安装方法][installation]**
 
@@ -172,7 +172,7 @@ plugin.mandatory: mapper-attachments,lang-python
 [root@h102 elasticsearch]# /usr/share/elasticsearch/bin/plugin install -h
 {% endhighlight %}
 
-###安装head插件
+### 安装head插件
 
 {% highlight bash %}
 [root@h102 elasticsearch]# /usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head 
@@ -205,7 +205,7 @@ drwxr-xr-x 5 root root 4096 Dec 30 22:04 head
 
 ---
 
-##外部访问
+## 外部访问
 
 修改配置使其可以从外部访问
 
@@ -245,7 +245,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 ---
 
 
-#命令汇总
+# 命令汇总
 
 
 * **`rpm -ql elasticsearch-2.1.1-1.noarch | grep plugin`**

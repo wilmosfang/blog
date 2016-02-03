@@ -32,7 +32,7 @@ comments: true
 
 ---
 
-##确认相同java版本
+## 确认相同java版本
 
 {% highlight bash %}
 java -version
@@ -42,13 +42,13 @@ java -version
 
 ---
 
-##配置
+## 配置
 
 详细配置可以参考 **[Configuration][configuration]**
 
-###系统配置
+### 系统配置
 
-####File Descriptors
+#### File Descriptors
 
 建议配置文件句柄到 32k 或 64k
 
@@ -63,7 +63,7 @@ curl localhost:9200/_nodes/process?pretty
 
 ---
 
-####Virtual memory
+#### Virtual memory
 
 ES会使用很多的内存映射来存储索引，默认情况下操作系统对 mmap 数量配置得很少，可能会导致内存溢出的异常
 
@@ -85,7 +85,7 @@ sysctl -w vm.max_map_count=262144
 ---
 
 
-####swap 
+#### swap 
 
 使用如下方法禁用 **swap**
 
@@ -98,7 +98,7 @@ sudo swapoff -a
 
 ---
 
-####swappiness
+#### swappiness
 
 查看
 
@@ -114,9 +114,9 @@ sysctl -w vm.swappiness=0
 
 ---
 
-###ES配置
+### ES配置
 
-####mlockall
+#### mlockall
 
 在 **config/elasticsearch.yml** 中配置
 
@@ -134,7 +134,7 @@ curl http://localhost:9200/_nodes/process?pretty
 
 ---
 
-####cluster.name
+#### cluster.name
 
 在 **config/elasticsearch.yml** 中配置
 
@@ -148,7 +148,7 @@ cluster.name: abctest
 
 ---
 
-####node.name
+#### node.name
 
 
 这个用来指定节点名
@@ -161,7 +161,7 @@ node.name: "ES node1"
 
 ---
 
-####network.host
+#### network.host
 
 用来同时设定 **network.bind_host** 和 **network.publish_host**
 
@@ -174,7 +174,7 @@ network.host: 10.10.10.200
 
 ---
 
-##iptables
+## iptables
 
 
 **/etc/sysconfig/iptables** 的 **filter**中要加入以下几条
@@ -197,7 +197,7 @@ network.host: 10.10.10.200
 ---
 
 
-##启动服务
+## 启动服务
 
 {% highlight bash %}
 /data/elasticsearch-1.2.2/bin/elasticsearch -d -Xms512m -Xmx512m
@@ -206,13 +206,13 @@ network.host: 10.10.10.200
 
 ---
 
-##停止服务
+## 停止服务
 
 ---
 
-##常用查询命令
+## 常用查询命令
 
-###查询健康状态
+### 查询健康状态
 
 {% highlight bash %}
 [root@esvm03 ~]# curl localhost:9200/_cat/health?v
@@ -227,7 +227,7 @@ epoch      timestamp cluster status node.total node.data shards pri relo init un
 ---
 
 
-###查询节点信息
+### 查询节点信息
 
 {% highlight bash %}
 [root@esvm03 ~]# curl localhost:9200/_cat/nodes?v
@@ -240,7 +240,7 @@ esvm03 	      10.10.10.203           49          24 0.01 d         m      ES esv
 
 ---
 
-###查询分配信息
+### 查询分配信息
 
 {% highlight bash %}
 [root@esvm03 ~]# curl 'localhost:9200/_cat/allocation?v'
@@ -254,7 +254,7 @@ shards disk.used disk.avail disk.total disk.percent host          ip            
 
 ---
 
-###查询索引信息
+### 查询索引信息
 
 {% highlight bash %}
 [root@esvm03 ~]# curl localhost:9200/_cat/indices?v
@@ -268,7 +268,7 @@ green  bet_orders   5   1      96720           17     93.2mb         46.6mb
 
 ---
 
-###查询节点负载
+### 查询节点负载
 
 {% highlight bash %}
 [root@esvm03 ~]# curl 'localhost:9200/_cat/fielddata?v'
@@ -281,7 +281,7 @@ NeyBeQw1Qn6jsuJInDxJCQ esvm03 	     10.10.10.203 ES esvm03    0b         0b
 
 ---
 
-###查询master信息
+### 查询master信息
 
 
 {% highlight bash %}
@@ -293,7 +293,7 @@ LNX8Y35TTEarNaW8zZYVeQ esvm01 10.10.10.200 ES esvm01
 
 ---
 
-###查询等待中的任务信息
+### 查询等待中的任务信息
 
 {% highlight bash %}
 [root@esvm03 ~]# curl 'localhost:9200/_cat/pending_tasks?v'
@@ -304,7 +304,7 @@ insertOrder timeInQueue priority source
 
 ---
 
-###查询插件信息
+### 查询插件信息
 
 {% highlight bash %}
 [root@esvm03 ~]# curl 'localhost:9200/_cat/plugins?v'
@@ -317,7 +317,7 @@ ES esvm03 analysis-mmseg NA      j
 
 ---
 
-###查询恢复信息
+### 查询恢复信息
 
 {% highlight bash %}
 [root@esvm03 ~]# curl 'localhost:9200/_cat/recovery?v'
@@ -367,7 +367,7 @@ bet_orders 4     59    replica    done  esvm01      esvm02        n/a        n/a
 
 ---
 
-###查询线程池信息
+### 查询线程池信息
 
 {% highlight bash %}
 [root@esvm03 ~]# curl localhost:9200/_cat/thread_pool?v
@@ -380,7 +380,7 @@ esvm03        10.10.10.203           0          0             0            0    
 
 ---
 
-###查看分片信息
+### 查看分片信息
 
 {% highlight bash %}
 [root@esvm03 ~]# curl localhost:9200/_cat/shards?v
@@ -431,7 +431,7 @@ bet_orders 2     r      STARTED   19350   9.3mb 10.10.10.201 ES esvm02
 
 ---
 
-###查询段信息
+### 查询段信息
 
 {% highlight bash %}
 curl 'http://localhost:9200/_cat/segments?v'
@@ -443,7 +443,7 @@ curl 'http://localhost:9200/_cat/segments?v'
 
 ---
 
-###关掉一个节点
+### 关掉一个节点
 
 {% highlight bash %}
 curl -XPOST 'http://localhost:9200/_cluster/nodes/_local/_shutdown'
@@ -451,7 +451,7 @@ curl -XPOST 'http://localhost:9200/_cluster/nodes/nodeId1,nodeId2/_shutdown'
 curl -XPOST 'http://localhost:9200/_cluster/nodes/_master/_shutdown'
 {% endhighlight %}
 
-###关掉所有节点
+### 关掉所有节点
 
 {% highlight bash %}
 curl -XPOST 'http://localhost:9200/_shutdown'
@@ -461,7 +461,7 @@ curl -XPOST 'http://localhost:9200/_cluster/nodes/_all/_shutdown'
 
 ---
 
-#命令汇总
+# 命令汇总
 
 
 * **`curl localhost:9200/_cat/health?v`**

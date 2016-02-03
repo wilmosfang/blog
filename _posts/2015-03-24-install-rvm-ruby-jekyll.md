@@ -29,7 +29,7 @@ comments: true
 
 ---
 
-##系统环境
+## 系统环境
 
 {% highlight bash %}
 [root@Test ~]# lsb_release  -a 
@@ -47,7 +47,7 @@ Linux Test 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_
 [root@Test ~]# 
 {% endhighlight %}
 
-##安装过程
+## 安装过程
 
 
 * 1.安装gcc
@@ -513,7 +513,7 @@ Configuration file: /root/tmp/myblog/_config.yml
 
 ---
 
-#总结
+# 总结
 
 * 1.安装gcc
 * 2.安装rvm
@@ -525,7 +525,7 @@ Configuration file: /root/tmp/myblog/_config.yml
 
 ---
 
-#注意
+# 注意
 
 * 1.尽量使用rvm,这是一款ruby神器
 * 2.使用合适的安装源,别让自己的青春虚度

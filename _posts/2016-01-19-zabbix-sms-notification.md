@@ -30,7 +30,7 @@ comments: true
 
 ---
 
-##前期准备
+## 前期准备
 
 首先得有一个发短信的云平台
 
@@ -48,7 +48,7 @@ comments: true
 
 ---
 
-###发送短信API
+### 发送短信API
 
 选择好短信云平台后，就要使用云平台提供的API开发出一个发送短信的工具(脚本)
 
@@ -102,7 +102,7 @@ comments: true
 
 ---
 
-###短信余额脚本
+### 短信余额脚本
 
 这个是获取短信余额的脚本
 
@@ -110,18 +110,18 @@ comments: true
 [root@redis-b sms_script]# cat sms_get_balance.bash 
 #!/bin/bash
 
-##config area
+## config area
 QTOOLS=/tmp/sms_script/qtools
 CURL=/usr/bin/curl
 account='xxxxxxx'
 password='xxxxxxx'
 
-##auto config
+## auto config
 timestamps=`date +%s`
 timestamps=$timestamps'000'
 url='http://139.129.128.71:8086/msgHttp/json/balance'
 
-##generate args for curl
+## generate args for curl
 url_account=`$QTOOLS urlencode $account`
 url_pass_temp=`echo -n $password$timestamps|md5sum | awk '{print $1}' `
 url_pass=`$QTOOLS urlencode $url_pass_temp`
@@ -139,7 +139,7 @@ $CURL -X POST  "$url" -d "account=$url_account&password=$url_pass&timestamps=$ur
 
 ---
 
-###发送短信脚本
+### 发送短信脚本
 
 这个是发送短信的脚本
 
@@ -184,7 +184,7 @@ More: <'phone_numbers'>  <'message'>  must be specified and only two args
 EOF
 }
 
-##simple check for input args
+## simple check for input args
 
 if [ "$#" -ne "2" ]
 then
@@ -193,24 +193,24 @@ then
 fi 
 
 ##
-##need to be specified in CLI
+## need to be specified in CLI
 
 mobile="$1"
 content="$2"
 
-##config area
-##need to be configed manually
+## config area
+## need to be configed manually
 QTOOLS=/tmp/sms_script/qtools
 CURL=/usr/bin/curl
 account='xxxxxxx'
 password='xxxxxxx'
 
-##auto config
+## auto config
 timestamps=`date +%s`
 timestamps=$timestamps'000'
 url='http://139.129.128.71:8086/msgHttp/json/mt'
 
-##generate args for curl
+## generate args for curl
 url_account=`$QTOOLS urlencode "$account"`
 url_pass_temp=`echo -n "$password$mobile$timestamps"|md5sum | awk '{print $1}' `
 url_pass=`$QTOOLS urlencode "$url_pass_temp"`
@@ -283,7 +283,7 @@ echo '报警' |tr -d '\n' |od -An -tx1|tr ' ' %
 
 ---
 
-##配置Zabbix Actions
+## 配置Zabbix Actions
 
 进入zabbix的Actions创建界面
 
@@ -332,7 +332,7 @@ echo '报警' |tr -d '\n' |od -An -tx1|tr ' ' %
 
 ---
 
-##触发测试
+## 触发测试
 
 
 创建一个 **Disaster** 级别的触发器
@@ -390,7 +390,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 ---
 
 
-#命令汇总
+# 命令汇总
 
 * **`cat sms_get_balance.bash`**
 * **`./sms_get_balance.bash`**

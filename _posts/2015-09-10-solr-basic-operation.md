@@ -27,7 +27,7 @@ comments: true
 
 ---
 
-##环境需求
+## 环境需求
 
 
 **Solr** 运行在 **Java 7** 之上
@@ -52,9 +52,9 @@ OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 
 ---
 
-##安装
+## 安装
 
-###下载与解压
+### 下载与解压
 
 **[Solr下载地址][download]**
 
@@ -83,7 +83,7 @@ bin  CHANGES.txt  contrib  dist  docs  example  licenses  LICENSE.txt  LUCENE_CH
 ---
 
 
-##启动solr
+## 启动solr
 
 {% highlight bash %}
 [root@h102 solr-5.3.0]# bin/solr start -e cloud -noprompt
@@ -138,7 +138,7 @@ SolrCloud example running, please visit: http://localhost:8983/solr
 
 ---
 
-###配置iptables
+### 配置iptables
 
 修改 **/etc/sysconfig/iptables** 在 **filter** 中加入以下内容，然后reload
 
@@ -149,7 +149,7 @@ SolrCloud example running, please visit: http://localhost:8983/solr
 
 ---
 
-###管理界面
+### 管理界面
 
 在本地使用 **http://localhost:8983/solr/** ，或远程使用 **http://ip:8983/solr/** 访问管理界面
 
@@ -161,7 +161,7 @@ SolrCloud example running, please visit: http://localhost:8983/solr
 
 ---
 
-###当前拓扑
+### 当前拓扑
 
 这是当前的拓扑
 
@@ -169,7 +169,7 @@ SolrCloud example running, please visit: http://localhost:8983/solr
 
 ---
 
-##添加数据
+## 添加数据
 
 
 使用 **bin/post** 可以方便的添加数据
@@ -247,7 +247,7 @@ Time spent: 0:02:41.136
 
 ---
 
-###索引XML
+### 索引XML
 
 {% highlight bash %}
 [root@h102 solr-5.3.0]# bin/post -c gettingstarted example/exampledocs/*.xml
@@ -277,7 +277,7 @@ Time spent: 0:00:23.754
 
 ---
 
-###索引JSON
+### 索引JSON
 
 
 {% highlight bash %}
@@ -296,7 +296,7 @@ Time spent: 0:00:05.241
 
 ---
 
-###索引CSV
+### 索引CSV
 
 {% highlight bash %}
 [root@h102 solr-5.3.0]# bin/post -c gettingstarted example/exampledocs/books.csv
@@ -313,11 +313,11 @@ Time spent: 0:00:00.512
 
 ---
 
-##使用管理界面检索数据
+## 使用管理界面检索数据
 
 
 
-###方法一 
+### 方法一 
 
 
 指定集合然后使用 **Query** 或通过 **http://192.168.100.102:7574/solr/#/gettingstarted_shard2_replica1/query**
@@ -330,7 +330,7 @@ Time spent: 0:00:00.512
 ---
 
 
-###方法二
+### 方法二
 
 通过 **http://ip:8983/solr/gettingstarted/browse** 输入关键字
 
@@ -343,7 +343,7 @@ Time spent: 0:00:00.512
 
 ---
 
-##删除数据
+## 删除数据
 
 {% highlight bash %}
 [root@h102 solr-5.3.0]# bin/post -c gettingstarted -d "<delete><id>/data/solr/solr-5.3.0/docs/quickstart.html</id></delete>"
@@ -359,14 +359,14 @@ Time spent: 0:00:00.292
 
 ---
 
-##使用CLI检索数据
+## 使用CLI检索数据
 
 使用curl可以快速返回结果
 
 **http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/select?q=\*%3A\*&wt=json&indent=true**
 
 
-###任意匹配
+### 任意匹配
 
 {% highlight bash %}
 [root@h102 solr-5.3.0]# curl  "http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/select?q=*%3A*&wt=json&indent=true"
@@ -413,7 +413,7 @@ Time spent: 0:00:00.292
 
 ---
 
-###单关键字匹配
+### 单关键字匹配
 
 {% highlight bash %}
 [root@h102 solr-5.3.0]# curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=foundation"
@@ -461,7 +461,7 @@ Time spent: 0:00:00.292
 
 ---
 
-###限定输出
+### 限定输出
 
 通过 **"numFound":3608** 我们知道一共有 **3608** 个结果，我们可以通过参数限定输出,默认情况下影响输出的参数是以下默认值
 
@@ -512,7 +512,7 @@ fl       | \*:\*
 
 ---
 
-###属性匹配
+### 属性匹配
 
 **q=field:value** 可以进行更精细的属性限定
 
@@ -548,7 +548,7 @@ fl       | \*:\*
 
 ---
 
-###多关键字匹配（或）
+### 多关键字匹配（或）
 
 如果要进行多关键字搜索，就使用 **+**  ，例如： **q=ui+test**  或 **q='ui+test'**
 
@@ -619,7 +619,7 @@ fl       | \*:\*
 
 ---
 
-###多关键字匹配（且）
+### 多关键字匹配（且）
 
 **+** **(%2B)** 前缀代表必须包含
 
@@ -685,9 +685,9 @@ fl       | \*:\*
 
 ---
 
-###Faceting
+### Faceting
 
-####Field facets
+#### Field facets
 
 信息分组统计
 
@@ -827,7 +827,7 @@ fl       | \*:\*
 
 ---
 
-####Range facets
+#### Range facets
 
 可以使用区间来进一步分组
 
@@ -889,7 +889,7 @@ fl       | \*:\*
 
 ---
 
-####Pivot facets
+#### Pivot facets
 
 其实也就是双重分组
 
@@ -1042,7 +1042,7 @@ fl       | \*:\*
 
 ---
 
-##关闭Solr
+## 关闭Solr
 
 正常运行的状态下，会有两个 **java** 分别监听在 **8983** 和 **7574**
 
@@ -1109,7 +1109,7 @@ root     64883  0.0  0.0 103252   828 pts/1    S+   13:56   0:00  |       \_ gre
 
 ---
 
-##删除数据
+## 删除数据
 
 
 数据保存到如下路径
@@ -1183,7 +1183,7 @@ example/cloud/ [error opening dir]
 
 ---
 
-#总结
+# 总结
 
 
 * Launched Solr into SolrCloud mode, two nodes, two collections including shards and replicas
@@ -1198,7 +1198,7 @@ example/cloud/ [error opening dir]
 ---
 
 
-#附
+# 附
 
 使用下面的脚本可以快速的准备出试验环境
 

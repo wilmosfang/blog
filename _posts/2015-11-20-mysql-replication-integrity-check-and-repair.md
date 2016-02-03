@@ -38,7 +38,7 @@ comments: true
 
 ---
 
-##下载安装Percona Toolkit
+## 下载安装Percona Toolkit
 
 {% highlight bash %}
 [root@replication-check-vm src]# wget  http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
@@ -150,7 +150,7 @@ Complete!
 
 ---
 
-##检查数据不一致
+## 检查数据不一致
 
 
 使用 **[pt-table-checksum][pt-table-checksum]** 进行不一致数据检查
@@ -262,7 +262,7 @@ Checksumming user_key_db.user_schema:  96% 00:22 remain
 
 ---
 
-##修复数据不一致
+## 修复数据不一致
 
 使用 **[pt-table-sync][pt-table-sync]** 来进行数据不一致修复
 

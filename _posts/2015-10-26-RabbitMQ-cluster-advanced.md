@@ -33,7 +33,7 @@ MQ可以使架构变得松耦合，从而更有弹性，更灵活，是SOA架构
 
 ---
 
-##升级集群
+## 升级集群
 
 升级Erlang或RabbitMQ版本，必须停止集群，因为集群中不能容忍不同版本协同工作
 
@@ -53,7 +53,7 @@ MQ可以使架构变得松耦合，从而更有弹性，更灵活，是SOA架构
 
 ---
 
-##单机集群
+## 单机集群
 
 
 在同一个OS中运行多个RabbitMQ node主要要满足以下两个条件：
@@ -301,7 +301,7 @@ Cluster status of node rabbit@h101 ...
 ---
 
 
-##防火墙问题
+## 防火墙问题
 
 集群中的node之间可能会有防火墙阻隔，为了确保集群正常工作，node之间必须开放一些端口用于互相通信，打开 **4369** 和 **25672** 
 
@@ -316,7 +316,7 @@ Cluster status of node rabbit@h101 ...
 
 ---
 
-##集群中Erlang的版本
+## 集群中Erlang的版本
 
 
 集群中所有node的Erlang版本必须一致
@@ -326,7 +326,7 @@ Cluster status of node rabbit@h101 ...
 
 ---
 
-##客户端的连接
+## 客户端的连接
 
 集群中没有主备概念，每一个node都是对等的，所以客户端可以连入任意一个node进行操作，如果一个node出现故障，客户端会返回错误，直接连接另一个node就可以继续进行操作
 
@@ -334,7 +334,7 @@ Cluster status of node rabbit@h101 ...
 
 ---
 
-##内存节点集群
+## 内存节点集群
 
 内存node是将所有元数据保存在内存中的node，是以一定安全风险为代价交换性能的选择，由于不保存数据到硬盘，所以断电或重启后数据将会丢失，也正因为不必与硬盘打交道，所以速度会非常快
 
@@ -351,7 +351,7 @@ Cluster status of node rabbit@h101 ...
 
 ---
 
-##创建内存node
+## 创建内存node
 
 
 使用下面方法创建内存node
@@ -390,7 +390,7 @@ Cluster status of node rabbit@h101 ...
 ---
 
 
-##修改node类型
+## 修改node类型
 
 
 一个集群中运行着的node，可以动态地切换类型
@@ -441,7 +441,7 @@ Cluster status of node rabbit@h101 ...
 
 
 
-#命令总结
+# 命令汇总
 
 
 * rabbitmqctl  -n hare  stop_app

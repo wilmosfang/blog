@@ -29,9 +29,9 @@ comments: true
 
 ---
 
-##准备slave软件环境
+## 准备slave软件环境
 
-###下载安装percona repo
+### 下载安装percona repo
 
 {% highlight bash %}
 [root@slave-test src]# wget  http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm 
@@ -75,7 +75,7 @@ warning: percona-release-0.1-3.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 
 
 ---
 
-###安装percona-xtrabackup
+### 安装percona-xtrabackup
 
 {% highlight bash %}
 [root@slave-test src]# yum -y install percona-xtrabackup.x86_64    
@@ -143,7 +143,7 @@ Complete!
 
 ---
 
-###安装mysql
+### 安装mysql
 
 {% highlight bash %}
 [root@slave-test src]# yum install Percona-Server-server-56
@@ -348,7 +348,7 @@ mysql>
 
 ---
 
-###注意事项
+### 注意事项
 
 * 1.slave上的数据存储位置有足够的空间，如果没有最好链接到一个有空间的位置
 * 2.slave上使用master的配置文件，可以将有些大内存使用参数酌情改小
@@ -357,11 +357,11 @@ mysql>
 
 ---
 
-##备份master数据库
+## 备份master数据库
 
 使用前面的方法在master上安装xtrabackup
 
-###报错1
+### 报错1
 
 
 {% highlight bash %}
@@ -566,7 +566,7 @@ innobackupex: MySQL binlog position: filename 'mysql-bin.000009', position 15092
 
 ---
 
-##拷贝备份数据到slave
+## 拷贝备份数据到slave
 
 {% highlight bash %}
 [root@master-qa data]# rsync  -av  fullbackup/  root@192.168.1.45:/data/fullbackup/   
@@ -624,7 +624,7 @@ total size is 16406176319  speedup is 1.00
 
 ---
 
-##恢复数据库
+## 恢复数据库
 
 
 备份目录里有几个文件,里面有一些重要信息
@@ -671,7 +671,7 @@ encrypted = N
 
 ---
 
-###准备数据
+### 准备数据
 
 
 {% highlight bash %}
@@ -808,7 +808,7 @@ InnoDB: Shutdown completed; log sequence number 76232248582
 ---
 
 
-###恢复数据库
+### 恢复数据库
 
 
 准备完数据后，会多出来一个文件 
@@ -931,7 +931,7 @@ encrypted = N[root@slave-test mysql]#
 
 ---
 
-###修改数据权限
+### 修改数据权限
 
 {% highlight bash %}
 [root@slave-test mysql]# chown -R mysql:mysql /var/lib/mysql 
@@ -942,7 +942,7 @@ encrypted = N[root@slave-test mysql]#
 
 ---
 
-###启动数据库
+### 启动数据库
 
 {% highlight bash %}
 [root@slave-test data]# /etc/init.d/mysql  start 
@@ -971,7 +971,7 @@ mysql>
 
 ---
 
-##创建复制用户
+## 创建复制用户
 
 在master上创建一个复制用户
 
@@ -987,7 +987,7 @@ mysql>
 
 ---
 
-##执行同步
+## 执行同步
 
 {% highlight bash %}
 [root@slave-test mysql]# mysql -u root -p 

@@ -30,10 +30,10 @@ comments: true
 
 ---
 
-##安装
+## 安装
 
 
-###下载软件包
+### 下载软件包
 
 
 **[Tengine][tengine]** 的 **[下载地址][download]**
@@ -59,9 +59,9 @@ Saving to: “tengine-2.1.1.tar.gz”
 ---
 
 
-###安装软件包
+### 安装软件包
 
-####依赖包
+#### 依赖包
 
 下面是可能的依赖包
 
@@ -79,7 +79,7 @@ openssl-devel.x86_64
 
 ---
 
-####解压
+#### 解压
 
 {% highlight bash %}
 [root@i-1avyrt2d src]# ls
@@ -106,7 +106,7 @@ nginx-1.9.6  nginx-1.9.6.tar.gz  tengine-2.1.1  tengine-2.1.1.tar.gz
 
 ---
 
-####配置
+#### 配置
 
 {% highlight bash %}
 [root@i-1avyrt2d tengine-2.1.1]# ./configure 
@@ -156,7 +156,7 @@ Configuration summary
 
 ---
 
-####编译
+#### 编译
 
 {% highlight bash %}
 [root@i-1avyrt2d tengine-2.1.1]# make 
@@ -193,7 +193,7 @@ make[1]: Leaving directory `/usr/local/src/tengine-2.1.1'
 
 ---
 
-####安装
+#### 安装
 
 {% highlight bash %}
 [root@i-1avyrt2d tengine-2.1.1]# make install 
@@ -224,7 +224,7 @@ make[1]: Leaving directory `/usr/local/src/tengine-2.1.1'
 
 ---
 
-##配置检查与启动
+## 配置检查与启动
 
 
 {% highlight bash %}
@@ -242,7 +242,7 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 
 ---
 
-##模块
+## 模块
 
 
 Tengine 将检查和监模块都集成了进来，非常方便
@@ -410,7 +410,7 @@ drwxr-xr-x 2 root root 4096 Nov  4 10:22 sbin
 
 ---
 
-##案例分析
+## 案例分析
 
 Nginx 很大的一个作用就是作为web前端进行负载均衡和反向代理，但负载均衡的一个关键点就是状态检查，因为不能把请求分配给有故障的后端服务器
 
@@ -483,7 +483,7 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 ---
 
 
-###负载均衡
+### 负载均衡
 
 nginx可以很简单的配置成http负载均衡服务器，对前端的请求进行转发
 
@@ -512,7 +512,7 @@ server 使用于 upstream  环境，服务名称可以是一个域名，一个ip
 |backup|-|标记服务器，在所有非backup服务器宕机的时候才启用|
 
 
-###反向代理
+### 反向代理
 
 {% highlight bash %}
 	location / {
@@ -525,7 +525,7 @@ server 使用于 upstream  环境，服务名称可以是一个域名，一个ip
 
 ---
 
-###状态检查
+### 状态检查
 
 单纯轮询，其中一台出问题后，会影响一定比例请求的正常响应，加入检查模块就可以避免此问题
 
