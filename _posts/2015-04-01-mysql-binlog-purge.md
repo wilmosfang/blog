@@ -2,15 +2,14 @@
 layout: post
 title: Mysql binlog 清理方法
 categories: linux mysql 
-wc: 426 1812 15866
-excerpt: follow me
+wc: 426  1823 15945
+excerpt: 相关基本参数，清理方法，手动清理，自动清理
 comments: true
 ---
 
----
 
-前言
-=
+# 前言
+
 
 作为master的Mysql运行久了以后会在根目录中产生大量的binlog日志，如果不及时清理，会占用大量的磁盘空间，也会对数据库的正常运行带来隐患
 
@@ -30,7 +29,7 @@ comments: true
 相关基本参数
 -
 
-####**--log-bin[=base_name]**
+#### **--log-bin[=base_name]**
 
 Item     | Format
 -------- | ---
@@ -49,7 +48,7 @@ Permitted Values Type |file name
 >* Certain data recovery operations require use of the binary log. After a backup has been restored, the events in the binary log that were recorded after the backup was made are re-executed. These events bring databases up to date from the point of the backup
 
 
-####**max_binlog_size**
+#### **max_binlog_size**
 
 Item     | Format
 -------- | ---
@@ -67,7 +66,7 @@ Range|4096 .. 1073741824
 > **Note:** If max\_relay\_log\_size is 0, the value of max\_binlog\_size applies to relay logs as well.
 
 
-####**--log-bin-index[=file_name]**
+#### **--log-bin-index[=file_name]**
 
 Item     | Format
 -------- | ---
@@ -80,7 +79,7 @@ Permitted Values Type |file name
 
 >The index file for binary log file names. If you omit the file name,and if you did not specify one with --log-bin, MySQL uses host_name-bin.index as the file name.
 
-####**expire_logs_days**
+#### **expire_logs_days**
 
 Item     | Format
 -------- | ---
