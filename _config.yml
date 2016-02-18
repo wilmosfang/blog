@@ -10,6 +10,7 @@ markdown: kramdown
 highlighter: pygments
 paginate: 15
 paginate_path: "page:num"
+gems: [jekyll-paginate]
 
 # 本地用rouge, github上用pygments
 # highlighter: pygments
