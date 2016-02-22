@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Me
-permalink: /about/
+permalink: /me/
 icon: glyphicon-heart
 ---
 

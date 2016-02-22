@@ -2,8 +2,8 @@
 layout: post
 title: 在Centos6.6中创建一个Bridge
 categories: linux network
-wc: 185 609 6762
-excerpt: follow me
+wc: 186  617 6628
+excerpt: 创建bridge的方法，配置以及注意事项
 comments: true
 ---
 
@@ -26,7 +26,7 @@ comments: true
 
 下面配置很少，但是花了我整整一个下午的时间排错，其根本原因不是配置错误，而是与**Network Manager**服务的冲突，关掉它这个世界立刻变得平静而祥和
 
-{% highlight bash %}bash
+{% highlight bash %}
 
 [test@test network-scripts]$ grep -v "#" ifcfg-eth0 | cat -s 
 
@@ -40,7 +40,7 @@ BRIDGE=br0
 DEVICE=br0
 ONBOOT=yes
 BOOTPROTO=static
-IPADDR=192.168.1.45
+IPADDR=192.168.1.123
 NETMASK=255.255.255.0
 GATEWAY=192.168.1.2
 
@@ -64,19 +64,19 @@ ifup br0
 
 下面是重启网络后的效果
 
-{% highlight bash %}bash
+{% highlight bash %}
 
 [root@test ~]# /etc/init.d/network  restart 
 Shutting down interface br0:                               [  OK  ]
 Shutting down interface eth0:                              [  OK  ]
 Shutting down loopback interface:                          [  OK  ]
 Bringing up loopback interface:                            [  OK  ]
-Bringing up interface br0:  Determining if ip address 192.168.1.45 is already in use for device br0...
+Bringing up interface br0:  Determining if ip address 192.168.1.123 is already in use for device br0...
                                                            [  OK  ]
 Bringing up interface eth0:                                [  OK  ]
 [root@test ~]# ifconfig 
 br0       Link encap:Ethernet  HWaddr 2C:27:D7:46:CF:12  
-          inet addr:192.168.1.45  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet addr:192.168.1.123  Bcast:192.168.1.255  Mask:255.255.255.0
           inet6 addr: fe80::fc54:ff:fe12:1e4a/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
           RX packets:1182852 errors:0 dropped:0 overruns:0 frame:0
@@ -130,7 +130,7 @@ vnet0     Link encap:Ethernet  HWaddr FE:54:00:12:1E:4A
        valid_lft forever preferred_lft forever
 3: br0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN 
     link/ether 2c:27:d7:46:cf:12 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.1.45/24 brd 192.168.1.255 scope global br0
+    inet 192.168.1.123/24 brd 192.168.1.255 scope global br0
     inet6 fe80::fc54:ff:fe12:1e4a/64 scope link 
        valid_lft forever preferred_lft forever
 4: virbr0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN 
@@ -152,7 +152,7 @@ selinux有时也会造成影响，需要关闭
 
 查看方法
 
-{% highlight bash %}bash
+{% highlight bash %}
 [root@test ~]# sestatus  -v 
 SELinux status:                 disabled
 [root@test ~]# getenforce 
@@ -178,7 +178,7 @@ SELINUXTYPE=targeted
 
 临时关闭方法 
 
-{% highlight bash %}bash
+{% highlight bash %}
 
 setenforce 0
 
