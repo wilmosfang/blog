@@ -11,8 +11,11 @@ icon: glyphicon-play
 
 一截均匀流淌的时空里，不同位置的点有节奏地律动
 
+
+我不懂音乐，但并不妨碍我对她的喜爱
+
 ---
 
 
 
-
+16.02.23 [爱尔兰画眉](http://kg.qq.com/share.html?s=FgSTtxtDkXkl)
