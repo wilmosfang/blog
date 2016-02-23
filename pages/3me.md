@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Me
+title: Me 
 permalink: /me/
 icon: glyphicon-heart
 ---

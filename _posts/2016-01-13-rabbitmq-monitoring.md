@@ -152,7 +152,7 @@ tcp        0      0 0.0.0.0:15672               0.0.0.0:*                   LIST
     <script src="js/charts.js" type="text/javascript"></script>
 
     <link href="css/main.css" rel="stylesheet" type="text/css"/>
-    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <!--<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>-->
 
 <!--[if lte IE 8]>
     <script src="js/excanvas.min.js" type="text/javascript"></script>
