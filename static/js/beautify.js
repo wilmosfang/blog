@@ -332,6 +332,7 @@ if (!("ontouchstart" in window)) {
 }
 
 /* Animation */
+/*
 $(function () {
 
     window.onload = function () {
@@ -377,17 +378,25 @@ $(function () {
         }
     });
 });
+*/
+
+
+
 
 /*
  * add line under every article title
  */
+
+/*
 $(function () {
     $("h2:not(.subheading):not(.post-title)").each(function () {
         $(this).append("<hr/>");
     })
 });
+*/
 
 /* Night Mode */
+/* 
 $(function () {
 
     var cookie_opt = function (key, value, options) {
@@ -490,3 +499,5 @@ $(function () {
         })
     })
 });
+
+*/
