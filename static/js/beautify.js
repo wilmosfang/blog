@@ -60,6 +60,7 @@ if (!("ontouchstart" in window)) {
             canvas.style.position = "fixed";
             canvas.style.top = '0px';
             canvas.style.left = '0px';
+	    canvas.style.zIndex='-1';
 
             canvas.width = width;
             canvas.height = height;
