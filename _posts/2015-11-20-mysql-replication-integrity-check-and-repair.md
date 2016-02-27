@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Mysql复制数据一致性检查
+author: wilmosfang
 categories: linux mysql admintools 
 wc: 310 1193 16168
 excerpt: follow me

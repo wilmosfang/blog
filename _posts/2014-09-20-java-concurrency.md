@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 测试文档
+author: wilmosfang
 categories: linux
 wc: 191 461 7025
 excerpt: follow me

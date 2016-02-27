@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Elasticsearch 常用命令
+author: wilmosfang
 categories: linux elasticsearch nosql
 wc: 485  1717 17870
 excerpt: es的配置，防火墙，启停，常用命令 

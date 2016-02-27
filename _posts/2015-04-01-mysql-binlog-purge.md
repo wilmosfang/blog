@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Mysql binlog 清理方法
+author: wilmosfang
 categories: linux mysql 
 wc: 426  1823 15945
 excerpt: 相关基本参数，清理方法，手动清理，自动清理

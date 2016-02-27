@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Zabbix Agent 安装
+author: wilmosfang
 categories: linux monitoring zabbix 
 wc: 443 1534 20654
 excerpt: zabbix agent 的安装过程

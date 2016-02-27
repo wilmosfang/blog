@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 在Centos6.6中创建一个Bridge
+author: wilmosfang
 categories: linux network
 wc: 186  617 6628
 excerpt: 创建bridge的方法，配置以及注意事项

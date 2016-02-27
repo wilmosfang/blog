@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Redis 迁移(操作流程建议)
+author: wilmosfang
 categories: linux redis nosql keepalived
 wc: 163 230 3602
 excerpt: follow me

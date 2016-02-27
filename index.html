@@ -9,21 +9,21 @@ layout: default
        <button>toggle</button>
      </p> -->
       <div class="post-list-header">
-        星海拾遗
+        <h1><strong>星海拾遗</strong></h1>
       </div>
       <div class="post-list-body">
         
         <div class="all-posts" post-cate="All">
           {% for post in paginator.posts %}
             <a class="post-list-item" href="{{ post.url | prepend: site.baseurl }}">
-              <h2>
+              <h3>
               {{ post.title }}
-              </h2>
-              <span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
+              </h3>
+              <h5><span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
 	      <span class="point"> · </span>
               <span class="">{{ post.wc }}</span>
 	      <span class="point"> · </span>
-              <span class="">{{ post.excerpt }}</span>
+              <span class="">{{ post.excerpt }}</span></h5>
             </a>
 
 

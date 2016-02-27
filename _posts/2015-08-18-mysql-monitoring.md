@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Mysql 监控 
+author: wilmosfang
 categories: linux monitoring zabbix mysql
 wc: 413 1448 16383
 excerpt: 使用Zabbix监控Mysql的方法 

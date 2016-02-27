@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Solr基础操作
+author: wilmosfang
 categories: linux solr nosql
 wc: 1225 3038 44365
 excerpt: follow me

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Mysql MHA 搭建 (四) mha failover 测试
+author: wilmosfang
 categories: linux mha mysql  keepalived cluster
 wc: 1064  5236 50029
 excerpt: mha的主动被动切换测试

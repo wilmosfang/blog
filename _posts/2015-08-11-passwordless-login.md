@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 证书管理碉堡机
+author: wilmosfang
 categories: linux ssh
 wc: 254 639 6129
 excerpt: follow me

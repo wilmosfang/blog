@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Mycat 配置
+author: wilmosfang
 categories:  linux mysql mycat
 wc: 474   714 12584 
 excerpt:  mycat的概念和配置解析 

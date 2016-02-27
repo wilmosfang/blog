@@ -1,6 +1,7 @@
 ---
 layout: post
 title: memcached基础
+author: wilmosfang
 categories: linux memcached
 wc: 1133 4849 46722
 excerpt: memcached 的安装、基础管理命令、基本操作命令、状态查看

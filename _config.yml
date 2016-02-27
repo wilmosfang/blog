@@ -1,7 +1,7 @@
 title: 镜缘浮影
 email: yyghdfz@163.com 
 description: 小人本住在 苏州的城外 家里有屋又有田 生活乐无边
-baseurl: 
+baseurl:  
 username: wilmosfang
 github_username:  wilmosfang
 permalink: /:year/:month/:day/:title/
@@ -11,6 +11,7 @@ highlighter: pygments
 paginate: 15
 paginate_path: "page:num"
 gems: [jekyll-paginate]
+refurl: "http://soft.dog"  #the base url of the site
 
 # 本地用rouge, github上用pygments
 # highlighter: pygments

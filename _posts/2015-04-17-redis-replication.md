@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Redis 复制
+author: wilmosfang
 categories: linux redis nosql
 wc: 579 1478 16982
 excerpt: follow me

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Elasticsearch Plugins
+author: wilmosfang
 categories: linux elasticsearch 
 wc: 273  588 7336 
 excerpt:  elasticsearch 插件的相关基础

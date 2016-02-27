@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Logstash  Plugins
+author: wilmosfang
 categories:  linux logstash ruby
 wc: 751  1934 25341 
 excerpt:  Logstash 插件相关基础与使用方法

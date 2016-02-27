@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Mysql 优化存储
+author: wilmosfang
 categories: linux  mysql 
 wc: 273 685 9865
 excerpt: 使用optimize table对数据库进行优化

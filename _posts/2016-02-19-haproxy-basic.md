@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  HAproxy 基础
+author: wilmosfang
 categories:  linux cluster haproxy 
 wc: 526  1846 17410 
 excerpt: haproxy的下载与安装，运行与监控 

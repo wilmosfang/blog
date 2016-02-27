@@ -1,6 +1,7 @@
 ---
 layout: post
 title: RabbitMQ集群I
+author: wilmosfang
 categories: linux rabbitmq cluster
 wc: 541 1398 16216
 excerpt: follow me

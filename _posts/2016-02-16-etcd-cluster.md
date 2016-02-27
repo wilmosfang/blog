@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  etcd 集群
+author: wilmosfang
 categories:  linux cluster etcd  
 wc: 494  1412 20562 
 excerpt: 配置、构建、启动etcd集群 ，成员信息查看，在线添加删除节点

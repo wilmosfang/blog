@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Temp Blog Name
+author: wilmosfang
 categories: linux template
 wc: 113  175 1692 
 excerpt: 我的blog模板与书写规范，检查与处理流程

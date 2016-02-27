@@ -1,6 +1,7 @@
 ---
 layout: post
 title: redis-benchmark 基础
+author: wilmosfang
 categories: linux redis nosql benchmark
 wc: 739 2451 17797
 excerpt: follow me

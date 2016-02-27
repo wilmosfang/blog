@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Zabbix 短信报警配置
+author: wilmosfang
 categories:  linux monitoring zabbix
 wc: 409 778 11512 
 excerpt: 涉及短信API，短信发送脚本，Zabbix Action配置，触发测试   

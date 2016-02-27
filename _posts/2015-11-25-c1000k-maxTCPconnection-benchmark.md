@@ -1,6 +1,7 @@
 ---
 layout: post
 title: c1000k TCP 连接上限测试
+author: wilmosfang
 categories: linux benchmark
 wc: 259 813 6283
 excerpt: follow me

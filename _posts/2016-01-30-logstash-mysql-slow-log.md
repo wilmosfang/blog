@@ -1,6 +1,7 @@
 ---
 layout: post
 title:    Logstash 处理 Mysql Slow Log
+author: wilmosfang
 categories:  linux logstash mysql
 wc: 411  1158 18484 
 excerpt: logstash配置，input，filter，output 插件详解，正则详解，配置运行与测试 

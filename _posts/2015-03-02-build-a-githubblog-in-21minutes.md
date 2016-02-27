@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 21分钟搭建一个GitHub Blog
+author: wilmosfang
 categories: linux git jekyll
 wc: 90 94 2740
 excerpt: follow me

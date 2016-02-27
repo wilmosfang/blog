@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Docker 基础
+author: wilmosfang
 categories:  linux docker
 wc: 810  3055 34393 
 excerpt: docker基础，yum 安装 docker，script 安装 docker，启动，检测，docker组，卸载，systemctl用法

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Linux CPU info
+author: wilmosfang
 categories: linux monitoring
 wc: 315 1070 10097
 excerpt: follow me

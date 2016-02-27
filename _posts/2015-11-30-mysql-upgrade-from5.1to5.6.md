@@ -1,6 +1,7 @@
 ---
 layout: post
 title: mysql 5.1升级到5.6
+author: wilmosfang
 categories: linux mysql upgrade
 wc: 1238 5231 59037
 excerpt: follow me
