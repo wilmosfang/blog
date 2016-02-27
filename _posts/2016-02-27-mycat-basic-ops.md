@@ -2,7 +2,7 @@
 layout: post
 title:  Mycat 运行与基础操作
 categories:  linux mysql mycat
-wc: 884  2899 25391 
+wc: 885  2906 25450
 excerpt: mycat的分片配置，日志查看，启动，连接，创建表，数据增删查改，表结构修改与注意事项  
 comments: true
 ---
@@ -99,7 +99,7 @@ comments: true
 
 ## 准备
 
-巧妇难为无米之炊，Mycat 本身并没有存储引擎，所以得事先准备，主要是以下几点
+巧妇难为无米之炊，Mycat 本身并没有存储引擎，所以得事先准备好，主要是以下几点
 
 * 在192.168.100.101提前创建三个数据库
 
@@ -874,8 +874,6 @@ mysql>
 * **`mysql -u cc -p -P 8066 -h 192.168.100.102`**
 
 ---
-
-
 
 [mycat]:http://www.mycat.org.cn/
 [mycat_doc]:http://www.mycat.org.cn/document/mycat1.5.2.pdf
