@@ -107,7 +107,7 @@ if (!("ontouchstart" in window)) {
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
-            window.cancelAnimationFrame();
+            window.cancelAnimationFrame(animate);
             initMap();
             initAnimation();
         }
