@@ -3,12 +3,9 @@ layout: post
 title: ZooKeeper 基础
 author: wilmosfang
 categories: linux zookeeper
-wc: 663  2070 20412
+wc: 660  2069 20407
 excerpt: zookeeper的下载，安装，服务启停，客户端连接，和常用命令
 comments: true
----
-
-
 ---
 
 # 前言
