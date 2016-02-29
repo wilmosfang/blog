@@ -3,8 +3,8 @@ layout: post
 title: ZooKeeper 基础
 author: wilmosfang
 categories: linux zookeeper
-wc: 641 1999 19836
-excerpt: follow me
+wc: 663  2070 20412
+excerpt: zookeeper的下载，安装，服务启停，客户端连接，和常用命令
 comments: true
 ---
 
@@ -633,6 +633,26 @@ WatchedEvent state:SyncConnected type:None path:null
 {% endhighlight %}
 
 还有一些关于权限管控和监听的命令在以后深入使用过程中再仔细研究
+
+
+---
+
+
+#  命令汇总
+
+* **`wget  http://apache.fayea.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz`**
+* **`tar -zxvf zookeeper-3.4.6.tar.gz`**
+* **`cd zookeeper-3.4.6`**
+* **`grep -v "^#" conf/zoo_sample.cfg`**
+* **`cp conf/zoo_sample.cfg conf/zoo.cfg`**
+* **`bin/zkServer.sh  start`**
+* **`netstat  -ant | grep 2181`**
+* **`bin/zkServer.sh restart`**
+* **`bin/zkServer.sh stop`**
+* **`bin/zkServer.sh status`**
+* **`bin/zkCli.sh`**
+
+
 
 ---
 
