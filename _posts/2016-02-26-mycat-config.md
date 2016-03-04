@@ -106,6 +106,9 @@ Mycat 其实只是一个数据中间件，或数据库代理
 > **Tip:** 数据冗余和表分组是解决跨分片数据join的好思路，也是数据切分规划的重要规则
 
 
+![mycat_table.png](/images/mycat/mycat_table.png)
+
+
 ---
 
 ### 分片节点(dataNode)
@@ -152,6 +155,11 @@ Mycat 其实只是一个数据中间件，或数据库代理
 
 
 隔离级别越来越低，共享程度越来越高，均摊成本越来越低
+
+### 整体关系
+
+
+![mycat_arch.jpg](/images/mycat/mycat_arch.jpg)
 
 
 ---
