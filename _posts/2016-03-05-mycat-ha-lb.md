@@ -2,7 +2,7 @@
 layout: post
 title:  Mycat HA(高可用) 与 LB(负载均衡)
 categories:  linux cluster mysql mycat  keepalived haproxy rsyslog
-wc: 1518  5643 64505 
+wc: 1522  5646 64545 
 excerpt: keepalived、haproxy、mycat的下载安装配置运行，rsyslog的配置运行与测试，简单的haproxy健康检查，haproxy监控，系统访问测试，切换过程中的影响，和部署过程中的注意事项
 comments: true
 ---
@@ -13,7 +13,11 @@ comments: true
 
 **[Mycat][mycat]** 是一款开源的数据库分库分表中间件
 
-一般而言在生产环境下，任何基础架构都有必要考虑 **高可用，扩展性和监控方案** ，使用 **Mycat web** (也有叫 **Mycat-eye** )可以实现对mycat的 **监控** ，**[Mycat][mycat]** 目前没有官方的高可用解决方案 ，但配合使用 **keepalived** 和 **haproxy** 也可以实现mycat的 **高可用** ，由于 **[Mycat][mycat]** 本身是无状态的，可以通过添加 **Mycat** 节点来实现 **水平扩展** ，从而分摊访问压力
+一般而言在生产环境下，任何基础架构都有必要考虑 **高可用，扩展性和监控方案** :
+
+* 监控：使用 **Mycat web** (也有叫 **Mycat-eye** )可以实现对mycat的 **监控** 
+* 高可用：**[Mycat][mycat]** 目前没有官方的高可用解决方案 ，但配合使用 **keepalived** 和 **haproxy** 也可以实现mycat的 **高可用** 
+* 可扩展：由于 **[Mycat][mycat]** 本身是无状态的，可以通过添加 **Mycat** 节点来实现 **水平扩展** ，从而分摊访问压力
 
 下面分享一下 **Mycat 高可用与负载均衡** 的实现方法，详细内容可以参考 **[官方文档][mycat_doc]** (但是由于官方文档比较老，有不少坑，这篇分享里会将这些坑填平)
 
