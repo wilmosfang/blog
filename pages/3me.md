@@ -48,7 +48,7 @@ icon: glyphicon-heart
 
 # 时间线
 
-
+2016.03.07|开通微信公众号，并发表第一篇文章，我的微信公众号 **星海拾遗**
 2016.02.23|使用K歌软件记录我翻唱的小曲，并发表第一首曲子，我的 **[口琴小辑](http://kg.qq.com/personal.html?uid=639e9c87202f318936)** 和 **[音乐小辑](http://soft.dog/music/)**
 2015.03.02|使用 jekyll + github pages 搭建好技术博客，并发表第一篇分享，我的 **[技术博客](http://soft.dog/)**
 2014.08.26|从上海出发，沿G318骑行去尼泊尔，简略经历在QQ说说里，详细经历在 **[贴吧](http://tieba.baidu.com/p/3484468000)** 中，持续更新中......
@@ -59,6 +59,7 @@ icon: glyphicon-heart
 # 联系我
 
 * **Email**: [yyghdfz@163.com](mailto:{{ site.email }})
-* **QQ**: 1120874273
+* **QQ**: **1120874273**
 * **贴吧**: [百度贴吧](http://tieba.baidu.com/p/3484468000)
 * **Github**: [GitHub](https://github.com/wilmosfang)
+* **微信公众号**: **星海拾遗**
