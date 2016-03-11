@@ -13,10 +13,18 @@ article p{
 pre{
 	padding: 0;
 	background: none;
+/* commom word-wrap  */
+        word-wrap: normal!important;
+/* commom */
+
 }
 
 pre code{
 	font-size: 14px;
+/* commom word-wrap  */
+        white-space: pre!important;
+/* commom */
+
 }
 
 table{
