@@ -2,7 +2,7 @@
 layout: post
 title:  SQLite 基础
 categories:  linux sqlite
-wc: 1455  5519 54763 
+wc: 1457  5534 54927 
 excerpt: sqlite的下载，安装，基础命令，交互输入，帮助，环境配置，数据类型，数据库与表的创建修改查看，导入导出，数据库的附加分离，基础信息表，和sqlite下的基本SQL操作
 comments: true
 ---
@@ -17,7 +17,9 @@ comments: true
 
 目前 **[SQLite][sqlite]** 应用极其广泛，我们几乎人手都使用着一个，因为它的轻量特性，IOS和Andriod终端里都嵌入了 **[SQLite][sqlite]** 作为本地数据库，同时它还大量地使用在了各类嵌入式系统中
 
-程序开发的过程中，也可以使用它来替代重量型的RDBMS，类似于 Mysql或Postgresql，来进行简单功能测试
+程序开发的过程中，也可以使用它来替代重量型的RDBMS，类似于Mysql或Postgresql，来进行简单功能测试 (然而sqlite本无意与去它们比较，只是想作一个更强大的fopen())
+
+>Think of SQLite not as a replacement for Oracle but as a replacement for fopen()
 
 这里分享一下 **[SQLite][sqlite]** 的相关操作基础，详细内容可以参考 **[官方文档][sqlite_doc]** , 网络资料参考了 **[RUNOOB][sqlite_ref]** 
 
