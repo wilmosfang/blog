@@ -2,12 +2,10 @@
 layout: post
 title:  Consul 集群
 categories:  linux cluster consul
-wc: 638  2047 22482 
+wc: 634  2047 22478 
 excerpt:  consul 的发现机制，集群构建，节点查询，脱离集群，健康检查，检查定义，配置重载，状态查看，键值操作，增删查改，条件更新，触发器与集群构建过程中的注意事项 
 comments: true
 ---
-
-
 
 # 前言
 
@@ -630,9 +628,7 @@ Consul 提供 WEB UI 来对自身状态进行 GUI 展示
 * **`time curl "http://localhost:8500/v1/kv/web/key2?index=101&wait=5s"`**
 * **`time curl "http://localhost:8500/v1/kv/web/key2?index=10001&wait=5s"`**
 
-
 ---
-
 
 [consul]:https://www.consul.io/
 [consul_doc]:https://www.consul.io/docs/index.html
