@@ -60,6 +60,6 @@ icon: glyphicon-heart
 
 * **Email**: [yyghdfz@163.com](mailto:{{ site.email }})
 * **QQ**: **1120874273**
-* **贴吧**: [百度贴吧](http://tieba.baidu.com/p/3484468000) [天涯](http://bbs.tianya.cn/post-funinfo-6869556-1.shtml)
+* **贴吧**: [百度](http://tieba.baidu.com/p/3484468000) [天涯](http://bbs.tianya.cn/post-funinfo-6869556-1.shtml)
 * **Github**: [GitHub](https://github.com/wilmosfang)
 * **微信公众号**: **星海拾遗**
