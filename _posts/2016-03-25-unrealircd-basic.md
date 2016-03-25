@@ -19,12 +19,12 @@ IRC的最大特性是实现了在线实时交谈，类似于QQ
 
 相对于电子邮件或新闻组等沟通方式，IRC速度更快、功能更多，交互性更强，所以也自然成为了很多技术社群的首选，因为它足够强健的安全保护，也成了很多黑客的交流工具(总之就是各种好呀！)
 
-话说回来，有没有不好呢，当然有，得有相应的人力物力资源来维护和支撑，在老板看来这就是成本，扯远了
+话说回来，有没有不好呢，当然有，得有相应的人力物力资源来维护和支撑，在老板看来这就是成本
 
 这里简单分享一下 **[UnrealIRCd][unrealircd]** 相关的基础，详细内容可以参考 **[官方文档][unrealircd_doc]** 
 
 
-> **Tip:** 当前的最新版本为 **UnrealIRCd 4.0.2** released on March 11, 2016, 17:25 CET
+> **Tip:** 当前的最新版本为 **UnrealIRCd 4.0.2** 发布于 March 11, 2016, 17:25 CET
 
 ---
 
@@ -134,7 +134,7 @@ Primary key fingerprint: 1D2D 2B03 A0B6 8ED1 1D68  A24B A7A2 1B0A 108F F4A9
 
 说明unrealircd给我们的公钥是没有经过权威认证的自签名证书，没有任何信息可以确保这的确就是来自unrealircd的
 
-(那为什么要使用自签名证书呢，因为生成快，还不要钱，测试时我也经常干这事儿，只要我自已信就可以了)
+那为什么要使用自签名证书呢，因为生成快，还不要钱，测试时我也经常干这事儿，只要我自已信就可以了
 
 还有一种方式就是使用hash结果来判断有否被篡改
 
@@ -146,7 +146,9 @@ Primary key fingerprint: 1D2D 2B03 A0B6 8ED1 1D68  A24B A7A2 1B0A 108F F4A9
 [root@h104 irc]# 
 {% endhighlight %}
 
-通过和官方提供的hash结果进行比较来判断是否一致(在http环境下，也有可能连同页面提供的hash结果一同劫持篡改，相对而言https页面里的hash结果更可信一些，更安全的是经ca认证的https)
+通过和官方提供的hash结果进行比较来判断是否一致
+
+在http环境下，也有可能连同页面提供的hash结果一同劫持篡改，相对而言https页面里的hash结果更可信一些，更安全的是经ca认证的https
 
 ---
 
@@ -1757,7 +1759,7 @@ config error: IRCd configuration failed to pass testing
 {% endhighlight %}
 
 
-###警告
+### 警告
 
 {% highlight bash %}
 WARNING: You are running UnrealIRCd as root and it is not
@@ -1815,7 +1817,7 @@ config error: IRCd configuration failed to pass testing
 分别为：
 
 * 1.要求修改操作员角色的用户名和密码
-* 2.**cloak-keys** 必须得相互不一样，并且由 **`a-zA-Z0-9`** 混合而成
+* 2.**cloak-keys** 必须得相互不一样，并且由 **`a-zA-Z0-9`** 混合而成(且必须包含这三种字符形式，少任何一种都会提示不通过)
 * 3.**kline-address** 必须得是一个邮箱地址格式
 
 根据定位，依次修改，顺便修改一下访问权限
