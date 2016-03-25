@@ -7,8 +7,6 @@ excerpt: unrealircd 的下载，检验，安装，依赖，基础配置，启动
 comments: true
 ---
 
-
-
 # 前言
 
 **[UnrealIRCd][unrealircd]** 是一款开源的 IRC 服务软件
