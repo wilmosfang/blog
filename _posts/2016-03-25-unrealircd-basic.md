@@ -2,7 +2,7 @@
 layout: post
 title:  UnrealIRCd 基础
 categories:  linux irc unrealircd
-wc: 2022 11273 97455 
+wc: 2022 11274 97515 
 excerpt: unrealircd 的下载，检验，安装，依赖，基础配置，启动运行，访问，和整个过程中的注意事项以及报错处理 
 comments: true
 ---
