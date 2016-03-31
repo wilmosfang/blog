@@ -3,8 +3,8 @@ layout: post
 title: 安装jekyll (include rvm,ruby,gem)
 author: wilmosfang
 categories: linux rvm ruby jekyll
-wc: 531 1714 19693
-excerpt: follow me
+wc: 567  1826 20553 
+excerpt: 系统环境准备，安装gcc，安装rvm，安装ruby，安装jekyll，安装nodejs，生成blog，运行jekyll server
 comments: true
 ---
 
@@ -14,7 +14,7 @@ comments: true
 
 ## 前言
 
-我前面有一篇文章可以[21分钟搭建一个GitHub Blog](http://wilmosfang.github.io/blog/2015/03/02/build-a-githubblog-in-21minutes.html)
+我前面有一篇文章可以[21分钟搭建一个GitHub Blog](http://soft.dog/2015/03/02/build-a-githubblog-in-21minutes/)
 
 这里我们深入到jekyll层面看看,如何在本地也生成一个blog,也就是在本地干和github上一样的事情
 
@@ -51,7 +51,7 @@ Linux Test 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_
 ## 安装过程
 
 
-* 1.安装gcc
+### 1.安装gcc
 
 {% highlight bash %}
 [root@Test ~]# yum -y install gcc
@@ -118,7 +118,11 @@ Complete!
 
 {% endhighlight %}
 
-* 1号坑:安装ruby(用于展示坑的大小,不要跟着操作,因为这是白操作)
+#### 1号坑
+
+##### 安装ruby
+
+(用于展示坑的大小,不要跟着操作,因为这是白操作)
 
 系统默认安装好了ruby
 
@@ -137,7 +141,7 @@ ruby 1.8.7 (2013-06-27 patchlevel 374) [x86_64-linux]
 [root@Test ~]#
 {% endhighlight %}
 
-安装rubygems
+##### 安装rubygems
 
 其中的这些包都是根据错误提示一个个加上去的，这个过程就略过了，至于为什么要安装gem呢，是网上的很多声称实践过的先驱们探索出来的,方便用来安装jekyll用的
 
@@ -146,7 +150,9 @@ ruby 1.8.7 (2013-06-27 patchlevel 374) [x86_64-linux]
 [root@Test ~]# yum -y install rubygems ruby-devel rubygems-devel
 {% endhighlight %}
 
-安装jekyll(坑来了，坑来了)
+##### 安装jekyll
+
+(坑来了，坑来了)
 
 {% highlight bash %}
 [root@Test ~]# gem install jekyll  
@@ -164,11 +170,12 @@ ruby 1.8.7 (2013-06-27 patchlevel 374) [x86_64-linux]
 ruby 1.9.3p545 (2014-02-24 revision 45159) [x86_64-linux]
 [root@Test ~]# 
 {% endhighlight %}
-可这个不是问题的关键，关键是由于此系统中的gem依赖1.8.7，结果一安装又把ruby覆盖掉了回到了1.8.7,解决办法是源码编译高版本的gem...,当然也不知道到时候又有什么别的依赖....,太浪费时间了
+
+可这个不是问题的关键，关键是由于此系统中的gem依赖1.8.7，结果一安装又把ruby覆盖掉了回到了1.8.7,解决办法是源码编译高版本的gem...当然也不知道到时候又有什么别的依赖....太浪费时间了
 
 干脆放弃了这个方法
 
-* 2.安装rvm
+### 2.安装rvm
 
 有了rvm，妈妈再也不担心我的ruby版本了
 
@@ -278,7 +285,7 @@ rvm 1.26.10 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <
 {% endhighlight %}
 
 
-* 3.安装ruby
+### 3.安装ruby
 
 
 {% highlight bash %}
@@ -318,9 +325,9 @@ ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-linux]
 [root@Test ~]#
 {% endhighlight %}
 
-* 4.安装jekyll
+### 4.安装jekyll
 
-2号坑来了
+#### 2号坑
 
 {% highlight bash %}
 [root@Test ~]# gem install jekyll
@@ -388,7 +395,7 @@ sys	0m2.128s
 [root@Test ~]#
 {% endhighlight %}
 
-* 5.安装nodejs
+### 5.安装nodejs
 
 为什么要安装nodejs呢，因为jekyll要依赖它，不安装会报错，下面是我没安装，常试直接运行的结果 
 
@@ -477,7 +484,7 @@ Complete!
 
 {% endhighlight %}
 
-* 6.生成blog
+### 6.生成blog
 
 {% highlight bash %}
 [root@Test tmp]# jekyll  new myblog
@@ -486,7 +493,7 @@ New jekyll site installed in /root/tmp/myblog.
 {% endhighlight %}
 
 
-* 7.运行jekyll server
+### 7.运行jekyll server
 
 {% highlight bash %}
 [root@Test tmp]# cd myblog/
@@ -523,6 +530,33 @@ Configuration file: /root/tmp/myblog/_config.yml
 * 5.安装nodejs
 * 6.生成blog
 * 7.运行jekyll server 
+
+
+---
+
+# 命令汇总
+
+* **`lsb_release  -a`**
+* **`cat /etc/issue`**
+* **`uname -a`**
+* **`yum -y install gcc`**
+* **`ruby -v`**
+* **`yum -y install rubygems ruby-devel rubygems-devel`**
+* **`gem install jekyll`**
+* **`gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39`**
+* **`curl -L get.rvm.io | bash -s stable`**
+* **`rvm -v`**
+* **`rvm install 2.2.1`**
+* **`ruby -v`**
+* **`gem -v`**
+* **`gem install jekyll`**
+* **`gem sources -a https://ruby.taobao.org/`**
+* **`gem sources --remove https://rubygems.org/`**
+* **`gem sources -l`**
+* **`time gem install jekyll`**
+* **`yum -y install nodejs`**
+* **`jekyll  new myblog`**
+* **`jekyll  server`**
 
 ---
 
