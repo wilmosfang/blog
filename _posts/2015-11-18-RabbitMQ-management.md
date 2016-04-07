@@ -3,7 +3,7 @@ layout: post
 title: RabbitMQ管理
 author: wilmosfang
 categories: linux rabbitmq python ruby
-wc: 793  2165 21319
+wc: 798  2193 21405
 excerpt: rabbitmqctl 命令的使用，用户管理，访问控制，Python Ruby 连接 RabbitMQ ,日志与状态的查看
 comments: true
 ---
@@ -345,7 +345,9 @@ Listing vhosts ...
 
 ## 连接RabbitMQ
 
-###[python连接RabbitMQ][python_api]
+### python连接RabbitMQ
+
+[python连接RabbitMQ][python_api]
 
 生产脚本
 
@@ -536,7 +538,9 @@ mq_learning_q	1
 
 ---
 
-###[ruby连接RabbitMQ][ruby_api]
+### ruby连接RabbitMQ
+
+[ruby连接RabbitMQ][ruby_api]
 
 
 生产脚本
