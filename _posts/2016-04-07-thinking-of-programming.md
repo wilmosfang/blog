@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  一个运维人员的编程思维
-categories:  linux  ruby python php perl 
-wc: 545   657 29062 
+categories:  linux  thinking ruby python php perl  
+wc: 545   658 29116 
 excerpt: 运维人员的优秀品质，懒惰，编码能力，编程思维，运维指导思想，程序到底是什么，数据到底是什么，程序能干什么，工具意识，DRY，流的思想 
 comments: true
 ---
@@ -375,7 +375,7 @@ Growth hacking 就是一个很典型的例子，通过关键动作的大数据�
 
 什么叫 **数据类型** ？ =>  数据的约定与表达方式
 
-什么叫 **变量** ？ =>  数据的容身之所
+什么叫 **变量** ？ =>  数据容身之所(其实是临时的)，可以直接代表数据
 
 什么叫 **属性** ？ =>  数据
 
