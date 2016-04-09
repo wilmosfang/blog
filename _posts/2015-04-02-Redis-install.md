@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Redis 3.0.0 安装
+title: Redis 安装
 author: wilmosfang
 categories: linux redis nosql
-wc: 397 1335 12997
+wc: 418  1391 13516
 excerpt: redis 的下载，解压，编译，安装，运行，连接
 comments: true
 ---
