@@ -4,14 +4,13 @@ title: Redis 3.0.0 安装
 author: wilmosfang
 categories: linux redis nosql
 wc: 397 1335 12997
-excerpt: follow me
+excerpt: redis 的下载，解压，编译，安装，运行，连接
 comments: true
 ---
 
----
 
-前言
-=
+# 前言
+
 
 
 [Redis][redis] 是一个开源的, BSD 许可的, key-value 缓存或存储. 它也被称作数据结构服务器，因为它可以包含 strings, hashes, lists, sets, sorted sets, bitmaps 和 hyperloglogs这些数据结构。
@@ -23,6 +22,8 @@ comments: true
 这里有张[列表][caselist]，对以上网络应用作了描述了，并且也列出了一些其它使用到redis的比较受欢迎的网站
 
 总体来说，redis对现在零碎的网络信息可以进行比较高效快捷的处理和存储，如评论，微博之类的碎片化信息
+
+> **Tip:** 当前的最新版是 **Redis Stable (3.0)**
 
 
 ---
@@ -386,6 +387,24 @@ webshell
 
 
 使用这个[**链接**][redis try]，可以对redis的基本操作进行学习
+
+---
+
+# 命令汇总
+
+* **`wget http://download.redis.io/releases/redis-3.0.0.tar.gz`**
+* **`tar zxvf redis-3.0.0.tar.gz`**
+* **`cd redis-3.0.0`**
+* **`make`**
+* **`cd src/`**
+* **`ls  | grep -v "\."`**
+* **`cp redis-server  /usr/local/bin/`**
+* **`cp redis-cli /usr/local/bin/`**
+* **`./redis-server  --help`**
+* **`./redis-server  --version`**
+* **`telnet localhost 6379`**
+
+
 
 
 ---
