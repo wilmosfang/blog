@@ -3,12 +3,11 @@ layout: post
 title: RabbitMQ基础 
 author: wilmosfang
 categories: linux rabbitmq
-wc: 775 2425 30842
-excerpt: follow me
+wc: 795  2505 31759
+excerpt: rabbitmq 的依赖，Erlang 的安装，rabbitmq 的安装，基础操作，启停，rabbitmqctl基础操作，关闭node，关闭应用，重置node，轮转日志，相关注意事项
 comments: true
 ---
 
----
 
 # 前言
 
@@ -760,7 +759,26 @@ total 24
 
 >Instruct the RabbitMQ node to rotate the log files.
 
+---
 
+# 命令汇总
+
+* **`yum install erlang.x86_64`**
+* **`wget  http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm`**
+* **`rpm -ivh rabbitmq-server-3.5.6-1.noarch.rpm`**
+* **`/etc/init.d/rabbitmq-server start`**
+* **`/etc/init.d/rabbitmq-server stop`**
+* **`/etc/init.d/rabbitmq-server status`**
+* **`cat /proc/2995/limits`**
+* **`netstat  -an | grep -E "(4369|25672|5672|5671|15672|61613|61614|1883|8883)"`**
+* **`rabbitmqctl  stop`**
+* **`rabbitmqctl  stop_app`**
+* **`rabbitmqctl  status`**
+* **`rabbitmqctl  start_app`**
+* **`rabbitmqctl  reset`**
+* **`rabbitmqctl  force_reset`**
+* **`rabbitmqctl  rotate_logs .1`**
+* **`ll /var/log/rabbitmq/`**
 
 
 ---
