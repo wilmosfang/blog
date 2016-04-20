@@ -1740,7 +1740,7 @@ Message published but NOT routed
 
 ---
 
-#### **fanout** 的特性
+### **fanout** 的特性
 
 定义第二个queue ，也使用 my.fanout binding 起来，取 routing_key 为 second
 
@@ -1886,7 +1886,7 @@ rabbitmqadmin --help for help
 
 ---
 
-#### **direct** 的特性
+### **direct** 的特性
 
 
 定义第三个queue ，使用 my.direct binding 起来
@@ -1982,7 +1982,7 @@ Message published
 
 ---
 
-#### **topic** 的特性
+### **topic** 的特性
 
 
 定义第四个queue ，使用 my.topic binding 起来
