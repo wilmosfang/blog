@@ -2,7 +2,7 @@
 layout: post
 title:  Elasticsearch 监控
 author: wilmosfang
-categories: linux elasticsearch nginx network monitoring
+categories: linux nosql elasticsearch nginx network monitoring
 wc: 462  1549 15563 
 excerpt:  elasticsearch 健康监控方法，融合nginx,ssl,auth_basic,plugins,DNAT等相关技术
 comments: true

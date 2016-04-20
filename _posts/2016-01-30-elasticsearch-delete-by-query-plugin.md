@@ -2,7 +2,7 @@
 layout: post
 title:  Elasticsearch Delete By Query Plugin  
 author: wilmosfang
-categories:  linux elasticsearch
+categories:  linux nosql elasticsearch
 wc: 607  1606 16293 
 excerpt: Elasticsearch Delete By Query Plugin 的安装卸载方法，操作注意事项  
 comments: true
