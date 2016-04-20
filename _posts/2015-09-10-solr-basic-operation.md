@@ -3,12 +3,11 @@ layout: post
 title: Solr基础操作
 author: wilmosfang
 categories: linux solr nosql
-wc: 1225 3038 44365
-excerpt: follow me
+wc: 1257  3180 46793
+excerpt: solr 的下载解压安装，启动，管理界面，拓扑，索引 XML，索引 JSON，索引 CSV，删除数据，使用 restful API 检索数据，各种匹配方法，格式化输出，关闭 solr
 comments: true
 ---
 
----
 
 # 前言
 
@@ -1195,6 +1194,36 @@ example/cloud/ [error opening dir]
 * Opened the admin console, used its query interface to get JSON formatted results
 * Opened the /browse interface to explore Solr's features in a more friendly and familiar interface
 
+---
+
+# 命令汇总
+
+* **`java  -version`**
+* **`tar -zxvf solr-5.3.0.tgz`**
+* **`cd solr-5.3.0`**
+* **`bin/solr start -e cloud -noprompt`**
+* **`bin/post -h`**
+* **`bin/post -c gettingstarted docs/`**
+* **`bin/post -c gettingstarted example/exampledocs/*.xml`**
+* **`bin/post -c gettingstarted example/exampledocs/books.json`**
+* **`bin/post -c gettingstarted example/exampledocs/books.csv`**
+* **`bin/post -c gettingstarted -d "<delete><id>/data/solr/solr-5.3.0/docs/quickstart.html</id></delete>"`**
+* **`curl  "http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/select?q=*%3A*&wt=json&indent=true"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=foundation"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=foundation&fl=id&start=30&rows=5"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=_version_:1511824568810995712"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&fl=id&rows=3&q=test"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&fl=id&rows=3&q=ui"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&fl=id&rows=3&q=ui+test"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&fl=id&rows=3&q=%2Bone+%2Bthree"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&fl=id&rows=3&q=%2Btwo+-three"`**
+* **`curl "http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/select?q=*%3A*&wt=json&indent=true&rows=0&facet=true&facet.field=stream_size"`**
+* **`curl "http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/select?q=*%3A*&wt=json&indent=true&rows=0&facet=true&facet.range=stream_size&f.stream_size.facet.range.start=0&&f.stream_size.facet.range.end=9000&f.stream_size.facet.range.gap=1000&facet.range.other=after"`**
+* **`curl "http://localhost:8983/solr/gettingstarted/select?q=*:*&rows=0&wt=json&indent=on&facet=on&facet.pivot=stream_size,title"`**
+* **`bin/solr stop -all`**
+* **`netstat  -ant | grep -E '(8983|7574)'`**
+* **`tree example/cloud/`**
+
 
 ---
 
@@ -1216,6 +1245,7 @@ bin/solr start -e cloud -noprompt ;
   bin/solr healthcheck -c gettingstarted ;
 date ;
 {% endhighlight %}
+
 
 
 ---
