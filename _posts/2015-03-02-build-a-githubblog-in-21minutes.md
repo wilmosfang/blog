@@ -3,8 +3,8 @@ layout: post
 title: 21分钟搭建一个GitHub Blog
 author: wilmosfang
 categories: linux git jekyll
-wc: 90 94 2740
-excerpt: follow me
+wc: 100  115 2862
+excerpt: 申请 github 账号，fork 出一个blog ，定制 blog , 添加新博文
 comments: true
 ---
 
@@ -38,6 +38,11 @@ comments: true
 
 GitHub是个好东西，自由且免费，还有一个所有穷屌丝爱死的特性，没容量上限，不要玩坏了哦！！
 
+
+
+---
+
+
 ## fork出一个现有的Blog
 
 如何最快地获得成果？
@@ -60,6 +65,7 @@ GitHub是个好东西，自由且免费，还有一个所有穷屌丝爱死的�
 
 其实此刻你已经拥有了一个完全属于自己的Blog
 
+---
 
 ## 定制化Blog
 
@@ -73,6 +79,8 @@ GitHub是个好东西，自由且免费，还有一个所有穷屌丝爱死的�
 
 由于整个Blog网站的源码都在你手上，你可做更多更深入的修改与定制
 
+
+---
 
 ## 添加新博文
 
