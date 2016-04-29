@@ -47,7 +47,7 @@ Redis 是日前我遇到过的安装最简单的数据库
 
 > **Tip:** Redis uses a standard practice for its versioning: major.minor.patchlevel. An even minor marks a stable release, like 1.2, 2.0, 2.2, 2.4, 2.6, 2.8. Odd minors are used for unstable releases, for example 2.9.x releases are the unstable versions of what will be Redis 3.0 once stable.
 
-{% highlight bash %}
+~~~
 [root@m1 ~]# wget http://download.redis.io/releases/redis-3.0.0.tar.gz
 --2015-04-02 16:46:56--  http://download.redis.io/releases/redis-3.0.0.tar.gz
 Resolving download.redis.io... 109.74.203.151
@@ -63,11 +63,11 @@ Saving to: “redis-3.0.0.tar.gz”
 anaconda-ks.cfg  Documents  install.log         log    Pictures  redis-3.0.0.tar.gz  tmp
 Desktop          Downloads  install.log.syslog  Music  Public    Templates           Videos
 [root@m1 ~]# 
-{% endhighlight %}
+~~~
 
 ## 解压并编译
 
-{% highlight bash %}
+~~~
 [root@m1 ~]# tar zxvf redis-3.0.0.tar.gz 
 redis-3.0.0/
 redis-3.0.0/.gitignore
@@ -102,14 +102,14 @@ make[1]: Leaving directory `/root/redis-3.0.0/src'
 [root@m1 redis-3.0.0]# echo $?
 0
 [root@m1 redis-3.0.0]# 
-{% endhighlight %}
+~~~
 
 ## 拷贝脚本
 
 
 src下会多出几个脚本
 
-{% highlight bash %}
+~~~
 [root@m1 redis-3.0.0]# cd src/
 [root@m1 src]# ls
 adlist.c     config.h       lzf_c.c          rdb.c               rio.c           t_hash.c
@@ -148,14 +148,14 @@ redis-cli
 redis-sentinel
 redis-server
 [root@m1 src]# 
-{% endhighlight %}
+~~~
 
 将 **redis-server** 和 **redis-cli** 拷贝到 **/usr/local/bin/** 以便使用
 
-{% highlight bash %}
+~~~
 [root@m1 src]# cp redis-server  /usr/local/bin/
 [root@m1 src]# cp redis-cli /usr/local/bin/
-{% endhighlight %}
+~~~
 
 
 > **Tip:** **redis-3.0.0**中有两个重要文件 **redis.conf** 和 **README** 
@@ -179,7 +179,7 @@ redis-server
 
 **redis-server** 的使用方法 
 
-{% highlight bash %}
+~~~
 [root@m1 src]# ./redis-server  --help 
 Usage: ./redis-server [/path/to/redis.conf] [options]
        ./redis-server - (read config from stdin)
@@ -199,10 +199,10 @@ Sentinel mode:
 [root@m1 src]# ./redis-server  --version
 Redis server v=3.0.0 sha=00000000:0 malloc=jemalloc-3.6.0 bits=64 build=2af66cb8b0604f9c
 [root@m1 src]# 
-{% endhighlight %}
+~~~
 redis-server 不加配置文件时是以默认配置运行
 
-{% highlight bash %}
+~~~
 [root@m1 ~]# redis-server  
 8551:C 02 Apr 20:27:32.302 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
 8551:M 02 Apr 20:27:32.304 * Increased maximum number of open files to 10032 (it was originally set to 1024).
@@ -233,11 +233,11 @@ redis-server 不加配置文件时是以默认配置运行
 8551:M 02 Apr 21:27:33.012 * Background saving started by pid 8822
 8822:C 02 Apr 21:27:33.033 * DB saved on disk
 8822:C 02 Apr 21:27:33.033 * RDB: 6 MB of memory used by copy-on-write
-{% endhighlight %}
+~~~
 
 redis服务默认运行在 **6379** 端口
 
-{% highlight bash %}
+~~~
 [root@m1 redis-3.0.0]# ps -ef | grep redis
 root      8551  4915  0 20:27 pts/0    00:00:11 redis-server *:6379
 root      8991  8562  0 22:17 pts/1    00:00:00 grep redis
@@ -245,13 +245,13 @@ root      8991  8562  0 22:17 pts/1    00:00:00 grep redis
 tcp        0      0 0.0.0.0:6379                0.0.0.0:*                   LISTEN      
 tcp        0      0 :::6379                     :::*                        LISTEN      
 [root@m1 redis-3.0.0]# 
-{% endhighlight %}
+~~~
 
 ## 连入redis server
 
 可以使用 **redis-cli** 连接 redis server , 然后完成各种操作
 
-{% highlight bash %}
+~~~
 [root@m1 ~]# redis-cli 
 127.0.0.1:6379> set abc xiaoge 
 OK
@@ -334,11 +334,11 @@ OK
 127.0.0.1:6379> hset h gender female
 (integer) 1
 127.0.0.1:6379>
-{% endhighlight %}
+~~~
 
 当然，还有一种方法，界面比较不友好，但也可以对redis server进行操作，使用 **telnet**
 
-{% highlight bash %}
+~~~
 [root@m1 ~]# telnet localhost 6379
 Trying ::1...
 Connected to localhost.
@@ -383,7 +383,7 @@ $2
 pp
 $8
 webshell
-{% endhighlight %}
+~~~
 
 
 使用这个[**链接**][redis try]，可以对redis的基本操作进行学习

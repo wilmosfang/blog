@@ -49,7 +49,7 @@ logstash提供了一种判断机制来对不同内容进行判断，然后分别
 ## logstash配置
 
 
-{% highlight bash %}
+~~~
 [root@logstash-server conf.d]# cat filebeat-logstash-es.conf 
 input {
 	
@@ -107,7 +107,7 @@ output {
     }
 }
 [root@logstash-server conf.d]#
-{% endhighlight %}
+~~~
 
 这里定义了两个输入源，分别在不同端口进行监听
 
@@ -125,7 +125,7 @@ output {
 
 ## mysql slowlog的filebeat配置
 
-{% highlight bash %}
+~~~
 [hunter@mysql-slow-log src]$ cat /etc/filebeat/filebeat.yml  | grep -v "#" | grep -v "^$"
 filebeat:
   prospectors:
@@ -144,7 +144,7 @@ shipper:
 logging:
   files:
 [hunter@mysql-slow-log src]$
-{% endhighlight %}
+~~~
 
 这里指定了日志路径，类型，添加了一个域并赋值，然后输出到指定的logstash中
 
@@ -156,7 +156,7 @@ logging:
 
 ## nginx accesslog的filebeat配置
 
-{% highlight bash %}
+~~~
 [root@nginx-accesslog filebeat]# cat /etc/filebeat/filebeat.yml  | grep -v "#" | grep -v "^$"
 filebeat:
   prospectors:
@@ -175,7 +175,7 @@ shipper:
 logging:
   files:
 [root@nginx-accesslog filebeat]# 
-{% endhighlight %}
+~~~
 
 这里指定了日志路径，类型，添加了一个域并赋值，然后输出到指定的logstash中
 
@@ -186,13 +186,13 @@ logging:
 
 > **Note:** CentOS 5 中 直接使用 **/etc/init.d/filebeat start** 会失败，报错如下
 
-{% highlight bash %}
+~~~
 [root@nginx-accesslog filebeat]# /etc/init.d/filebeat start
 Starting filebeat: FATAL: kernel too old
 /bin/bash: line 1:  7968 Segmentation fault      filebeat-god -r / -n -p /var/run/filebeat.pid -- /usr/bin/filebeat -c /etc/filebeat/filebeat.yml
                                                            [FAILED]
 [root@nginx-accesslog filebeat]#
-{% endhighlight %}
+~~~
 
 原因是 **filebeat-god** 认为内核版本太老了，这是一个 **go** 语言写出来的工具，CentOS 5 的年代 go 语言还不能很好的对它进行支持
 

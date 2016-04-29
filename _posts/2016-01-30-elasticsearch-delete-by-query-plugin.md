@@ -50,15 +50,15 @@ comments: true
 
 ES版本为2.1.1
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# ps faux | grep elasticsearch |grep -v grep 
 492      16600 28.8  1.2 4968568 411068 ?      Sl   23:39   2:17 /usr/bin/java -Xms256m -Xmx1g -Djava.awt.headless=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -XX:+DisableExplicitGC -Dfile.encoding=UTF-8 -Djna.nosys=true -Des.path.home=/usr/share/elasticsearch -cp /usr/share/elasticsearch/lib/elasticsearch-2.1.1.jar:/usr/share/elasticsearch/lib/* org.elasticsearch.bootstrap.Elasticsearch start -p /var/run/elasticsearch/elasticsearch.pid -d -Des.default.path.home=/usr/share/elasticsearch -Des.default.path.logs=/var/log/elasticsearch -Des.default.path.data=/var/lib/elasticsearch -Des.default.path.conf=/etc/elasticsearch
 [root@esdbqp bin]# 
-{% endhighlight %}
+~~~
 
 ES中有一些被标记为 **multiline** 的记录，我想删掉它们
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# curl "http://localhost:9200/filebeat-*/_search?pretty=true&q=tags:multiline"
 {
   "took" : 44,
@@ -79,22 +79,22 @@ ES中有一些被标记为 **multiline** 的记录，我想删掉它们
       ...
       ...
       ...
-{% endhighlight %}
+~~~
 
 当前的插件情况
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# /usr/share/elasticsearch/bin/plugin list
 Installed plugins in /usr/share/elasticsearch/plugins:
     - No plugin detected
 [root@esdbqp bin]# 
-{% endhighlight %}
+~~~
 
 ### 报错1
 
 当前尝试使用 **Delete By Query API**
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# curl -XDELETE "http://localhost:9200/filebeat-*/log/_query?pretty=true&q=tags:multiline"
 {
   "error" : {
@@ -123,7 +123,7 @@ Installed plugins in /usr/share/elasticsearch/plugins:
   }
 }
 [root@esdbqp bin]#
-{% endhighlight %}
+~~~
 
  说明在 ES2.1.1中的确已经删掉了这个API 
  
@@ -133,7 +133,7 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 
 ## 安装插件
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]#  /usr/share/elasticsearch/bin/plugin list
 Installed plugins in /usr/share/elasticsearch/plugins:
     - No plugin detected
@@ -152,7 +152,7 @@ Installed delete-by-query into /usr/share/elasticsearch/plugins/delete-by-query
 Installed plugins in /usr/share/elasticsearch/plugins:
     - delete-by-query
 [root@esdbqp bin]# 
-{% endhighlight %}
+~~~
 
 ### 报错2
 
@@ -166,12 +166,12 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 
 >The plugin must be installed on every node in the cluster, and each node must be restarted after installation.
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# /etc/init.d/elasticsearch restart 
 Stopping elasticsearch:                                    [  OK  ]
 Starting elasticsearch:                                    [  OK  ]
 [root@esdbqp bin]#
-{% endhighlight %}
+~~~
 
 > **Note:**  一定得重启
 
@@ -187,7 +187,7 @@ Starting elasticsearch:                                    [  OK  ]
 
 一般会反馈如下结果
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# curl -XDELETE "http://localhost:9200/filebeat-*/log/_query?pretty=true&q=tags:multiline"
 {
   "error" : {
@@ -201,11 +201,11 @@ Starting elasticsearch:                                    [  OK  ]
   "status" : 503
 }
 [root@esdbqp bin]#
-{% endhighlight %}
+~~~
 
 稍等过后，再次尝试，就可以进行删除操作
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# curl -XDELETE "http://localhost:9200/filebeat-2016.01.28/log/_query?q=tags:multiline"
 {"took":200,"timed_out":false,"_indices":{"_all":{"found":110,"deleted":110,"missing":0,"failed":0},"filebeat-2016.01.28:{"found":110,"deleted":110,"missing":0,"failed":0}},"failures":[]}[root@esdbqp bin]# curl -XDELETE "http://localhost:920/filebeat-2016.01.28/log/_query?pretty=true&q=tags:multiline"
 {
@@ -236,13 +236,13 @@ Starting elasticsearch:                                    [  OK  ]
   "failures" : [ ]
 }
 [root@esdbqp bin]#
-{% endhighlight %}
+~~~
 
 
 
 也可以使用如下DSL
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# curl -XDELETE "http://localhost:9200/filebeat-2016.01.28/log/_query?pretty=true" -d '
 {
  "query": {
@@ -265,7 +265,7 @@ Starting elasticsearch:                                    [  OK  ]
   "failures" : [ ]
 }
 [root@esdbqp bin]#
-{% endhighlight %}
+~~~
 
 我觉得CLI下面这种方法比较麻烦
 
@@ -283,7 +283,7 @@ Starting elasticsearch:                                    [  OK  ]
 
 进行查看，剩下4104条，而原来总共4214条，确实是删掉了这么多
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# curl "http://localhost:9200/filebeat-*/log/_search?pretty=true&q=tags:multiline" | head -n 20 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -307,7 +307,7 @@ Starting elasticsearch:                                    [  OK  ]
       ...
       ...
       ...
-{% endhighlight %}
+~~~
 
 上面是对单个索引里的内容进行删除操作
 
@@ -315,7 +315,7 @@ Starting elasticsearch:                                    [  OK  ]
 
 > **Tip:** 这个操作在前面没有安装插件的情况下，是会报错的
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# curl -XDELETE "http://localhost:9200/filebeat-*/log/_query?pretty=true&q=tags:multiline"
 {
   "took" : 8468,
@@ -523,13 +523,13 @@ Starting elasticsearch:                                    [  OK  ]
   "failures" : [ ]
 }
 [root@esdbqp bin]# 
-{% endhighlight %}
+~~~
 
 结果显示成功删除了4104个记录
 
 进行查看
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# curl "http://localhost:9200/filebeat-*/log/_search?pretty=true&q=tags:multiline"
 {
   "took" : 43,
@@ -546,7 +546,7 @@ Starting elasticsearch:                                    [  OK  ]
   }
 }
 [root@esdbqp bin]# 
-{% endhighlight %}
+~~~
 
 已经没有被标记为 **multiline** 的记录了
 
@@ -581,7 +581,7 @@ Starting elasticsearch:                                    [  OK  ]
 
 ## 删除插件
 
-{% highlight bash %}
+~~~
 [root@esdbqp bin]# /usr/share/elasticsearch/bin/plugin list
 Installed plugins in /usr/share/elasticsearch/plugins:
     - delete-by-query
@@ -595,7 +595,7 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 Stopping elasticsearch:                                    [  OK  ]
 Starting elasticsearch:                                    [  OK  ]
 [root@esdbqp bin]# 
-{% endhighlight %}
+~~~
 
 > **Note:** 一定要重启服务，才能生效
 

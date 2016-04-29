@@ -40,7 +40,7 @@ RPC 服务：rpcbind (Centos6.x 下) / portmap (Centos5.x 下)
 
 NFS 服务：nfs-utils
 
-{% highlight bash %}
+~~~
 [root@Centos6.x ~]# rpm -qa | grep -E '(rpcbind|nfs|portmap)'
 nfs-utils-lib-1.1.5-11.el6.x86_64
 nfs-utils-1.2.3-64.el6.x86_64
@@ -54,7 +54,7 @@ nfs-utils-1.0.9-70.el5
 nfs-utils-lib-1.0.8-7.9.el5
 portmap-4.0-65.2.2.1
 [root@Centos5.x ~]# 
-{% endhighlight %}
+~~~
 
 > **Tip:**   NFS 会产生以下进程
  rpc.nfsd 主服务
@@ -86,11 +86,11 @@ NFS配置文件
 
 NFS使用 **/etc/exports** 作为配置文件
 
-{% highlight bash %}
+~~~
 [root@test ~]# cat /etc/exports 
 /data/nfs     192.168.1.115(rw,sync,no_root_squash)  192.168.1.0/24(ro)
 [root@test ~]# 
-{% endhighlight %}
+~~~
 
 **rw** :代表可读写
 
@@ -113,7 +113,7 @@ NFS使用 **/etc/exports** 作为配置文件
 * **/etc/init.d/nfs**
 * **/etc/init.d/nfslock**
 
-{% highlight bash %}
+~~~
 [root@test data]# /etc/init.d/rpcbind  status
 rpcbind (pid  2338) is running...
 [root@test data]# /etc/init.d/nfs status
@@ -135,18 +135,18 @@ Starting RPC idmapd: [  OK  ]
 [root@test ~]# /etc/init.d/nfslock  status
 rpc.statd (pid  2360) is running...
 [root@test ~]# 
-{% endhighlight %}
+~~~
 
 成功启动后111端口是监听状态
 
-{% highlight bash %}
+~~~
 [root@test ~]# netstat -an | grep 111
 tcp        0      0 0.0.0.0:111                 0.0.0.0:*                   LISTEN      
 tcp        0      0 :::111                      :::*                        LISTEN      
 udp        0      0 0.0.0.0:111                 0.0.0.0:*                               
 udp        0      0 :::111                      :::*                                    
 [root@test ~]# 
-{% endhighlight %}
+~~~
 
 
 > **Tip:**  NFS的启动信息默认会写到 **/var/log/messages** 里
@@ -154,7 +154,7 @@ udp        0      0 :::111                      :::*
 
 NFS的服务会打开很多端口(并且其中一些端口是随机的)
 
-{% highlight bash %}
+~~~
 [root@test data]# netstat -tulnp | grep -E '(rpc|nfs)'
 tcp        0      0 0.0.0.0:34146               0.0.0.0:*                   LISTEN      37900/rpc.mountd    
 tcp        0      0 0.0.0.0:44934               0.0.0.0:*                   LISTEN      37900/rpc.mountd    
@@ -182,11 +182,11 @@ udp        0      0 :::52049                    :::*                            
 udp        0      0 :::111                      :::*                                    2338/rpcbind        
 udp        0      0 :::36981                    :::*                                    2360/rpc.statd      
 [root@test data]# 
-{% endhighlight %}
+~~~
 
 使用下面方法可以看到本机的rpc信息
 
-{% highlight bash %}
+~~~
 [root@test data]# rpcinfo -p localhost
    program vers proto   port  service
     100000    4   tcp    111  portmapper
@@ -225,7 +225,7 @@ udp        0      0 :::36981                    :::*                            
     100021    4   tcp  59092  nlockmgr
 [root@test data]# 
 
-{% endhighlight %}
+~~~
 
 其中
 
@@ -235,7 +235,7 @@ udp        0      0 :::36981                    :::*                            
 
 那为什么是三个NFS 服务呢
 
-{% highlight bash %}
+~~~
 [root@test ~]# rpcinfo -u  localhost nfs 
 program 100003 version 2 ready and waiting
 program 100003 version 3 ready and waiting
@@ -255,7 +255,7 @@ program 100003 version 2 ready and waiting
 program 100003 version 3 ready and waiting
 program 100003 version 4 ready and waiting
 [root@abc ~]# 
-{% endhighlight %}
+~~~
 
 因为为了更好的兼容，NFS开启了三个版本进行响应
 
@@ -268,7 +268,7 @@ program 100003 version 4 ready and waiting
 
 这个工具同样依赖rpcbind
 
-{% highlight bash %}
+~~~
 [root@nfs-server ~]# showmount  -a localhost
 All mount points on localhost:
 192.168.1.215:/data/nfs
@@ -286,17 +286,17 @@ Export list for nfs-server:
 All mount points on nfs-server:
 192.168.1.215:/data/nfs
 [root@nfs-client ~]#
-{% endhighlight %}
+~~~
 
 如果想查看当前比较全面的参数，可以通过 **/var/lib/nfs/etab**
 
 
-{% highlight bash %}
+~~~
 [root@nfs-server ~]# cat /var/lib/nfs/etab 
 /data/nfs	192.168.1.215(rw,sync,wdelay,hide,nocrossmnt,secure,no_root_squash,no_all_squash,no_subtree_check,secure_ocks,acl,anonuid=65534,anongid=65534,sec=sys,rw,no_root_squash,no_all_squash)
 /data/nfs	192.168.1.0/24(ro,sync,wdelay,hide,nocrossmnt,secure,root_squash,no_all_squash,no_subtree_check,secure_lcks,acl,anonuid=65534,anongid=65534,sec=sys,ro,root_squash,no_all_squash)
 [root@nfs-server ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -305,7 +305,7 @@ All mount points on nfs-server:
 
 使用 **exportfs** 对NFS进行重载
 
-{% highlight bash %}
+~~~
 [root@nfs-server ~]# showmount -e
 Export list for nfs-server:
 /data/nfs 192.168.1.0/24
@@ -313,17 +313,17 @@ Export list for nfs-server:
 [root@nfs-server ~]# showmount -e
 Export list for nfs-server:
 [root@nfs-server ~]# 
-{% endhighlight %}
+~~~
 
 使用 **exportfs -ra** 可以对 **/etc/exports** 里的内容进行重载
 
-{% highlight bash %}
+~~~
 [root@nfs-server ~]# exportfs  -ra
 [root@nfs-server ~]# showmount -e
 Export list for nfs-server:
 /data/nfs 192.168.1.0/24
 [root@nfs-server ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -333,18 +333,18 @@ Export list for nfs-server:
 
 编辑 **/etc/sysconfig/nfs** , 取消下面行的注释
 
-{% highlight bash %}
+~~~
 [root@nfs-server ~]# grep -v "^#" /etc/sysconfig/nfs 
 RQUOTAD_PORT=875
 LOCKD_TCPPORT=32803
 LOCKD_UDPPORT=32769
 MOUNTD_PORT=892
 [root@nfs-server ~]# 
-{% endhighlight %}
+~~~
 
 重启NFS服务，然后看看 **rpcinfo**
 
-{% highlight bash %}
+~~~
 [root@nfs-server ~]# rpcinfo  -p | grep -E '(rquota|mount|nlock)'
     100011    1   udp    875  rquotad
     100011    2   udp    875  rquotad
@@ -363,7 +363,7 @@ MOUNTD_PORT=892
     100021    3   tcp  32803  nlockmgr
     100021    4   tcp  32803  nlockmgr
 [root@nfs-server ~]# 
-{% endhighlight %}
+~~~
 
 发现本来随机的端口都已经变成了自己指定的了
 
@@ -371,10 +371,10 @@ MOUNTD_PORT=892
 
 编辑 **/etc/sysconfig/iptables** , 加入下列行, 然后 reload 
 
-{% highlight bash %}
+~~~
 -A INPUT -i em1 -p tcp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT
 -A INPUT -i em1 -p udp -s 192.168.1.0/24 -m multiport --dport 111,2049,875,892,32769,32803 -j ACCEPT
-{% endhighlight %}
+~~~
 
 或者直接输入
 
@@ -393,7 +393,7 @@ MOUNTD_PORT=892
 
 **/etc/init.d/nfslock** 都是启动状态
 
-{% highlight bash %}
+~~~
 [root@nfs-client ~]# mount -t nfs -o intr nfs-server:/data/nfs /mnt/nfs/ 
 [root@nfs-client ~]# df  -h 
 Filesystem            Size  Used Avail Use% Mounted on
@@ -405,7 +405,7 @@ tmpfs                  24G     0   24G   0% /dev/shm
 nfs-server:/data/nfs
                       1.7T  585G  1.1T  36% /mnt/nfs
 [root@nfs-client ~]# 
-{% endhighlight %}
+~~~
 
 
 查看本地挂载参数

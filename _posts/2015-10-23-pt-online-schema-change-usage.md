@@ -52,7 +52,7 @@ comments: true
 
 ## 构建测试表
 
-{% highlight bash %}
+~~~
 mysql> create table forpttest( id int(6), name char(10), comment char(10), abc char(10));
 Query OK, 0 rows affected (0.10 sec)
 
@@ -85,12 +85,12 @@ Query OK, 1 row affected (0.01 sec)
 
 mysql> 
 
-{% endhighlight %}
+~~~
 
 
 填入一些数据
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# i=1
 [root@h101 ~]#  while true; do  echo $i; let "i=$i+1"; sleep 1 ; done
 1
@@ -122,7 +122,7 @@ Warning: Using a password on the command line interface can be insecure.
 [root@h101 ~]# echo $i
 49
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -130,7 +130,7 @@ Warning: Using a password on the command line interface can be insecure.
 
 ### 无主键报错
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# pt-online-schema-change -u root -h localhost  -pmysql  --alter='add column newid char(20)  ' --execute D=pt,t=forptte
 No slaves found.  See --recursion-method if host h101.temp has slaves.
 Not checking slave lag because no slaves were found and --check-slave-lag was not specified.
@@ -152,7 +152,7 @@ The new table `pt`.`_forpttest_new` does not have a PRIMARY KEY or a unique inde
 [root@h101 ~]# echo $?
 255
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 至少需要一个主键或唯一索引
 
@@ -160,7 +160,7 @@ The new table `pt`.`_forpttest_new` does not have a PRIMARY KEY or a unique inde
 
 添加主键
 
-{% highlight bash %}
+~~~
 mysql> show create table forpttest\G
 *************************** 1. row ***************************
        Table: forpttest
@@ -201,13 +201,13 @@ mysql> desc forpttest;
 4 rows in set (0.00 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 ---
 
 ### 添加主键成功
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# pt-online-schema-change -u root -h localhost  -pmysql  --alter='add column newid char(20)  ' --execute D=pt,t=forpttest  
 No slaves found.  See --recursion-method if host h101.temp has slaves.
 Not checking slave lag because no slaves were found and --check-slave-lag was not specified.
@@ -236,11 +236,11 @@ Successfully altered `pt`.`forpttest`.
 [root@h101 ~]# echo $?
 0
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 已经添加好新列
 
-{% highlight bash %}
+~~~
 mysql> desc forpttest;
 +---------+----------+------+-----+---------+-------+
 | Field   | Type     | Null | Key | Default | Extra |
@@ -254,10 +254,10 @@ mysql> desc forpttest;
 5 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
-{% highlight bash %}
+~~~
 mysql> select * from forpttest;
 +----+------+---------+------+-------+
 | id | name | comment | abc  | newid |
@@ -307,7 +307,7 @@ mysql> select * from forpttest;
 41 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 可知新添加的列默认为空
@@ -317,7 +317,7 @@ mysql>
 ### 非空报错
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# pt-online-schema-change -u root -h localhost  -pmysql  --alter='add column newid2 char(20) not null ' --execute D=pt,t=forpttest  
 No slaves found.  See --recursion-method if host h101.temp has slaves.
 Not checking slave lag because no slaves were found and --check-slave-lag was not specified.
@@ -347,7 +347,7 @@ Altered `pt`.`_forpttest_new` OK.
     Query: INSERT LOW_PRIORITY IGNORE INTO `pt`.`_forpttest_new` (`id`, `name`, `comment`, `abc`, `newid`) SELECT `id`, `name`, `comment`, `abc`, `newid` FROM `pt`.`forpttest` LOCK IN SHARE MODE /*pt-online-schema-change 6366 copy table*/
 
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 如果新添列有非空约束，但不给定默认值，就会报错
 
@@ -357,7 +357,7 @@ Altered `pt`.`_forpttest_new` OK.
 ### 添加默认值成功
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# pt-online-schema-change -u root -h localhost  -pmysql  --alter='add column newid2 char(20) not null default "fucktest" ' --execute D=pt,t=forpttest  
 No slaves found.  See --recursion-method if host h101.temp has slaves.
 Not checking slave lag because no slaves were found and --check-slave-lag was not specified.
@@ -387,12 +387,12 @@ Successfully altered `pt`.`forpttest`.
 0
 [root@h101 ~]# 
 
-{% endhighlight %}
+~~~
 
 表结构已经变化 
 
 
-{% highlight bash %}
+~~~
 mysql> desc forpttest;
 +---------+----------+------+-----+----------+-------+
 | Field   | Type     | Null | Key | Default  | Extra |
@@ -422,12 +422,12 @@ mysql> select * from forpttest;
 41 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 > **Note:** 还有其它一些 **[注意事项][limitations]**
 
 
-{% highlight bash %}
+~~~
 --alter
 type: string
 
@@ -462,7 +462,7 @@ The error happens when converting a MyISAM table to InnoDB because MyISAM is non
 This is a MySQL bug, similar to http://bugs.mysql.com/bug.php?id=45694, but there is no fix or workaround in MySQL 5.0. Without LOCK IN SHARE MODE, tests pass 100% of the time, so the risk of data loss or breaking replication should be negligible.
 
 Be sure to verify the new table if using MySQL 5.0 and converting from MyISAM to InnoDB!
-{% endhighlight %}
+~~~
 
 
 
@@ -474,7 +474,7 @@ Be sure to verify the new table if using MySQL 5.0 and converting from MyISAM to
 打开一个session，不断往表里插入新数据
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# echo $i
 49
 [root@h101 ~]#  while true; do  echo $i; mysql -u root -pmysql -e "insert into pt.forpttest(id,name,comment,abc)  values($i,$i,$i,$i)" ;let "i=$i+1"; sleep 1 ; done
@@ -505,13 +505,13 @@ Warning: Using a password on the command line interface can be insecure.
 80
 Warning: Using a password on the command line interface can be insecure.
 81
-{% endhighlight %}
+~~~
 
 
 同时在另一个session里修改表结构
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# pt-online-schema-change -u root -h localhost  -pmysql  --alter='add column newcolumn char(20) not null default "duang" ' --execute D=pt,t=forpttest  
 No slaves found.  See --recursion-method if host h101.temp has slaves.
 Not checking slave lag because no slaves were found and --check-slave-lag was not specified.
@@ -538,11 +538,11 @@ Altered `pt`.`_forpttest_new` OK.
 2015-10-23T14:27:33 Dropped triggers OK.
 Successfully altered `pt`.`forpttest`.
 [root@h101 ~]#
-{% endhighlight %}
+~~~
 
 表结构按预期发生了变化，正在执行的操作也没有中断
 
-{% highlight bash %}
+~~~
 mysql> desc forpttest;
 +-----------+----------+------+-----+----------+-------+
 | Field     | Type     | Null | Key | Default  | Extra |
@@ -558,7 +558,7 @@ mysql> desc forpttest;
 7 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 可知DML不会被锁
 

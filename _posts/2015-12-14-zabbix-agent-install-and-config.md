@@ -39,7 +39,7 @@ date:   2015-12-14 17:52:00
 
 ## 获取zabbix仓库
 
-{% highlight bash %}
+~~~
 [root@zbx-target src]# wget http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
 --2015-12-14 15:23:26--  http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
 Resolving repo.zabbix.com... 87.110.183.174
@@ -59,14 +59,14 @@ warning: zabbix-release-2.4-1.el6.noarch.rpm: Header V4 DSA/SHA1 Signature, key 
 Preparing...                ########################################### [100%]
    1:zabbix-release         ########################################### [100%]
 [root@zbx-target src]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ## 使用yum安装zabbix-agent
 
-{% highlight bash %}
+~~~
 [root@zbx-target src]# yum list all | grep zabbix
 zabbix-release.noarch                    2.4-1.el6                      installed
 fping.x86_64                             2.4b2-16.el6                   zabbix-non-supported
@@ -156,14 +156,14 @@ Dependency Installed:
 
 Complete!
 [root@zbx-target src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 目录结构
 
 
-{% highlight bash %}
+~~~
 [root@zbx-target etc]# tree /etc/zabbix/
 /etc/zabbix/
 ├── zabbix_agentd.conf
@@ -172,7 +172,7 @@ Complete!
 
 1 directory, 2 files
 [root@zbx-target etc]# 
-{% endhighlight %}
+~~~
 
 其中 **zabbix_agentd.conf** 是agent的配置文件， **userparameter_mysql.conf** 是用户自定义监控插件的地方
 
@@ -186,7 +186,7 @@ Complete!
 
 原本的配置 
 
-{% highlight bash %}
+~~~
 [root@zbx-target etc]#  grep -v "^#" /etc/zabbix/zabbix_agentd.conf | grep -v "^$"
 PidFile=/var/run/zabbix/zabbix_agentd.pid
 LogFile=/var/log/zabbix/zabbix_agentd.log
@@ -196,11 +196,11 @@ ServerActive=127.0.0.1
 Hostname=Zabbix server
 Include=/etc/zabbix/zabbix_agentd.d/
 [root@zbx-target etc]# 
-{% endhighlight %}
+~~~
 
 我们需要在 **Server** 中加入zabbix server的IP地址
 
-{% highlight bash %}
+~~~
 [root@zbx-target zabbix]# vim zabbix_agentd.conf 
 [root@zbx-target zabbix]# grep -v "^#" /etc/zabbix/zabbix_agentd.conf | grep -v "^$"
 PidFile=/var/run/zabbix/zabbix_agentd.pid
@@ -211,7 +211,7 @@ ServerActive=127.0.0.1
 Hostname=Zabbix server
 Include=/etc/zabbix/zabbix_agentd.d/
 [root@zbx-target zabbix]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -219,7 +219,7 @@ Include=/etc/zabbix/zabbix_agentd.d/
 ## 打开防火墙
 
 
-{% highlight bash %}
+~~~
 [root@zbx-target script]# vim /etc/sysconfig/iptables
 [root@zbx-target script]# grep 10050 /etc/sysconfig/iptables
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 10050  -j ACCEPT
@@ -228,7 +228,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@zbx-target script]# iptables -L -nv  | grep 10050
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:10050 
 [root@zbx-target script]# 
-{% endhighlight %}
+~~~
 
 默认情况下 **zabbix_agentd** 会监听在 **`0.0.0.0:10050`** 上面，所以要将防火墙打开，以方便与zabbix server之间的通信
 
@@ -236,7 +236,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ## 启动zabbix-agent
 
-{% highlight bash %}
+~~~
 [root@zbx-target zabbix]# /etc/init.d/zabbix-agent start 
 Starting Zabbix agent:                                     [  OK  ]
 [root@zbx-target zabbix]# ps faux | grep zabbix | grep -v grep 
@@ -252,24 +252,24 @@ tcp        0      0 192.168.66.5:10050          192.168.66.123:38010         TIM
 tcp        0      0 192.168.66.5:10050          192.168.66.123:38072         TIME_WAIT   
 tcp        0      0 :::10050                    :::*                        LISTEN      
 [root@zbx-target zabbix]# 
-{% endhighlight %}
+~~~
 
 当它可以开机启动
 
-{% highlight bash %}
+~~~
 [root@zbx-target zabbix]# chkconfig  --list | grep zabbix
 zabbix-agent   	0:off	1:off	2:off	3:off	4:off	5:off	6:off
 [root@zbx-target zabbix]# chkconfig  zabbix-agent on 
 [root@zbx-target zabbix]# chkconfig  --list | grep zabbix
 zabbix-agent   	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 [root@zbx-target zabbix]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 使用zabbix-server测试连接
 
-{% highlight bash %}
+~~~
 [root@zbx-server script]# zabbix_get -s zbx-target -p 10050 -k "system.cpu.load[all,avg1]"
 0.010000
 [root@zbx-server script]# zabbix_get -s zbx-target -p 10050 -k "system.cpu.load[all,avg5]"
@@ -291,7 +291,7 @@ zabbix-agent   	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 [root@zbx-server script]# zabbix_get -s zbx-target -p 10050 -k "system.sw.arch"
 x86_64
 [root@zbx-server script]# 
-{% endhighlight %}
+~~~
 
 可以正常获取检测结果，说明连接通畅，更多的监控条目可以参考 **[Zabbix agent items][zbx_items]** ，这些条目的详细解释可以参考 **[Zabbix agent][zabbix_agent]**
 
@@ -305,7 +305,7 @@ Zabbix中已经集成了大量的常用监控条目，不用过多配置就可�
 
 虽然Zabbix直接集成和覆盖了很多我们的监控对象，但有时官方提供的条目无法满足我们的个性化需求，这时需要自定义一些脚本，获取信息以让zabbix可以接受并处理
 
-{% highlight bash %}
+~~~
 [root@zbx-target zabbix]# ls
 zabbix_agentd.conf  zabbix_agentd.d
 [root@zbx-target zabbix]# cd zabbix_agentd.d/
@@ -336,14 +336,14 @@ done
 
 echo -e '{"{#OPENPORT}":"END"}]}' 
 [root@zbx-target script]# 
-{% endhighlight %}
+~~~
 
 这个脚本是用来进行端口发现的，作为基础服务提供给其它监控条目使用
 
 
 > **Note:**  zabbix用户要有这个脚本的执行权限，因为实际信息收集过程中，是以zabbix这个用户的身份进行的
 
-{% highlight bash %}
+~~~
 [root@zbx-target zabbix_agentd.d]# ps faux | grep zabbix  | grep -v "grep"
 zabbix   26928  0.0  0.0  77336  1136 ?        S    17:02   0:00 zabbix_agentd -c /etc/zabbix/zabbix_agentd.conf
 zabbix   26930  0.0  0.0  77388  2028 ?        S    17:02   0:00  \_ zabbix_agentd: collector [idle 1 sec]          
@@ -352,13 +352,13 @@ zabbix   26932  0.0  0.0  77388  1368 ?        S    17:02   0:00  \_ zabbix_agen
 zabbix   26933  0.0  0.0  77388  1412 ?        S    17:02   0:00  \_ zabbix_agentd: listener #3 [waiting for connection]
 zabbix   26934  0.0  0.0  77344  1128 ?        S    17:02   0:00  \_ zabbix_agentd: active checks #1 [idle 1 sec]   
 [root@zbx-target zabbix_agentd.d]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 配置监控插件
 
-{% highlight bash %}
+~~~
 [root@zbx-target zabbix_agentd.d]# vim userparameter_DIY.conf
 [root@zbx-target zabbix_agentd.d]# cat userparameter_DIY.conf 
 #UserParameter=swap.in.ps,/usr/bin/sar -W 1 1  | grep Average | awk {'print $2'}
@@ -374,38 +374,38 @@ UserParameter=kernal.sysctl[*], (/sbin/sysctl -n $1  2> /dev/null || /sbin/sysct
 UserParameter=mongo.slowlog[*], /usr/bin/tail -n $1 $2  | awk 'BEGIN{sum=0;}{sum= sum+($NF-0)}END{print sum/$1}'
 UserParameter=mysql.slowlog[*], /usr/bin/tail -n $1 $2 | grep Query_time   | awk 'BEGIN{sum=0;}{sum= sum+($$3-0)}END{print sum/NR}'
 [root@zbx-target zabbix_agentd.d]#
-{% endhighlight %}
+~~~
 
 配置完监控插件后，要重启agent
 
 > **Note:** 如果不重启，就读不到新添的配置，从服务端尝试获取信息，会出现如下报错
 
-{% highlight bash %}
+~~~
 [root@zbx-server zabbix_agentd.d]#  zabbix_get -s zbx-target -p 10050 -k "mem.used"
 ZBX_NOTSUPPORTED: Unsupported item key.
 [root@zbx-server zabbix_agentd.d]#  zabbix_get -s zbx-target -p 10050 -k "port.discovery"
 ZBX_NOTSUPPORTED: Unsupported item key.
 [root@zbx-server zabbix_agentd.d]# 
-{% endhighlight %}
+~~~
 
 重启agent
 
-{% highlight bash %}
+~~~
 [root@zbx-target zabbix_agentd.d]# /etc/init.d/zabbix-agent restart 
 Shutting down Zabbix agent:                                [  OK  ]
 Starting Zabbix agent:                                     [  OK  ]
 [root@zbx-target zabbix_agentd.d]# 
-{% endhighlight %}
+~~~
 
 然后再尝试从服务端进行信息采集
 
-{% highlight bash %}
+~~~
 [root@zbx-server zabbix_agentd.d]#  zabbix_get -s zbx-target -p 10050 -k "port.discovery"
 {"data":[{"{#OPENPORT}":"57091"},{"{#OPENPORT}":"55581"},{"{#OPENPORT}":"10050"},{"{#OPENPORT}":"10010"},{"{#OPENPORT}":"631"},{"{#OPENPORT}":"111"},{"{#OPENPORT}":"25"},{"{#OPENPORT}":"22"},{"{#OPENPORT}":"END"}]}
 [root@zbx-server zabbix_agentd.d]#  zabbix_get -s zbx-target -p 10050 -k "mem.used"
 623308
 [root@zbx-server zabbix_agentd.d]# 
-{% endhighlight %}
+~~~
 
 一切正常
 

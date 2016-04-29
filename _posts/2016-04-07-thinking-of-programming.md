@@ -103,7 +103,7 @@ comments: true
 
 下面是一个安装 apache http server的示例：
 
-{% highlight bash %}
+~~~
 ---
 - hosts: webservers
   vars:
@@ -122,7 +122,7 @@ comments: true
   handlers:
     - name: restart apache
       service: name=httpd state=restarted
-{% endhighlight %}
+~~~
 
 总体而言就是将一个模糊的安装需求，分解成了一个个有条理的可以执行的操作，完成这些操作后，整体的安装就完成了
 
@@ -203,7 +203,7 @@ shell准确来说是一个类别，有各种版本，我个人比较喜欢用bas
 
 查看本地shell和当前shell
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# cat /etc/shells 
 /bin/sh
 /bin/bash
@@ -215,7 +215,7 @@ shell准确来说是一个类别，有各种版本，我个人比较喜欢用bas
 [root@h102 ~]# echo $SHELL
 /bin/bash
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 shell 结合 crontab ，sed，awk，grep，正则还有管道就已经可以应付绝大部分的日常处理
 
@@ -250,14 +250,14 @@ ruby 是一门懒人都会喜欢的语言，因为真的很方便，个人感觉
 
 这里只是show一下它的展示能力，它可以根据基础数据简单高效地生成各种图像形式
 
-{% highlight bash %}
+~~~
 gnuplot> f(x,y)=sin(sqrt(x*x+y*y))/sqrt(x*x+y*y)
 gnuplot> splot f(x,y)
 gnuplot> set isosamples 100
 gnuplot> set xyplane 0.2
 gnuplot> replot
 gnuplot>
-{% endhighlight %}
+~~~
 
 
 ![gnuplot.png](/images/gnuplot/gnuplot.png)
@@ -507,9 +507,9 @@ perl 有 cpan ，python 有 pip ，ruby 有 gem
 
 Logstash 是这样的处理模型
 
-{% highlight bash %}
+~~~
 input threads | filter worker threads | output worker
-{% endhighlight %}
+~~~
 
 ![deploy_2.png](/images/logstash/deploy_2.png)
 
@@ -519,7 +519,7 @@ input threads | filter worker threads | output worker
 
 我只想获得以M为单位的空余内存大小
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# free -m 
              total       used       free     shared    buffers     cached
 Mem:          1869       1269        600          2        213        367
@@ -528,7 +528,7 @@ Swap:         3999          0       3999
 [root@h102 ~]# free -m  | grep Mem | awk '{print $4}'
 600
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 
 ---

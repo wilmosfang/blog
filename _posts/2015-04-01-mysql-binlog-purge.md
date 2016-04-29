@@ -104,7 +104,7 @@ Range|0 .. 99
 
 #### 使用PURGE BINARY LOGS进行清理
 
-{% highlight bash %}
+~~~
 mysql> help purge 
 Name: 'PURGE BINARY LOGS'
 Description:
@@ -133,7 +133,7 @@ PURGE BINARY LOGS TO 'mysql-bin.010';
 PURGE BINARY LOGS BEFORE '2008-04-02 22:46:26';
 
 mysql> 
-{% endhighlight %}
+~~~
 
 当slave正在复制时，这条命令也是安全的，如果尝试删除一个正在被读的日志文件，这个语句将什么事情也不做。
 
@@ -153,7 +153,7 @@ mysql>
 
 检查当前系统中的日志文件
 
-{% highlight bash %}
+~~~
 mysql> show binary logs;
 +------------------+-----------+
 | Log_name         | File_size |
@@ -211,11 +211,11 @@ srwxrwxrwx. 1 mysql mysql        0 Apr  1 17:07 mysql.sock
 -rw-rw----. 1 mysql mysql       60 Apr  1 17:07 relay-log.info
 drwx------. 2 mysql mysql     4096 Mar 18 17:32 test
 mysql>
-{% endhighlight %}
+~~~
 
 删除掉**mysql-bin.000004**之前的日志
 
-{% highlight bash %}
+~~~
 mysql> purge binary logs to 'mysql-bin.000004';
 Query OK, 0 rows affected (0.00 sec)
 
@@ -270,11 +270,11 @@ srwxrwxrwx. 1 mysql mysql        0 Apr  1 17:07 mysql.sock
 -rw-rw----. 1 mysql mysql       60 Apr  1 17:07 relay-log.info
 drwx------. 2 mysql mysql     4096 Mar 18 17:32 test
 mysql>
-{% endhighlight %}
+~~~
 
 查看binlog事件
 
-{% highlight bash %}
+~~~
 mysql> show binlog events\G
 *************************** 1. row ***************************
    Log_name: mysql-bin.000004
@@ -293,11 +293,11 @@ End_log_pos: 125
 2 rows in set (0.03 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 根据时间来清理
 
-{% highlight bash %}
+~~~
 mysql> purge master logs before '2015-03-19 15:56:00'
 Query OK, 0 rows affected (0.01 sec)
 
@@ -320,11 +320,11 @@ mysql> show binary logs;
 11 rows in set (0.00 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 清理5天之前的日志
 
-{% highlight bash %}
+~~~
 mysql> select now();
 +---------------------+
 | now()               |
@@ -364,7 +364,7 @@ mysql> \! cat mysql-bin.index
 ./mysql-bin.000016
 ./mysql-bin.000017
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -402,7 +402,7 @@ mysql>
 
 设定5天为日志过期时间
 
-{% highlight bash %}
+~~~
 mysql> show variables like "%expire%";
 +------------------+-------+
 | Variable_name    | Value |
@@ -423,5 +423,5 @@ mysql> show variables like "%expire%";
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 

@@ -30,7 +30,7 @@ Web运维难免涉及到access log的分析工作,虽然使用awk可以实现绝
 
 如果配置了epel库，可以直接使用yum安装，过程非常简单
 
-{% highlight bash %}
+~~~
 [root@Test-slave ~]# yum -y install  goaccess 
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -89,7 +89,7 @@ GoAccess - 0.8.5.
 For more details visit: http://goaccess.io
 Copyright (C) 2009-2014 GNU GPL'd, by Gerardo Orellana
 [root@Test-slave ~]#
-{% endhighlight %}
+~~~
 
 如果是源码安装，这里提供了[下载和安装方法](http://goaccess.io/download)
 
@@ -101,13 +101,13 @@ Copyright (C) 2009-2014 GNU GPL'd, by Gerardo Orellana
 * 1.命令行键入 **goaccess -f access.log**
 
 
-{% highlight bash %}
+~~~
 [root@Test-slave tmp]# goaccess -f access.log 
-{% endhighlight %}
+~~~
 
 * 2.弹出一个交互窗口
 
-{% highlight bash %}
+~~~
 GoAccess  
                        +--------------------------------------------------+
                        | Log Format Configuration                         |
@@ -127,11 +127,11 @@ GoAccess
                        |                                                  |
                        +--------------------------------------------------+
 
-{% endhighlight %}
+~~~
 
 * 3.选择一种格式，由于我的access.log最匹配第一种格式，于是选择了它，这是goaccess能进行正常解析的基础
 
-{% highlight bash %}
+~~~
 GoAccess
                        +--------------------------------------------------+
                        | Log Format Configuration                         |
@@ -152,11 +152,11 @@ GoAccess
                        +--------------------------------------------------+
 
 
-{% endhighlight %}
+~~~
 
 * 3.经过一段时间的解析，出现下面的Dashboard
 
-{% highlight bash %}
+~~~
  Dashboard - Overall Analyzed Requests                                   [Active Panel: Visitors]
 
   Total Requests  1278268 Unique Visitors 49690  Referrers    107473 Log Size  301.37 MiB
@@ -168,11 +168,11 @@ GoAccess
 
   49690 100.00%   13.81 GiB 26/Mar/2015 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-{% endhighlight %}
+~~~
 
 * 4.使用上下翻页可以看到其它的统计信息
 
-{% highlight bash %}
+~~~
  Dashboard - Overall Analyzed Requests                                                          [Active Panel: Visitors]
 
   Total Requests  1278268 Unique Visitors 49690  Referrers    107473 Log Size  301.37 MiB
@@ -197,11 +197,11 @@ GoAccess
   10370 20.87% MSIE     |||||||||||||||||||||||||||||||||||||||||||
   8934  17.98% Safari   |||||||||||||||||||||||||||||||||||||
  [F1]Help [O]pen detail view  0 - Thu Mar 26 17:30:05 2015                                          [Q]uit GoAccess 0.8.
-{% endhighlight %}
+~~~
 
 * 5.下面是请求源的地理信息
 
-{% highlight bash %}
+~~~
  Dashboard - Overall Analyzed Requests                                                          [Active Panel: Visitors]
 
   Total Requests  1278268 Unique Visitors 49690  Referrers    107473 Log Size  301.37 MiB
@@ -226,7 +226,7 @@ GoAccess
   21406   1.67%  5xx Server Error
   13243   1.04%  4xx Client Error
  [F1]Help [O]pen detail view  0 - Thu Mar 26 17:30:05 2015                                          [Q]uit GoAccess 0.8.
-{% endhighlight %}
+~~~
 
 
 是不是很强大，至少我是这么觉得的，下面展示更强大的显示效果

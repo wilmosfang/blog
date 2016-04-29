@@ -31,7 +31,7 @@ comments: true
 
 这里以一台Centos6的服务器进行演示
 
-{% highlight bash %}
+~~~
 [root@localhost ~]# uname -a 
 Linux localhost.localdomain 2.6.32-573.el6.x86_64 #1 SMP Thu Jul 23 15:44:03 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
 [root@localhost ~]# lsb_release 
@@ -41,7 +41,7 @@ CentOS release 6.7 (Final)
 Kernel \r on an \m
 
 [root@localhost ~]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -60,7 +60,7 @@ Kernel \r on an \m
 * GATEWAY
 * DNS
 
-{% highlight bash %}
+~~~
 [root@localhost ~]# vim /etc/sysconfig/network-scripts/ifcfg-eth1 
 [root@localhost ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth1  
 DEVICE=eth1
@@ -89,7 +89,7 @@ PING www.a.shifen.com (115.239.210.27) 56(84) bytes of data.
 2 packets transmitted, 2 received, 0% packet loss, time 1155ms
 rtt min/avg/max/mdev = 5.427/5.456/5.486/0.079 ms
 [root@localhost ~]#
-{% endhighlight %}
+~~~
 
 ### 内网联通
 
@@ -98,12 +98,12 @@ rtt min/avg/max/mdev = 5.427/5.456/5.486/0.079 ms
 
 添加主机列表到里面
 
-{% highlight bash %}
+~~~
 [root@localhost ~]# cat  /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 [root@localhost ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -118,7 +118,7 @@ rtt min/avg/max/mdev = 5.427/5.456/5.486/0.079 ms
 * /etc/hosts
 * /etc/networks
 
-{% highlight bash %}
+~~~
 [root@localhost ~]# vim /etc/networks 
 [root@localhost ~]# cat /etc/networks 
 default 0.0.0.0
@@ -126,7 +126,7 @@ loopback 127.0.0.0
 link-local 169.254.0.0
 HOSTNAME=check-list
 [root@localhost ~]#
-{% endhighlight %}
+~~~
 
 ### 更新系统
 
@@ -135,7 +135,7 @@ HOSTNAME=check-list
 
 使用 **yum update** 对系统进行更新
 
-{% highlight bash %}
+~~~
 [root@localhost ~]# yum update 
 Loaded plugins: fastestmirror, security
 Setting up Update Process
@@ -206,7 +206,7 @@ Loading mirror speeds from cached hostfile
  * updates: mirrors.skyshe.cn
 No Packages marked for Update
 [root@localhost ~]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 更新完成后，对服务器进行重启 **init 6**
 
@@ -215,7 +215,7 @@ No Packages marked for Update
 
 在同一个网络中，最好将时间进行统一，否则日志信息都会误导分析，更不用说一些对时间非常敏感的服务了
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# cp /etc/ntp.conf /etc/ntp.conf.bak.160329
 [root@check-list ~]# vim /etc/ntp.conf
 [root@check-list ~]# ntpdate  ntp-server
@@ -232,7 +232,7 @@ Starting ntpd:                                             [  OK  ]
 ntpd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 ntpdate        	0:off	1:off	2:off	3:off	4:off	5:off	6:off
 [root@check-list ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -242,20 +242,20 @@ ntpdate        	0:off	1:off	2:off	3:off	4:off	5:off	6:off
 
 云主机服务商提供了初始登录密码，但显然不是一个安全的密码，需要进行修改
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# passwd
 Changing password for user root.
 New password: 
 Retype new password: 
 passwd: all authentication tokens updated successfully.
 [root@check-list ~]#
-{% endhighlight %}
+~~~
 
 ### 禁止root ssh登录
 
 禁止root的ssh登录可以有效防止通过直接破解root密码来获取系统最高权限，或者通过多次的尝试失败来进行登录的DOS攻击
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# grep RootLogin /etc/ssh/sshd_config 
 #PermitRootLogin yes
 # the setting of "PermitRootLogin without-password".
@@ -265,7 +265,7 @@ passwd: all authentication tokens updated successfully.
 PermitRootLogin no
 # the setting of "PermitRootLogin without-password".
 [root@check-list ~]#
-{% endhighlight %}
+~~~
 
 要使生效，得重启sshd服务
 
@@ -276,7 +276,7 @@ PermitRootLogin no
 
 并且要赋予sudo权限
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# useradd saops 
 [root@check-list ~]# passwd saops
 Changing password for user saops.
@@ -287,7 +287,7 @@ passwd: all authentication tokens updated successfully.
 ----------
 User_Alias USERSU = saops
 USERSU  ALL=(root)  ALL
-{% endhighlight %}
+~~~
 
 ### 防火墙设置
 
@@ -295,7 +295,7 @@ USERSU  ALL=(root)  ALL
 
 确认防火墙是开启的，并且只有22号端口是开放的，以后随着业务的扩展会逐步更新防火墙配置
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# chkconfig --list | grep ipta
 iptables       	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 [root@check-list ~]# iptables -L -nv 
@@ -314,7 +314,7 @@ Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
 Chain OUTPUT (policy ACCEPT 1480 packets, 171K bytes)
  pkts bytes target     prot opt in     out     source               destination         
 [root@check-list ~]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 前端等特殊情况下最好也安装一下 **dynfw** ， 它提供的 **ipdrop、tcplimit、host-tcplimit** 能够有效抵抗恶意访问或攻击
 
@@ -325,7 +325,7 @@ Chain OUTPUT (policy ACCEPT 1480 packets, 171K bytes)
 
 一般选择关闭SELINUX，虽然SELINUX会提升系统安全级别，但是会给很多应用的运行造成困扰，也有很大的性能开销，如果不是极其注重安全的领域，建议关闭SELINUX
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# getenforce 
 Enforcing
 [root@check-list ~]# vim /etc/sysconfig/selinux 
@@ -336,11 +336,11 @@ SELINUX=disabled
 # SELINUXTYPE= can take one of these two values:
 SELINUXTYPE=targeted 
 [root@check-list ~]#
-{% endhighlight %}
+~~~
  
  重启后就可以生效，如果要立刻生效，可以使用 **setenforce 0**
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# getenforce 
 Enforcing
 [root@check-list ~]# setenforce 0
@@ -374,7 +374,7 @@ Controlling term:               unconfined_u:object_r:user_devpts_t:s0
 /lib/libc.so.6                  system_u:object_r:lib_t:s0 -> system_u:object_r:lib_t:s0
 /lib/ld-linux.so.2              system_u:object_r:lib_t:s0 -> system_u:object_r:ld_so_t:s0
 [root@check-list ~]#
-{% endhighlight %}
+~~~
 
 
 ### RSA key
@@ -383,7 +383,7 @@ Controlling term:               unconfined_u:object_r:user_devpts_t:s0
 
 将有权限登入的公钥添加到 **authorized_keys**
 
-{% highlight bash %}
+~~~
 [saops@check-list ~]$ ssh-keygen -t rsa 
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/saops/.ssh/id_rsa): 
@@ -420,7 +420,7 @@ total 12
 -rw-------. 1 saops saops 1675 Mar 29 17:07 id_rsa
 -rw-r--r--. 1 saops saops  395 Mar 29 17:07 id_rsa.pub
 [saops@check-list .ssh]$ 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -434,7 +434,7 @@ total 12
 
 在挂载选项里加入 **noatime** 可以提升磁盘读写效率
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# cat /etc/fstab 
 
 #
@@ -471,7 +471,7 @@ sysfs                   /sys                    sysfs   defaults        0 0
 proc                    /proc                   proc    defaults        0 0
 /dev/sdb1               /data                         ext4    defaults,noatime      0 0
 [root@check-list ~]#
-{% endhighlight %}
+~~~
 
 
 > **Tip:** **noatime** 包含了 **nodiratime** ，所以不必重复指定
@@ -489,7 +489,7 @@ proc                    /proc                   proc    defaults        0 0
 
 **/etc/security/limits.conf** 可以配置打开文件句柄数的软硬限制，它是被 **PAM** 模块调用，所以它在每个用户登录时会生效
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# cat /proc/sys/fs/file-max 
 3264717
 [root@check-list ~]# cat /proc/sys/fs/file-nr 
@@ -506,7 +506,7 @@ proc                    /proc                   proc    defaults        0 0
 * soft nofile 32768
 * hard nofile 65536
 [root@check-list ~]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -518,7 +518,7 @@ proc                    /proc                   proc    defaults        0 0
 
 **epel** 是一个非常好用的扩展仓库，一般都建议配置上
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# rpm -qa | grep epel
 [root@check-list ~]# yum list all | grep "^epel"
 epel-release.noarch                      6-8                            extras  
@@ -581,7 +581,7 @@ epel-release-6-8.noarch
 /usr/share/doc/epel-release-6
 /usr/share/doc/epel-release-6/GPL
 [root@check-list ~]#
-{% endhighlight %}
+~~~
 
 
 
@@ -598,7 +598,7 @@ discovering a repeated attack host, updates the /etc/hosts.deny file
 to prevent future break-in attempts from that host.  Email reports can
 be sent to a system admin.
 
-{% highlight bash %}
+~~~
 [root@check-list ~]# yum list all | grep -i denyhost
 denyhosts.noarch                           2.6-20.el6                   epel    
 [root@check-list ~]# yum install denyhosts.noarch
@@ -675,7 +675,7 @@ denyhosts      	0:off	1:off	2:off	3:off	4:off	5:off	6:off
 [root@check-list ~]# chkconfig --list | grep deny
 denyhosts      	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 [root@check-list ~]#
-{% endhighlight %}
+~~~
 
 
 ---

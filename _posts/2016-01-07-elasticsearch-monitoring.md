@@ -35,7 +35,7 @@ comments: true
 ## 安装插件
 
 
-{% highlight bash %}
+~~~
 [root@es_node ~]# /data/ES/bin/plugin install mobz/elasticsearch-head
 -> Installing mobz/elasticsearch-head...
 Trying https://github.com/mobz/elasticsearch-head/archive/master.zip...
@@ -55,7 +55,7 @@ total 8
 drwxr-xr-x 2 bhuser bhuser 4096 Jul 10  2014 analysis-mmseg
 drwxr-xr-x 5 bhuser bhuser 4096 Jan  6 19:22 head
 [root@es_node ~]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -67,7 +67,7 @@ drwxr-xr-x 5 bhuser bhuser 4096 Jan  6 19:22 head
 
 安装之前要确保以下软件包已经安装
 
-{% highlight bash %}
+~~~
 gcc.x86_64
 pcre.x86_64   
 pcre-devel.x86_64  
@@ -75,11 +75,11 @@ zlib.x86_64
 zlib-devel.x86_64 
 openssl.x86_64 
 openssl-devel.x86_64
-{% endhighlight %}
+~~~
 
 ### 下载Tengine
 
-{% highlight bash %}
+~~~
 [root@es_node src]# wget http://tengine.taobao.org/download/tengine-2.1.2.tar.gz
 --2016-01-06 19:30:59--  http://tengine.taobao.org/download/tengine-2.1.2.tar.gz
 Resolving tengine.taobao.org... 120.55.149.135
@@ -95,11 +95,11 @@ Saving to: “tengine-2.1.2.tar.gz”
 [root@es_node src]# md5sum tengine-2.1.2.tar.gz 
 7f898a0dbb5162ff1eb19aeb9d53bec3  tengine-2.1.2.tar.gz
 [root@es_node src]# 
-{% endhighlight %}
+~~~
 
 ### 解压编译与安装
 
-{% highlight bash %}
+~~~
 [root@es_node src]# tar -zxvf tengine-2.1.2.tar.gz 
 tengine-2.1.2/
 tengine-2.1.2/good_configure
@@ -179,13 +179,13 @@ drwxr-xr-x 2 root root 4096 Jan  6 19:46 logs
 drwxr-xr-x 2 root root 4096 Jan  6 19:46 modules
 drwxr-xr-x 2 root root 4096 Jan  6 19:46 sbin
 [root@es_node tengine-2.1.2]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 创建自签名证书
 
-{% highlight bash %}
+~~~
 [root@es_node tengine-2.1.2]# cd /usr/local/nginx/
 [root@es_node nginx]# ls
 conf  html  include  logs  modules  sbin
@@ -232,13 +232,13 @@ total 12
 -rw------- 1 root root 1025 Jan  6 19:53 es.csr
 -rw------- 1 root root 1675 Jan  6 19:49 es.key
 [root@es_node cert]#
-{% endhighlight %}
+~~~
 
 ---
 
 ## 创建nginx用户
 
-{% highlight bash %}
+~~~
 [root@es_node cert]# useradd nginx 
 [root@es_node cert]# grep nginx /etc/passwd
 nginx:x:505:505::/home/nginx:/bin/bash
@@ -249,13 +249,13 @@ total 12
 -rw------- 1 nginx nginx 1025 Jan  6 19:53 es.csr
 -rw------- 1 nginx nginx 1675 Jan  6 19:49 es.key
 [root@es_node cert]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 生成认证密码
 
-{% highlight bash %}
+~~~
 [nginx@es_node nginx]$ ll
 total 28
 drwxr-xr-x 2 nginx nginx 4096 Jan  6 19:54 cert
@@ -272,7 +272,7 @@ esPl/R9yBFjpA[nginx@es_node pass]$ vim es.passwd
 [nginx@es_node pass]$ cat es.passwd 
 test:esPl/R9yBFjpA
 [nginx@es_node pass]$
-{% endhighlight %}
+~~~
 
 ---
 
@@ -280,7 +280,7 @@ test:esPl/R9yBFjpA
 
 修改nginx配置文件
 
-{% highlight bash %}
+~~~
 [root@es_node conf]# vim nginx.conf
 [root@es_node conf]# grep -v "#" nginx.conf | grep -v "^$"
 user  nginx;
@@ -328,7 +328,7 @@ http {
 the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
 configuration file /usr/local/nginx/conf/nginx.conf test is successful
 [root@es_node nginx]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 打开日志不是必要的，因为会浪费掉部分磁盘空间，也会影响一点性能，但是会给排查问题，行为跟踪带来方便，相对而言此类非应用型系统，打开日志带来的方便明显比产生的开销要更有价值
 
@@ -337,7 +337,7 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 
 ## 打开防火墙
 
-{% highlight bash %}
+~~~
 [root@es_node nginx]# iptables -L -nv | grep 443
 [root@es_node nginx]# vim /etc/sysconfig/iptables
 [root@es_node nginx]# grep 443 /etc/sysconfig/iptables
@@ -347,7 +347,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@es_node nginx]# iptables -L -nv | grep 443
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:443 
 [root@es_node nginx]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -360,7 +360,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 然后开启 **NAT** **PREROUTING** 链的 **DNAT**
 
-{% highlight bash %}
+~~~
 [root@net_border ~]# iptables -L -nv  -t nat | grep 443
 [root@net_border ~]# vim /etc/sysconfig/iptables
 [root@net_border ~]# grep 443 /etc/sysconfig/iptables
@@ -370,14 +370,14 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@net_border ~]# iptables -L -nv  -t nat | grep 443
     0     0 DNAT       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:2443 to:192.168.66.66:443 
 [root@net_border ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 开启nginx服务
 
 
-{% highlight bash %}
+~~~
 [root@es_node nginx]# sbin/nginx  -t -c conf/nginx.conf
 the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
 configuration file /usr/local/nginx/conf/nginx.conf test is successful
@@ -387,7 +387,7 @@ root      4629  0.0  0.0 103308   832 pts/0    S+   22:18   0:00          \_ gre
 root      4623  0.0  0.0  46320  1172 ?        Ss   22:17   0:00 nginx: master process sbin/nginx -c conf/nginx.conf
 nginx     4624  0.0  0.0  46688  1836 ?        S    22:17   0:00  \_ nginx: worker process        
 [root@es_node nginx]# 
-{% endhighlight %}
+~~~
 
 ## 进行访问
 

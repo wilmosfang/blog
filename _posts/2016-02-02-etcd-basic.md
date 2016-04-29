@@ -50,7 +50,7 @@ comments: true
 
 ## 下载安装
 
-{% highlight bash %}
+~~~
 [root@docker etcd]# curl -L  https://github.com/coreos/etcd/releases/download/v2.2.4/etcd-v2.2.4-linux-amd64.tar.gz -o etcd-v2.2.4-linux-amd64.tar.gz
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -137,7 +137,7 @@ drwxrwxr-x 6 cc cc     4096 Jan 14 06:13 Documentation
 -rw-rw-r-- 1 cc cc     5613 Jan 14 06:13 README-etcdctl.md
 -rw-rw-r-- 1 cc cc     4684 Jan 14 06:13 README.md
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 上面的报错是由于地址被重定向了，到了一个被墙的服务器上，于是翻墙，改为手动下载，放到了目录底下
 
@@ -146,7 +146,7 @@ drwxrwxr-x 6 cc cc     4096 Jan 14 06:13 Documentation
 
 ## 运行服务
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# ./etcd
 2016-02-01 22:42:57.420693 I | etcdmain: etcd Version: 2.2.4
 2016-02-01 22:42:57.420802 I | etcdmain: Git SHA: bdee27b
@@ -186,7 +186,7 @@ drwxrwxr-x 6 cc cc     4096 Jan 14 06:13 Documentation
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 前台运行，直接占用了当前终端
 
@@ -196,19 +196,19 @@ drwxrwxr-x 6 cc cc     4096 Jan 14 06:13 Documentation
 ## 存取测试
 
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# ./etcdctl set keytest "hello world for etcd test"
 hello world for etcd test
 [root@docker etcd-v2.2.4-linux-amd64]# ./etcdctl get keytest
 hello world for etcd test
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 单点运行
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# netstat  -ant | grep -E '(2379|2380)'
 [root@docker etcd-v2.2.4-linux-amd64]# 
 ----------
@@ -225,7 +225,7 @@ hello world for etcd test
 tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN     
 tcp        0      0 127.0.0.1:2380          0.0.0.0:*               LISTEN     
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 etcd运行后会监听在本地的 **2379** 和 **2380** 上面
 
@@ -237,11 +237,11 @@ etcd运行后会监听在本地的 **2379** 和 **2380** 上面
 
 ## 获取版本信息
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# curl -L http://127.0.0.1:2379/version
 {"etcdserver":"2.2.4","etcdcluster":"2.2.0"}[root@docker etcd-v2.2.4-linux-amd64]# 
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -254,7 +254,7 @@ etcd的绝大部分API都是在对这两类对象进行操作
 ### 给关键字赋值
 
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# curl http://127.0.0.1:2379/v2/keys/message -XPUT -d value="Hello world"
 {"action":"set","node":{"key":"/message","value":"Hello world","modifiedIndex":8,"createdIndex":8}}
 [root@docker etcd-v2.2.4-linux-amd64]# curl http://127.0.0.1:2379/v2/keys/message -XPUT -d value="Hello world"
@@ -272,7 +272,7 @@ etcd的绝大部分API都是在对这两类对象进行操作
 [root@docker etcd-v2.2.4-linux-amd64]# curl http://127.0.0.1:2379/v2/keys/abc -XPUT -d value="abc"
 {"action":"set","node":{"key":"/abc","value":"abc","modifiedIndex":15,"createdIndex":15},"prevNode":{"key":"/abc","value":"Hello world","modifiedIndex":14,"createdIndex":14}}
 [root@docker etcd-v2.2.4-linux-amd64]#
-{% endhighlight %}
+~~~
 
 
 Attribute | Comment
@@ -288,22 +288,22 @@ node.createdIndex|有创建操作时会递增
 
 ### 获取值
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# curl http://127.0.0.1:2379/v2/keys/message
 {"action":"get","node":{"key":"/message","value":"Hello world","modifiedIndex":12,"createdIndex":12}}
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 修改值
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# curl http://127.0.0.1:2379/v2/keys/message -XPUT -d value="hello etcd"
 {"action":"set","node":{"key":"/message","value":"hello etcd","modifiedIndex":17,"createdIndex":17},"prevNode":{"key":"/message","value":"Hello world","modifiedIndex":12,"createdIndex":12}}
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 直接使用 **PUT** 就可以进行修改，并且后面会接上修改前的状态信息
 
@@ -312,11 +312,11 @@ node.createdIndex|有创建操作时会递增
 ### 删除键
 
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# curl http://127.0.0.1:2379/v2/keys/message -XDELETE
 {"action":"delete","node":{"key":"/message","modifiedIndex":18,"createdIndex":17},"prevNode":{"key":"/message","value":"hello etcd","modifiedIndex":17,"createdIndex":17}}
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 留意到 **modifiedIndex** 有递增， **createdIndex** 却没有
 
@@ -325,7 +325,7 @@ node.createdIndex|有创建操作时会递增
 
 ### 设定key过期时间
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# date ; curl http://127.0.0.1:2379/v2/keys/foo -XPUT -d value=bar -d ttl=6
 Mon Feb  1 23:30:12 CST 2016
 {"action":"set","node":{"key":"/foo","value":"bar","expiration":"2016-02-01T15:30:18.084936032Z","ttl":6,"modifiedIndex":21,"createdIndex":21}}
@@ -336,7 +336,7 @@ Mon Feb  1 23:30:17 CST 2016
 Mon Feb  1 23:30:19 CST 2016
 {"errorCode":100,"message":"Key not found","cause":"/foo","index":22}
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 多出来两个属性
 
@@ -352,7 +352,7 @@ node.ttl | 剩余的存活时间
 
 ### 解除过期
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# date ; curl http://127.0.0.1:2379/v2/keys/foo -XPUT -d value=bar -d ttl=10
 Mon Feb  1 23:41:21 CST 2016
 {"action":"set","node":{"key":"/foo","value":"bar","expiration":"2016-02-01T15:41:31.103825075Z","ttl":10,"modifiedIndex":29,"createdIndex":29}}
@@ -366,7 +366,7 @@ Mon Feb  1 23:41:30 CST 2016
 Mon Feb  1 23:42:02 CST 2016
 {"action":"get","node":{"key":"/foo","value":"bar","modifiedIndex":30,"createdIndex":29}}
 [root@docker etcd-v2.2.4-linux-amd64]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -377,17 +377,17 @@ etcd可以实现变更提醒，如果要监控子层关键字的变更可以加�
 
 我们打开一个终端，输入下面命令后，会hung住
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo?wait=true
-{% endhighlight %}
+~~~
 
 然后在另一个终端中输入
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo -XPUT -d value=abc
 {"action":"set","node":{"key":"/foo","value":"abc","modifiedIndex":33,"createdIndex":33},"prevNode":{"key":"/foo","value":"bar","modifiedIndex":31,"createdIndex":31}}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 于是第一个终端里会反馈出第二个终端里的结果，并退出hung状态
 
@@ -395,7 +395,7 @@ etcd可以实现变更提醒，如果要监控子层关键字的变更可以加�
 
 ### 响应头
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo -vv
 * About to connect() to 127.0.0.1 port 2379 (#0)
 *   Trying 127.0.0.1...
@@ -417,7 +417,7 @@ etcd可以实现变更提醒，如果要监控子层关键字的变更可以加�
 {"action":"get","node":{"key":"/foo","value":"abc","modifiedIndex":54,"createdIndex":54}}
 * Connection #0 to host 127.0.0.1 left intact
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 Item     | Comment
 -------- | ---
@@ -433,7 +433,7 @@ X-Raft-Term|master选举发生的次数，发生一次递增一，如果递增�
 
 因为是使用的etcd序列，所以确保了有序性
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/queue -XPOST -d value=Job1
 {"action":"create","node":{"key":"/queue/00000000000000000055","value":"Job1","modifiedIndex":55,"createdIndex":55}}
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/queue -XPOST -d value=Job2
@@ -441,17 +441,17 @@ X-Raft-Term|master选举发生的次数，发生一次递增一，如果递增�
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/queue -XPOST -d value=Job3
 {"action":"create","node":{"key":"/queue/00000000000000000057","value":"Job3","modifiedIndex":57,"createdIndex":57}}
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 ---
 
 ### 读取序列
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl -s 'http://127.0.0.1:2379/v2/keys/queue?recursive=true&sorted=true'
 {"action":"get","node":{"key":"/queue","dir":true,"nodes":[{"key":"/queue/00000000000000000055","value":"Job1","modifiedIndex":55,"createdIndex":55},{"key":"/queue/00000000000000000056","value":"Job2","modifiedIndex":56,"createdIndex":56},{"key":"/queue/00000000000000000057","value":"Job3","modifiedIndex":57,"createdIndex":57}],"modifiedIndex":55,"createdIndex":55}}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -461,7 +461,7 @@ X-Raft-Term|master选举发生的次数，发生一次递增一，如果递增�
 
 目录也可以像key一样设定过期
 
-{% highlight bash %}
+~~~
 [root@docker ~]# date +%s ;curl http://127.0.0.1:2379/v2/keys/testdir -XPUT -d ttl=10 -d dir=true
 1454394081
 {"action":"set","node":{"key":"/testdir","dir":true,"expiration":"2016-02-02T06:21:31.631806205Z","ttl":10,"modifiedIndex":81,"createdIndex":81}}
@@ -475,13 +475,13 @@ X-Raft-Term|master选举发生的次数，发生一次递增一，如果递增�
 1454394094
 {"errorCode":100,"message":"Key not found","cause":"/testdir","index":82}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 刷新目录过期时间
 
-{% highlight bash %}
+~~~
 [root@docker ~]# date +%s ;curl http://127.0.0.1:2379/v2/keys/testdir -XPUT -d ttl=10 -d dir=true
 1454394195
 {"action":"set","node":{"key":"/testdir","dir":true,"expiration":"2016-02-02T06:23:25.962070512Z","ttl":10,"modifiedIndex":85,"createdIndex":85}}
@@ -504,7 +504,7 @@ X-Raft-Term|master选举发生的次数，发生一次递增一，如果递增�
 1454394356
 {"errorCode":100,"message":"Key not found","cause":"/testdir","index":88}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -529,7 +529,7 @@ prevIndex | 比较当前的modifiedIndex
 prevExist | 检查key是否存在，如果是 **true** 就是一个更新操作; 如果是 **false** 就是一个创建操作
 
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo -XPUT -d value=one
 {"action":"set","node":{"key":"/foo","value":"one","modifiedIndex":89,"createdIndex":89},"prevNode":{"key":"/foo","value":"abc","moddex":54}}
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo?prevExist=false -XPUT -d value=three
@@ -543,7 +543,7 @@ prevExist | 检查key是否存在，如果是 **true** 就是一个更新操作;
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo?prevIndex=90 -XPUT -d value=xxx
 {"action":"compareAndSwap","node":{"key":"/foo","value":"xxx","modifiedIndex":91,"createdIndex":89},"prevNode":{"key":"/foo","value"0,"createdIndex":89}}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -559,7 +559,7 @@ Item     | Comment
 prevValue | 比较当前的值
 prevIndex | 比较当前的modifiedIndex
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo -XPUT -d value=one
 {"action":"set","node":{"key":"/foo","value":"one","modifiedIndex":94,"createdIndex":94},"prevNode":{"key":"/foo","value":"three","modifiedIndex":93,"createdIndex":89}}
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo?prevValue=two -XDELETE
@@ -579,18 +579,18 @@ prevIndex | 比较当前的modifiedIndex
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo 
 {"errorCode":100,"message":"Key not found","cause":"/foo","index":97}
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 创建目录
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/testdir -XPUT -d dir=true
 {"action":"set","node":{"key":"/testdir","dir":true,"modifiedIndex":98,"createdIndex":98}}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -605,7 +605,7 @@ prevIndex | 比较当前的modifiedIndex
 
 使用 **recursive=true** ，可以递归显现子目录
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/testdir -XPUT -d dir=true
 {"action":"set","node":{"key":"/testdir","dir":true,"modifiedIndex":98,"createdIndex":98}}
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo_dir/abc -XPUT -d dir=true
@@ -615,7 +615,7 @@ prevIndex | 比较当前的modifiedIndex
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/?recursive=true
 {"action":"get","node":{"dir":true,"nodes":[{"key":"/keytest","value":"hello world for etcd test","modifiedIndex":4,"createdIndex":4},{"key":"/testdir","dir":true,"modifiedIndex":98,"createdIndex":98},{"key":"/abc","value":"jkjkj","modifiedIndex":16,"createdIndex":16},{"key":"/queue","dir":true,"nodes":[{"key":"/queue/00000000000000000055","value":"Job1","modifiedIndex":55,"createdIndex":55},{"key":"/queue/00000000000000000056","value":"Job2","modifiedIndex":56,"createdIndex":56},{"key":"/queue/00000000000000000057","value":"Job3","modifiedIndex":57,"createdIndex":57}],"modifiedIndex":55,"createdIndex":55},{"key":"/dir","dir":true,"modifiedIndex":77,"createdIndex":77},{"key":"/foo_dir","dir":true,"nodes":[{"key":"/foo_dir/abc","dir":true,"modifiedIndex":99,"createdIndex":99}],"modifiedIndex":99,"createdIndex":99}]}}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -625,7 +625,7 @@ prevIndex | 比较当前的modifiedIndex
 
 如果目录不为空，会报错，加上 **recursive=true** 后就可以递归删除
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo_dir/abc?dir=true  -XDELETE
 {"action":"delete","node":{"key":"/foo_dir/abc","dir":true,"modifiedIndex":100,"createdIndex":99},"prevNode":{"key":"/foo_dir/abc","dir":true,"modifiedIndex":99,"createdIndex":99}}
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo_dir/abc -XPUT -d value=uiuiuii
@@ -637,7 +637,7 @@ prevIndex | 比较当前的modifiedIndex
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/foo_dir
 {"errorCode":100,"message":"Key not found","cause":"/foo_dir","index":102}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -646,7 +646,7 @@ prevIndex | 比较当前的modifiedIndex
 
 我们可以通过添加 **\_** 的前缀来创建隐藏的键值对
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/_message -XPUT -d value="Hello hidden"
 {"action":"set","node":{"key":"/_message","value":"Hello hidden","modifiedIndex":103,"createdIndex":103}}
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/message -XPUT -d value="Hello world"
@@ -656,7 +656,7 @@ prevIndex | 比较当前的modifiedIndex
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/_message
 {"action":"get","node":{"key":"/_message","value":"Hello hidden","modifiedIndex":103,"createdIndex":103}}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -668,12 +668,12 @@ prevIndex | 比较当前的modifiedIndex
 JAON 文件，XML文件可以进行直接存储
 
 
-{% highlight bash %}
+~~~
 [root@docker ~]# echo "Hello\nWorld" > testfile.txt
 [root@docker ~]# curl http://127.0.0.1:2379/v2/keys/testfile -XPUT --data-urlencode value@testfile.txt
 {"action":"set","node":{"key":"/testfile","value":"Hello\\nWorld\n","modifiedIndex":105,"createdIndex":105}}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -691,11 +691,11 @@ etcd集群对延时，带宽，和运行时间都有统计，通过统计信息�
 * 成功和失败的Raft RPC请求
 
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/stats/leader
 {"leader":"ce2a822cea30bfca","followers":{}}[root@docker ~]# 
 [root@docker ~]#  
-{% endhighlight %}
+~~~
 
 我的环境中还没有followers，所以是空的
 
@@ -705,7 +705,7 @@ etcd集群对延时，带宽，和运行时间都有统计，通过统计信息�
 **`curl http://127.0.0.1:2379/v2/stats/leader`**
 
 
-{% highlight bash %}
+~~~
 {
     "followers": {
         "6e3bd23ae5f1eae0": {
@@ -737,16 +737,16 @@ etcd集群对延时，带宽，和运行时间都有统计，通过统计信息�
     },
     "leader": "924e2e83e93f2560"
 }
-{% endhighlight %}
+~~~
 
 ---
 
 ### 自身统计
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/stats/self
 {"name":"default","id":"ce2a822cea30bfca","state":"StateLeader","startTime":"2016-02-02T10:16:08.734974815+08:00","leaderInfo":{"leader":"ce2a822cea30bfca","uptime":"7h10m25.17655575s","startTime":"2016-02-02T10:16:10.036154166+08:00"},"recvAppendRequestCnt":0,"sendAppendRequestCnt":0}[root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 Attribute| Comment
@@ -775,11 +775,11 @@ startTime|这个节点的启动时间
 
 > **Note:** v2版本将信息保存在了内存中，节点重启后，信息会丢失
 
-{% highlight bash %}
+~~~
 [root@docker ~]# curl http://127.0.0.1:2379/v2/stats/store
 {"getsSuccess":73,"getsFail":13,"setsSuccess":65,"setsFail":8,"deleteSuccess":3,"deleteFail":2,"updateSuccess":9,"updateFail":4,"createSuccess":7,"createFail":1,"compareAndSwapSuccess":2,"compareAndSwapFail":2,"compareAndDeleteSuccess":2,"compareAndDeleteFail":2,"expireCount":17,"watchers":0}[root@docker ~]# 
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 ---

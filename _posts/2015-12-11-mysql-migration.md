@@ -55,7 +55,7 @@ comments: true
 
 用于备份重建slave
 
-{% highlight bash %}
+~~~
 [root@new-slave ~]# yum clean all 
 Loaded plugins: fastestmirror
 Cleaning repos: base epel extras newrelic updates
@@ -84,7 +84,7 @@ Export list for new-master:
 new-master:/data/nfs
                       548G   46G  475G   9% /data/nfs
 [root@new-slave data]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -93,7 +93,7 @@ new-master:/data/nfs
 
 安装并启动keepalived
 
-{% highlight bash %}
+~~~
 [root@new-master ~]# yum -y install  keepalived.x86_64
 ...
 ...
@@ -111,11 +111,11 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@new-master keepalived]# /etc/init.d/keepalived start 
 Starting keepalived:                                       [  OK  ]
 [root@new-master keepalived]# 
-{% endhighlight %}
+~~~
 
 确认配置
 
-{% highlight bash %}
+~~~
 [testuser@new-master ~]$ ps faux | grep keep  | grep -v grep 
 root      73609  0.0  0.0 110276  1144 ?        Ss   Sep25   2:17 /usr/sbin/keepalived -D
 root      73610  0.0  0.0 112500  2908 ?        S    Sep25   2:21  \_ /usr/sbin/keepalived -D
@@ -143,7 +143,7 @@ vrrp_instance VI_3 {
     }
 }
 [testuser@new-master ~]$ 
-{% endhighlight %}
+~~~
 
 
 **Note:**
@@ -166,7 +166,7 @@ vrrp_instance VI_3 {
 由于集群软件在侦测到主服务器失效后会干预相关资源，造成备机身份切换和IP飘移，为了避免这种影响，要关掉集群
 
 
-{% highlight bash %}
+~~~
 [mysql@slave02 bin]$ masterha_check_status --conf=/etc/app1.cnf
 app1 (pid:18911) is running(0:PING_OK), master:origin-master
 [mysql@slave02 bin]$ masterha_stop --conf=/etc/app1.cnf
@@ -176,7 +176,7 @@ app1 is stopped(2:NOT_RUNNING).
 [mysql@slave02 bin]$ ps faux | grep manager
 mysql    27192  0.0  0.0 103244   864 pts/2    S+   00:23   0:00                                  \_ grep manager
 [mysql@slave02 bin]$
-{% endhighlight %}
+~~~
 
 ---
 
@@ -185,7 +185,7 @@ mysql    27192  0.0  0.0 103244   864 pts/2    S+   00:23   0:00                
 
 此目的是为了减少三个keepalived之间协商优先级的时间
 
-{% highlight bash %}
+~~~
 [root@slave01 tmp]# ps faux | grep keep 
 root     25745  0.0  0.0 103244   864 pts/0    S+   00:25   0:00                          \_ grep keep
 root     17798  0.0  0.0 110196   432 ?        Ss   Aug12  12:49 /usr/sbin/keepalived -D
@@ -239,7 +239,7 @@ Stopping keepalived:                                       [  OK  ]
 [root@slave01 tmp]# ps faux |  grep keep 
 root     28544  0.0  0.0 103244   864 pts/0    S+   00:28   0:00                          \_ grep keep
 [root@slave01 tmp]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -254,10 +254,10 @@ root     28544  0.0  0.0 103244   864 pts/0    S+   00:28   0:00                
 
 变更新master keepalived优先级，重载的方式切换
 
-{% highlight bash %}
+~~~
 [root@new-master ~]# vim /etc/keepalived/keepalived.conf
 [root@new-master ~]# /etc/init.d/keepalived reload ; watch -n .2 ip a 
-{% endhighlight %}
+~~~
 
 使用给新master keepalived 升优先级重载的方式切IP
 
@@ -275,11 +275,11 @@ root     28544  0.0  0.0 103244   864 pts/0    S+   00:28   0:00                
 (必要的时候可以停止原master数据库)
 
 
-{% highlight bash %}
+~~~
 [root@origin-master ~]# /etc/init.d/mysql  stop 
 Shutting down MySQL........................................[  OK  ].
 [root@origin-master ~]# 
-{% endhighlight %}
+~~~
 
 
 主要观察DB层APP层有无报错，确认无报错，正常后再进行下步
@@ -300,7 +300,7 @@ Shutting down MySQL........................................[  OK  ].
 ## 备份新master以便重建
 
 
-{% highlight bash %}
+~~~
 [root@new-master nfs]# time nohup /usr/bin/innobackupex --defaults-file=/etc/my.cnf --user=root --password=xxxxxxxxxx /data/nfs/test_full_backup    >>  /data/nfs/full_backup.log 2>&1  &
 [1] 80736
 [root@new-master nfs]# 
@@ -313,7 +313,7 @@ xtrabackup: using O_DIRECT
 >> log scanned up to (4998975642548)
 xtrabackup: Generating a list of tablespaces
 >> log scanned up to (4998975644454)
-{% endhighlight %}
+~~~
 
 ---
 
@@ -322,7 +322,7 @@ xtrabackup: Generating a list of tablespaces
 如果有足够空间，可以备到一个目录，没有则可以直接删
 
 
-{% highlight bash %}
+~~~
 [root@slave01 data]# /etc/init.d/mysql  stop 
 Shutting down MySQL.............. SUCCESS! 
 [root@slave01 data]# cd /var/lib/mysql/
@@ -343,7 +343,7 @@ tmpfs                  16G     0   16G   0% /dev/shm
 new-master:/data/nfs
                       1.7T  300G  1.4T  19% /data/nfs
 [root@slave01 mysql]# 
-{% endhighlight %}
+~~~
 
 如果有多个slave ,重复上面操作
 
@@ -351,7 +351,7 @@ new-master:/data/nfs
 
 ## 更新slave mysql版本
 
-{% highlight bash %}
+~~~
 [root@slave02 src]# rpm -e Percona-Server-client-51-5.1.73-rel14.11.603.rhel6.x86_64 Percona-Server-server-51-5.1.73-rel14.11.603.rhel6.x86_64 Percona-Server-shared-51-5.1.73-rel14.11.603.rhel6.x86_64  
 error: Failed dependencies:
 	mysql is needed by (installed) xtrabackup-1.6.7-356.rhel6.x86_64
@@ -450,7 +450,7 @@ See http://www.percona.com/doc/percona-server/5.6/management/udf_percona_toolkit
 [root@slave02 percona56]# echo $?
 0
 [root@slave02 percona56]# 
-{% endhighlight %}
+~~~
 
 多个slave，而重复上面操作
 
@@ -458,18 +458,18 @@ See http://www.percona.com/doc/percona-server/5.6/management/udf_percona_toolkit
 
 ## 备份替换my.cnf配置文件
 
-{% highlight bash %}
+~~~
 [root@slave02 etc]# mv my.cnf my.old.2015.12.09.backup
 [root@slave02 etc]# mv mynew02.cnf  my.cnf
 [root@slave02 etc]# ll my*
 -rw-r--r-- 1 root root  1928 Dec  8 21:18 my.cnf
 -rw-r--r-- 1 root root 21146 Jul  4  2014 my.old.2015.12.09.backup
 [root@slave02 etc]# 
-{% endhighlight %}
+~~~
 
 部分参数已经在新版本中不用，或更名，要进行替换
 
-{% highlight bash %}
+~~~
 [testuser@slave01 etc]$ diff /tmp/old /tmp/new
 11c11
 < table_cache = 2048
@@ -497,7 +497,7 @@ See http://www.percona.com/doc/percona-server/5.6/management/udf_percona_toolkit
 ---
 > myisam_recover_options
 [testuser@slave01 etc]$ 
-{% endhighlight %}
+~~~
 
 innodb_additional_mem_pool_size  也已经被弃用了,如果有要注释掉
 
@@ -507,7 +507,7 @@ innodb_additional_mem_pool_size  也已经被弃用了,如果有要注释掉
 ## 将zabbit加入mysql组以方便监控
 
 
-{% highlight bash %}
+~~~
 [root@new-master mysql]# vim /etc/group
 [root@new-master mysql]# id zabbix
 uid=496(zabbix) gid=493(zabbix) groups=493(zabbix),492(mysql)
@@ -519,18 +519,18 @@ Starting Zabbix agent:                                     [  OK  ]
 [root@zabbix-server ~]# zabbix_get -s new-master -p 10050 -k "mysql.slowlog[100,/var/lib/mysql/new-master-slow.log]"
 2.98465
 [root@zabbix-server ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 修改zabbix统计数据过期时间
 
-{% highlight bash %}
+~~~
 [root@new-master mysql]# vim  /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh
 [root@new-master mysql]# grep 120  /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh
     if [ `expr $TIMENOW - $TIMEFLM` -gt 120 ]; then
 [root@new-master mysql]# 
-{% endhighlight %}
+~~~
 
 修改之前是300,也就是5分钟,这个监控粒度太粗,所以改为120
 
@@ -539,7 +539,7 @@ Starting Zabbix agent:                                     [  OK  ]
 ## 安装percona-xtrabackup
 
 
-{% highlight bash %}
+~~~
 [root@slave01 percona56]# rpm -ivh  percona-xtrabackup-2.3.2-1.el6.x86_64.rpm
 warning: percona-xtrabackup-2.3.2-1.el6.x86_64.rpm: Header V4 DSA/SHA1
 Signature, key ID cd2efd2a: NOKEY
@@ -636,7 +636,7 @@ Preparing...                ########################################### [100%]
 [root@slave01 percona56]# innobackupex --version
 innobackupex version 2.3.2 Linux (x86_64) (revision id: 306a2e0)
 [root@slave01 percona56]# 
-{% endhighlight %}
+~~~
 
 slave上确保安装好 **percona-xtrabackup** 软件
 
@@ -645,7 +645,7 @@ slave上确保安装好 **percona-xtrabackup** 软件
 
 ## 备份完成
 
-{% highlight bash %}
+~~~
 xtrabackup: Creating suspend file '/data/nfs/test_full_backup/2015-12-09_00-53-03/xtrabackup_log_copied' with pid '80799'
 xtrabackup: Transaction log of lsn (4998915938330) to (4998984695861) was copied.
 151209 02:06:09  innobackupex: Executing UNLOCK BINLOG
@@ -663,13 +663,13 @@ sys	7m44.089s
 
 [1]+  Done                    time nohup /usr/bin/innobackupex --defaults-file=/etc/my.cnf --user=root --password=xxxxxxxxxx /data/nfs/test_full_backup >> /data/nfs/full_backup.log 2>&1
 [root@new-master nfs]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 准备恢复
 
-{% highlight bash %}
+~~~
 [root@slave01 nfs]# which innobackupex 
 /usr/bin/innobackupex
 [root@slave01 nfs]# time nohup /usr/bin/innobackupex --apply-log /data/nfs/test_full_backup/2015-12-09_00-53-03/
@@ -679,26 +679,26 @@ real	1m43.335s
 user	0m20.049s
 sys	0m9.147s
 [root@slave01 nfs]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 恢复数据
 
-{% highlight bash %}
+~~~
 [root@slave01 data]# time nohup /usr/bin/innobackupex --copy-back /data/nfs/test_full_backup/2015-12-09_00-53-03/ >> restore.log  2>&1   &  
 [1] 12635
 [root@slave01 data]# 
 [root@slave01 data]# tail -f restore.log 
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 要确保mysql 数据库的 datadir是清空的，否则会报错
 
 
-{% highlight bash %}
+~~~
 [root@slave02 data]# cat restore.log 
 nohup: ignoring input
 Warning: option 'innodb_autoextend_increment': unsigned value 33554432
@@ -725,7 +725,7 @@ IMPORTANT: Please check that the copy-back run completes successfully.
 (x86_64) (revision id: 306a2e0)
 Original data directory /var/lib/mysql is not empty!
 [root@slave02 data]#
-{% endhighlight %}
+~~~
 
 一般而言，**`rm -rf *`** 并不会删除以 `.` 开头的文件 如： **`.bash_history  .lesshst  .mysql_history  .viminfo`** 
 
@@ -739,9 +739,9 @@ Original data directory /var/lib/mysql is not empty!
 
 ## 监测进展
 
-{% highlight bash %}
+~~~
 [root@slave02 data]# watch -n 2 du -sh /data/mysql/
-{% endhighlight %}
+~~~
 
 每两秒看一下数据目录大小
 
@@ -750,7 +750,7 @@ Original data directory /var/lib/mysql is not empty!
 ## 恢复完成
 
 
-{% highlight bash %}
+~~~
 151209 03:57:34 [01] Copying ./mysqltestt_db/kqmobile_payments.ibd to
 /var/lib/mysql/mysqltestt_db/kqmobile_payments.ibd
 151209 03:57:34 [01]        ...done
@@ -769,7 +769,7 @@ sys	19m4.516s
 [1]+  Done                    time nohup /usr/bin/innobackupex --copy-back
 /data/nfs/test_full_backup/2015-12-09_00-53-03/ >> restore.log 2>&1
 [root@slave02 data]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -777,7 +777,7 @@ sys	19m4.516s
 ## 修改权限
 
 
-{% highlight bash %}
+~~~
 [root@slave02 mysql]# cat xtrabackup_binlog_pos_innodb 
 mysql-bin.000004	8299670
 [root@slave02 mysql]# ll 
@@ -828,14 +828,14 @@ drwx------ 2 mysql mysql       4096 Dec  9 02:52 test
 [root@slave02 mysql]# ll -d /data/mysql/
 drwxr-xr-x 16 mysql mysql 20480 Dec  9 03:08 /data/mysql/
 [root@slave02 mysql]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ## 启动mysql并且开启同步
 
-{% highlight bash %}
+~~~
 [root@slave02 mysql]# mysql -u root -p 
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -1041,7 +1041,7 @@ slave I/O thread to update it
 mysql> \! hostname
 slave02
 mysql> 
-{% endhighlight %}
+~~~
 
 ---
 

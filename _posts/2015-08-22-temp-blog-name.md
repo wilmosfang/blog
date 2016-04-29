@@ -44,22 +44,22 @@ comments: true
 
 代码块
 
-{% highlight bash %}
+~~~
 #!/bin/sh
 #
 # This script will be executed *after* all the other init scripts.
 # You can put your own initialization stuff in here if you don't
 # want to do the full Sys V style init stuff.
 touch /var/lock/subsys/local
-{% endhighlight %}
+~~~
 
 
 > **Tip:**
 
 
-{% highlight bash %}
+~~~
 just for test
-{% endhighlight %}
+~~~
 
 
 > **Note:**
@@ -81,7 +81,7 @@ just for test
 * 图片信息过滤处理
 * 嵌入图片
 
-{% highlight bash %}
+~~~
 [gituser@tools ~]$  for i in `seq 1 10`; do  echo "[sms$i.png](/images/zabbix_sms/sms$i.png)" ; done 
 [sms1.png](/images/zabbix_sms/sms1.png)
 [sms2.png](/images/zabbix_sms/sms2.png)
@@ -94,7 +94,7 @@ just for test
 [sms9.png](/images/zabbix_sms/sms9.png)
 [sms10.png](/images/zabbix_sms/sms10.png)
 [gituser@tools ~]$ 
-{% endhighlight %}
+~~~
 
 ---
 

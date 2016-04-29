@@ -56,27 +56,27 @@ BGP双线优点：
 
  > **Tip:** **traceroute** 是通过 **traceroute-2.0.14-2.el6.x86_64** 提供的
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# which  traceroute 
 /bin/traceroute
 [root@h101 ~]# rpm -qf  /bin/traceroute 
 traceroute-2.0.14-2.el6.x86_64
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 使用 **-A** 参数可以跟踪AS号
 
-{% highlight bash %}
+~~~
 -A  --as-path-lookups       Perform AS path lookups in routing registries and
                               print results directly after the corresponding
                               addresses
-{% endhighlight %}
+~~~
 
 在此以51IDC 提供的安畅云BGP ip 为例
 
 ![bgp_idc_check.png](/images/bgp_idc_check.png)
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# traceroute -A  103.21.118.104 
 traceroute to 103.21.118.104 (103.21.118.104), 30 hops max, 60 byte packets
  1  192.168.2.254 (192.168.2.254) [*]  1.143 ms 192.168.2.75 (192.168.2.75) [*]  2.110 ms  0.634 ms
@@ -98,7 +98,7 @@ traceroute to 103.21.118.104 (103.21.118.104), 30 hops max, 60 byte packets
 29  * * *
 30  * * *
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -108,17 +108,17 @@ traceroute to 103.21.118.104 (103.21.118.104), 30 hops max, 60 byte packets
 
 > **Tip:** **whois** 是通过 **jwhois-4.0-19.el6.x86_64** 提供的
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# which whois
 /usr/bin/whois
 [root@h101 ~]# rpm -qf /usr/bin/whois
 jwhois-4.0-19.el6.x86_64
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 直接加IP进行查询
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# whois  103.21.118.104
 [Querying whois.arin.net]
 [Redirected to whois.apnic.net]
@@ -171,14 +171,14 @@ source:         APNIC
 
 
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 从结果信息得知 **103.21.116.0 - 103.21.119.255** 段的ip 都属于ANCHNET 安畅网络公司
 
-{% highlight bash %}
+~~~
 inetnum:        103.21.116.0 - 103.21.119.255
 netname:        ANCHNET
-{% endhighlight %}
+~~~
 
 ---
 
@@ -186,7 +186,7 @@ netname:        ANCHNET
 
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# whois AS58879
 [Querying whois.radb.net]
 [whois.radb.net]
@@ -211,7 +211,7 @@ mnt-irt:        IRT-CNISP-CN
 changed:        ip@cnisp.org.cn 20131202
 source:         APNIC
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 从结果看出，这并不是一个多线BGP网络
 
@@ -222,7 +222,7 @@ source:         APNIC
 
 ### 上海有孚BGP
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# traceroute -A  175.102.17.5
 traceroute to 175.102.17.5 (175.102.17.5), 30 hops max, 60 byte packets
  1  192.168.2.75 (192.168.2.75) [*]  0.507 ms 192.168.2.254 (192.168.2.254) [*]  1.333 ms  0.830 ms
@@ -356,7 +356,7 @@ mnt-routes:   MAINT-CNNIC-AP
 changed:      ipas@cnnic.cn 20090424
 source:       APNIC
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 被防火墙阻挡，但AS9800是一个多线BGP
 
@@ -366,7 +366,7 @@ source:       APNIC
 
 ### 上海Ucloud BGP
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# traceroute -A  101.52.131.7 
 traceroute to 101.52.131.7 (101.52.131.7), 30 hops max, 60 byte packets
  1  192.168.2.75 (192.168.2.75) [*]  0.507 ms 192.168.2.254 (192.168.2.254) [*]  0.507 ms  0.523 ms
@@ -468,7 +468,7 @@ mnt-irt:        IRT-CNNIC-CN
 changed:        ipas@cnnic.net.cn 20140324
 source:         APNIC
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 
 并不是一个多线BGP
@@ -477,7 +477,7 @@ source:         APNIC
 
 ### 北京Ucloud BGP
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# traceroute -A  120.132.92.156 
 traceroute to 120.132.92.156 (120.132.92.156), 30 hops max, 60 byte packets
  1  192.168.2.75 (192.168.2.75) [*]  0.604 ms  0.672 ms  0.250 ms
@@ -605,7 +605,7 @@ mnt-irt:        IRT-CNNIC-CN
 changed:        ipas@cnnic.cn 20141021
 source:         APNIC
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 
 可知AS59089分别和AS24138、AS56048建立了BGP连接，是一个双线BGP
@@ -615,7 +615,7 @@ source:         APNIC
 
 ### 广东Ucloud BGP
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# traceroute -A  114.119.43.116 
 traceroute to 114.119.43.116 (114.119.43.116), 30 hops max, 60 byte packets
  1  192.168.2.75 (192.168.2.75) [*]  0.524 ms  0.977 ms  0.396 ms
@@ -718,7 +718,7 @@ mnt-routes:     MAINT-CNCGROUP-RR
 changed:        abuse@cnc-noc.net 20101021
 source:         APNIC
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 被防火墙阻截，但AS17816是一个双线BGP
 

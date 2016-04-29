@@ -57,7 +57,7 @@ Zookeeper 特点：
 
 使用下列方法进行下载
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# wget  http://apache.fayea.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
 --2015-12-02 21:04:50--  http://apache.fayea.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
 Resolving apache.fayea.com... 119.6.56.18, 119.6.56.17
@@ -74,7 +74,7 @@ Saving to: “zookeeper-3.4.6.tar.gz”
 total 17288
 -rw-r--r-- 1 root root 17699306 Oct 31  2014 zookeeper-3.4.6.tar.gz
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -87,7 +87,7 @@ total 17288
 >
 > ZooKeeper runs in Java, release 1.6 or greater (JDK 6 or greater)
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# tar -zxvf zookeeper-3.4.6.tar.gz 
 zookeeper-3.4.6/
 zookeeper-3.4.6/src/
@@ -110,11 +110,11 @@ zookeeper-3.4.6/lib/jline-0.9.94.LICENSE.txt
 [root@h101 zk]# ls
 zookeeper-3.4.6  zookeeper-3.4.6.tar.gz
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 默认配置
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# cd zookeeper-3.4.6
 [root@h101 zookeeper-3.4.6]# ls
 bin          conf        docs             lib          README_packaging.txt  src                      zookeeper-3.4.6.jar.md5
@@ -127,7 +127,7 @@ syncLimit=5
 dataDir=/tmp/zookeeper
 clientPort=2181
 [root@h101 zookeeper-3.4.6]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -136,7 +136,7 @@ clientPort=2181
 
 ### 启动服务
 
-{% highlight bash %}
+~~~
 [root@h101 zookeeper-3.4.6]# cp conf/zoo_sample.cfg conf/zoo.cfg
 [root@h101 zookeeper-3.4.6]# bin/zkServer.sh  start 
 JMX enabled by default
@@ -149,25 +149,25 @@ tcp        0      0 :::2181                     :::*                        LIST
 root      5544  0.0  0.0 103256   832 pts/2    S+   21:59   0:00          \_ grep zookeeper
 root      5516  1.5  2.4 2094296 46252 pts/2   Sl   21:58   0:01 java -Dzookeeper.log.dir=. -Dzookeeper.root.logger=INFO,CONSOLE -cp /root/zk/zookeeper-3.4.6/bin/../build/classes:/root/zk/zookeeper-3.4.6/bin/../build/lib/*.jar:/root/zk/zookeeper-3.4.6/bin/../lib/slf4j-log4j12-1.6.1.jar:/root/zk/zookeeper-3.4.6/bin/../lib/slf4j-api-1.6.1.jar:/root/zk/zookeeper-3.4.6/bin/../lib/netty-3.7.0.Final.jar:/root/zk/zookeeper-3.4.6/bin/../lib/log4j-1.2.16.jar:/root/zk/zookeeper-3.4.6/bin/../lib/jline-0.9.94.jar:/root/zk/zookeeper-3.4.6/bin/../zookeeper-3.4.6.jar:/root/zk/zookeeper-3.4.6/bin/../src/java/lib/*.jar:/root/zk/zookeeper-3.4.6/bin/../conf: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false org.apache.zookeeper.server.quorum.QuorumPeerMain /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
 [root@h101 zookeeper-3.4.6]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 服务状态
 
 
-{% highlight bash %}
+~~~
 [root@h101 zookeeper-3.4.6]# bin/zkServer.sh status
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
 Mode: standalone
 [root@h101 zookeeper-3.4.6]# 
-{% endhighlight %}
+~~~
 
 ### 重启服务
 
 
-{% highlight bash %}
+~~~
 [root@h101 zookeeper-3.4.6]# bin/zkServer.sh restart
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
@@ -178,13 +178,13 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
 Starting zookeeper ... STARTED
 [root@h101 zookeeper-3.4.6]# 
-{% endhighlight %}
+~~~
 
 
 
 ### 停止服务
 
-{% highlight bash %}
+~~~
 [root@h101 zookeeper-3.4.6]# bin/zkServer.sh stop
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
@@ -196,7 +196,7 @@ Error contacting service. It is probably not running.
 [root@h101 zookeeper-3.4.6]# ps faux | grep zookeeper
 root      5853  0.0  0.0 103256   836 pts/2    S+   22:11   0:00          \_ grep zookeeper
 [root@h101 zookeeper-3.4.6]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -209,7 +209,7 @@ root      5853  0.0  0.0 103256   836 pts/2    S+   22:11   0:00          \_ gre
 
 如果都是默认配置可以不用加
 
-{% highlight bash %}
+~~~
 [root@h101 zookeeper-3.4.6]# bin/zkCli.sh  
 Connecting to localhost:2181
 2015-12-02 22:13:42,629 [myid:] - INFO  [main:Environment@100] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
@@ -261,7 +261,7 @@ ZooKeeper -server host:port cmd args
 	delete path [version]
 	setquota -n|-b val path
 [zk: localhost:2181(CONNECTED) 1] 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -271,11 +271,11 @@ ZooKeeper -server host:port cmd args
 
 类似linux里的ls
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 15] ls /
 [zookeeper]
 [zk: localhost:2181(CONNECTED) 16] 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -285,7 +285,7 @@ ZooKeeper -server host:port cmd args
 
 > **Note:** 必须以 **`/`** 开头
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 17] create abc abc 
 Command failed: java.lang.IllegalArgumentException: Path must start with / character
 [zk: localhost:2181(CONNECTED) 18] create /abc abc
@@ -293,7 +293,7 @@ Created /abc
 [zk: localhost:2181(CONNECTED) 19] ls / 
 [abc, zookeeper]
 [zk: localhost:2181(CONNECTED) 20] 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -302,7 +302,7 @@ Created /abc
 
 获取znode内容
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 30] get /
 
 cZxid = 0x0
@@ -343,7 +343,7 @@ ephemeralOwner = 0x0
 dataLength = 3
 numChildren = 0
 [zk: localhost:2181(CONNECTED) 33] 
-{% endhighlight %}
+~~~
 
 Attribute     | Comment
 -------- | ---
@@ -365,7 +365,7 @@ numChildren|The number of children of this znode.
 
 设置znode内容
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 33] set /abc def
 cZxid = 0xa
 ctime = Thu Dec 03 14:28:05 CST 2015
@@ -392,7 +392,7 @@ ephemeralOwner = 0x0
 dataLength = 3
 numChildren = 0
 [zk: localhost:2181(CONNECTED) 35] 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -403,7 +403,7 @@ numChildren = 0
 
 > **Note:** **`/`** 无法被删除
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 35] ls / 
 [abc, zookeeper]
 [zk: localhost:2181(CONNECTED) 36] delete /
@@ -412,7 +412,7 @@ Arguments are not valid : /
 [zk: localhost:2181(CONNECTED) 38] ls /
 [zookeeper]
 [zk: localhost:2181(CONNECTED) 39] 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -421,7 +421,7 @@ Arguments are not valid : /
 可以像shell一样上下翻命令，也可使用history查看历史命令
 
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 40] history
 30 - get /
 31 - get /zookeeper
@@ -435,7 +435,7 @@ Arguments are not valid : /
 39 - help 
 40 - history
 [zk: localhost:2181(CONNECTED) 41] 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -443,7 +443,7 @@ Arguments are not valid : /
 
 感觉和get没有太大差别，只是少了内容数据
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 43] stat /def
 cZxid = 0xe
 ctime = Thu Dec 03 14:57:27 CST 2015
@@ -470,7 +470,7 @@ ephemeralOwner = 0x0
 dataLength = 3
 numChildren = 0
 [zk: localhost:2181(CONNECTED) 45]
-{% endhighlight %}
+~~~
 
 
 ---
@@ -479,7 +479,7 @@ numChildren = 0
 
 ls2 就是携带了stat信息的ls
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 60] ls /def
 []
 [zk: localhost:2181(CONNECTED) 61] ls2 /def
@@ -496,7 +496,7 @@ ephemeralOwner = 0x0
 dataLength = 3
 numChildren = 0
 [zk: localhost:2181(CONNECTED) 62]
-{% endhighlight %}
+~~~
 
 ---
 
@@ -504,7 +504,7 @@ numChildren = 0
 
 递归删除
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 74] ls /def
 [abc]
 [zk: localhost:2181(CONNECTED) 75] ls2 /def
@@ -526,7 +526,7 @@ Node not empty: /def
 [zk: localhost:2181(CONNECTED) 78] ls /
 [zookeeper]
 [zk: localhost:2181(CONNECTED) 79] 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -534,7 +534,7 @@ Node not empty: /def
 
 主动断开当前连接
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 14] ls /
 [test, zookeeper]
 [zk: localhost:2181(CONNECTED) 15] close 
@@ -545,7 +545,7 @@ Node not empty: /def
 [zk: localhost:2181(CLOSED) 16] ls /
 Not connected
 [zk: localhost:2181(CLOSED) 17] 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -553,7 +553,7 @@ Not connected
 
 连接服务
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CLOSED) 16] ls /
 Not connected
 [zk: localhost:2181(CLOSED) 17] connect localhost:2181
@@ -569,7 +569,7 @@ WatchedEvent state:SyncConnected type:None path:null
 [zk: localhost:2181(CONNECTED) 18] ls /
 [test, zookeeper]
 [zk: localhost:2181(CONNECTED) 19] 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -578,13 +578,13 @@ WatchedEvent state:SyncConnected type:None path:null
 
 退出
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 80] quit
 Quitting...
 2015-12-03 15:48:27,285 [myid:] - INFO  [main:ZooKeeper@684] - Session: 0x151665fb7430001 closed
 2015-12-03 15:48:27,294 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@512] - EventThread shut down
 [root@h101 bin]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -595,7 +595,7 @@ Quitting...
 
 > **Tip:** 历史命令的保持是在当前会话中，不论此时是否已经成功连接服务
 
-{% highlight bash %}
+~~~
 [zk: localhost:2181(CONNECTED) 20] history
 10 - ls
 11 - ls /
@@ -627,7 +627,7 @@ WATCHER::
 WatchedEvent state:SyncConnected type:None path:null
 
 [zk: localhost:2181(CONNECTED) 24] 
-{% endhighlight %}
+~~~
 
 还有一些关于权限管控和监听的命令在以后深入使用过程中再仔细研究
 

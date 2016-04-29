@@ -34,16 +34,16 @@ comments: true
 
 下载，解压然后编译
 
-{% highlight bash %}
+~~~
 wget http://download.redis.io/releases/redis-3.0.5.tar.gz
 tar zxvf redis-3.0.5.tar.gz 
 cd redis-3.0.5
 make
-{% endhighlight %}
+~~~
 
 此时编译好的命令已经存在于 **src** 目录下面
 
-{% highlight bash %}
+~~~
 [root@h102 src]# pwd
 /usr/local/src/redis-3.0.5/src
 [root@h102 src]# ls  | grep -v "\." 
@@ -55,20 +55,20 @@ redis-cli
 redis-sentinel
 redis-server
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 运行redis服务
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /usr/local/src/redis-3.0.5/src/redis-server  /etc/redis/redis6379.conf 
 [root@h102 ~]# ps faux | grep redis 
 root      5385  0.0  0.0 103256   828 pts/0    S+   20:46   0:00          \_ grep redis
 root      5380  0.4  0.3 137444  7480 ?        Ssl  20:45   0:00 /usr/local/src/redis-3.0.5/src/redis-server *:6379                   
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -76,7 +76,7 @@ root      5380  0.4  0.3 137444  7480 ?        Ssl  20:45   0:00 /usr/local/src/
 ## redis-benchmark
 
 
-{% highlight bash %}
+~~~
 [root@h102 src]# ./redis-benchmark -h 
 Invalid option "-h" or option argument missing
 
@@ -128,7 +128,7 @@ Examples:
  On user specified command lines __rand_int__ is replaced with a random integer
  with a range of values selected by the -r option.
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 
 Option     | Comment
@@ -168,7 +168,7 @@ Option     | Comment
 
 分别对以下方法进行测试
 
-{% highlight bash %}
+~~~
 PING_INLINE
 PING_BULK
 SET
@@ -184,11 +184,11 @@ LRANGE_300 (first 300 elements)
 LRANGE_500 (first 450 elements)
 LRANGE_600 (first 600 elements)
 MSET (10 keys)
-{% endhighlight %}
+~~~
 
 运行测试
 
-{% highlight bash %}
+~~~
 [root@h102 src]# ./redis-benchmark 
 ====== PING_INLINE ======
   100000 requests completed in 1.74 seconds
@@ -401,13 +401,13 @@ MSET (10 keys)
 
 
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 指定主机，端口，请求数，并发数测试
 
-{% highlight bash %}
+~~~
 [root@h102 src]# ./redis-benchmark -h localhost -p 6379 -n 100000 -c 20
 ====== PING_INLINE ======
   100000 requests completed in 1.61 seconds
@@ -607,13 +607,13 @@ MSET (10 keys)
 
 
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 使用SET测试来填充1000000keys
 
-{% highlight bash %}
+~~~
 [root@h102 src]# ./redis-benchmark -t set -n 1000000 -r 100000000
 ====== SET ======
   1000000 requests completed in 19.13 seconds
@@ -644,27 +644,27 @@ MSET (10 keys)
 
 
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 使用CSV的输出来测试本地服务的几种调用
 
 
-{% highlight bash %}
+~~~
 [root@h102 src]# ./redis-benchmark -t ping,set,get -n 100000 --csv
 "PING_INLINE","59559.26"
 "PING_BULK","54555.38"
 "SET","37078.23"
 "GET","57670.13"
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 测试指定的命令
 
-{% highlight bash %}
+~~~
 [root@h102 src]# ./redis-benchmark -r 10000 -n 10000 eval 'return redis.call("ping")' 0
 ====== eval return redis.call("ping") 0 ======
   10000 requests completed in 0.28 seconds
@@ -681,13 +681,13 @@ MSET (10 keys)
 36101.08 requests per second
 
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 使用10000个随机元素填充一个列表
 
-{% highlight bash %}
+~~~
 [root@h102 src]# ./redis-benchmark -r 10000 -n 10000 lpush mylist __rand_int__
 ====== lpush mylist __rand_int__ ======
   10000 requests completed in 0.19 seconds
@@ -706,7 +706,7 @@ MSET (10 keys)
 52910.05 requests per second
 
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 
 ---

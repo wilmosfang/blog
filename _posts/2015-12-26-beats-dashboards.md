@@ -57,7 +57,7 @@ comments: true
 
 完成上一篇《Beats 基础》后再看ES里的信息
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl localhost:9200/_cat/indices?v
 health status index               pri rep docs.count docs.deleted store.size pri.store.size 
 yellow open   logstash-2015.12.23   5   1        100            0    235.8kb        235.8kb 
@@ -65,7 +65,7 @@ yellow open   filebeat-2015.12.24   5   1       3175            0   1018.6kb    
 yellow open   logstash-2015.12.22   5   1         41            0    126.5kb        126.5kb 
 yellow open   .kibana               1   1          2            0      8.3kb          8.3kb 
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 发现已经产生了 **`filebeat-*`** 的index，并且有相当数量的文档
 
@@ -74,7 +74,7 @@ yellow open   .kibana               1   1          2            0      8.3kb    
 
 ## 下载beats dashboards
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# mkdir beats-dashboards
 [root@h102 ~]# cd beats-dashboards/
 [root@h102 beats-dashboards]# curl -L -O http://download.elastic.co/beats/dashboards/beats-dashboards-1.0.1.tar.gz
@@ -96,14 +96,14 @@ total 764
 [root@h102 beats-dashboards]# du -sh beats-dashboards-1.0.1.tar.gz 
 764K	beats-dashboards-1.0.1.tar.gz
 [root@h102 beats-dashboards]#
-{% endhighlight %}
+~~~
 
 ---
 
 ## 解压并导入
 
 
-{% highlight bash %}
+~~~
 [root@h102 beats-dashboards]# du -sh beats-dashboards-1.0.1.tar.gz 
 764K	beats-dashboards-1.0.1.tar.gz
 [root@h102 beats-dashboards]# tar -zxvf beats-dashboards-1.0.1.tar.gz 
@@ -415,13 +415,13 @@ yellow open   filebeat-2015.12.24   5   1       3179            0        1mb    
 yellow open   logstash-2015.12.22   5   1         41            0    126.5kb        126.5kb 
 yellow open   .kibana               1   1         93            0     97.6kb         97.6kb 
 [root@h102 beats-dashboards-1.0.1]# 
-{% endhighlight %}
+~~~
 
 **.kibana** 已经变大了，之前是 **8.3kb** 现在是 **97.6kb** ,原因是导入的数据都装到了这里
 
 **load.sh** 实际的作为
 
-{% highlight bash %}
+~~~
 [root@h102 beats-dashboards-1.0.1]# ls
 CHANGELOG.md  dashboards  load.sh  Makefile  README.md  release.sh  save  screenshots
 [root@h102 beats-dashboards-1.0.1]# wc -l load.sh 
@@ -484,7 +484,7 @@ done
 
 
 [root@h102 beats-dashboards-1.0.1]# 
-{% endhighlight %}
+~~~
 
 ---
 

@@ -52,7 +52,7 @@ API 以是 **`/_bulk`** 结尾的，并且跟上如下形式的 **JSON** 数据
 
 ### 数据内容格式
 
-{% highlight bash %}
+~~~
 action_and_meta_data\n
 optional_source\n
 action_and_meta_data\n
@@ -60,7 +60,7 @@ optional_source\n
 ....
 action_and_meta_data\n
 optional_source\n
-{% endhighlight %}
+~~~
 
 > **Note:** 最后的一行也必须以 **`\n`** 结尾
 
@@ -76,9 +76,9 @@ optional_source\n
 
 由于是批量操作，所以不太会直接使用命令行的方式手动指定，更多的是使用文件，如果使用文本文件，则得遵循如下格式
 
-{% highlight bash %}
+~~~
 curl -s -XPOST localhost:9200/_bulk --data-binary "@requests"
-{% endhighlight %}
+~~~
 
 > **Tip:**  **requests** 是文件名 , **`-s`** 是静默模式，不产生输出，也可以使用 **`> /dev/null`** 替代
 
@@ -89,7 +89,7 @@ curl -s -XPOST localhost:9200/_bulk --data-binary "@requests"
 
 ### 尝试不按要求索引数据
 
-{% highlight bash %}
+~~~
 [root@es-bulk tmp]# curl localhost:9200/stuff_orders/order_list/903713?pretty
 {
   "_index" : "stuff_orders",
@@ -119,7 +119,7 @@ curl -s -XPOST localhost:9200/_bulk --data-binary "@requests"
   "found" : false
 }
 [root@es-bulk tmp]#
-{% endhighlight %}
+~~~
 
 产生了报错，并且数据也的确没有加成功，原因是在校验操作请求(**`action_and_meta_data`**)时，由于不符合规范，所以报异常
 
@@ -127,7 +127,7 @@ curl -s -XPOST localhost:9200/_bulk --data-binary "@requests"
 
 解决办法是将格式纠正过来，加上换行
 
-{% highlight bash %}
+~~~
 [root@es-bulk tmp]# vim test.json 
 [root@es-bulk tmp]# cat test.json 
 {"index":{"_index":"stuff_orders","_type":"order_list","_id":903713}}
@@ -161,15 +161,15 @@ curl -s -XPOST localhost:9200/_bulk --data-binary "@requests"
   "_source":{"real_name":"刘备","user_id":48430,"address_province":"上海","address_city":"浦东新区","address_district":null,"address_street":"上海市浦东新区广兰路1弄2号345室","price":30.0,"carriage":6.0,"state":"canceled","created_at":"2013-10-24T09:09:28.000Z","payed_at":null,"goods":["营养早餐：火腿麦满分"],"position":[121.53,31.22],"weight":70.0,"height":172.0,"sex_type":"female","birthday":"1988-01-01"}
 }
 [root@es-bulk tmp]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 当数据量极大时，这样一个个改肯定不方便，这时可以使用sed脚本，能很方便的进行批量修改
 
 
-{% highlight bash %}
+~~~
 [root@es-bulk summary]# sed -ir  's/[}][}][{]/\}\}\n\{/' jjjj.json 
 [root@es-bulk summary]# less jjjj.json
-{% endhighlight %}
+~~~
 
 其实就是匹配到合适的地方加上一个换行
 
@@ -180,7 +180,7 @@ curl -s -XPOST localhost:9200/_bulk --data-binary "@requests"
 基本上只要遵循前面的操作方式，理想情况下都会很顺利地将数据导入ES，但是实现环境中，总会有各种意外，我就遇到了其中一种：内存不足
 
 
-{% highlight bash %}
+~~~
 [root@es-bulk tmp]# time curl -XPOST 'localhost:9200/stuff_orders/_bulk?pretty' --data-binary @es_data.json > /dev/null
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -191,28 +191,28 @@ real	0m5.351s
 user	0m0.161s
 sys	0m0.919s
 [root@es-bulk tmp]#
-{% endhighlight %}
+~~~
 
 当时百思不得其解，已经反复确认了数据格式无误，并且随机选取其中一些进行导入测试也没发现问题，但只要整体一导就出问题，而且每次都一样
 
 
-{% highlight bash %}
+~~~
 [root@es-bulk tmp]# free -m 
              total       used       free     shared    buffers     cached
 Mem:          3949       3548        400          0          1        196
 -/+ buffers/cache:       3349        599
 Swap:         3951        237       3714
 [root@es-bulk tmp]#
-{% endhighlight %}
+~~~
 
 系统内存明明还有多余，但是再看到JAVA内存时，就隐约感觉到了原因
 
-{% highlight bash %}
+~~~
 [root@es-bulk tmp]# ps faux | grep elas
 root     14479  0.0  0.0 103252   816 pts/1    S+   16:05   0:00          \_ grep elas
 495      19045  0.2 25.6 3646816 1036220 ?     Sl   Mar07  25:45 /usr/bin/java -Xms256m -Xmx1g -Djava.awt.headless=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -XX:+DisableExplicitGC -Dfile.encoding=UTF-8 -Djna.nosys=true -Des.path.home=/usr/share/elasticsearch -cp /usr/share/elasticsearch/lib/elasticsearch-2.1.1.jar:/usr/share/elasticsearch/lib/* org.elasticsearch.bootstrap.Elasticsearch start -p /var/run/elasticsearch/elasticsearch.pid -d -Des.default.path.home=/usr/share/elasticsearch -Des.default.path.logs=/var/log/elasticsearch -Des.default.path.data=/var/lib/elasticsearch -Des.default.path.conf=/etc/elasticsearch
 [root@es-bulk tmp]#
-{% endhighlight %}
+~~~
 
 ES和lucene是使用的JAVA，JAVA的内存分配大小决定了它们的发挥空间，这里的初始内存为 **256M** ，这也是大多数情况下的默认配置，但是应对当前的实际数据大小 **265M** 时就不够了，虽然官方说会尽量减小使用buffer，但实测下来，系统应该会是首先尽量使用内存，通过导入内存的方式来起到显著加速的效果，但是内存不够时，就直接报错退出了
 
@@ -224,7 +224,7 @@ ES和lucene是使用的JAVA，JAVA的内存分配大小决定了它们的发挥�
 
 第一种方式，要求停应用和业务，在某些情况下是不具备条件的(得统一协调时间窗口)，那么就尝试使用第二种方式,好在text文档的切分也可以使用sed快速完成
 
-{% highlight bash %}
+~~~
 [root@es-bulk tmp]# sed  -rn '1,250000p' es_data.json  > es_data1.json
 [root@es-bulk tmp]# sed  -rn '250001,500000p' es_data.json  > es_data2.json
 [root@es-bulk tmp]# sed  -rn '500001,750000p' es_data.json  > es_data3.json
@@ -243,12 +243,12 @@ ES和lucene是使用的JAVA，JAVA的内存分配大小决定了它们的发挥�
 [root@es-bulk tmp]# tail es_data2.json
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 再依次进行导入，就发现没问题了
 
-{% highlight bash %}
+~~~
 [root@es-bulk tmp]# time curl -XPOST 'localhost:9200/stuff_orders/_bulk?pretty' --data-binary @es_data1.json > /dev/null
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -258,7 +258,7 @@ real	0m33.308s
 user	0m0.100s
 sys	0m0.390s
 [root@es-bulk tmp]#
-{% endhighlight %}
+~~~
 
 
 ---

@@ -33,13 +33,13 @@ comments: true
 **Solr** 运行在 **Java 7** 之上
 
 
-{% highlight bash %}
+~~~
 [root@h102 solr]# java  -version
 java version "1.7.0_65"
 OpenJDK Runtime Environment (rhel-2.5.1.2.el6_5-x86_64 u65-b17)
 OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 [root@h102 solr]# 
-{% endhighlight %}
+~~~
 
 >Apache Solr runs of Java 7 or greater, Java 8 is verified to be compatible and may bring some performance improvements. When using Oracle Java 7 or OpenJDK 7, be sure to not use the GA build 147 or update versions u40, u45 and u51! We recommend using u55 or later.
 >
@@ -61,7 +61,7 @@ OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 > **Tip:** 里面列举了很多地址，可以选取一个离自己最近的最快的站点下载
 
 
-{% highlight bash %}
+~~~
 [root@h102 solr]# tar -zxvf solr-5.3.0.tgz 
 solr-5.3.0/LUCENE_CHANGES.txt
 solr-5.3.0/contrib/analysis-extras/lib/
@@ -78,14 +78,14 @@ solr-5.3.0  solr-5.3.0.tgz
 [root@h102 solr-5.3.0]# ls
 bin  CHANGES.txt  contrib  dist  docs  example  licenses  LICENSE.txt  LUCENE_CHANGES.txt  NOTICE.txt  README.txt  server
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
 
 ## 启动solr
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# bin/solr start -e cloud -noprompt
 
 Welcome to the SolrCloud example!
@@ -134,7 +134,7 @@ Successfully set-property updateHandler.autoSoftCommit.maxTime to 3000
 SolrCloud example running, please visit: http://localhost:8983/solr 
 
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -142,10 +142,10 @@ SolrCloud example running, please visit: http://localhost:8983/solr
 
 修改 **/etc/sysconfig/iptables** 在 **filter** 中加入以下内容，然后reload
 
-{% highlight bash %}
+~~~
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 8983 -j ACCEPT 
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 7574 -j ACCEPT 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -174,7 +174,7 @@ SolrCloud example running, please visit: http://localhost:8983/solr
 
 使用 **bin/post** 可以方便的添加数据
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# bin/post -h 
 
 Usage: post -c <collection> [OPTIONS] <files|directories|urls|-d ["...",...]>
@@ -217,12 +217,12 @@ Examples:
 * Data as string: bin/post -c signals -type text/csv -out yes -d $'id,value\n1,0.47'
 
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 
 添加一个目录里所有内容到solr
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# du -sh docs/
 70M	docs/
 [root@h102 solr-5.3.0]# 
@@ -243,13 +243,13 @@ Indexing directory docs/solr-dataimporthandler/resources (0 files, depth=2)
 COMMITting Solr index changes to http://localhost:8983/solr/gettingstarted/update...
 Time spent: 0:02:41.136
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 索引XML
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# bin/post -c gettingstarted example/exampledocs/*.xml
 java -classpath /data/solr/solr-5.3.0/dist/solr-core-5.3.0.jar -Dauto=yes -Dc=gettingstarted -Ddata=files org.apache.solr.util.SimplePostTool example/exampledocs/gb18030-example.xml example/exampledocs/hd.xml example/exampledocs/ipod_other.xml example/exampledocs/ipod_video.xml example/exampledocs/manufacturers.xml example/exampledocs/mem.xml example/exampledocs/money.xml example/exampledocs/monitor2.xml example/exampledocs/monitor.xml example/exampledocs/mp500.xml example/exampledocs/sd500.xml example/exampledocs/solr.xml example/exampledocs/utf8-example.xml example/exampledocs/vidcard.xml
 SimplePostTool version 5.0.0
@@ -273,14 +273,14 @@ POSTing file vidcard.xml (application/xml) to [base]
 COMMITting Solr index changes to http://localhost:8983/solr/gettingstarted/update...
 Time spent: 0:00:23.754
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 索引JSON
 
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# bin/post -c gettingstarted example/exampledocs/books.json
 java -classpath /data/solr/solr-5.3.0/dist/solr-core-5.3.0.jar -Dauto=yes -Dc=gettingstarted -Ddata=files org.apache.solr.util.SimplePostTool example/exampledocs/books.json
 SimplePostTool version 5.0.0
@@ -291,14 +291,14 @@ POSTing file books.json (application/json) to [base]
 COMMITting Solr index changes to http://localhost:8983/solr/gettingstarted/update...
 Time spent: 0:00:05.241
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 索引CSV
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# bin/post -c gettingstarted example/exampledocs/books.csv
 java -classpath /data/solr/solr-5.3.0/dist/solr-core-5.3.0.jar -Dauto=yes -Dc=gettingstarted -Ddata=files org.apache.solr.util.SimplePostTool example/exampledocs/books.csv
 SimplePostTool version 5.0.0
@@ -309,7 +309,7 @@ POSTing file books.csv (text/csv) to [base]
 COMMITting Solr index changes to http://localhost:8983/solr/gettingstarted/update...
 Time spent: 0:00:00.512
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -345,7 +345,7 @@ Time spent: 0:00:00.512
 
 ## 删除数据
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# bin/post -c gettingstarted -d "<delete><id>/data/solr/solr-5.3.0/docs/quickstart.html</id></delete>"
 java -classpath /data/solr/solr-5.3.0/dist/solr-core-5.3.0.jar -Dauto=yes -Dc=gettingstarted -Ddata=args org.apache.solr.util.SimplePostTool <delete><id>/data/solr/solr-5.3.0/docs/quickstart.html</id></delete>
 SimplePostTool version 5.0.0
@@ -353,7 +353,7 @@ POSTing args to http://localhost:8983/solr/gettingstarted/update...
 COMMITting Solr index changes to http://localhost:8983/solr/gettingstarted/update...
 Time spent: 0:00:00.292
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 再使用 **http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/browse?q=example** 就搜不到了
 
@@ -368,7 +368,7 @@ Time spent: 0:00:00.292
 
 ### 任意匹配
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl  "http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/select?q=*%3A*&wt=json&indent=true"
 {
   "responseHeader":{
@@ -409,13 +409,13 @@ Time spent: 0:00:00.292
         "_version_":1511824585009397760}]
   }}
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 单关键字匹配
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=foundation"
 {
   "responseHeader":{
@@ -457,7 +457,7 @@ Time spent: 0:00:00.292
         "_version_":1511824702977343488}]
   }}
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -482,7 +482,7 @@ fl       | \*:\*
 **rows=5** 只返回 **5** 条
 
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=foundation&fl=id&start=30&rows=5"
 {
   "responseHeader":{
@@ -508,7 +508,7 @@ fl       | \*:\*
         "id":"/data/solr/solr-5.3.0/docs/solr-clustering/org/apache/solr/handler/clustering/carrot2/class-use/LuceneCarrot2TokenizerFactory.html"}]
   }}
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -518,7 +518,7 @@ fl       | \*:\*
 
 比如只搜索 **\_version\_** 为 **1511824568810995712** 的文档 
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=_version_:1511824568810995712"
 {
   "responseHeader":{
@@ -544,7 +544,7 @@ fl       | \*:\*
         "_version_":1511824568810995712}]
   }}
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -553,7 +553,7 @@ fl       | \*:\*
 如果要进行多关键字搜索，就使用 **+**  ，例如： **q=ui+test**  或 **q='ui+test'**
 
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&fl=id&rows=3&q=test"
 {
   "responseHeader":{
@@ -612,7 +612,7 @@ fl       | \*:\*
         "id":"/data/solr/solr-5.3.0/docs/solr-test-framework/org/apache/solr/analysis/package-frame.html"}]
   }}
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 同时匹配多个关键字的结果会排到更前列
 
@@ -623,7 +623,7 @@ fl       | \*:\*
 
 **+** **(%2B)** 前缀代表必须包含
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&fl=id&rows=3&q=%2Bone+%2Bthree"
 {
   "responseHeader":{
@@ -644,7 +644,7 @@ fl       | \*:\*
         "id":"/data/solr/solr-5.3.0/docs/solr-core/org/apache/solr/handler/DumpRequestHandler.html"}]
   }}
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 >By default, when you search for multiple terms and/or phrases in a single query, Solr will only require that one of them is present in order for a document to match. Documents containing more terms will be sorted higher in the results list.
 >
@@ -657,7 +657,7 @@ fl       | \*:\*
 
 **-** 前缀代表必须不包含指定关键字
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&fl=id&rows=3&q=%2Btwo+-three"
 {
   "responseHeader":{
@@ -678,7 +678,7 @@ fl       | \*:\*
         "id":"/data/solr/solr-5.3.0/docs/solr-core/org/apache/solr/search/function/distance/package-summary.html"}]
   }}
 [root@h102 solr-5.3.0]#
-{% endhighlight %}
+~~~
 
 > **Note:** 所谓的不包含并不是绝对的，比如不包含 **one** 但可以包含 **none** ，结果取决于分词算法
 
@@ -699,7 +699,7 @@ fl       | \*:\*
 
 
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/select?q=*%3A*&wt=json&indent=true&rows=0&facet=true&facet.field=stream_size"
 {
   "responseHeader":{
@@ -823,7 +823,7 @@ fl       | \*:\*
     "facet_intervals":{},
     "facet_heatmaps":{}}}
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -843,7 +843,7 @@ fl       | \*:\*
 
 **facet.range.other=after** 其它的排最后
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://192.168.100.102:7574/solr/gettingstarted_shard1_replica1/select?q=*%3A*&wt=json&indent=true&rows=0&facet=true&facet.range=stream_size&f.stream_size.facet.range.start=0&&f.stream_size.facet.range.end=9000&f.stream_size.facet.range.gap=1000&facet.range.other=after"
 {
   "responseHeader":{
@@ -885,7 +885,7 @@ fl       | \*:\*
     "facet_intervals":{},
     "facet_heatmaps":{}}}
 [root@h102 solr-5.3.0]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -895,7 +895,7 @@ fl       | \*:\*
 
 **facet.pivot=stream_size,title**  先根据 **stream_size** 分组 ，再根据 **title** 分组
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# curl "http://localhost:8983/solr/gettingstarted/select?q=*:*&rows=0&wt=json&indent=on&facet=on&facet.pivot=stream_size,title"
 {
   "responseHeader":{
@@ -1037,7 +1037,7 @@ fl       | \*:\*
               "value":"org.apache.solr.store.hdfs (Solr 5.3.0 API)",
               "count":1}]}]}}}
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1046,7 +1046,7 @@ fl       | \*:\*
 
 正常运行的状态下，会有两个 **java** 分别监听在 **8983** 和 **7574**
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]#  ps faux | grep solr 
 root     63799  0.0  0.0 103252   828 pts/1    S+   13:45   0:00  |       \_ grep solr
 root      3579  0.8 13.0 2002356 513088 pts/0  Sl   Sep09  11:10 java -server -Xss256k -Xms512m -Xmx512m -XX:NewRatio=3 -XX:SurvivorRatio=4 -XX:TargetSurvivorRatio=90 -XX:MaxTenuringThreshold=8 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ConcGCThreads=4 -XX:ParallelGCThreads=4 -XX:+CMSScavengeBeforeRemark -XX:PretenureSizeThreshold=64m -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=50 -XX:CMSMaxAbortablePrecleanTime=6000 -XX:+CMSParallelRemarkEnabled -XX:+ParallelRefProcEnabled -XX:CMSFullGCsBeforeCompaction=1 -XX:CMSTriggerPermRatio=80 -verbose:gc -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -Xloggc:/data/solr/solr-5.3.0/example/cloud/node1/solr/../logs/solr_gc.log -DzkClientTimeout=15000 -DzkRun -Djetty.port=8983 -DSTOP.PORT=7983 -DSTOP.KEY=solrrocks -Duser.timezone=UTC -Djetty.home=/data/solr/solr-5.3.0/server -Dsolr.solr.home=/data/solr/solr-5.3.0/example/cloud/node1/solr -Dsolr.install.dir=/data/solr/solr-5.3.0 -Dlog4j.configuration=file:/data/solr/solr-5.3.0/example/resources/log4j.properties -jar start.jar -XX:OnOutOfMemoryError=/data/solr/solr-5.3.0/bin/oom_solr.sh 8983 /data/solr/solr-5.3.0/example/cloud/node1/solr/../logs --module=http
@@ -1082,29 +1082,29 @@ tcp        0      0 ::ffff:192.168.100.10:33946 ::ffff:192.168.100.102:7574 TIME
 tcp        0      0 ::ffff:192.168.100.10:33943 ::ffff:192.168.100.102:7574 TIME_WAIT   
 tcp        0      0 ::ffff:127.0.0.1:59150      ::ffff:127.0.0.1:7574       TIME_WAIT   
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 使用如下命令停止服务 
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# bin/solr stop -all
 Sending stop command to Solr running on port 8983 ... waiting 5 seconds to allow Jetty process 3579 to stop gracefully.
 Sending stop command to Solr running on port 7574 ... waiting 5 seconds to allow Jetty process 3799 to stop gracefully.
 Solr process 3799 is still running; forcefully killing it now.
 Killed process 3799
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 原来的两个 **java** 分别监听在 **8983** 和 **7574** ，现在已经没有了
 
 > **Tip:** 监听的端口会马上消失，但是还有一些残留的连接处于 **TIME_WAIT** 状态，timeout 后会自动消失，但此刻管理界面已经无法访问了
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# ps fuax | grep solr 
 root     64883  0.0  0.0 103252   828 pts/1    S+   13:56   0:00  |       \_ grep solr
 [root@h102 solr-5.3.0]# netstat  -ant | grep -E '(8983|7574)'
 [root@h102 solr-5.3.0]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1114,7 +1114,7 @@ root     64883  0.0  0.0 103252   828 pts/1    S+   13:56   0:00  |       \_ gre
 
 数据保存到如下路径
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# tree example/cloud/
 example/cloud/
 ├── node1
@@ -1167,18 +1167,18 @@ example/cloud/
 
 24 directories, 23 files
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 如果要删除数据，确保服务已经停止的前提下，通过如下方式
 
-{% highlight bash %}
+~~~
 [root@h102 solr-5.3.0]# rm -Rf  example/cloud/
 [root@h102 solr-5.3.0]# tree example/cloud/
 example/cloud/ [error opening dir]
 
 0 directories, 0 files
 [root@h102 solr-5.3.0]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1232,7 +1232,7 @@ example/cloud/ [error opening dir]
 
 使用下面的脚本可以快速的准备出试验环境
 
-{% highlight bash %}
+~~~
 date ;
 bin/solr start -e cloud -noprompt ;
   open http://localhost:8983/solr ;
@@ -1244,7 +1244,7 @@ bin/solr start -e cloud -noprompt ;
   bin/post -c gettingstarted -d "<delete><id>SP2514N</id></delete>" ;
   bin/solr healthcheck -c gettingstarted ;
 date ;
-{% endhighlight %}
+~~~
 
 
 

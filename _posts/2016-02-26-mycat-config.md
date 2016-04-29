@@ -169,7 +169,7 @@ Mycat 其实只是一个数据中间件，或数据库代理
 
 Mycat 的大部分配置都是以 **XML** 的格式设定的
 
-{% highlight bash %}
+~~~
 [root@h102 mycat]# ll conf/schema.xml 
 -rwxrwxrwx 1 root root 4129 Feb 17 10:30 conf/schema.xml
 [root@h102 mycat]# ll conf/rule.xml 
@@ -179,7 +179,7 @@ Mycat 的大部分配置都是以 **XML** 的格式设定的
 [root@h102 mycat]# ll conf/wrapper.conf 
 -rwxrwxrwx 1 root root 4318 Feb 24 21:20 conf/wrapper.conf
 [root@h102 mycat]#  
-{% endhighlight %}
+~~~
 
 
 Conf | Comment
@@ -198,7 +198,7 @@ conf/rule.xml| 用来定义分片规则
 
 我们使用这个文件来配置JVM的相关运行参数
 
-{% highlight bash %}
+~~~
 [root@h102 conf]# cat wrapper.conf | egrep "(Xm|MaxDirectMemorySize)"
 #wrapper.java.additional.5=-XX:MaxDirectMemorySize=2G
 wrapper.java.additional.5=-XX:MaxDirectMemorySize=256m
@@ -207,7 +207,7 @@ wrapper.java.additional.10=-Xmx512m
 #wrapper.java.additional.11=-Xms1G
 wrapper.java.additional.11=-Xms128m
 [root@h102 conf]# 
-{% endhighlight %}
+~~~
 
 以上配置是常用的对JVM内存的控制
 
@@ -222,45 +222,45 @@ XML的格式就是各类标签
 
 这个标签用来框定注释范围
 
-{% highlight bash %}
+~~~
 <!--
 ...
 ...
 -->
-{% endhighlight %}
+~~~
 
 
 #### mycat:server
 
 这个标签用来框定服务配置范围
 
-{% highlight bash %}
+~~~
 <mycat:server xmlns:mycat="http://org.opencloudb/">
 </mycat:server>
-{% endhighlight %}
+~~~
 
 
 #### system
 
 这个标签用来框定系统配置范围，用来保存几乎所有mycat需要的系统配置信息(其在代码内直接的映射类为 **SystemConfig** )
 
-{% highlight bash %}
+~~~
 <system>
 </system>
-{% endhighlight %}
+~~~
 
 #### property
 
 
 用来设定服务的具体参数
 
-{% highlight bash %}
+~~~
 <property name="defaultSqlParser">druidparser</property>
 <property name="processors">2</property>
 <property name="serverPort">8066</property> 
 <property name="managerPort">9066</property>
 <property name="bindIp">0.0.0.0</property> 
-{% endhighlight %}
+~~~
 
 
 #### user
@@ -269,12 +269,12 @@ XML的格式就是各类标签
 
 这里设定了一个 **cc** 的租户，密码为 **cc** , 可以访问 **cctest** 的数据库(schema)
 
-{% highlight bash %}
+~~~
 <user name="cc">
 	<property name="password">cc</property>
 	<property name="schemas">cctest</property>
 </user>
-{% endhighlight %}
+~~~
 
 ---
 
@@ -285,10 +285,10 @@ XML的格式就是各类标签
 
 这个标签用来框定shema的配置范围
 
-{% highlight bash %}
+~~~
 <mycat:schema xmlns:mycat="http://org.opencloudb/">
 </mycat:schema>
-{% endhighlight %}
+~~~
 
 #### schema
 
@@ -297,12 +297,12 @@ XML的格式就是各类标签
 
 这里配置了一个名叫 **cctest** 的逻辑库，不检查SQL，默认limit为100(sql中不添加limit的情况下，mycat会隐式添加，以避免返回太多结果)，其中包含两个逻辑表，**catworld** 和 **catworld4** ，**catworld** 有三个分片，使用 **mod-long** 的规则，**catworld4** 有四个分片，使用 **mod4-long** 的分片规则
 
-{% highlight bash %}
+~~~
 <schema name="cctest" checkSQLschema="false" sqlMaxLimit="100">
 	       <table name="catworld"  dataNode="sd1,sd2,sd3"  rule="mod-long" />
 	       <table name="catworld4"  dataNode="sd1,sd2,sd3,sd4"  rule="mod4-long" />
 </schema>
-{% endhighlight %}
+~~~
 
 
 Attribute | Comment
@@ -324,12 +324,12 @@ rule| 指定分片规则
 
 这个标签用来定义数据节点(数据分片存放的地方)
 
-{% highlight bash %}
+~~~
 <dataNode name="sd1" dataHost="h101" database="my1" />
 <dataNode name="sd2" dataHost="h101" database="my2" />
 <dataNode name="sd3" dataHost="h101" database="my3" />
 <dataNode name="sd4" dataHost="h202" database="my4" />
-{% endhighlight %}
+~~~
 
 
 Attribute | Comment
@@ -343,7 +343,7 @@ database| 指定数据库实例上的实际数据库名(一定要和真实库一
 
 节点主机的相关配置
 
-{% highlight bash %}
+~~~
 <dataHost name="h101" maxCon="100" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
 		<heartbeat>select user()</heartbeat>
 		<writeHost host="h101M1" url="192.168.100.101:3306" user="root" password="mysql">
@@ -356,7 +356,7 @@ database| 指定数据库实例上的实际数据库名(一定要和真实库一
 		<!-- can have multi read hosts -->
 		</writeHost>
 </dataHost>
-{% endhighlight %}
+~~~
 
 Attribute | Comment
 -------- | ---
@@ -397,10 +397,10 @@ password|连接密码
 
 框定rule的配置范围
 
-{% highlight bash %}
+~~~
 <mycat:rule xmlns:mycat="http://org.opencloudb/">
 </mycat:rule>
-{% endhighlight %}
+~~~
 
 #### tableRule
 
@@ -408,7 +408,7 @@ password|连接密码
 
 定义了一个 **mod-long** 的分片规则，对 **id** 列进行分片，使用 **mod-long** 算法；定义了一个 **mod4-long** 的分片规则，对 **id** 列进行分片，使用 **mod4-long** 算法
 
-{% highlight bash %}
+~~~
 <tableRule name="mod-long">
                 <rule>
                         <columns>id</columns>
@@ -421,13 +421,13 @@ password|连接密码
                         <algorithm>mod4-long</algorithm>
                 </rule>
 </tableRule>
-{% endhighlight %}
+~~~
 
 
 #### function
 
 
-{% highlight bash %}
+~~~
 <function name="mod-long" class="org.opencloudb.route.function.PartitionByMod">
                 <!-- how many data nodes -->
                 <property name="count">3</property>
@@ -436,7 +436,7 @@ password|连接密码
                 <!-- how many data nodes -->
                 <property name="count">4</property>
 </function>
-{% endhighlight %}
+~~~
 
 Attribute | Comment
 -------- | ---

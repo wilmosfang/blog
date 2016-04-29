@@ -37,7 +37,7 @@ comments: true
 
 使用 **`curl -L http://cpanmin.us | perl - --sudo Dancer2`** 进行安装
 
-{% highlight bash %}
+~~~
 [root@dancer-test ~]# curl -L http://cpanmin.us | perl - --sudo Dancer2 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -631,7 +631,7 @@ Successfully installed Dancer2-0.163000
 [root@dancer-test ~]# echo $?
 0
 [root@dancer-test ~]# 
-{% endhighlight %}
+~~~
 
 > **Note:** 由于网络原因可能部分包在下载过程中会出错，只要重新在执行一次就可以了
 
@@ -644,7 +644,7 @@ Successfully installed Dancer2-0.163000
 
 首先创建一个用户(最好不要使用root的身份运行web app)
 
-{% highlight bash %}
+~~~
 [root@dancer-test ~]# tail -n 2 /etc/passwd
 hunter:x:503:503::/home/hunter:/bin/bash
 autotools:x:504:504::/home/autotools:/bin/bash
@@ -655,12 +655,12 @@ dancer:x:505:505::/home/dancer:/bin/bash
 [root@dancer-test ~]# su - dancer 
 [dancer@dancer-test ~]$ ls
 [dancer@dancer-test ~]$ 
-{% endhighlight %}
+~~~
 
 
 创建一个名字叫 **TEST-APP** 的应用
 
-{% highlight bash %}
+~~~
 [dancer@dancer-test ~]$ dancer2  version
 Dancer2 0.163000
 [dancer@dancer-test ~]$ dancer2  -a TEST::APP
@@ -700,7 +700,7 @@ Dancer2 0.163000
 [dancer@dancer-test ~]$ ls
 TEST-APP
 [dancer@dancer-test ~]$ 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -709,7 +709,7 @@ TEST-APP
 
 使用 **`plackup -r bin/app.psgi`** 启动应用
 
-{% highlight bash %}
+~~~
 [dancer@dancer-test ~]$ cd TEST-APP/
 [dancer@dancer-test TEST-APP]$ ls
 bin  config.yml  cpanfile  environments  lib  Makefile.PL  MANIFEST  MANIFEST.SKIP  public  t  views 
@@ -720,15 +720,15 @@ HTTP::Server::PSGI: Accepting connections at http://0:5000/
 ...
 ...
 
-{% endhighlight %}
+~~~
 
 当前的窗口被抢占并且启动了一个监听端口 **5000**
 
-{% highlight bash %}
+~~~
 [root@dancer-test ~]# netstat  -ant | grep 5000
 tcp        0      0 0.0.0.0:5000                0.0.0.0:*                   LISTEN      
 [root@dancer-test ~]# 
-{% endhighlight %}
+~~~
 
 此时可以访问此服务器的 **5000** 端口
 
@@ -738,7 +738,7 @@ tcp        0      0 0.0.0.0:5000                0.0.0.0:*                   LIST
 
 这是第一次请求中前端产生的访问日志
 
-{% highlight bash %}
+~~~
 [TEST::APP:7832] core @2015-11-27 17:41:17> looking for get / in /usr/local/share/perl5/Dancer2/Core/App.pm l. 1205
 [TEST::APP:7832] core @2015-11-27 17:41:17> Entering hook core.app.before_request in (eval 66) l. 1
 [TEST::APP:7832] core @2015-11-27 17:41:17> Entering hook core.app.after_request in (eval 66) l. 1
@@ -746,14 +746,14 @@ tcp        0      0 0.0.0.0:5000                0.0.0.0:*                   LIST
 192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /css/style.css HTTP/1.1" 200 2850 "http://192.168.20.105:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
 192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /images/perldancer-bg.jpg HTTP/1.1" 200 7125 "http://192.168.20.105:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
 192.168.2.59 - - [27/Nov/2015:17:41:17 +0800] "GET /images/perldancer.jpg HTTP/1.1" 200 2240 "http://192.168.20.105:5000/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
-{% endhighlight %}
+~~~
 
 
 ---
 
 ## 目录结构
 
-{% highlight bash %}
+~~~
 [dancer@dancer-test TEST-APP]$ ls
 bin  config.yml  cpanfile  environments  lib  Makefile.PL  MANIFEST  MANIFEST.SKIP  public  t  views
 [dancer@dancer-test TEST-APP]$ tree
@@ -795,7 +795,7 @@ bin  config.yml  cpanfile  environments  lib  Makefile.PL  MANIFEST  MANIFEST.SK
 
 11 directories, 23 files
 [dancer@dancer-test TEST-APP]$ 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -805,7 +805,7 @@ bin  config.yml  cpanfile  environments  lib  Makefile.PL  MANIFEST  MANIFEST.SK
 
 首先要配置cpan
 
-{% highlight bash %}
+~~~
 [root@dancer-test ~]# perl -MCPAN -e shell 
 Sorry, we have to rerun the configuration dialog for CPAN.pm due to
 some missing parameters...
@@ -1043,7 +1043,7 @@ Other
  reload cpan   load CPAN.pm again      reload index  load newer indices
  autobundle    Snapshot                recent        latest CPAN uploads
 cpan[2]> 
-{% endhighlight %}
+~~~
 
 > **Note:**  
 >
@@ -1060,20 +1060,20 @@ cpan[2]>
 
 cpanm
 
-{% highlight bash %}
+~~~
 cpanm Expect
-{% endhighlight %}
+~~~
 
 CPAN shell
 
-{% highlight bash %}
+~~~
 perl -MCPAN -e shell
 install Expect
-{% endhighlight %}
+~~~
 
 或直接在cpan中进行安装
 
-{% highlight bash %}
+~~~
 cpan[2]> install Expect
 CPAN: Storable loaded ok (v2.20)
 CPAN: LWP::UserAgent loaded ok (v5.833)
@@ -1384,7 +1384,7 @@ cpan[3]> quit
 No history written (no histfile specified).
 Lockfile removed.
 [root@dancer-test ~]# 
-{% endhighlight %}
+~~~
 
 > **Note:** cpan会自动发现依赖，并且尝试解决依赖，请求同意时要允许
 
@@ -1397,14 +1397,14 @@ MVC(Model-View-Controller) 是一种架构，或者说是设计理念，不同�
 
 下面是大体的数据流向图
 
-{% highlight bash %}
+~~~
 MVC
    +------------------------+ 
    |                        V 
 +------+    +----+    +----------+     +-----+     +--+
 |client|<---|view|<---|controller|<--->|model|<--->|DB|
 +------+    +----+    +----------+     +-----+     +--+
-{% endhighlight %}
+~~~
 
 也有如此的
 
@@ -1418,7 +1418,7 @@ MVC
 
 在dancer中 **`TEST-APP/lib/TEST/APP.pm`** 是起控制作用的，在 **true** 之前添加以下几行
 
-{% highlight bash %}
+~~~
 get '/check_backup' => sub{
 	template 'check_class/check_database_backup';
 };
@@ -1439,7 +1439,7 @@ post '/check_backup' => sub{
 	return  '<pre>'.$tmp_resault.'</pre>';
 	
 };
-{% endhighlight %}
+~~~
 
 ---
 
@@ -1447,7 +1447,7 @@ post '/check_backup' => sub{
 
 在dancer中 **`TEST-APP/views/`** 是控制显示的，创建 **TEST-APP/views/check_class/check_database_backup.tt**
 
-{% highlight bash %}
+~~~
 [dancer@dancer-test ~]$ cat TEST-APP/views/check_class/check_database_backup.tt 
 <form class="form-cr" method="POST" action="/check_backup">
   <h2 class="form-cr-heading">Please input the Email address :</h2>
@@ -1459,14 +1459,14 @@ Type your Email address here...
 </form>
 
 [dancer@dancer-test ~]$ 
-{% endhighlight %}
+~~~
 
 ---
 
 
 ### 添加功能逻辑[M]
 
-{% highlight bash %}
+~~~
 [dancer@dancer-test bin]$ cat D_check_backup_for_db.pl 
 #!/usr/bin/perl
 
@@ -1547,7 +1547,7 @@ EOF
 exit  0;
 }
 [dancer@dancer-test bin]$ 
-{% endhighlight %}
+~~~
 
 > **Note:** 一般而言，密码不要直接写到功能逻辑里面，不灵活，不安全
 

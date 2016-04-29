@@ -35,7 +35,7 @@ comments: true
 
 ### 下载软件包
 
-{% highlight bash %}
+~~~
 [root@h101 src]# wget https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz 
 --2015-10-28 13:43:57--  https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz
 Resolving www.snort.org... 104.20.60.203, 104.20.59.203, 2400:cb00:2048:1::6814:3bcb, ...
@@ -72,7 +72,7 @@ Saving to: “snort-2.9.7.6.tar.gz.1”
 2015-10-28 14:15:59 (5.22 KB/s) - “snort-2.9.7.6.tar.gz.1” saved [6198052/6198052]
 
 [root@h101 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -81,7 +81,7 @@ Saving to: “snort-2.9.7.6.tar.gz.1”
 
 #### 安装daq-2.0.6
 
-{% highlight bash %}
+~~~
 [root@h101 snort]# ll
 total 6560
 -rw-r--r-- 1 root root  514687 Oct 28 13:53 daq-2.0.6.tar.gz
@@ -103,11 +103,11 @@ drwxr-xr-x 6 1000 1000    4096 Jul 17 05:06 daq-2.0.6
 -rw-r--r-- 1 root root  514687 Oct 28 13:53 daq-2.0.6.tar.gz
 -rw-r--r-- 1 root root 6198052 Oct 28 13:53 snort-2.9.7.6.tar.gz
 [root@h101 snort]# 
-{% endhighlight %}
+~~~
 
 ##### 安装报错一
 
-{% highlight bash %}
+~~~
 [root@h101 snort]# cd daq-2.0.6
 [root@h101 daq-2.0.6]# ls
 aclocal.m4  ChangeLog  config.guess  config.sub  configure.ac  daq.dsp  install-sh  m4           Makefile.in  os-daq-modules  sfbpf
@@ -136,17 +136,17 @@ configure: error: Your operating system's lex is insufficient to compile
 [root@h101 daq-2.0.6]# echo $?
 1
 [root@h101 daq-2.0.6]#
-{% endhighlight %}
+~~~
 
 错误原因是缺少 **bison** 和 **flex** ，不仅要安装它们的rpm包，还要安装开发包
 
-{% highlight bash %}
+~~~
 yum install flex.x86_64  flex-devel.x86_64  bison.x86_64  bison-devel.x86_64 
-{% endhighlight %}
+~~~
 
 解决办法
 
-{% highlight bash %}
+~~~
 [root@h101 daq-2.0.6]# yum install flex-devel.x86_64  bison-devel.x86_64 
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -238,13 +238,13 @@ Installed:
 
 Complete!
 [root@h101 daq-2.0.6]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ##### 安装报错二
 
-{% highlight bash %}
+~~~
 [root@h101 daq-2.0.6]# ./configure
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
@@ -282,14 +282,14 @@ checking for pcap_lib_version... checking for pcap_lib_version in -lpcap... (cac
 [root@h101 daq-2.0.6]# echo $?
 1
 [root@h101 daq-2.0.6]# 
-{% endhighlight %}
+~~~
 
 报错原因是有 **Libpcap** 的依赖关系
 
 
 解决办法: 安装依赖包
 
-{% highlight bash %}
+~~~
 [root@h101 daq-2.0.6]# yum list all | grep  -i  Libpcap 
 libpcap.x86_64                              14:1.4.0-1.20130826git2dbcaa1.el6
 libpcap.i686                                14:1.4.0-4.20130826git2dbcaa1.el6
@@ -352,12 +352,12 @@ Updated:
 
 Complete!
 [root@h101 daq-2.0.6]#
-{% endhighlight %}
+~~~
 
 
 再次配置，就成功了
 
-{% highlight bash %}
+~~~
 [root@h101 daq-2.0.6]# ./configure
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
@@ -550,11 +550,11 @@ Build netmap DAQ module.... : no
 [root@h101 daq-2.0.6]# echo $?
 0
 [root@h101 daq-2.0.6]#
-{% endhighlight %}
+~~~
 
 然后编译和安装
 
-{% highlight bash %}
+~~~
 [root@h101 daq-2.0.6]# make 
 make  all-recursive
 make[1]: Entering directory `/tmp/snort/daq-2.0.6'
@@ -611,13 +611,13 @@ make[1]: Leaving directory `/tmp/snort/daq-2.0.6'
 [root@h101 daq-2.0.6]# echo $?
 0
 [root@h101 daq-2.0.6]# 
-{% endhighlight %}
+~~~
 
 ---
 
 #### 安装snort-2.9.7.6
 
-{% highlight bash %}
+~~~
 [root@h101 snort]# tar -zxvf snort-2.9.7.6.tar.gz 
 snort-2.9.7.6/
 snort-2.9.7.6/depcomp
@@ -650,11 +650,11 @@ drwxr-xr-x  6 1000 1000    4096 Oct 28 14:07 daq-2.0.6
 drwxr-xr-x 10 root root    4096 Aug 28 13:54 snort-2.9.7.6
 -rw-r--r--  1 root root 6198052 Oct 28 13:53 snort-2.9.7.6.tar.gz
 [root@h101 snort]# 
-{% endhighlight %}
+~~~
 
 ##### 安装报错一
 
-{% highlight bash %}
+~~~
 [root@h101 snort-2.9.7.6]# ./configure  --enable-sourcefire 
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
@@ -685,13 +685,13 @@ checking for pcre.h... no
 [root@h101 snort-2.9.7.6]# echo $?
 1
 [root@h101 snort-2.9.7.6]# 
-{% endhighlight %}
+~~~
 
 报错原因为 **pcre** 头文件缺失
 
 解决方法 : 安装 **pcre.x86_64** 和 **pcre-devel.x86_64** 软件包
 
-{% highlight bash %}
+~~~
 [root@h101 snort-2.9.7.6]# yum install  pcre.x86_64  pcre-devel.x86_64  
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -748,13 +748,13 @@ Updated:
 
 Complete!
 [root@h101 snort-2.9.7.6]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ##### 安装报错二
 
-{% highlight bash %}
+~~~
 [root@h101 snort-2.9.7.6]# ./configure  --enable-sourcefire 
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
@@ -780,13 +780,13 @@ checking for dumbnet.h... no
    http://code.google.com/p/libdnet/ or use the --with-dnet-*
    options, if you have it installed in an unusual place
 [root@h101 snort-2.9.7.6]# 
-{% endhighlight %}
+~~~
 
 报错是因为 **libdnet** 头文件缺失
 
 解决办法：安装 **libdnet.x86_64** 和 **libdnet-devel.x86_64**
 
-{% highlight bash %}
+~~~
 [root@h101 snort-2.9.7.6]# yum install  libdnet.x86_64   libdnet-devel.x86_64 
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -836,13 +836,13 @@ Installed:
 
 Complete!
 [root@h101 snort-2.9.7.6]# 
-{% endhighlight %}
+~~~
 
 
 ##### 安装报错三
 
 
-{% highlight bash %}
+~~~
 [root@h101 snort-2.9.7.6]# ./configure  --enable-sourcefire 
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
@@ -867,13 +867,13 @@ checking for zlib.h... no
    ERROR!  zlib header not found, go get it from
    http://www.zlib.net
 [root@h101 snort-2.9.7.6]# 
-{% endhighlight %}
+~~~
 
 报错原因是 **zlib** 的头文件缺失
 
 解决办法是： 安装 **zlib-devel.x86_64**
 
-{% highlight bash %}
+~~~
 [root@h101 snort-2.9.7.6]# yum install  zlib.x86_64  zlib-devel.x86_64  
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -917,11 +917,11 @@ Installed:
 
 Complete!
 [root@h101 snort-2.9.7.6]# 
-{% endhighlight %}
+~~~
 
 再次配置，就成功
 
-{% highlight bash %}
+~~~
 [root@h101 snort-2.9.7.6]# ./configure  --enable-sourcefire 
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
@@ -1217,11 +1217,11 @@ config.status: executing libtool commands
 [root@h101 snort-2.9.7.6]# echo $?
 0
 [root@h101 snort-2.9.7.6]#
-{% endhighlight %}
+~~~
 
 然后编译和安装
 
-{% highlight bash %}
+~~~
 [root@h101 snort-2.9.7.6]# make 
 make  all-recursive
 make[1]: Entering directory `/tmp/snort/snort-2.9.7.6'
@@ -1288,54 +1288,54 @@ make[1]: Leaving directory `/tmp/snort/snort-2.9.7.6'
 [root@h101 snort-2.9.7.6]# echo $?
 0
 [root@h101 snort-2.9.7.6]# 
-{% endhighlight %}
+~~~
 
 #### 包依赖总结
 
 
 snort-2.9.7.6 依赖以下安装包
 
-{% highlight bash %}
+~~~
 pcre.x86_64  pcre-devel.x86_64   libdnet.x86_64   libdnet-devel.x86_64   zlib.x86_64  zlib-devel.x86_64 daq-2.0.6
-{% endhighlight %}
+~~~
 
 
 daq-2.0.6 依赖以下安装包
 
-{% highlight bash %}
+~~~
 flex.x86_64  flex-devel.x86_64  bison.x86_64  bison-devel.x86_64  libpcap.x86_64  libpcap-devel.x86_64
-{% endhighlight %}
+~~~
 
 ##### 汇总解决依赖
 
-{% highlight bash %}
+~~~
 yum install flex.x86_64  flex-devel.x86_64  bison.x86_64  bison-devel.x86_64  libpcap.x86_64  libpcap-devel.x86_64  pcre.x86_64  pcre-devel.x86_64   libdnet.x86_64   libdnet-devel.x86_64   zlib.x86_64  zlib-devel.x86_64 
-{% endhighlight %}
+~~~
 
 > **Tip:** Make sure the following packages are installed in your CentOS 6.x system via System Administration  Add/Remove Software (requires ‘**root**’ privileges): **gcc** version (4.4.6 including libraries), **flex** (2.5.35), **bison** (2.4.1), **zlib** (1.2.3 including **zlib-devel** ), **libpcap** (1.0.0 including **libpcap-devel** ), **pcre** (7.84 including **pcre-devel** ), **libdnet** (1.11 or 1.12 including **libdnet-devel** ) and **tcpdump** (4.1.0). Versions of these packages already installed may be newer than what is listed here, but should NOT cause any issues when compiling DAQ and/or SNORT.
 
 下载源码包
 
-{% highlight bash %}
+~~~
 wget https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz
 wget https://www.snort.org/downloads/snort/snort-2.9.7.6.tar.gz
-{% endhighlight %}
+~~~
 
 安装daq-2.0.6
 
-{% highlight bash %}
+~~~
 tar xvfz daq-2.0.6.tar.gz
 cd daq-2.0.6
 ./configure; make; make install
-{% endhighlight %}
+~~~
 
 安装snort-2.9.7.6
 
-{% highlight bash %}
+~~~
 tar xvfz snort-2.9.7.6.tar.gz
 cd snort-2.9.7.6
 ./configure --enable-sourcefire; make; make install
-{% endhighlight %}
+~~~
 
 > **Tip:** 可以使用 **echo $?** 来检验上一步是否成功返回
 

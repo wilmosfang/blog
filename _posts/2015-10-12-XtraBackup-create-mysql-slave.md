@@ -34,7 +34,7 @@ comments: true
 
 ### 下载安装percona repo
 
-{% highlight bash %}
+~~~
 [root@slave-test src]# wget  http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm 
 --2015-10-12 14:03:35--  http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 Resolving www.percona.com... 74.121.199.234
@@ -58,11 +58,11 @@ warning: percona-release-0.1-3.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 
 Preparing...                ########################################### [100%]
    1:percona-release        ########################################### [100%]
 [root@slave-test src]# 
-{% endhighlight %}
+~~~
 
 可以在系统中进行一下检查
 
-{% highlight bash %}
+~~~
 [root@slave-test src]# rpm -qlp percona-release-0.1-3.noarch.rpm 
 warning: percona-release-0.1-3.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID cd2efd2a: NOKEY
 /etc/pki/rpm-gpg/RPM-GPG-KEY-Percona
@@ -72,13 +72,13 @@ warning: percona-release-0.1-3.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 
 [root@slave-test src]# ll /etc/yum.repos.d/percona-release.repo 
 -rw-r--r-- 1 root root 2501 Sep 22  2014 /etc/yum.repos.d/percona-release.repo
 [root@slave-test src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 安装percona-xtrabackup
 
-{% highlight bash %}
+~~~
 [root@slave-test src]# yum -y install percona-xtrabackup.x86_64    
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Loading mirror speeds from cached hostfile
@@ -139,14 +139,14 @@ Dependency Installed:
 
 Complete!
 [root@slave-test src]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 安装mysql
 
-{% highlight bash %}
+~~~
 [root@slave-test src]# yum install Percona-Server-server-56
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Loading mirror speeds from cached hostfile
@@ -305,11 +305,11 @@ Complete!
 [root@slave-test src]# echo $?
 0
 [root@slave-test src]# 
-{% endhighlight %}
+~~~
 
 启动mysql，设定密码
 
-{% highlight bash %}
+~~~
 [root@slave-test src]# /etc/init.d/mysql  start 
 Starting MySQL (Percona Server).                           [  OK  ]
 [root@slave-test src]#  /usr/bin/mysqladmin -u root password 'xxxxx'
@@ -343,7 +343,7 @@ mysql> show databases;
 4 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 到此salve的软件环境就已经准备好了
 
@@ -365,7 +365,7 @@ mysql>
 ### 报错1
 
 
-{% highlight bash %}
+~~~
 [root@master-qa ~]# /usr/bin/innobackupex --defaults-file=/etc/my.cnf --user=root --password=xxxxxxxx /data/fullbackup/ 
 
 InnoDB Backup Utility v1.5.1-xtrabackup; Copyright 2003, 2009 Innobase Oy
@@ -390,7 +390,7 @@ innobackupex: Error: Failed to connect to MySQL server as DBD::mysql module is n
 perl-DBD-SQLite-1.27-3.el6.x86_64
 perl-DBD-MySQL-4.013-3.el6.x86_64
 [root@master-qa ~]#
-{% endhighlight %}
+~~~
 
 可知 **perl-DBD-MySQL** 已经安装了，和报错不符合
 
@@ -399,7 +399,7 @@ perl-DBD-MySQL-4.013-3.el6.x86_64
 
 重装 **perl-DBD-MySQL**
 
-{% highlight bash %}
+~~~
 [root@master-qa ~]# yum list all | grep  perl-DBD-MySQL 
 perl-DBD-MySQL.x86_64                      4.013-3.el6                   @base  
 [root@master-qa ~]# yum reinstall  perl-DBD-MySQL.x86_64  
@@ -469,11 +469,11 @@ Dependency Installed:
 
 Complete!
 [root@master-qa ~]# 
-{% endhighlight %}
+~~~
 
 再次尝试备份master数据库
 
-{% highlight bash %}
+~~~
 [root@master-qa ~]#  /usr/bin/innobackupex --defaults-file=/etc/my.cnf --user=root --password=xxxxxxx /data/fullbackup/ 
 
 InnoDB Backup Utility v1.5.1-xtrabackup; Copyright 2003, 2009 Innobase Oy
@@ -563,13 +563,13 @@ innobackupex: MySQL binlog position: filename 'mysql-bin.000009', position 15092
 [root@master-qa ~]# echo $?
 0
 [root@master-qa ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 拷贝备份数据到slave
 
-{% highlight bash %}
+~~~
 [root@master-qa data]# rsync  -av  fullbackup/  root@192.168.1.45:/data/fullbackup/   
 The authenticity of host '192.168.1.45 (192.168.1.45)' can't be established.
 RSA key fingerprint is bf:ad:20:64:d2:9e:7d:25:a7:bd:8d:7c:a5:de:04:fc.
@@ -619,7 +619,7 @@ sending incremental file list
 sent 16408401594 bytes  received 62857 bytes  11633083.62 bytes/sec
 total size is 16406176319  speedup is 1.00
 [root@master-qa data]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -633,7 +633,7 @@ total size is 16406176319  speedup is 1.00
 恢复之前，我习惯将它们进行备份
 
 
-{% highlight bash %}
+~~~
 [root@slave-test 2015-10-12_15-24-06]# file xtrabackup_*
 xtrabackup_binlog_info: ASCII text
 xtrabackup_checkpoints: ASCII text
@@ -668,14 +668,14 @@ compact = N
 compressed = N
 encrypted = N
 [root@slave-test 2015-10-12_15-24-06]#
-{% endhighlight %}
+~~~
 
 ---
 
 ### 准备数据
 
 
-{% highlight bash %}
+~~~
 [root@slave-test ~]# /usr/bin/innobackupex  --apply-log  /data/fullbackup/2015-10-12_15-24-06/
 
 InnoDB Backup Utility v1.5.1-xtrabackup; Copyright 2003, 2009 Innobase Oy
@@ -803,7 +803,7 @@ InnoDB: Shutdown completed; log sequence number 76232248582
 [root@slave-test ~]# echo $?
 0
 [root@slave-test ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -814,7 +814,7 @@ InnoDB: Shutdown completed; log sequence number 76232248582
 
 准备完数据后，会多出来一个文件 
 
-{% highlight bash %}
+~~~
 [root@slave-test 2015-10-12_15-24-06]# ll /tmp/xtrabackup_*
 -rw-r--r-- 1 root root    25 Oct 12 20:02 /tmp/xtrabackup_binlog_info
 -rw-r----- 1 root root    97 Oct 12 20:02 /tmp/xtrabackup_checkpoints
@@ -833,11 +833,11 @@ mysql-bin.000009	1509223
 [root@slave-test 2015-10-12_15-24-06]# cat xtrabackup_binlog_pos_innodb 
 mysql-bin.000009	1509223
 [root@slave-test 2015-10-12_15-24-06]# 
-{% endhighlight %}
+~~~
 
 在合适的位置创建一个空文件夹，用来存放数据文件
 
-{% highlight bash %}
+~~~
 [root@slave-test lib]# mv mysql/ mysql.old
 [root@slave-test lib]# ln -s /data/mysql/  /var/lib/mysql
 [root@slave-test lib]# cd /var/lib/mysql
@@ -848,13 +848,13 @@ lrwxrwxrwx 1 root root 12 Oct 12 15:00 /var/lib/mysql -> /data/mysql/
 [root@slave-test ~]# ll /data/mysql/
 total 0
 [root@slave-test ~]# 
-{% endhighlight %}
+~~~
 
 > **Note:**  The  **datadir must be empty** ; Percona XtraBackup innobackupex --copy-back option will not copy over existing files unless innobackupex --force-non-empty-directories option is specified. Also it’s important to note that **MySQL server needs to be shut down** before restore is performed. You can’t restore to a datadir of a running mysqld instance (except when importing a partial backup). 
 
 恢复数据库
 
-{% highlight bash %}
+~~~
 [root@slave-test fullbackup]# innobackupex  --copy-back /data/fullbackup/2015-10-12_15-24-06/ 
 
 InnoDB Backup Utility v1.5.1-xtrabackup; Copyright 2003, 2009 Innobase Oy
@@ -901,11 +901,11 @@ innobackupex: Finished copying back files.
 [root@slave-test fullbackup]# echo $?
 0
 [root@slave-test fullbackup]# 
-{% endhighlight %}
+~~~
 
 恢复完后， **datadir** 里也有一个位置文件
 
-{% highlight bash %}
+~~~
 [root@slave-test mysql]# cat /data/mysql/xtrabackup_binlog_pos_innodb 
 mysql-bin.000009	1509223
 [root@slave-test mysql]# cat /data/mysql/xtrabackup_info 
@@ -928,24 +928,24 @@ format = file
 compact = N
 compressed = N
 encrypted = N[root@slave-test mysql]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 修改数据权限
 
-{% highlight bash %}
+~~~
 [root@slave-test mysql]# chown -R mysql:mysql /var/lib/mysql 
 [root@slave-test mysql]#
 [root@slave-test data]# chown -R mysql:mysql  /data/mysql/
 [root@slave-test data]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 启动数据库
 
-{% highlight bash %}
+~~~
 [root@slave-test data]# /etc/init.d/mysql  start 
 Starting MySQL (Percona Server)...                         [  OK  ]
 [root@slave-test data]# 
@@ -968,7 +968,7 @@ mysql> show slave status\G
 Empty set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -976,7 +976,7 @@ mysql>
 
 在master上创建一个复制用户
 
-{% highlight bash %}
+~~~
 mysql> grant replication slave,replication client on *.* to repl@'192.168.1.%' identified by 'xxxxxx' ;
 Query OK, 0 rows affected (0.04 sec)
 
@@ -984,13 +984,13 @@ mysql> flush privileges;
 Query OK, 0 rows affected (0.08 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 执行同步
 
-{% highlight bash %}
+~~~
 [root@slave-test mysql]# mysql -u root -p 
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -1132,11 +1132,11 @@ Master_SSL_Verify_Server_Cert: No
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 稳定后的状态
 
-{% highlight bash %}
+~~~
 mysql> show slave status\G
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
@@ -1196,7 +1196,7 @@ Master_SSL_Verify_Server_Cert: No
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 

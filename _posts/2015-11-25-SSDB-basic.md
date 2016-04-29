@@ -45,17 +45,17 @@ comments: true
 
 使用下面的方法进行安装
 
-{% highlight bash %}
+~~~
 wget --no-check-certificate https://github.com/ideawu/ssdb/archive/master.zip
 unzip master
 cd ssdb-master
 make
 sudo make install
-{% endhighlight %}
+~~~
 
 安装过程
 
-{% highlight bash %}
+~~~
 [root@h101 src]# wget --no-check-certificate https://github.com/ideawu/ssdb/archive/master.zip
 --2015-11-24 19:36:34--  https://github.com/ideawu/ssdb/archive/master.zip
 Resolving github.com... 192.30.252.130
@@ -153,11 +153,11 @@ chmod 755 /usr/local/ssdb
 chmod -R ugo+rw /usr/local/ssdb/*
 rm -f /usr/local/ssdb/Makefile
 [root@h101 ssdb-master]#
-{% endhighlight %}
+~~~
 
 默认将安装在 **/usr/local/ssdb** 目录下
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb-master]# ll /usr/local/ssdb/
 total 17848
 drwxrwxrwx 6 root root    4096 Nov 24 19:41 api
@@ -175,7 +175,7 @@ drwxrwxrwx 2 root root    4096 Nov 24 19:41 ssdb_cli
 drwxrwxrwx 2 root root    4096 Nov 24 19:41 var
 drwxrwxrwx 2 root root    4096 Nov 24 19:41 var_slave
 [root@h101 ssdb-master]# 
-{% endhighlight %} 
+~~~ 
 
 ---
 
@@ -185,25 +185,25 @@ drwxrwxrwx 2 root root    4096 Nov 24 19:41 var_slave
 
 这种模式下会占用当前的terminal
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb]# ./ssdb-server  ssdb.conf 
 ssdb-server 1.9.2
 Copyright (c) 2012-2015 ssdb.io
 
 
-{% endhighlight %}
+~~~
 
 查看进程状态
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb]# ps faux | grep ssdb | grep -v grep 
 root     10734  0.4  1.8 184860 34508 pts/1    Sl+  20:29   0:07          \_ ./ssdb-server ssdb.conf
 [root@h101 ssdb]# 
-{% endhighlight %}
+~~~
 
 查看日志
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb]# cat log.txt 
 2015-11-24 20:29:21.692 [INFO ] ssdb-server.cpp(46): ssdb-server 1.9.2
 2015-11-24 20:29:21.692 [INFO ] ssdb-server.cpp(47): conf_file        : ssdb.conf
@@ -246,11 +246,11 @@ root     10734  0.4  1.8 184860 34508 pts/1    Sl+  20:29   0:07          \_ ./s
 2015-11-24 20:54:22.630 [INFO ] server.cpp(203): server running, links: 0
 2015-11-24 20:59:22.630 [INFO ] server.cpp(203): server running, links: 0
 [root@h101 ssdb]# 
-{% endhighlight %}
+~~~
 
 查看线程
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb]# pstree -a 10734
 ssdb-server ssdb.conf
   ├─{ssdb-server}
@@ -283,20 +283,20 @@ root     10734 10446 10745  0   14 20:29 pts/1    Sl+    0:00 ./ssdb-server ssdb
 root     10734 10446 10746  0   14 20:29 pts/1    Sl+    0:00 ./ssdb-server ssdb.conf
 root     10734 10446 10747  0   14 20:29 pts/1    Sl+    0:00 ./ssdb-server ssdb.conf
 [root@h101 ssdb]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 停止服务
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb]# ./ssdb-server  ssdb.conf  -s stop 
 ssdb-server 1.9.2
 Copyright (c) 2012-2015 ssdb.io
 
 [root@h101 ssdb]# ps faux | grep ssdb | grep -v grep 
 [root@h101 ssdb]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -304,7 +304,7 @@ Copyright (c) 2012-2015 ssdb.io
 
 这种方式不会占用当前terminal，关闭当前terminal也不会导致服务退出
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb]# ./ssdb-server  -d ssdb.conf 
 ssdb-server 1.9.2
 Copyright (c) 2012-2015 ssdb.io
@@ -314,14 +314,14 @@ root     10890  1.7  1.8 184860 36164 ?        Ssl  21:05   0:00 ./ssdb-server -
 [root@h101 ssdb]# pstree 10890
 ssdb-server───13*[{ssdb-server}]
 [root@h101 ssdb]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 客户端连接
 
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb]# ./ssdb-cli -p 8888
 ssdb (cli) - ssdb command line tool.
 Copyright (c) 2012-2015 ssdb.io
@@ -360,14 +360,14 @@ leveldb.stats
 	
 17 result(s) (0.001 sec)
 ssdb 127.0.0.1:8888> 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 发送信号终止服务
 
-{% highlight bash %}
+~~~
 [root@h101 ssdb]# ps faux | grep ssdb | grep -v grep 
 root     10890  0.4  1.8 184860 36164 ?        Ssl  21:05   0:01 ./ssdb-server -d ssdb.conf
 [root@h101 ssdb]# cat var/ssdb.pid 
@@ -376,7 +376,7 @@ root     10890  0.4  1.8 184860 36164 ?        Ssl  21:05   0:01 ./ssdb-server -
 [root@h101 ssdb]# cat var/ssdb.pid
 cat: var/ssdb.pid: No such file or directory
 [root@h101 ssdb]#  
-{% endhighlight %}
+~~~
 
 ---
 
@@ -384,7 +384,7 @@ cat: var/ssdb.pid: No such file or directory
 
 修改 **configs** 配置，使其指向正确的位置
 
-{% highlight bash %}
+~~~
 [root@h101 tools]# cp /usr/local/src/ssdb-master/tools/ssdb.sh  /etc/init.d/ssdb
 [root@h101 tools]# vim ssdb.sh 
 [root@h101 tools]# grep configs=  /etc/init.d/ssdb
@@ -392,11 +392,11 @@ cat: var/ssdb.pid: No such file or directory
 #configs="/data/ssdb_data/test/ssdb.conf"
 configs="/usr/local/ssdb/ssdb.conf"
 [root@h101 tools]# 
-{% endhighlight %}
+~~~
 
 使用脚本启动服务
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# /etc/init.d/ssdb  start 
 ssdb-server 1.9.2
 Copyright (c) 2012-2015 ssdb.io
@@ -409,7 +409,7 @@ Copyright (c) 2012-2015 ssdb.io
 
 [root@h101 ~]# ps faux | grep ssdb | grep -v grep 
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 SSDB相关配置可以参阅[SSDB配置][ssdb_config]
 
@@ -422,7 +422,7 @@ SSDB相关命令可以参阅[SSDB命令][ssdb_command]
 
 config on h101
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# grep -v "#" /etc/ssdb/ssdb1234.conf 
 
 work_dir = /data/ssdb/ssdb1234
@@ -459,11 +459,11 @@ leveldb:
 
 
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 config on h102
 
-{% highlight bash %}
+~~~
 [root@h102 ssdb]# grep -v "#" /etc/ssdb/ssdb1234.conf 
 work_dir = /data/ssdb/ssdb1234
 pidfile = /data/ssdb/ssdb1234/ssdb.pid
@@ -497,7 +497,7 @@ leveldb:
 	compaction_speed: 1000
 	compression: yes
 [root@h102 ssdb]# 
-{% endhighlight %}
+~~~
 
 
 **Note:** 注意以下几点
@@ -514,7 +514,7 @@ leveldb:
 
 分别启动服务
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# /usr/local/ssdb/ssdb-server -d /etc/ssdb/ssdb1234.conf
 ssdb-server 1.9.2
 Copyright (c) 2012-2015 ssdb.io
@@ -526,12 +526,12 @@ ssdb-server 1.9.2
 Copyright (c) 2012-2015 ssdb.io
 
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 分别查看状态
 
 
-{% highlight bash %}
+~~~
 ssdb h101:1234> info 
 version
 	1.9.2
@@ -621,7 +621,7 @@ leveldb.stats
 	
 21 result(s) (0.001 sec)
 ssdb h102:1234> 
-{% endhighlight %}
+~~~
 
 
 详细可以参考[同步和复制的配置与监控][ssdb_replication]
@@ -647,15 +647,15 @@ Item     | Comment
 
 对于压缩选项没有开启的情况
 
-{% highlight bash %}
+~~~
 cache_size + write_buffer_size * 66 + 32
-{% endhighlight %}
+~~~
 
 如果压缩选项开启 (compression: yes) , 计算公式是:
 
-{% highlight bash %}
+~~~
 cache_size + 10 * write_buffer_size * 66 + 32
-{% endhighlight %}
+~~~
 
 可以调整配置参数, 限制 ssdb-server 的内存占用.
 

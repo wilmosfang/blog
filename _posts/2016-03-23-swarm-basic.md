@@ -76,7 +76,7 @@ comments: true
 
 关键是要使用如下配置启动服务
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
 WARN[0000] /!\ DON'T BIND ON ANY IP ADDRESS WITHOUT setting -tlsverify IF YOU DON'T KNOW WHAT YOU'RE DOING /!\ 
 INFO[0000] API listen on [::]:2375                      
@@ -93,14 +93,14 @@ INFO[0000] Docker daemon                                 commit=a34a1d5 execdriv
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 > **Note:** 如不指定，默认会以 **`/usr/bin/docker daemon -H fd://`** 的方式启动服务，这将导致 **swarm** 无法通过 **2375** 端口接受请求，**node** 会一直都处于 **Pending** 状态
 
 
 安装完成后，可以使用 **hello-world** 镜像来检测是否运行成功
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker run hello-world
 
 Hello from Docker.
@@ -124,7 +124,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/userguide/
 
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -140,7 +140,7 @@ Docker 将 **Swarm** 也做成了镜像，可以通过 **Docker Swarm** 的官�
 
 使用 **`docker pull swarm`** 的方式下载 Swarm 镜像
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker images
 REPOSITORY                              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 docker:5000/ci/jnkns-img                latest              5b825467fc4f        7 weeks ago         708.2 MB
@@ -205,7 +205,7 @@ hello-world                             latest              0a6ba66e537a        
 [root@h104 ~]# docker images | grep swarm 
 swarm                                   latest              81127fe5e9b4        2 weeks ago         18.11 MB
 [root@h104 ~]#
-{% endhighlight %}
+~~~
 
 除了使用 Swarm 的镜像，还能使用 Swarm binary 的方式，但是官方不推荐这么用，因为有配置编译安装等一系列“脏活”要干(实在是感兴趣的话可以参考 **[Swarm binary][swarm_bin]** ，主要面向贡献代码的开发人员)，相较而言直接使用 Swarm的镜像有如下好处：
 
@@ -230,7 +230,7 @@ Swarm 目前支持四种服务发现工具：
 
 下面选择 Consul 作为服务发现工具
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap
 Unable to find image 'progrium/consul:latest' locally
 latest: Pulling from progrium/consul
@@ -277,11 +277,11 @@ docker.io/progrium/consul: this image was pulled from a legacy registry.  Import
 [root@h104 ~]# echo $?
 0
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 多了一个 Consul 的镜像，容器也已经运行起来了
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker images
 REPOSITORY                              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 swarm                                   latest              81127fe5e9b4        2 weeks ago         18.11 MB
@@ -301,7 +301,7 @@ CONTAINER ID        IMAGE                       COMMAND                  CREATED
 3b12ab97b20f        progrium/consul             "/bin/start -server -"   4 minutes ago        Up 4 minutes               53/tcp, 53/udp, 8300-8302/tcp, 8400/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp   consul
 236348a3c9ff        docker:5000/ci/jnkns-img2   "/bin/tini -- /usr/lo"   7 weeks ago         Exited (143) 4 weeks ago                                                                                    jenkins01
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -314,7 +314,7 @@ CONTAINER ID        IMAGE                       COMMAND                  CREATED
 
 ### 创建第一个管理节点
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise 192.168.100.104:4000 consul://192.168.100.104:8500
 a6a0adaa76a8771bf373998832deaa236d68513bb5f9de0b3051c49761447e1a
 [root@h104 ~]# docker ps -a 
@@ -323,11 +323,11 @@ a6a0adaa76a8        swarm                       "/swarm manage -H :40"   3 secon
 3b12ab97b20f        progrium/consul             "/bin/start -server -"   16 hours ago        Up 20 minutes              53/tcp, 53/udp, 8300-8302/tcp, 8400/tcp, 0.0.0.0:8500->8500/tcp, 8301-8302/udp   consul
 236348a3c9ff        docker:5000/ci/jnkns-img2   "/bin/tini -- /usr/lo"   7 weeks ago         Exited (143) 4 weeks ago                                                                                    jenkins01
 [root@h104 ~]#  
-{% endhighlight %}
+~~~
 
 ### 创建第二个管理节点
 
-{% highlight bash %}
+~~~
 [root@docker ~]# docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise 192.168.100.103:4000 consul://192.168.100.104:8500
 de2669846044ea05851f69a643846d55b0f87c1f1d9abd29bcb90c71fa91bb0f
 [root@docker ~]# docker ps -a 
@@ -336,11 +336,11 @@ de2669846044        swarm                         "/swarm manage -H :40"   3 sec
 f616e3e353bc        ci-infrastructure/jnkns-img   "/bin/tini -- /usr/lo"   7 weeks ago         Exited (0) 7 weeks ago                                      jenkins01
 71de3ba93794        registry:2                    "/bin/registry /etc/d"   8 weeks ago         Up 2 hours               0.0.0.0:5000->5000/tcp             registry
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 > **Note:**  涉及的网络端口有必要在防火墙上放行，打开方法
 
-{% highlight bash %}
+~~~
 [root@docker ~]# firewall-cmd --list-all 
 public (default, active)
   interfaces: eno16777736 eno33554960
@@ -366,7 +366,7 @@ public (default, active)
   rich rules: 
 	
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 有必要打开的端口为 **4000/tcp、2375/tcp、8500/tcp**
 
@@ -379,7 +379,7 @@ PORT  | Comment
 
 此时已经可以使用命令对管理节点发送请求
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker -H :4000 info 
 Containers: 0
 Images: 0
@@ -414,7 +414,7 @@ Name: de2669846044
 [root@docker ~]# docker -H :4000 ps -a 
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 可见通过投票自动选举出103为主节点，104为备份节点，主节点是投票选出的而不是谁先加入谁就一定是主节点，103和104上都有运行中的容器，但目前还看不到，因为没有安装swarm代理节点
 
@@ -426,7 +426,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 安装完swarm代理节点后就可以通过管理节点使用到该服务器上的资源
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker run -d swarm join --advertise=192.168.100.104:2375 consul://192.168.100.104:8500
 055469770d50b477642717e3ebcd795eca26806bc1d55a547d60ac4559991b79
 [root@h104 ~]# docker ps -a 
@@ -458,11 +458,11 @@ CPUs: 2
 Total Memory: 2.044 GiB
 Name: a6a0adaa76a8
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 ### 添加另一个节点
 
-{% highlight bash %}
+~~~
 [root@docker ~]# docker run -d swarm join --advertise=192.168.100.103:2375 consul://192.168.100.104:8500
 592ca6995b4d66344686d588f066db6a6dc7018e45052704bdf9728d36cca807
 [root@docker ~]# docker -H :4000 info
@@ -495,7 +495,7 @@ CPUs: 4
 Total Memory: 6.09 GiB
 Name: de2669846044
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 此时，Swarm 的集群已经构建完成和成功启动，同时符合高可用的架构，并且可以通过添加更多的服务发现节点，swarm管理节点，普通swarm节点来进一步提升系统的稳定性、可用性和负载能力
 
@@ -505,7 +505,7 @@ Name: de2669846044
 
 在VM环境下，如果通过克隆虚拟机或拷贝软件目录的方式创建新的docker实例，可能会遇到下面的问题
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker -H :4000 info 
 Containers: 7
 Images: 9
@@ -536,7 +536,7 @@ CPUs: 2
 Total Memory: 2.044 GiB
 Name: a8f16aa3a7d1
 [root@h104 ~]#
-{% endhighlight %}
+~~~
 
 其中 **103** 处于 **Pending** 的状态，有 **Error: ID duplicated.** 的报错，表明ID有冲突
 
@@ -544,17 +544,17 @@ Name: a8f16aa3a7d1
 
 首先备份一下 **/etc/docker/key.json**
 
-{% highlight bash %}
+~~~
 [root@docker ~]# mv /etc/docker/key.json  /tmp/
 [root@docker ~]# ll /etc/docker/key.json 
 ls: cannot access /etc/docker/key.json: No such file or directory
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 然后重启Docker 服务，**/etc/docker/** 目录下会重新生成新的 **key.json** 
 
 
-{% highlight bash %}
+~~~
 [root@docker ~]# cat /tmp/key.json 
 {
     "crv": "P-256",
@@ -572,7 +572,7 @@ ls: cannot access /etc/docker/key.json: No such file or directory
     "x": "9W4wJfqvetoJY5VcMz-pJHMqZxDz_u0ZqRKPF4FKegs",
     "y": "MEHvblUpJkCyMD5GTbk7sbl5NgUS5ZTGzB2BXf0Wa-E"
 }[root@docker ~]#
-{% endhighlight %}
+~~~
 
 再进行检查，状态就正常了
 
@@ -585,7 +585,7 @@ ls: cannot access /etc/docker/key.json: No such file or directory
 
 ### 查看容器状态
 
-{% highlight bash %}
+~~~
 [root@docker ~]# docker -H :4000 ps 
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                                                    NAMES
 3b12ab97b20f        progrium/consul     "/bin/start -server -"   18 hours ago        Up About an hour    53/tcp, 53/udp, 8300-8302/tcp, 8301-8302/udp, 192.168.100.104:8500->8500/tcp, 8400/tcp   h104/consul
@@ -601,7 +601,7 @@ a6a0adaa76a8        swarm                         "/swarm manage -H :40"   About
 f616e3e353bc        ci-infrastructure/jnkns-img   "/bin/tini -- /usr/lo"   7 weeks ago         Exited (0) 7 weeks ago                                                                                              docker/jenkins01
 71de3ba93794        registry:2                    "/bin/registry /etc/d"   8 weeks ago         Up 4 hours                 192.168.100.103:5000->5000/tcp                                                           docker/registry
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -610,7 +610,7 @@ f616e3e353bc        ci-infrastructure/jnkns-img   "/bin/tini -- /usr/lo"   7 wee
 
 虽然104是备份管理节点，但是它依然可以接受命令，它会自动将命令路由给主管理节点，主管理节点再将命令发布给合适的代理节点执行
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker -H :4000 run hello-world
 [root@h104 ~]# docker -H :4000 run hello-world
 [root@h104 ~]# docker -H :4000 run hello-world
@@ -631,7 +631,7 @@ a6a0adaa76a8        swarm                         "/swarm manage -H :40"   About
 f616e3e353bc        ci-infrastructure/jnkns-img   "/bin/tini -- /usr/lo"   7 weeks ago         Exited (0) 7 weeks ago                                                                                               docker/jenkins01
 71de3ba93794        registry:2                    "/bin/registry /etc/d"   8 weeks ago         Up 4 hours                  192.168.100.103:5000->5000/tcp                                                           docker/registry
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 我连续创建了四个容器，从输出可以看出，它们是平均分布的(两个在h104上，两个在docker上)，这个策略由 **info** 中的 **Strategy: spread** 决定
 
@@ -648,7 +648,7 @@ f616e3e353bc        ci-infrastructure/jnkns-img   "/bin/tini -- /usr/lo"   7 wee
 
 我们使用Swarm自已来删除主管理节点
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker -H :4000 info 
 Containers: 12
 Images: 17
@@ -742,7 +742,7 @@ CPUs: 4
 Total Memory: 6.09 GiB
 Name: a6a0adaa76a8
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 虽然途中有一个报错，但是还是成功执行了，为什么呢？
 
@@ -752,7 +752,7 @@ Name: a6a0adaa76a8
 
 最后104自动切换换成了primary ，再去 103上看本地的容器状态
 
-{% highlight bash %}
+~~~
 [root@docker ~]# docker ps -a 
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                      PORTS                    NAMES
 8d7c107be5fa        hello-world                   "/hello"                 18 minutes ago      Exited (0) 18 minutes ago                            high_hopper
@@ -795,13 +795,13 @@ CPUs: 4
 Total Memory: 6.09 GiB
 Name: a6a0adaa76a8
 [root@docker ~]#  
-{% endhighlight %}
+~~~
 
 没有了那个管理节点容器，并且对Swarm的管理命令无法执行
 
 现在加回来
 
-{% highlight bash %}
+~~~
 [root@docker ~]# docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise 192.168.100.103:4000 consul://192.168.100.104:8500
 d563af1475b5cc2f58e3ec2d0e80224472db86785740736cd628e27c6dee8164
 [root@docker ~]# docker ps -a 
@@ -843,7 +843,7 @@ CPUs: 4
 Total Memory: 6.09 GiB
 Name: d563af1475b5
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 

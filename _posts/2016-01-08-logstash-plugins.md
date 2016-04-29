@@ -40,7 +40,7 @@ comments: true
 ### 获取帮助
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin --help
 Usage:
     bin/plugin [OPTIONS] SUBCOMMAND [ARG] ...
@@ -72,13 +72,13 @@ Options:
     --group NAME                  Filter plugins per group: input, output, filter or codec
     -h, --help                    print help
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### plugin list
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin list 
 logstash-codec-collectd
 logstash-codec-dots
@@ -211,7 +211,7 @@ logstash-codec-oldlogstashjson
 logstash-codec-plain
 logstash-codec-rubydebug
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -219,7 +219,7 @@ logstash-codec-rubydebug
 ### plugin uninstall
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin uninstall -h 
 Usage:
     bin/plugin uninstall [OPTIONS] PLUGIN
@@ -230,21 +230,21 @@ Parameters:
 Options:
     -h, --help                    print help
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 #### 修改镜像源
 
-{% highlight bash %}
+~~~
 [root@h102 logstash]# cd /opt/logstash/
 [root@h102 logstash]# vim Gemfile
 [root@h102 logstash]# grep source Gemfile
 source "https://ruby.taobao.org"
 [root@h102 logstash]# 
-{% endhighlight %}
+~~~
 
 > **Note:** 如果不修改，所有涉及插件变更的操作都会报错，原因是 **The Great Wall** ，如下
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin uninstall logstash-output-kafka
 Uninstalling logstash-output-kafka
 Error Bundler::InstallError, retrying 1/10
@@ -253,34 +253,34 @@ Make sure that `gem install arr-pm -v '0.0.10'` succeeds before bundling.
 WARNING: SSLSocket#session= is not supported
 
 ^C
-{% endhighlight %}
+~~~
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin install logstash-output-kafka
 Validating logstash-output-kafka
 Unable to download data from https://rubygems.org - Connection reset by peer (https://rubygems.global.ssl.fastly.net/latest_specs.4.8.gz)
 ERROR: Installation aborted, verification failed for logstash-output-kafka 
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 即便全局的Source指的没问题
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# gem source -l 
 *** CURRENT SOURCES ***
 
 https://ruby.taobao.org/
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 但局部配置会覆盖此配置，从而实际以无法访问的地址作为自己的镜像源
 
-{% highlight bash %}
+~~~
 [root@h102 logstash]# grep source /opt/logstash/Gemfile
 source "https://rubygems.org"
 [root@h102 logstash]# 
-{% endhighlight %}
+~~~
 
 报错就是这么产生的
 
@@ -292,7 +292,7 @@ source "https://rubygems.org"
 ---
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin list kafka 
 logstash-input-kafka
 logstash-output-kafka
@@ -301,14 +301,14 @@ Uninstalling logstash-output-kafka
 [root@h102 ~]# /opt/logstash/bin/plugin list kafka 
 logstash-input-kafka
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 ---
 
 ### plugin install
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin install -h
 Usage:
     bin/plugin install [OPTIONS] [PLUGIN] ...
@@ -332,14 +332,14 @@ Installation successful
 logstash-input-kafka
 logstash-output-kafka
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### plugin update
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin update -h
 Usage:
     bin/plugin update [OPTIONS] [PLUGIN] ...
@@ -355,14 +355,14 @@ Options:
 Updating logstash-codec-edn_lines
 No plugin updated
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 由于当前没有更新的 **logstash-codec-edn_lines** ，所以没有更新
 
 
 更新所有插件
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin list --verbose 
 logstash-codec-collectd (2.0.2)
 logstash-codec-dots (2.0.2)
@@ -623,7 +623,7 @@ logstash-output-xmpp (2.0.2)
 logstash-output-zeromq (2.0.2)
 logstash-patterns-core (2.0.2)
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 
 其中有几个由于找不到包，所以没有更新成功，但是大部分已经获得了更新
@@ -634,7 +634,7 @@ logstash-patterns-core (2.0.2)
 ### plugin pack
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin pack -h
 Usage:
     bin/plugin pack [OPTIONS]
@@ -651,14 +651,14 @@ Generated at /opt/logstash/plugins_package.tar.gz
 [root@h102 ~]# ll -h /opt/logstash/plugins_package.tar.gz
 -rw-r--r-- 1 root root 52M Jan  8 16:26 /opt/logstash/plugins_package.tar.gz
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### plugin unpack
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin unpack -h
 Usage:
     bin/plugin unpack [OPTIONS] file
@@ -677,11 +677,11 @@ The unpacked plugins can now be installed in local-only mode using bin/plugin in
 [root@h102 ~]# echo $?
 0
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 **pack/unpack** 主要是用来进行离线管理 **plugins** 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/plugin uninstall logstash-input-twitter
 Uninstalling logstash-input-twitter
 [root@h102 ~]# /opt/logstash/bin/plugin list twitter
@@ -692,7 +692,7 @@ Installation successful
 [root@h102 ~]# /opt/logstash/bin/plugin list twitter
 logstash-input-twitter
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 ---
 

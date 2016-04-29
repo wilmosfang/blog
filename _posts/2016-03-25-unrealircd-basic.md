@@ -42,7 +42,7 @@ IRC的最大特性是实现了在线实时交谈，类似于QQ
 
 撰文此刻最新版的 **[下载地址][unrealircd_dl]** 
 
-{% highlight bash %}
+~~~
 [root@h104 irc]# wget https://www.unrealircd.org/unrealircd4/unrealircd-4.0.2.tar.gz
 --2016-03-21 20:45:12--  https://www.unrealircd.org/unrealircd4/unrealircd-4.0.2.tar.gz
 Resolving www.unrealircd.org (www.unrealircd.org)... 54.76.160.181
@@ -62,7 +62,7 @@ unrealircd-4.0.2.tar.gz
 [root@h104 irc]# ll unrealircd-4.0.2.tar.gz 
 -rw-r--r-- 1 root root 4728491 Mar 12 00:00 unrealircd-4.0.2.tar.gz
 [root@h104 irc]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -72,7 +72,7 @@ unrealircd-4.0.2.tar.gz
 
 这一步并不是必须的，但是体检一下，可以消除很大的安全隐患
 
-{% highlight bash %}
+~~~
 [root@h104 irc]# gpg --keyserver keys.gnupg.net --recv-keys 0xA7A21B0A108FF4A9
 gpg: keyring `/root/.gnupg/secring.gpg' created
 gpg: requesting key 108FF4A9 from hkp server keys.gnupg.net
@@ -122,15 +122,15 @@ gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 1D2D 2B03 A0B6 8ED1 1D68  A24B A7A2 1B0A 108F F4A9
 [root@h104 irc]# 
-{% endhighlight %}
+~~~
 
 这里有一段：
 
-{% highlight bash %}
+~~~
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 1D2D 2B03 A0B6 8ED1 1D68  A24B A7A2 1B0A 108F F4A9
-{% endhighlight %}
+~~~
 
 说明unrealircd给我们的公钥是没有经过权威认证的自签名证书，没有任何信息可以确保这的确就是来自unrealircd的
 
@@ -138,13 +138,13 @@ Primary key fingerprint: 1D2D 2B03 A0B6 8ED1 1D68  A24B A7A2 1B0A 108F F4A9
 
 还有一种方式就是使用hash结果来判断有否被篡改
 
-{% highlight bash %}
+~~~
 [root@h104 irc]# sha1sum unrealircd-4.0.2.tar.gz
 57d59e8ee436dd4d9894789095a9d94358dfd5c6  unrealircd-4.0.2.tar.gz
 [root@h104 irc]# sha256sum unrealircd-4.0.2.tar.gz
 6af88866c0926fef874b969a09cae547be898c6b528d906fcf1834659531927c  unrealircd-4.0.2.tar.gz
 [root@h104 irc]# 
-{% endhighlight %}
+~~~
 
 通过和官方提供的hash结果进行比较来判断是否一致
 
@@ -154,7 +154,7 @@ Primary key fingerprint: 1D2D 2B03 A0B6 8ED1 1D68  A24B A7A2 1B0A 108F F4A9
 
 ## 解压
 
-{% highlight bash %}
+~~~
 [root@h104 irc]# tar -axvf unrealircd-4.0.2.tar.gz
 unrealircd-4.0.2/
 unrealircd-4.0.2/README.md
@@ -173,7 +173,7 @@ unrealircd-4.0.2/.CHANGES.NEW
 [root@h104 irc]# ls
 unrealircd-4.0.2  unrealircd-4.0.2.tar.gz  unrealircd-4.0.2.tar.gz.asc
 [root@h104 irc]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -181,11 +181,11 @@ unrealircd-4.0.2  unrealircd-4.0.2.tar.gz  unrealircd-4.0.2.tar.gz.asc
 
 整个过程使用如下命令
 
-{% highlight bash %}
+~~~
 ./Config
 make
 make install
-{% endhighlight %}
+~~~
 
 详细安装过程
 
@@ -199,7 +199,7 @@ make install
 
 一切都接受默认
 
-{% highlight bash %}
+~~~
 [root@h104 irc]# ls
 unrealircd-4.0.2  unrealircd-4.0.2.tar.gz  unrealircd-4.0.2.tar.gz.asc
 [root@h104 irc]# cd unrealircd-4.0.2
@@ -712,34 +712,34 @@ After doing so re-run ./Config
 [root@h104 unrealircd-4.0.2]# echo $?
 1
 [root@h104 unrealircd-4.0.2]#
-{% endhighlight %}
+~~~
 
 ### 报错
 
 报错内容
 
-{% highlight bash %}
+~~~
 checking for openssl... not found
 
 Apparently you do not have both the openssl binary and openssl development libraries installed.
 Please install the needed binaries and libraries.
 The package is often called 'openssl-dev', 'openssl-devel' or 'libssl-dev'
 After doing so re-run ./Config
-{% endhighlight %}
+~~~
 
 由于依赖 **openssl-devel** , 在它缺失的情况下就会报找不到的错
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd-4.0.2]# rpm -qa | egrep -E '(openssl|libssl)'
 openssl-1.0.1e-51.el7_2.2.x86_64
 openssl098e-0.9.8e-29.el7.centos.2.x86_64
 openssl-libs-1.0.1e-51.el7_2.2.x86_64
 [root@h104 unrealircd-4.0.2]# 
-{% endhighlight %}
+~~~
 
 解决办法是给系统装上这个包
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd-4.0.2]# yum install openssl-devel.x86_64
 Loaded plugins: fastestmirror, langpacks
 Repodata is over 2 weeks old. Install yum-cron? Or run: yum makecache fast
@@ -876,11 +876,11 @@ Complete!
 [root@h104 unrealircd-4.0.2]# echo $?
 0
 [root@h104 unrealircd-4.0.2]#
-{% endhighlight %}
+~~~
 
 再次运行
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd-4.0.2]# ./Config 
 
  _   _                      _ ___________  _____     _
@@ -1379,7 +1379,7 @@ Certificate created successfully.
 [root@h104 unrealircd-4.0.2]# echo $?
 0
 [root@h104 unrealircd-4.0.2]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -1388,7 +1388,7 @@ Certificate created successfully.
 
 然后编译
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd-4.0.2]# make 
 Building src
 make[1]: Entering directory `/usr/local/src/irc/unrealircd-4.0.2/src'
@@ -1415,11 +1415,11 @@ make[1]: Leaving directory `/usr/local/src/irc/unrealircd-4.0.2/src'
 [root@h104 unrealircd-4.0.2]# echo $?
 0
 [root@h104 unrealircd-4.0.2]# 
-{% endhighlight %}
+~~~
 
 最后安装
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd-4.0.2]# make install 
 Building src
 make[1]: Entering directory `/usr/local/src/irc/unrealircd-4.0.2/src'
@@ -1504,12 +1504,12 @@ Again, be sure to change to the /root/unrealircd directory!
 [root@h104 unrealircd-4.0.2]# echo $?
 0
 [root@h104 unrealircd-4.0.2]# 
-{% endhighlight %}
+~~~
 
 
 > **Tip:** 由于我以root的身份配置安装(生产中不要这样)，并且接受的默认配置，于是它给安装到了 **/root/unrealircd** 下
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd-4.0.2]# ll /root/unrealircd/
 total 16
 drwx------ 2 root root   23 Mar 21 22:57 bin
@@ -1713,7 +1713,7 @@ drwx------ 2 root root    6 Mar 21 22:20 tmp
 
 17 directories, 170 files
 [root@h104 unrealircd-4.0.2]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -1725,7 +1725,7 @@ drwx------ 2 root root    6 Mar 21 22:20 tmp
 
 于是拷贝过来，直接使用
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd]# cp conf/examples/example.conf conf/unrealircd.conf
 [root@h104 unrealircd]# 
 [root@h104 unrealircd]# bin/unrealircd 
@@ -1756,12 +1756,12 @@ config error: /root/unrealircd/conf/unrealircd.conf:386: set::kline-address must
 config error: 5 errors encountered
 config error: IRCd configuration failed to pass testing
 [root@h104 unrealircd]# 
-{% endhighlight %}
+~~~
 
 
 ### 警告
 
-{% highlight bash %}
+~~~
 WARNING: You are running UnrealIRCd as root and it is not
          configured to drop priviliges. This is VERY dangerous,
          as any compromise of your UnrealIRCd is the same as
@@ -1770,11 +1770,11 @@ WARNING: You are running UnrealIRCd as root and it is not
          account than root, or set IRC_USER in include/config.h
          to a nonprivileged username and recompile.
 
-{% endhighlight %}
+~~~
 
 我们是使用的root，如果使用的普通用户，就不会有这样的警告，如：
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd]# su - irc 
 Last login: Tue Mar 22 00:17:00 CST 2016 on pts/0
 [irc@h104 ~]$ /usr/local/unrealircd/bin/unrealircd 
@@ -1799,11 +1799,11 @@ IPv4: *:6900(SSL), *:6697(SSL), *:6667
 IPv6: *:6900(SSL), *:6697(SSL), *:6667
 UnrealIRCd started.
 [irc@h104 ~]$ 
-{% endhighlight %}
+~~~
 
 ### 报错
 
-{% highlight bash %}
+~~~
 Loading IRCd configuration..
 config error: /root/unrealircd/conf/unrealircd.conf:144: please change the the name and password of the default 'bobsmith' oper block
 config error: /root/unrealircd/conf/unrealircd.conf:378: set::cloak-keys: (key 2) Keys should be mixed a-zA-Z0-9, like "a2JO6fh3Q6w4oN3s7"
@@ -1812,7 +1812,7 @@ config error: /root/unrealircd/conf/unrealircd.conf:376: set::cloak-keys: All yo
 config error: /root/unrealircd/conf/unrealircd.conf:386: set::kline-address must be an e-mail or an URL
 config error: 5 errors encountered
 config error: IRCd configuration failed to pass testing
-{% endhighlight %}
+~~~
 
 分别为：
 
@@ -1822,7 +1822,7 @@ config error: IRCd configuration failed to pass testing
 
 根据定位，依次修改，顺便修改一下访问权限
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd]# vim conf/unrealircd.conf 
 [root@h104 unrealircd]# 
 [root@h104 unrealircd]# diff conf/examples/example.conf  conf/unrealircd.conf 
@@ -1855,7 +1855,7 @@ config error: IRCd configuration failed to pass testing
 ---
 > 	kline-address "yyghdfz@163.com"; /* e-mail or URL shown when a user is banned */
 [root@h104 unrealircd]# 
-{% endhighlight %}
+~~~
 
 这里只是最基本的，使其可以运行并且能够访问的配置，详细的配置方法，放到以后再作讲解
 
@@ -1870,7 +1870,7 @@ config error: IRCd configuration failed to pass testing
 
 尝试启动服务
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd]# bin/unrealircd 
 WARNING: You are running UnrealIRCd as root and it is not
          configured to drop priviliges. This is VERY dangerous,
@@ -1908,11 +1908,11 @@ root     27340     1 27340  0    1 23:04 ?        S      0:00 bin/unrealircd
 [root@h104 unrealircd]# pstree 27340
 unrealircd
 [root@h104 unrealircd]#
-{% endhighlight %}
+~~~
 
 可以看到正常启动了，并且打开了几个端口
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd]# netstat -ant | egrep -E '(6900|6697|6667)'
 tcp        0      0 0.0.0.0:6697            0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:6667            0.0.0.0:*               LISTEN     
@@ -1921,12 +1921,12 @@ tcp6       0      0 :::6697                 :::*                    LISTEN
 tcp6       0      0 :::6667                 :::*                    LISTEN     
 tcp6       0      0 :::6900                 :::*                    LISTEN     
 [root@h104 unrealircd]# 
-{% endhighlight %}
+~~~
 
 
 为了能对外正常提供服务，防火墙上这几个端口也要打开，打开方法
 
-{% highlight bash %}
+~~~
 [root@h104 unrealircd]# firewall-cmd --list-all 
 public (default, active)
   interfaces: eno16777736 eno33554960
@@ -1956,7 +1956,7 @@ public (default, active)
   rich rules: 
 	
 [root@h104 unrealircd]# 
-{% endhighlight %}
+~~~
 
 
 ---

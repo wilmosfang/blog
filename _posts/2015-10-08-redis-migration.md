@@ -56,9 +56,9 @@ backup c (backup of b)
 
 使用redis用户身份执行如下代码
 
-{% highlight bash %}
+~~~
 redis-server  /etc/redis/redis6379.conf
-{% endhighlight %}
+~~~
 
 > **Note:**  使用相同的方法在c上也建立一个redis实例，准备作为b的备份实例
 
@@ -73,9 +73,9 @@ redis-server  /etc/redis/redis6379.conf
 
 设定一个未使用的IP作为VIP
 
-{% highlight bash %}
+~~~
 nmap -R -vv -T4 -p 1  192.168.1.20/24   | grep 'host down'
-{% endhighlight %}
+~~~
 
 除了下面两条，其它配置都一样
 
@@ -88,10 +88,10 @@ nmap -R -vv -T4 -p 1  192.168.1.20/24   | grep 'host down'
 
 加入如下配置到b和c 的filter表，然后reload
 
-{% highlight bash %}
+~~~
 -A INPUT -d 224.0.0.18 -j ACCEPT
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 6379 -j ACCEPT
-{% endhighlight %}
+~~~
 
 > **Note:**  加载完iptables配置 ，最好在其它机器上进行一个访问测试，避免出现网络问题
 
@@ -102,15 +102,15 @@ nmap -R -vv -T4 -p 1  192.168.1.20/24   | grep 'host down'
 
 选择业务低峰点操作
 
-{% highlight bash %}
+~~~
 SLAVEOF a 6379
-{% endhighlight %}
+~~~
 
 可以使用以下命令观察同步状态 **master_sync_in_progress**
 
-{% highlight bash %}
+~~~
 info replication 
-{% endhighlight %}
+~~~
 
 > **Note:**  b的同步完成之后，使用相同的方法让c同步b
 
@@ -124,9 +124,9 @@ info replication
 
 > **Tip:**  这个设置本来是为了安全，避免对slave的写操作而导致的数据不一致，但为了平滑切换，需要牺牲一点这方面的安全考虑，如果不打开此设置，会出现一些写入报错
 
-{% highlight bash %}
+~~~
 CONFIG SET slave-read-only no 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -151,9 +151,9 @@ CONFIG SET slave-read-only no
 
 在b上使用如下命令断开与a的同步
 
-{% highlight bash %}
+~~~
 slaveof no one
-{% endhighlight %}
+~~~
 
 此时切换完成，b已经成为了c的master
 

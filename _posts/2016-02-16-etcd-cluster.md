@@ -41,7 +41,7 @@ comments: true
 
 ## 环境
 
-{% highlight bash %}
+~~~
 [root@docker etcd]# hostnamectl 
    Static hostname: docker
          Icon name: computer-vm
@@ -60,7 +60,7 @@ Git SHA: bdee27b
 Go Version: go1.5.3
 Go OS/Arch: linux/amd64
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -104,15 +104,15 @@ CLI | ENV
 
 配置使用方法为：
 
-{% highlight bash %}
+~~~
 ETCD_INITIAL_CLUSTER="infra0=http://10.0.1.10:2380,infra1=http://10.0.1.11:2380,infra2=http://10.0.1.12:2380" ETCD_INITIAL_CLUSTER_STATE=new etcd
-{% endhighlight %}
+~~~
 
 或
 
-{% highlight bash %}
+~~~
 etcd -initial-cluster infra0=http://10.0.1.10:2380,infra1=http://10.0.1.11:2380,infra2=http://10.0.1.12:2380 -initial-cluster-state new
-{% endhighlight %}
+~~~
 
 上面两种方法是一样的效果，也可以两种结合一起使用(重复指定的情况下，以命令行中的优先)
 
@@ -121,7 +121,7 @@ etcd -initial-cluster infra0=http://10.0.1.10:2380,infra1=http://10.0.1.11:2380,
 
 ## 打开防火墙端口
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# firewall-cmd  --list-all
 public (default, active)
   interfaces: eno16777736 eno33554960
@@ -149,7 +149,7 @@ public (default, active)
   rich rules: 
 	
 [root@docker etcd-v2.2.4-linux-amd64]#
-{% endhighlight %}
+~~~
 
 确保 **2379** 和 **2380** 端口被打开，默认情况下
 
@@ -166,7 +166,7 @@ public (default, active)
 ## 配置启动集群
 
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# ./etcd -name docker -initial-advertise-peer-urls http://192.168.100.103:2380 \
 >   -listen-peer-urls http://192.168.100.103:2380 \
 >   -listen-client-urls http://192.168.100.103:2379,http://127.0.0.1:2379 \
@@ -205,7 +205,7 @@ public (default, active)
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 
@@ -227,23 +227,23 @@ Item     | Comment
 
 ## 查看成员信息
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# curl http://localhost:2379/v2/members
 {"members":[{"id":"1b80a88a471eb4b8","name":"h104","peerURLs":["http://192.168.100.104:2380"],"clientURLs":["http://192.168.100.104:2379"]},{"id":"84099faad6d56427","name":"h102","peerURLs":["http://192.168.100.102:2380"],"clientURLs":["http://192.168.100.102:2379"]},{"id":"940f6e83e019a03f","name":"docker","peerURLs":["http://192.168.100.103:2380"],"clientURLs":["http://192.168.100.103:2379"]}]}
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 
 > **Note:**  要确保节点之间时间的一致，如果时间有太大偏差，etcd日志是会报警的
 
-{% highlight bash %}
+~~~
 2016-02-16 15:49:38.674505 W | rafthttp: the clock difference against peer 940f6e83e019a03f is too high [4.377659814s > 1s]
 2016-02-16 15:49:38.674572 W | rafthttp: the clock difference against peer 1b80a88a471eb4b8 is too high [4.372660776s > 1s]
-{% endhighlight %}
+~~~
 
 节点间的时间有偏差
 
-{% highlight bash %}
+~~~
 [root@docker etcd-v2.2.4-linux-amd64]# date
 Tue Feb 16 15:45:38 CST 2016
 [root@docker etcd-v2.2.4-linux-amd64]# date +%s
@@ -261,7 +261,7 @@ Tue Feb 16 15:45:38 CST 2016
 [root@h104 ~]# date +%s
 1455608804
 [root@h104 ~]#
-{% endhighlight %}
+~~~
 
 时间同步后，警告就会消失
 
@@ -273,7 +273,7 @@ Tue Feb 16 15:45:38 CST 2016
 
 ## 简单测试
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# curl http://127.0.0.1:2379/v2/keys/message -XPUT -d value="set by h104"
 {"action":"set","node":{"key":"/message","value":"set by h104","modifiedIndex":11,"createdIndex":11},"prevNode":{"key":"/message","value":"abc","modifiedIndex":10,"createdIndex":10}}
 [root@h104 ~]# curl http://127.0.0.1:2379/v2/keys/message
@@ -287,7 +287,7 @@ Tue Feb 16 15:45:38 CST 2016
 [root@docker etcd-v2.2.4-linux-amd64]# curl http://127.0.0.1:2379/v2/keys/message
 {"action":"get","node":{"key":"/message","value":"set by h104","modifiedIndex":11,"createdIndex":11}}
 [root@docker etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 在h104上设定的数据自动同步到了h102和docker上，简单测试通过
 
@@ -300,7 +300,7 @@ Tue Feb 16 15:45:38 CST 2016
 
 **[etcdctl][etcdctl]** 可以帮忙完成相关工作 
 
-{% highlight bash %}
+~~~
 [root@h104 etcd-v2.2.4-linux-amd64]# curl http://localhost:2379/v2/members
 {"members":[{"id":"1b80a88a471eb4b8","name":"h104","peerURLs":["http://192.168.100.104:2380"],"clientURLs":["http://192.168.100.104:2379"]},{"id":"84099faad6d56427","name":"h102","peerURLs":["http://192.168.100.102:2380"],"clientURLs":["http://192.168.100.102:2379"]},{"id":"940f6e83e019a03f","name":"docker","peerURLs":["http://192.168.100.103:2380"],"clientURLs":["http://192.168.100.103:2379"]}]}
 [root@h104 etcd-v2.2.4-linux-amd64]# ./etcdctl  member list
@@ -308,12 +308,12 @@ Tue Feb 16 15:45:38 CST 2016
 84099faad6d56427: name=h102 peerURLs=http://192.168.100.102:2380 clientURLs=http://192.168.100.102:2379
 940f6e83e019a03f: name=docker peerURLs=http://192.168.100.103:2380 clientURLs=http://192.168.100.103:2379
 [root@h104 etcd-v2.2.4-linux-amd64]#
-{% endhighlight %}
+~~~
 
 
 加减节点相关的操作
 
-{% highlight bash %}
+~~~
 [root@h104 etcd-v2.2.4-linux-amd64]# ./etcdctl  member --help 
 NAME:
    etcdctl member - member add, remove and list subcommands
@@ -332,7 +332,7 @@ OPTIONS:
    --help, -h	show help
    
 [root@h104 etcd-v2.2.4-linux-amd64]#
-{% endhighlight %}
+~~~
 
 
 下面演示一下在线添加删除节点的操作
@@ -344,7 +344,7 @@ OPTIONS:
 
 删除节点相对简单
 
-{% highlight bash %}
+~~~
 [root@h104 etcd-v2.2.4-linux-amd64]# ./etcdctl  member  list
 1b80a88a471eb4b8: name=h104 peerURLs=http://192.168.100.104:2380 clientURLs=http://192.168.100.104:2379
 84099faad6d56427: name=h102 peerURLs=http://192.168.100.102:2380 clientURLs=http://192.168.100.102:2379
@@ -357,12 +357,12 @@ Removed member 84099faad6d56427 from cluster
 [root@h104 etcd-v2.2.4-linux-amd64]# curl http://localhost:2379/v2/members
 {"members":[{"id":"1b80a88a471eb4b8","name":"h104","peerURLs":["http://192.168.100.104:2380"],"clientURLs":["http://192.168.100.104:2379"]},{"id":"940f6e83e019a03f","name":"docker","peerURLs":["http://192.168.100.103:2380"],"clientURLs":["http://192.168.100.103:2379"]}]}
 [root@h104 etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 同时 h102 的日志中出现如下信息，最后退出
 
 
-{% highlight bash %}
+~~~
 ...
 ...
 ...
@@ -376,7 +376,7 @@ Removed member 84099faad6d56427 from cluster
 2016-02-16 17:42:21.342314 E | etcdhttp: error removing member 84099faad6d56427 (etcdserver: server stopped)
 2016-02-16 17:42:21.342338 E | etcdhttp: got unexpected response error (etcdserver: server stopped)
 [root@h102 etcd-v2.2.4-linux-amd64]#
-{% endhighlight %}
+~~~
 
 > **Tip:**  直接删除leader也是安全的，只是在选举出新的leader前集群是不可用状态，时长相当于一个选举timeout周期加上投票过程耗费的总时间
 
@@ -390,7 +390,7 @@ Removed member 84099faad6d56427 from cluster
 * 使用 **`etcdctl member add`** 或 [members API][members_api] 添加节点
 * 使用新的集群配置启动新加入的节点，包含一份所有当前成员的列表
 
-{% highlight bash %}
+~~~
 [root@h104 etcd-v2.2.4-linux-amd64]# ./etcdctl  member  list
 1b80a88a471eb4b8: name=h104 peerURLs=http://192.168.100.104:2380 clientURLs=http://192.168.100.104:2379
 940f6e83e019a03f: name=docker peerURLs=http://192.168.100.103:2380 clientURLs=http://192.168.100.103:2379
@@ -402,23 +402,23 @@ ETCD_NAME="new-h102"
 ETCD_INITIAL_CLUSTER="h104=http://192.168.100.104:2380,docker=http://192.168.100.103:2380,new-h102=http://192.168.100.102:2380"
 ETCD_INITIAL_CLUSTER_STATE="existing"
 [root@h104 etcd-v2.2.4-linux-amd64]#
-{% endhighlight %}
+~~~
 
 执行完后，终端反馈出几个关键的环境变量
 
 要使用这些环境变量来运行新加入的节点，当前情况下新节点还没运行
 
-{% highlight bash %}
+~~~
 [root@h104 etcd-v2.2.4-linux-amd64]# ./etcdctl  member  list
 1b80a88a471eb4b8: name=h104 peerURLs=http://192.168.100.104:2380 clientURLs=http://192.168.100.104:2379
 940f6e83e019a03f: name=docker peerURLs=http://192.168.100.103:2380 clientURLs=http://192.168.100.103:2379
 cdc1e5e338e27adc[unstarted]: peerURLs=http://192.168.100.102:2380
 [root@h104 etcd-v2.2.4-linux-amd64]#
-{% endhighlight %}
+~~~
 
 使用环境变量运行新节点，将节点加入集群
 
-{% highlight bash %}
+~~~
 [root@h102 etcd-v2.2.4-linux-amd64]# ETCD_NAME="new-h102" ETCD_INITIAL_CLUSTER="h104=http://192.168.100.104:2380,docker=http://192.168.100.103:2380,new-h102=http://192.168.100.102:2380"   ETCD_INITIAL_CLUSTER_STATE="existing"   /usr/local/src/etcd/etcd-v2.2.4-linux-amd64/etcd -listen-client-urls http://192.168.100.102:2379,http://127.0.0.1:2379   -advertise-client-urls http://192.168.100.102:2379 -listen-peer-urls http://192.168.100.102:2380   -initial-advertise-peer-urls http://192.168.100.102:2380
 2016-02-16 18:46:13.884181 I | flags: recognized and used environment variable ETCD_INITIAL_CLUSTER=h104=http://192.168.100.104:2380,docker=http://192.168.100.103:2380,new-h102=http://192.168.100.102:2380
 2016-02-16 18:46:13.884325 I | flags: recognized and used environment variable ETCD_INITIAL_CLUSTER_STATE=existing
@@ -430,25 +430,25 @@ cdc1e5e338e27adc[unstarted]: peerURLs=http://192.168.100.102:2380
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 节点可以正常工作
 
-{% highlight bash %}
+~~~
 [root@h102 etcd-v2.2.4-linux-amd64]# curl http://127.0.0.1:2379/v2/keys/message
 {"action":"get","node":{"key":"/message","value":"set by h104","modifiedIndex":11,"createdIndex":11}}
 [root@h102 etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 再次查看成员状态
 
-{% highlight bash %}
+~~~
 [root@h102 etcd-v2.2.4-linux-amd64]# ./etcdctl  member list
 1b80a88a471eb4b8: name=h104 peerURLs=http://192.168.100.104:2380 clientURLs=http://192.168.100.104:2379
 940f6e83e019a03f: name=docker peerURLs=http://192.168.100.103:2380 clientURLs=http://192.168.100.103:2379
 cdc1e5e338e27adc: name=new-h102 peerURLs=http://192.168.100.102:2380 clientURLs=http://192.168.100.102:2379
 [root@h102 etcd-v2.2.4-linux-amd64]# 
-{% endhighlight %}
+~~~
 
 
 > **Note:** 如果要添加多个节点，建议一次只添加一个，然后检查节点和集群运行状态正常后再依次逐个添加其它节点

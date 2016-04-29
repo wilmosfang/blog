@@ -39,7 +39,7 @@ comments: true
 
 **[Tengine][tengine]** 的 **[下载地址][download]**
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d src]# wget  http://tengine.taobao.org/download/tengine-2.1.1.tar.gz 
 --2015-11-04 13:24:28--  http://tengine.taobao.org/download/tengine-2.1.1.tar.gz
 Resolving tengine.taobao.org... 120.55.149.135
@@ -55,7 +55,7 @@ Saving to: “tengine-2.1.1.tar.gz”
 [root@i-1avyrt2d src]# md5sum  tengine-2.1.1.tar.gz 
 357ec313735bce0b75fedd4662f6208c  tengine-2.1.1.tar.gz
 [root@i-1avyrt2d src]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -66,14 +66,14 @@ Saving to: “tengine-2.1.1.tar.gz”
 
 下面是可能的依赖包
 
-{% highlight bash %}
+~~~
 pcre.x86_64   
 pcre-devel.x86_64  
 zlib.x86_64  
 zlib-devel.x86_64 
 openssl.x86_64 
 openssl-devel.x86_64
-{% endhighlight %}
+~~~
 
 > **Note:** 如果缺少以上的包，在配置检查过程中就可能会报错 ， 可以使用 **yum** 
 
@@ -82,7 +82,7 @@ openssl-devel.x86_64
 
 #### 解压
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d src]# ls
 nginx-1.9.6  nginx-1.9.6.tar.gz  tengine-2.1.1.tar.gz
 [root@i-1avyrt2d src]# tar -zxvf tengine-2.1.1.tar.gz 
@@ -103,13 +103,13 @@ tengine-2.1.1/tests/test-nginx/dso_cases/ngx_http_upstream_check_module/http_che
 [root@i-1avyrt2d src]# ls
 nginx-1.9.6  nginx-1.9.6.tar.gz  tengine-2.1.1  tengine-2.1.1.tar.gz
 [root@i-1avyrt2d src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 #### 配置
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d tengine-2.1.1]# ./configure 
 checking for OS
  + Linux 2.6.32-573.7.1.el6.x86_64 x86_64
@@ -152,14 +152,14 @@ Configuration summary
 [root@i-1avyrt2d tengine-2.1.1]# echo $?
 0
 [root@i-1avyrt2d tengine-2.1.1]#
-{% endhighlight %}
+~~~
 
 
 ---
 
 #### 编译
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d tengine-2.1.1]# make 
 make -f objs/Makefile
 make[1]: Entering directory `/usr/local/src/tengine-2.1.1'
@@ -190,13 +190,13 @@ make[1]: Leaving directory `/usr/local/src/tengine-2.1.1'
 [root@i-1avyrt2d tengine-2.1.1]# echo $?
 0
 [root@i-1avyrt2d tengine-2.1.1]#
-{% endhighlight %}
+~~~
 
 ---
 
 #### 安装
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d tengine-2.1.1]# make install 
 make -f objs/Makefile install
 make[1]: Entering directory `/usr/local/src/tengine-2.1.1'
@@ -221,20 +221,20 @@ make[1]: Leaving directory `/usr/local/src/tengine-2.1.1'
 [root@i-1avyrt2d tengine-2.1.1]# echo $?
 0
 [root@i-1avyrt2d tengine-2.1.1]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 配置检查与启动
 
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d nginx]# sbin/nginx -t -c conf/nginx.conf
 the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
 configuration file /usr/local/nginx/conf/nginx.conf test is successful
 [root@i-1avyrt2d nginx]# sbin/nginx  -c conf/nginx.conf
 [root@i-1avyrt2d nginx]# 
-{% endhighlight %}
+~~~
 
 之后就可以访问了
 
@@ -252,7 +252,7 @@ Tengine 将检查和监模块都集成了进来，非常方便
 模块查看方法
 
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d nginx.old]# /usr/local/nginx/sbin/nginx  -h 
 Tengine version: Tengine/2.1.1 (nginx/1.6.2)
 Usage: nginx [-?hvmVtdq] [-s signal] [-c filename] [-p prefix] [-g directives]
@@ -336,11 +336,11 @@ loaded modules:
     ngx_http_range_body_filter_module (static)
     ngx_http_not_modified_filter_module (static)
 [root@i-1avyrt2d nginx.old]# 
-{% endhighlight %}
+~~~
 
 这些模块都很实用， **ngx_http_upstream_check_module** 可以检查后端服务器的状态
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d nginx.old]# /usr/local/nginx/sbin/nginx  -m  2>&1  | grep upstream 
     ngx_http_upstream_module (static)
     ngx_http_upstream_ip_hash_module (static)
@@ -353,12 +353,12 @@ loaded modules:
 [root@i-1avyrt2d nginx.old]# /usr/local/nginx/sbin/nginx  -m  2>&1  | grep upstream | grep check 
     ngx_http_upstream_check_module (static)
 [root@i-1avyrt2d nginx.old]# 
-{% endhighlight %}
+~~~
 
 
 > **Tip:**  官方版本的没有 **-m** 选项，不能方便的列出加载的模块
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d nginx.old]# sbin/nginx -h 
 nginx version: nginx/1.9.6
 Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]
@@ -382,11 +382,11 @@ nginx version: nginx/1.9.6
 built by gcc 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC) 
 configure arguments:
 [root@i-1avyrt2d nginx.old]# 
-{% endhighlight %}
+~~~
 
 从目录结构可以看到，多了不少东西， **nginx.old** 是官方版本
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d nginx]# ll /usr/local/nginx
 total 44
 drwx------ 2 nginx root 4096 Nov  4 14:17 client_body_temp
@@ -407,7 +407,7 @@ drwxr-xr-x 2 root root 4096 Nov  4 10:22 html
 drwxr-xr-x 2 root root 4096 Nov  4 13:09 logs
 drwxr-xr-x 2 root root 4096 Nov  4 10:22 sbin
 [root@i-1avyrt2d nginx]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -417,7 +417,7 @@ Nginx 很大的一个作用就是作为web前端进行负载均衡和反向代�
 
 下面对一个案例进行分析
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d conf]# cat nginx.conf | grep -v "#" | grep -v "^$"  
 user nginx nginx;
 worker_processes  4;
@@ -477,7 +477,7 @@ the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
 configuration file /usr/local/nginx/conf/nginx.conf test is successful
 [root@i-1avyrt2d conf]# kill  -HUP `cat ../logs/nginx.pid `
 [root@i-1avyrt2d conf]# 
-{% endhighlight %}
+~~~
 
 后面对这个配置的不同部分进行详细分析
 
@@ -488,14 +488,14 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 
 nginx可以很简单的配置成http负载均衡服务器，对前端的请求进行转发
 
-{% highlight bash %}
+~~~
     upstream test_apps {
         server x.x.x.x:80  max_fails=1 fail_timeout=10s weight=25;
         server y.y.y.y:80  max_fails=1 fail_timeout=10s  weight=25;
         server x.x.x.x:80  max_fails=1 fail_timeout=10s  weight=25;
         server y.y.y.y:80  max_fails=1 fail_timeout=10s  weight=25;
     }
-{% endhighlight %}
+~~~
 
 upstream 是nginx 负载均衡的主要模块，它提供了一个简单方法来轮询后端的服务器
 
@@ -515,13 +515,13 @@ server 使用于 upstream  环境，服务名称可以是一个域名，一个ip
 
 ### 反向代理
 
-{% highlight bash %}
+~~~
 	location / {
 	    proxy_pass http://test_apps;
             proxy_set_header X-Forwarded-For  $remote_addr;
 	
 	}
-{% endhighlight %}
+~~~
 
 
 ---
@@ -532,7 +532,7 @@ server 使用于 upstream  环境，服务名称可以是一个域名，一个ip
 
 这个检查逻辑就是 **ngx_http_upstream_check_module** 模块提供的，如果使用官方版，需要额外编译加入此模块
 
-{% highlight bash %}
+~~~
     upstream test_apps {
         server x.x.x.x:80  max_fails=1 fail_timeout=10s weight=25;
         server y.y.y.y:80  max_fails=1 fail_timeout=10s  weight=25;
@@ -542,22 +542,22 @@ server 使用于 upstream  环境，服务名称可以是一个域名，一个ip
         check_http_send "HEAD /health_status HTTP/1.0\r\n\r\n";
         check_http_expect_alive http_2xx http_3xx;
     }
-{% endhighlight %}
+~~~
 
 创建 **apps/status.passwd** 文件，创建方法(用户设为test，密码设为tengine) 
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d apps]#  perl -e 'print  crypt(tengine,tengine)';
 tejMqaZALnkgk[root@i-1avyrt2d apps]# vim status.passwd 
 [root@i-1avyrt2d apps]# cat status.passwd 
 test:tejMqaZALnkgk
 [root@i-1avyrt2d apps]# 
-{% endhighlight %}
+~~~
 
 
 下面代码的作用就是可以使用 **http://ip/status** 监控后端服务器的状态
 
-{% highlight bash %}
+~~~
 	location /status {
         auth_basic      "input your name and passsword";
         auth_basic_user_file  apps/status.passwd;
@@ -565,17 +565,17 @@ test:tejMqaZALnkgk
         access_log off;
         allow all;
 	}	
-{% endhighlight %}
+~~~
 
 > **Tip:** 在启动前可以使用 nginx check 一下配置语法 
 
-{% highlight bash %}
+~~~
 [root@i-1avyrt2d conf]# ../sbin/nginx  -t -c /usr/local/nginx/conf/nginx.conf
 the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
 configuration file /usr/local/nginx/conf/nginx.conf test is successful
 [root@i-1avyrt2d conf]# kill  -HUP `cat ../logs/nginx.pid `
 [root@i-1avyrt2d conf]# 
-{% endhighlight %}
+~~~
 
 
 使用浏览器访问 **http://103.21.118.104/**

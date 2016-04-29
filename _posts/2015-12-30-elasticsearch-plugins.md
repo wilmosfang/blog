@@ -45,7 +45,7 @@ comments: true
 ## Plugin管理
 
 
-{% highlight bash %}
+~~~
 [root@h102 elasticsearch]# rpm -qa | grep elast
 elasticsearch-2.1.1-1.noarch
 [root@h102 elasticsearch]# rpm -ql elasticsearch-2.1.1-1.noarch | grep plugin
@@ -79,14 +79,14 @@ NOTES
 
 
 [root@h102 elasticsearch]# 
-{% endhighlight %}
+~~~
 
 
 相对简单，只有三个方法 **install，remove，list**
 
 子命令的帮助查看方法 
 
-{% highlight bash %}
+~~~
 [root@h102 elasticsearch]# /usr/share/elasticsearch/bin/plugin list -h
 
 NAME
@@ -118,16 +118,16 @@ DESCRIPTION
 
 
 [root@h102 elasticsearch]#
-{% endhighlight %}
+~~~
 
 当前系统中并没有检测到有插件
 
-{% highlight bash %}
+~~~
 [root@h102 elasticsearch]# /usr/share/elasticsearch/bin/plugin list 
 Installed plugins in /usr/share/elasticsearch/plugins:
     - No plugin detected
 [root@h102 elasticsearch]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -136,29 +136,29 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 
 plugin默认地址为安装目录的 **./plugins** 
 
-{% highlight bash %}
+~~~
 [root@h102 elasticsearch]# rpm -ql elasticsearch-2.1.1-1.noarch | grep plugin
 /usr/share/elasticsearch/bin/plugin
 /usr/share/elasticsearch/plugins
 [root@h102 elasticsearch]# ll  /usr/share/elasticsearch/plugins
 total 0
 [root@h102 elasticsearch]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 由于没有插件，所以是空的
 
 
 但是可以在 **elasticsearch.yml** 中进行修改
 
-{% highlight bash %}
+~~~
 path.plugins: /path/to/custom/plugins/dir
-{% endhighlight %}
+~~~
 
 可以在 **elasticsearch.yml** 中设定强制要求的plugins
 
-{% highlight bash %}
+~~~
 plugin.mandatory: mapper-attachments,lang-python
-{% endhighlight %}
+~~~
 
 设定之后，如果缺少指定的plugin，ES是不会启动的
 
@@ -169,13 +169,13 @@ plugin.mandatory: mapper-attachments,lang-python
 
 详细的安装方法可以使用下面命令进行查看，也可以参考 **[plugin安装方法][installation]**
 
-{% highlight bash %}
+~~~
 [root@h102 elasticsearch]# /usr/share/elasticsearch/bin/plugin install -h
-{% endhighlight %}
+~~~
 
 ### 安装head插件
 
-{% highlight bash %}
+~~~
 [root@h102 elasticsearch]# /usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head 
 -> Installing mobz/elasticsearch-head...
 Trying https://github.com/mobz/elasticsearch-head/archive/master.zip ...
@@ -192,7 +192,7 @@ Installed plugins in /usr/share/elasticsearch/plugins:
 total 4
 drwxr-xr-x 5 root root 4096 Dec 30 22:04 head
 [root@h102 elasticsearch]#
-{% endhighlight %}
+~~~
 
 于是使用网页浏览 **`http://localhost:9200/_plugin/head/`** 就可以看到下列界面
 
@@ -213,7 +213,7 @@ drwxr-xr-x 5 root root 4096 Dec 30 22:04 head
 **network.host** 可以绑定IP到主机IP，也可以对所有 **0.0.0.0** 打开
 
 
-{% highlight bash %}
+~~~
 [root@h102 elasticsearch]# vim elasticsearch.yml
 [root@h102 elasticsearch]# grep host elasticsearch.yml | grep -v "^#"
 network.host: 0.0.0.0 
@@ -221,12 +221,12 @@ network.host: 0.0.0.0
 Stopping elasticsearch:                                    [  OK  ]
 Starting elasticsearch:                                    [  OK  ]
 [root@h102 elasticsearch]# 
-{% endhighlight %}
+~~~
 
 
 打开防火墙
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# grep 9200 /etc/sysconfig/iptables 
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 9200 -j ACCEPT 
 [root@h102 ~]# /etc/init.d/iptables reload 
@@ -234,7 +234,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@h102 ~]# iptables -L -nv | grep 9200
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:9200 
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 现在可以从外面进行访问了
 

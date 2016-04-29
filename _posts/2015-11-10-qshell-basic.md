@@ -33,7 +33,7 @@ comments: true
 ## 下载
 
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# wget http://devtools.qiniu.com/qshell-v1.6.0.zip 
 --2015-11-10 14:42:47--  http://devtools.qiniu.com/qshell-v1.6.0.zip
 Resolving devtools.qiniu.com... 218.59.186.254, 58.20.197.62, 110.53.75.44, ...
@@ -65,7 +65,7 @@ qshell-v1.6.0.zip:        Zip archive data, at least v2.0 to extract
 qshell_windows_386.exe:   PE32 executable for MS Windows (console) Intel 80386 32-bit
 qshell_windows_amd64.exe: PE32+ executable for MS Windows (console) Mono/.Net assembly
 [root@h101 qshell]#
-{% endhighlight %}
+~~~
 
 | 版本| 支持平台| 链接|更新日志|
 | :------- | :----: | :---: |:---: |
@@ -88,7 +88,7 @@ qshell_windows_amd64.exe: PE32+ executable for MS Windows (console) Mono/.Net as
 ## 常用命令
 
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  -h
 QShell v1.6.0
 
@@ -146,7 +146,7 @@ Commands:
 [root@h101 qshell]# ./qshell_linux_amd64  -v
 qshell v1.6.0
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -157,7 +157,7 @@ qshell v1.6.0
 
 设置或显示当前用户的AccessKey和SecretKey
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  account 
 AccessKey:  SecretKey:  Zone: 
 [root@h101 qshell]# 
@@ -166,7 +166,7 @@ AccessKey:  SecretKey:  Zone:
 AccessKey: ELUs327kxVPJrGCXqWae9yioc0xYZyrIpbM6Wh6x SecretKey: LVzZY2SqOQ_I_kM1n00ygACVBArDvOWtiLkDtKiw Zone: nb
 [root@h101 qshell]# 
 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -176,11 +176,11 @@ AccessKey: ELUs327kxVPJrGCXqWae9yioc0xYZyrIpbM6Wh6x SecretKey: LVzZY2SqOQ_I_kM1n
 
 切换当前设置帐号所在的机房区域，仅账号拥有该指定区域机房时有效
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  zone
 Current zone: nb
 [root@h101 qshell]#
-{% endhighlight %}
+~~~
 
 
 ### listbucket
@@ -189,12 +189,12 @@ Current zone: nb
 
 列举七牛空间里面的所有文件
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  listbucket   qiniucloud-goods    qiniucloud-goods.list.txt
 [root@h101 qshell]# cat qiniucloud-goods.list.txt 
 ux/20140618/qiniutest-shop_video_001.MP4	24559427	lpb0Xu_Drayb851dgWn7RBPqcu-s	14030768636225751	video/mp4	
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -205,7 +205,7 @@ ux/20140618/qiniutest-shop_video_001.MP4	24559427	lpb0Xu_Drayb851dgWn7RBPqcu-s	1
 
 获取当前账号下所有的空间名称
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64   buckets
 qiniucloud-flower
 qiniucloud-apple
@@ -215,7 +215,7 @@ qiniucloud-upload
 qiniucloud-goods
 qiniucloudtest
 [root@h101 qshell]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -225,7 +225,7 @@ qiniucloudtest
 
 获取指定空间的所有关联域名
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64   domains qiniucloud-goods 
 qiniucloud-goods.qiniudn.com
 qiniucloud-goods.u.qiniudn.com
@@ -234,7 +234,7 @@ video.qiniutest.cn
 7jpnf5.com2.z0.glb.clouddn.com
 7jpnf5.com2.z0.glb.qiniucdn.com
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -244,11 +244,11 @@ video.qiniutest.cn
 
 根据七牛的qetag算法来计算文件的hash
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  qetag   qiniucloud-goods.list.txt 
 Flxstje1T4ojLoOe0G4HjI_WJuVl
 [root@h101 qshell]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -262,14 +262,14 @@ Flxstje1T4ojLoOe0G4HjI_WJuVl
 > **Tip:** 淘宝的公开API **http://ip.taobao.com/service/getIpInfo.php**
 
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  ip  180.154.236.170  192.168.1.1 
 Ip: 180.154.236.170      => 中国	华东	上海市	上海市		电信
 Ip: 192.168.1.1          => 未分配或者内网IP					
 [root@h101 qshell]# ./qshell_linux_amd64  ip   202.118.1.81 
 Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -280,11 +280,11 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 将日期转为timestamp(单位秒)
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64   d2ts   0
 1447159453
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -294,11 +294,11 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 将timestamp(单位秒)转为UTC+8:00中国日期，主要用来检查上传策略的deadline参数
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64   ts2d  1447159453
 2015-11-10 20:44:13 +0800 CST
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -309,7 +309,7 @@ Ip: 202.118.1.81         => 中国	东北	辽宁省	沈阳市		教育网
 
 查询七牛空间中一个文件的基本信息
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64 stat qiniucloud-goods   ux/20140618/qiniutest-shop_video_001.MP4 
 Bucket:             qiniucloud-goods          
 Key:                ux/20140618/qiniutest-shop_video_001.MP4
@@ -319,7 +319,7 @@ PutTime:            14030768636225751
 MimeType:           video/mp4           
 
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -330,11 +330,11 @@ MimeType:           video/mp4
 
 将timestamp(单位100纳秒)转为UTC+8:00中国日期
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64 tns2d 14030768636225751 
 2014-06-18 15:34:23.6225751 +0800 CST
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -346,7 +346,7 @@ MimeType:           video/mp4
 
 同步数据到七牛空间， 带同步进度信息，和数据上传完整性检查
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# tree /root/qshell/abc/
 /root/qshell/abc/
 ├── qiniucloud-goods.list.txt
@@ -382,7 +382,7 @@ MimeType:           video/mp4
 2015/11/10 17:03:42 [INFO][qshell] qupload.go:418: Duration:	 10.920875261s
 2015/11/10 17:03:42 [INFO][qshell] qupload.go:419: -------------------------
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -394,7 +394,7 @@ MimeType:           video/mp4
 
 从七牛空间同步数据到本地，支持只同步某些前缀的文件，支持增量同步
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# cat ccfg
 {
     "dest_dir"  :   "/tmp/x",
@@ -430,7 +430,7 @@ MimeType:           video/mp4
 
 4 directories, 3 files
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -442,11 +442,11 @@ MimeType:           video/mp4
 
 删除七牛空间中的一个文件
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  delete   qiniucloud-goods  2015/11/10/test/qshell_windows_386.exe 
 Done!
 [root@h101 qshell]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -457,11 +457,11 @@ Done!
 
 移动或重命名七牛空间中的一个文件
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  move    qiniucloud-goods  2015/11/10/test/qiniucloud-goods.list.txt  qiniucloud-goods  2015/11/10/test/qshell_windows_386.exe 
 Done!
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -472,11 +472,11 @@ Done!
 
 移动或重命名七牛空间中的一个文件
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  copy     qiniucloud-goods  2015/11/10/test/qshell_windows_386.exe   qiniucloud-goods  2015/11/10/test/qshell_windows_386_test_cccccopy.exe 
 Done!
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -488,7 +488,7 @@ Done!
 
 修改七牛空间中的一个文件的MimeType
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  chgm   qiniucloud-goods  2015/11/10/test/qshell_windows_386_test_cccccopy.exe  image/jpeg
 Done!
 [root@h101 qshell]# ./qshell_linux_amd64  stat   qiniucloud-goods  2015/11/10/test/qshell_windows_386_test_cccccopy.exe 
@@ -500,7 +500,7 @@ PutTime:            14471470979836277
 MimeType:           image/jpeg          
 
 [root@h101 qshell]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -511,7 +511,7 @@ MimeType:           image/jpeg
 
 从Internet上抓取一个资源并存储到七牛空间中
 
-{% highlight bash %}
+~~~
 [root@h101 qshell]# ./qshell_linux_amd64  fetch 'https://www.baidu.com/img/bdlogo.png' qiniucloud-goods baidu_logo_1.png 
 Key: baidu_logo_1.png
 Hash: FrUHIqhkDDd77-AtiDcOwi94YIeM
@@ -532,7 +532,7 @@ Saving to: “bdlogo.png”
 [root@h101 abc]# ../qshell_linux_amd64   qetag  bdlogo.png  
 FrUHIqhkDDd77-AtiDcOwi94YIeM
 [root@h101 abc]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -542,7 +542,7 @@ FrUHIqhkDDd77-AtiDcOwi94YIeM
 
 批量删除七牛空间中的文件，可以直接根据listbucket的结果来删除
 
-{% highlight bash %}
+~~~
 [root@h101 abc]# cat abc.txt 
 2015/11/10/test/qshell_darwin_386	7885316	lvDom3i6Wp4mvC7EStSgXZ__2Z7a	14471462224350860	application/octet-stream	
 2015/11/10/test/qshell_windows_386.exe	106	Flxstje1T4ojLoOe0G4HjI_WJuVl	14471470171609874	text/plain	
@@ -551,17 +551,17 @@ baidu_logo_1.png	5331	FrUHIqhkDDd77-AtiDcOwi94YIeM	14471472708081319	image/png
 <DANGER> Input giddfi to confirm operation: giddfi
 All deleted!
 [root@h101 abc]# 
-{% endhighlight %}
+~~~
 
 完全删除某空间下的文件 
 
-{% highlight bash %}
+~~~
 [root@h101 copy]# ../qshell_linux_amd64  listbucket   qiniucloud-goods  list.video 
 [root@h101 copy]# ../qshell_linux_amd64  batchdelete  qiniucloud-goods  list.video 
 <DANGER> Input hdbiha to confirm operation: hdbiha
 All deleted!
 [root@h101 copy]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -575,22 +575,22 @@ All deleted!
 
 准备列表
 
-{% highlight bash %}
+~~~
 [root@h101 copy]# ../qshell_linux_amd64  listbucket  qiniucloud-people  coffee/video  t.video
 [root@h101 copy]# ../qshell_linux_amd64  listbucket  qiniucloud-people  coffee/audio  t.audio
 [root@h101 copy]# awk '{print $1}' t.video   >> all.list
 [root@h101 copy]# awk '{print $1}' t.audio   >> all.list
 [root@h101 copy]# less all.list 
-{% endhighlight %}
+~~~
 
 进行复制
 
-{% highlight bash %}
+~~~
 [root@h101 copy]# ../qshell_linux_amd64  batchcopy  qiniucloud-people qiniucloud-goods  all.list 
 <DANGER> Input aijbdc to confirm operation: aijbdc
 All Copyed!
 [root@h101 copy]#
-{% endhighlight %}
+~~~
 
 
 
@@ -602,7 +602,7 @@ All Copyed!
 
 输出本地指定路径下所有的文件列表
 
-{% highlight bash %}
+~~~
 [root@h101 abc]# ../qshell_linux_amd64 dircache  /root/qshell/abc   /tmp/iii
 2015/11/10 21:28:02 [INFO][qshell] dir_cache.go:18: No cache file `/tmp/iii' found, will create one
 2015/11/10 21:28:02 [INFO][qshell] dir_cache.go:36: Walk `/root/qshell/abc' start from `2015-11-10 21:28:02.039784717 +0800 CST'
@@ -616,7 +616,7 @@ i	221	14471620636996111
 qshell_darwin_386	7885316	14471460520296193
 qshell_windows_386.exe	8027136	14471460520916193
 [root@h101 abc]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -626,7 +626,7 @@ qshell_windows_386.exe	8027136	14471460520916193
 
 可以直接在qshell后面加一个命令，然后不指定参数，来查看其用法
 
-{% highlight bash %}
+~~~
 [root@h101 abc]# ../qshell_linux_amd64 sync
 Usage: qshell [-d] sync <SrcResUrl> <Bucket> <Key> [<UpHostIp>]
   Sync big file to qiniu bucket
@@ -640,7 +640,7 @@ Usage: qshell [-d] b64encode [<UrlSafe>] <DataToEncode>
   Base64 Encode
 
 [root@h101 abc]# 
-{% endhighlight %}
+~~~
 
 
 ---

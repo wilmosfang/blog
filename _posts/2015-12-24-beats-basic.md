@@ -77,7 +77,7 @@ filebeat是构建于beats之上的，应用于日志收集场景的实现
 
 ## 安装
 
-{% highlight bash %}
+~~~
 [root@h102 filebeat]# curl -L -O https://download.elastic.co/beats/filebeat/filebeat-1.0.1-x86_64.rpm
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -92,7 +92,7 @@ filebeat-1.0.1-x86_64.rpm
 Preparing...                ########################################### [100%]
    1:filebeat               ########################################### [100%]
 [root@h102 filebeat]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -101,7 +101,7 @@ Preparing...                ########################################### [100%]
 ## 配置
 
 
-{% highlight bash %}
+~~~
 [root@h102 filebeat]# tree /etc/filebeat/
 /etc/filebeat/
 ├── filebeat.template.json
@@ -139,7 +139,7 @@ shipper:
 logging:
   files:
 [root@h102 filebeat]# 
-{% endhighlight %}
+~~~
 
 在默认配置的基础上加入 **/var/log/messages** 以监控系统日志
 
@@ -155,7 +155,7 @@ logging:
 
 ## 导入索引模板到ES
 
-{% highlight bash %}
+~~~
 [root@h102 filebeat]# ls
 filebeat.template.json  filebeat.yml
 [root@h102 filebeat]# curl -XPUT 'http://localhost:9200/_template/filebeat?pretty' -d@/etc/filebeat/filebeat.template.json
@@ -165,13 +165,13 @@ filebeat.template.json  filebeat.yml
 [root@h102 filebeat]# echo $?
 0
 [root@h102 filebeat]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 运行filebeat 
 
-{% highlight bash %}
+~~~
 [root@h102 filebeat]# /etc/init.d/filebeat start 
 Starting filebeat:                                         [  OK  ]
 [root@h102 filebeat]# /etc/init.d/filebeat status
@@ -181,11 +181,11 @@ root      2870  0.0  0.0 103256   828 pts/0    S+   21:48   0:00  |       \_ gre
 root      2852  0.0  0.0  11388   232 pts/0    Sl   21:47   0:00 filebeat-god -r / -n -p /var/run/filebeat.pid -- /usr/bin/filebeat -c /etc/filebeat/filebeat.yml
 root      2853  0.5  0.6 237664 12920 pts/0    Sl   21:47   0:00  \_ /usr/bin/filebeat -c /etc/filebeat/filebeat.yml
 [root@h102 filebeat]# 
-{% endhighlight %}
+~~~
 
 线程信息
 
-{% highlight bash %}
+~~~
 [root@h102 filebeat]# ps -Lf 2852
 UID        PID  PPID   LWP  C NLWP STIME TTY      STAT   TIME CMD
 root      2852     1  2852  0    2 21:47 pts/0    Sl     0:00 filebeat-god -r / -n -p /var/run/filebeat.pid -- /usr/bin/filebeat -c /e
@@ -214,13 +214,13 @@ filebeat-god,2852 -r / -n -p /var/run/filebeat.pid -- /usr/bin/filebeat -c /etc/
   │   └─{filebeat},2862
   └─{filebeat-god},2854
 [root@h102 filebeat]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 配置与运行logstash
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-filebeat-es-simple.conf -t 
 Configuration OK
 [root@h102 etc]# cat logstash-filebeat-es-simple.conf
@@ -241,12 +241,12 @@ Settings: Default filter workers: 1
 Logstash startup completed
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 查看端口信息
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# netstat  -ant | grep 5044
 tcp        0      0 :::5044                     :::*                        LISTEN      
 [root@h102 ~]# lsof -i :5044
@@ -282,7 +282,7 @@ Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
 root      3577  0.0  0.0 103256   828 pts/2    S+   22:58   0:00  |       \_ grep 3518
 root      3518 12.9  9.5 2516488 183444 pts/3  Sl+  22:53   0:36          \_ /usr/bin/java -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -Djava.awt.headless=true -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -Xmx1g -Xss2048k -Djffi.boot.library.path=/opt/logstash/vendor/jruby/lib/jni -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -Djava.awt.headless=true -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/logstash/heapdump.hprof -Xbootclasspath/a:/opt/logstash/vendor/jruby/lib/jruby.jar -classpath : -Djruby.home=/opt/logstash/vendor/jruby -Djruby.lib=/opt/logstash/vendor/jruby/lib -Djruby.script=jruby -Djruby.shell=/bin/sh org.jruby.Main --1.9 /opt/logstash/lib/bootstrap/environment.rb logstash/runner.rb agent -f logstash-filebeat-es-simple.conf
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -293,7 +293,7 @@ logstash的配置中加入了 **stdout {codec=>rubydebug}** 是为了方便在�
 
 产生了大量如下格式的输出
 
-{% highlight bash %}
+~~~
 ...
 ...
 {
@@ -330,11 +330,11 @@ logstash的配置中加入了 **stdout {codec=>rubydebug}** 是为了方便在�
 }
 ...
 ...
-{% endhighlight %}
+~~~
 
 再看ES里的信息
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl localhost:9200/_cat/indices?v
 health status index               pri rep docs.count docs.deleted store.size pri.store.size 
 yellow open   logstash-2015.12.23   5   1        100            0    235.8kb        235.8kb 
@@ -342,7 +342,7 @@ yellow open   filebeat-2015.12.24   5   1       3175            0   1018.6kb    
 yellow open   logstash-2015.12.22   5   1         41            0    126.5kb        126.5kb 
 yellow open   .kibana               1   1          2            0      8.3kb          8.3kb 
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 发现已经产生了 **`filebeat-*`** 的index，并且有相当数量的文档
 

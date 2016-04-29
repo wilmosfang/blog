@@ -34,7 +34,7 @@ mysql 升级过程中出现了general_log的缺失，下面分享一下处理过
 
 **慢速日志（slow log）** 可以提供一种机制，将执行时间超过指定长度的语句记录下来
 
-{% highlight bash %}
+~~~
 mysql> show variables like "%slow%";
 +------------------------------------+-------------------------+
 | Variable_name                      | Value                   |
@@ -59,7 +59,7 @@ mysql> show variables like "%slow%";
 16 rows in set (0.00 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 
 **普通日志（general log）** 可以提供一种机制，能将打开日志期间所有的语句记录下来，由于开销比较大，所以正常情况下是关闭的，只在进行深度分析时打开
@@ -76,7 +76,7 @@ mysql>
 
 
 
-{% highlight bash %}
+~~~
 mysql> show variables like "%general%";
 +------------------+-----------------------------------+
 | Variable_name    | Value                             |
@@ -87,11 +87,11 @@ mysql> show variables like "%general%";
 2 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 如果 **`log_output`** 设定为 **FILE** ，则会记录到 **`general_log_file`** 中去
 
-{% highlight bash %}
+~~~
 mysql> show variables like "%log_output%";
 +---------------+-------+
 | Variable_name | Value |
@@ -101,7 +101,7 @@ mysql> show variables like "%log_output%";
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 如果为 **TABLE** 则会写到 **mysql.general_log** 中，关于general_log的详细机制，可以参考附录中的相关资料
 
@@ -113,7 +113,7 @@ mysql>
 
 在5.1->5.6升级过程中，执行upgrade之后产生如下报错
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# time mysql_upgrade -u root -p 
 Enter password: 
 Looking for 'mysql' as: mysql
@@ -173,13 +173,13 @@ real	0m5.161s
 user	0m0.051s
 sys	0m0.049s
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 由于缺少 **general_log.CSV** 从而报错
 
 为了确认是否在备份过程中丢失的，进入master中查看
 
-{% highlight bash %}
+~~~
 [root@old-master mysql]# ll  ./mysql/general_log.CSV
 ls: ./mysql/general_log.CSV: No such file or directory
 [root@old-master mysql]# cd mysql
@@ -222,13 +222,13 @@ mysql> show tables;
 mysql> show create table general_log;
 ERROR 13 (HY000): Can't get stat of './mysql/general_log.CSV' (Errcode: 2)
 mysql>
-{% endhighlight %}
+~~~
 
 发现master中也没有，也许在很久以前损坏的
 
 正常情况下是这样的
 
-{% highlight bash %}
+~~~
 [root@normal-instancek mysql]# ll general_log.
 general_log.CSM  general_log.CSV  general_log.frm  
 [root@normal-instancek mysql]# du -sh general_log.*
@@ -239,11 +239,11 @@ general_log.CSM  general_log.CSV  general_log.frm
 general_log.CSV: empty
 [root@normal-instancek mysql]# cat general_log.CSV
 [root@normal-instancek mysql]#
-{% endhighlight %}
+~~~
 
 表结构如下
 
-{% highlight bash %}
+~~~
 mysql> desc general_log;
 +--------------+---------------------+------+-----+-------------------+-----------------------------+
 | Field        | Type                | Null | Key | Default           | Extra                       |
@@ -279,14 +279,14 @@ mysql> select count(*) general_log;
 1 row in set (0.00 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 
 ---
 
 ## 进行手动修复
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave mysql]# touch general_log.CSV
 [root@upgrade-slave mysql]# ll general_log.*
 -rw-r--r--. 1 root  root     0 Dec 15 00:18 general_log.CSV
@@ -297,14 +297,14 @@ mysql>
 -rw-rw----. 1 mysql mysql    0 Dec 15 00:18 general_log.CSV
 -rw-------. 1 mysql mysql 8776 Dec 14 23:37 general_log.frm
 [root@upgrade-slave mysql]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 再次尝试升级
 
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# time mysql_upgrade -u root -p 
 Enter password: 
 Looking for 'mysql' as: mysql
@@ -352,7 +352,7 @@ real	0m5.853s
 user	0m0.055s
 sys	0m0.066s
 [root@upgrade-slave ~]#
-{% endhighlight %}
+~~~
 
 这时general_log 被认为已经crashed了，需要修复一下
 
@@ -361,7 +361,7 @@ sys	0m0.066s
 
 ## repair table
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# mysql -u root -p 
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -426,21 +426,21 @@ mysql> repair table `general_log`;
 mysql> quit
 Bye
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 此时多出来一个文件 **general_log.CSM** 
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave mysql]# ll general_log.*
 -rw-rw----. 1 mysql mysql   35 Dec 15 00:22 general_log.CSM
 -rw-rw----. 1 mysql mysql    0 Dec 15 00:18 general_log.CSV
 -rw-------. 1 mysql mysql 8776 Dec 15 00:22 general_log.frm
 [root@upgrade-slave mysql]# 
-{% endhighlight %}
+~~~
 
 再次尝试升级
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# time mysql_upgrade -u root -p
 Enter password: 
 Looking for 'mysql' as: mysql
@@ -505,14 +505,14 @@ real	0m59.267s
 user	0m0.098s
 sys	0m0.099s
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 执行正常，顺利完成升级
 
 
 重启服务，查看error日志里的信息，关注有无报错
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# /etc/init.d/mysql  stop 
 Shutting down MySQL (Percona Server)..[  OK  ]
 
@@ -520,7 +520,7 @@ Shutting down MySQL (Percona Server)..[  OK  ]
 Starting MySQL (Percona Server)...[  OK  ]
 
 [root@upgrade-slave ~]#
-{% endhighlight %}
+~~~
 
 检查无误后，配置master，启动同步就可以了
 
@@ -548,7 +548,7 @@ Starting MySQL (Percona Server)...[  OK  ]
 
 **[The General Query Log][query-log]**
 
-{% highlight bash %}
+~~~
 5.2.3 The General Query Log
 
 The general query log is a general record of what mysqld is doing. The server writes information to this log when clients connect or disconnect, and it logs each SQL statement received from clients. The general query log can be very useful when you suspect an error in a client and want to know exactly what the client sent to mysqld.
@@ -592,7 +592,7 @@ As of MySQL 5.6.3, passwords in statements written to the general query log are 
 Before MySQL 5.6.3, passwords in statements are not rewritten and the general query log should be protected. See Section 6.1.2.3, “Passwords and Logging”.
 
 One implication of the introduction of password rewriting in MySQL 5.6.3 is that statements that cannot be parsed (due, for example, to syntax errors) are no longer written to the general query log because they cannot be known to be password free. Use cases that require logging of all statements including those with errors should use the --log-raw option, bearing in mind that this also bypasses password writing.
-{% endhighlight %}
+~~~
 
 
 ## log-output
@@ -614,7 +614,7 @@ One implication of the introduction of password rewriting in MySQL 5.6.3 is that
 
 **[Selecting General Query and Slow Query Log Output Destinations][log-destinations]**
 
-{% highlight bash %}
+~~~
 5.2.1 Selecting General Query and Slow Query Log Output Destinations
 
 MySQL Server provides flexible control over the destination of output to the general query log and the slow query log, if those logs are enabled. Possible destinations for log entries are log files or the general_log and slow_log tables in the mysql database. Either or both destinations can be selected.
@@ -699,7 +699,7 @@ To flush the log tables or log files, use FLUSH TABLES or FLUSH LOGS, respective
 Partitioning of log tables is not permitted.
 
 Before MySQL 5.5.25, mysqldump does not dump the general_log or slow_query_log tables for dumps of the mysql database. As of 5.5.25, the dump includes statements to recreate those tables so that they are not missing after reloading the dump file. Log table contents are not dumped.
-{% endhighlight %}
+~~~
 
 
 ---

@@ -40,7 +40,7 @@ comments: true
 
 **Kibana** 的 **[下载地址][kibana_download]**
 
-{% highlight bash %}
+~~~
 [root@h101 kibana]# wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz
 --2015-12-22 17:42:45--  https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz
 Resolving download.elastic.co... 50.16.251.137, 50.17.224.164, 23.21.65.76, ...
@@ -56,7 +56,7 @@ Saving to: “kibana-4.3.1-linux-x64.tar.gz”
 [root@h101 kibana]# sha1sum kibana-4.3.1-linux-x64.tar.gz 
 115ba22882df75eb5f07330b7ad8781a57569b00  kibana-4.3.1-linux-x64.tar.gz
 [root@h101 kibana]# 
-{% endhighlight %}
+~~~
 
 可以与 **[kibana-4.3.1-linux-x64.tar.gz.sha1.txt][hash]** 相对照，避免不完整或不一致
 
@@ -70,7 +70,7 @@ Saving to: “kibana-4.3.1-linux-x64.tar.gz”
 
 非常简单，只用解压，就相当于安装了
 
-{% highlight bash %}
+~~~
 [root@h101 kibana]# ls
 kibana-4.3.1-linux-x64.tar.gz
 [root@h101 kibana]# tar -zxvf kibana-4.3.1-linux-x64.tar.gz 
@@ -95,11 +95,11 @@ kibana-4.3.1-linux-x64/bin/kibana.bat
 [root@h101 kibana]# echo $?
 0
 [root@h101 kibana]# 
-{% endhighlight %}
+~~~
 
 目录结构
 
-{% highlight bash %}
+~~~
 [root@h101 kibana]# ll 
 total 29700
 drwxr-xr-x 10 cc   games     4096 Dec 16 22:57 kibana-4.3.1-linux-x64
@@ -126,7 +126,7 @@ kibana-4.3.1-linux-x64/config/
 
 0 directories, 3 files
 [root@h101 kibana]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -134,7 +134,7 @@ kibana-4.3.1-linux-x64/config/
 
 修改 **config/kibana.yml** 中的 **elasticsearch** 配置
 
-{% highlight bash %}
+~~~
 [root@h101 kibana]# cd kibana-4.3.1-linux-x64/config/
 [root@h101 config]# ls
 kibana.yml
@@ -143,7 +143,7 @@ kibana.yml
 [root@h101 config]# grep -v "^#" kibana.yml | grep -v "^$"
 elasticsearch.url: "http://h102:9200"
 [root@h101 config]#
-{% endhighlight %}
+~~~
 
 指向可用的ES
 
@@ -154,7 +154,7 @@ elasticsearch.url: "http://h102:9200"
 
 直接使用 **bin/kibana** 就可以启动服务到前台运行
 
-{% highlight bash %}
+~~~
 [root@h101 kibana-4.3.1-linux-x64]# bin/kibana 
   log   [23:42:21.246] [info][status][plugin:kibana] Status changed from uninitialized to green - Ready
   log   [23:42:21.327] [info][status][plugin:elasticsearch] Status changed from uninitialized to yellow - Waiting for Elasticsearch
@@ -168,18 +168,18 @@ elasticsearch.url: "http://h102:9200"
   log   [23:42:21.510] [info][listening] Server running at http://0.0.0.0:5601
   ...
   ...
-{% endhighlight %}
+~~~
 
 会默认监听在 **0.0.0.0:5601** 
 
 
 > **Note:** 确认本地的 **5601** 是开放状态
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# iptables -L -nv | grep 5601
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:5601 
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -201,7 +201,7 @@ elasticsearch.url: "http://h102:9200"
 
 准备数据
 
-{% highlight bash %}
+~~~
 [root@h101 date]# curl -XPUT http://h102:9200/shakespeare -d '{
  "mappings" : {
   "_default_" : {
@@ -282,21 +282,21 @@ accounts.json  accounts.zip  logs.jsonl  shakespeare.json
 52100	logs.jsonl
 24628	shakespeare.json
 [root@h101 date]#
-{% endhighlight %}
+~~~
 
 
 > **Tip:** 实验数据的地址，可以参考 **[Getting Started][getting-started]** ， 可以使用 **wget** 获取
 
-{% highlight bash %}
+~~~
 https://www.elastic.co/guide/en/kibana/3.0/snippets/shakespeare.json
 https://github.com/bly2k/files/blob/master/accounts.zip?raw=true
 https://download.elastic.co/demos/kibana/gettingstarted/logs.jsonl.gz
-{% endhighlight %}
+~~~
 
 
 导入数据
 
-{% highlight bash %}
+~~~
 [root@h101 date]# curl -XPOST 'h102:9200/bank/account/_bulk?pretty' --data-binary @accounts.json
 ...
 ...
@@ -307,14 +307,14 @@ https://download.elastic.co/demos/kibana/gettingstarted/logs.jsonl.gz
 ...
 ...
 [root@h101 date]#
-{% endhighlight %}
+~~~
 
 
 > **Tip:** 之所以加上 **`> /dev/null`** 是因为如果不加，会刷屏，相当影响加载速度
 
 再看一眼ES状态
 
-{% highlight bash %}
+~~~
 [root@h101 date]# curl 'h102:9200/_cat/indices?v'
 health status index                           pri rep docs.count docs.deleted store.size pri.store.size 
 yellow open   logstash-2015.05.19               5   1       4624            0     30.8mb         30.8mb 
@@ -332,7 +332,7 @@ yellow open   .kibana                           1   1         94            0   
 yellow open   bank                              5   1       1000            0    451.1kb        451.1kb 
 yellow open   shakespeare                       5   1     111396            0     18.9mb         18.9mb 
 [root@h101 date]# 
-{% endhighlight %}
+~~~
 
 可见 **bank、shakespeare、logstash-2015.05.18、logstash-2015.05.19、logstash-2015.05.20** 都已经加载进来了，其它的是我自己生成的数据，不用理会
 
@@ -375,7 +375,7 @@ yellow open   shakespeare                       5   1     111396            0   
 
 kibana也有插件机制，目前来看还是比较方便的，只是没有 **list** 命令，不过可以通过网页的状态查看
 
-{% highlight bash %}
+~~~
 [root@h101 kibana-4.3.1-linux-x64]# bin/kibana plugin --help 
 
   Usage: plugin [options]
@@ -395,7 +395,7 @@ kibana也有插件机制，目前来看还是比较方便的，只是没有 **li
     -d, --plugin-dir <path>                 The path to the directory where plugins are stored
 
 [root@h101 kibana-4.3.1-linux-x64]#
-{% endhighlight %}
+~~~
 
 **[检索数据][discover]**
 

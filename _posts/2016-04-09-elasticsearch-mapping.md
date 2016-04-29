@@ -45,7 +45,7 @@ ES 不像一般 RDBMS (mysql，postgresql) 一样，字段类型必须提前定�
 
 系统版本和ES版本
 
-{% highlight bash %}
+~~~
 [root@h102 st]# uname -a 
 Linux h102.temp 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
 [root@h102 st]# cat /etc/issue
@@ -55,7 +55,7 @@ Kernel \r on an \m
 [root@h102 st]# curl 'localhost:9200/_cat/nodes?h=v'
 2.1.1 
 [root@h102 st]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -63,7 +63,7 @@ Kernel \r on an \m
 
 首先创建一个索引，并加入一条数据
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl -XPUT 'localhost:9200/abc/test/1?pretty' -d '{"name":"joke","age":12}'
 {
   "_index" : "abc",
@@ -87,13 +87,13 @@ Kernel \r on an \m
   "_source":{"name":"joke","age":12}
 }
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 ---
 
 ###  查看索引的mapping
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl 'localhost:9200/abc/_mapping?pretty'
 {
   "abc" : {
@@ -112,7 +112,7 @@ Kernel \r on an \m
   }
 }
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 可以看到虽然我没有手动指定字段类型，但ES根据我指定的输入内容自动判断 **age** 类型为 **long** ， **name** 类型为 **string**
 
@@ -120,16 +120,16 @@ Kernel \r on an \m
 
 查看API为 
 
-{% highlight bash %}
+~~~
 host:port/{index}/_mapping/{type}
-{% endhighlight %}
+~~~
 
 **`{index}`** 和 **`{type}`** 中可以使用逗号作为分割来指定一个名称列表，以同时指定多个想查看的对象 . 如果要代表所有的索引 可以在 **`{index}`** 中使用 **`_all`** 
 
 
 > **Tip:** 可以直接查看索引的所有信息
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl 'localhost:9200/abc?pretty'
 {
   "abc" : {
@@ -161,7 +161,7 @@ host:port/{index}/_mapping/{type}
   }
 }
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -169,7 +169,7 @@ host:port/{index}/_mapping/{type}
 
 可以限定只查看指定的字段类型，而不是所有字段
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl 'localhost:9200/abc/_mapping/test/field/age?pretty'
 {
   "abc" : {
@@ -188,13 +188,13 @@ host:port/{index}/_mapping/{type}
   }
 }
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 查看API为 
 
-{% highlight bash %}
+~~~
 host:port/{index}/{type}/_mapping/field/{field}
-{% endhighlight %}
+~~~
 
 **`{index}`** 、 **`{type}`** 和 **`{field}`** 中可以使用逗号作为分割来指定一个名称列表，以同时指定多个想查看的对象 . 如果要代表所有的索引 可以在 **`{index}`** 中使用 **`_all`**
 
@@ -206,7 +206,7 @@ host:port/{index}/{type}/_mapping/field/{field}
 
 可以使用逗号作为分割来指定一个名称列表，同时也可以使用匹配符
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl 'localhost:9200/abc/_mapping/t*/field/a*?pretty'
 {
   "abc" : {
@@ -225,7 +225,7 @@ host:port/{index}/{type}/_mapping/field/{field}
   }
 }
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 
 #### 嵌套文档
@@ -234,7 +234,7 @@ host:port/{index}/{type}/_mapping/field/{field}
 
 这时用 **`.`** 来进行指定
 
-{% highlight bash %}
+~~~
 {
      "article": {
          "properties": {
@@ -250,7 +250,7 @@ host:port/{index}/{type}/_mapping/field/{field}
          }
      }
 }
-{% endhighlight %}
+~~~
 
 **author.id**  指代 **author** 中的 **id**
 
@@ -265,7 +265,7 @@ host:port/{index}/{type}/_mapping/field/{field}
 
 加上 **`include_defaults=true`**  就可以将隐藏的默认属性都显示出来
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl 'localhost:9200/abc/_mapping/test/field/age?pretty&include_defaults=true'
 {
   "abc" : {
@@ -302,7 +302,7 @@ host:port/{index}/{type}/_mapping/field/{field}
   }
 }
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -312,7 +312,7 @@ host:port/{index}/{type}/_mapping/field/{field}
 
 我们尝试添加一条数据类型的记录到 **name** 中
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl -XPUT 'localhost:9200/abc/test/2?pretty' -d '{"name":12,"age":23}'
 {
   "_index" : "abc",
@@ -354,13 +354,13 @@ host:port/{index}/{type}/_mapping/field/{field}
   }
 }
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 成功了，说明数据类型被转化为了字符串类型
 
 我们再尝试添加一条字符串类型的数据到 **age** 中
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl -XPUT 'localhost:9200/abc/test/3?pretty' -d '{"name":"testtype","age":"lili"}'
 {
   "error" : {
@@ -385,13 +385,13 @@ host:port/{index}/{type}/_mapping/field/{field}
   "found" : false
 }
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 报类型不匹配的错误
 
 我们尝试进行修改
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl -XPUT 'localhost:9200/abc/_mapping/test?update_all_types&pretty' -d  '{"properties" : {"age" : {"type" : "string"}}}'
 {
   "error" : {
@@ -423,7 +423,7 @@ host:port/{index}/{type}/_mapping/field/{field}
   }
 }
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 结论是：**修改不了** 
 
@@ -439,7 +439,7 @@ host:port/{index}/{type}/_mapping/field/{field}
 
 使用 **PUT mapping API** 可以在一个索引中创建符合指定mapping的类型(type，其实翻译过来反而怪怪的)，或者在一个现有的类型中添加指定mapping的字段
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl -XPUT 'localhost:9200/def?pretty'  -d '{"mappings": {"test": {"properties": {"userid": {"type": "integer"}}}}}'
 {
   "acknowledged" : true
@@ -480,16 +480,16 @@ host:port/{index}/{type}/_mapping/field/{field}
   }
 }
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 更为详细的mapping属性可以参考 **[Mapping][mapping]** ，字段类型可以参考 **[Field datatypes][mapping_type]**
 
 **PUT mapping API**  
 
-{% highlight bash %}
+~~~
 PUT /{index}/_mapping/{type}
 { body }
-{% endhighlight %}
+~~~
 
 
 * **`{index}`** 可以是以逗号分割的多个索引或匹配符.

@@ -63,7 +63,7 @@ MQ可以使架构变得松耦合，从而更有弹性，更灵活，是SOA架构
 * 2 每一个node使用的port / IP不能重复
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl  status
 Status of node rabbit@h101 ...
 Error: unable to connect to node rabbit@h101: nodedown
@@ -91,11 +91,11 @@ Mem:          3824        659       3165          0         20         84
 -/+ buffers/cache:        553       3271
 Swap:         3999          0       3999
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 使用不同名字，不同端口，分别从后台启动两个服务进程
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# RABBITMQ_NODE_PORT=5672 RABBITMQ_NODENAME=rabbit rabbitmq-server -detached
 Warning: PID file not written; -detached was passed.
 [root@h101 ~]# ps faux | grep mq 
@@ -116,11 +116,11 @@ rabbitmq  3116 29.8  0.8 1087524 33684 ?       Sl   14:21   0:01 /usr/lib64/erla
 rabbitmq  3191  0.0  0.0  10792   508 ?        Ss   14:21   0:00  \_ inet_gethost 4
 rabbitmq  3192  0.0  0.0  12896   648 ?        S    14:21   0:00      \_ inet_gethost 4
 [root@h101 ~]#
-{% endhighlight %}
+~~~
 
 查看node状态
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl  -n hare status
 Status of node hare@h101 ...
 [{pid,3116},
@@ -215,12 +215,12 @@ tcp        0      0 :::5673                     :::*                        LIST
 [root@h101 ~]# ll /var/lib/rabbitmq/.erlang.cookie 
 -r-------- 1 rabbitmq rabbitmq 20 Oct 23 00:00 /var/lib/rabbitmq/.erlang.cookie
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 查看集群状态
 
 
-{% highlight bash %}
+~~~
 [root@h101 mnesia]# rabbitmqctl  -n hare cluster_status
 Cluster status of node hare@h101 ...
 [{nodes,[{disc,[hare@h101]}]},
@@ -234,11 +234,11 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"rabbit@h101.temp">>},
  {partitions,[]}]
 [root@h101 mnesia]#
-{% endhighlight %}
+~~~
 
 创建集群
 
-{% highlight bash %}
+~~~
 [root@h101 mnesia]# rabbitmqctl  -n rabbit stop_app 
 Stopping node rabbit@h101 ...
 [root@h101 mnesia]# rabbitmqctl  -n rabbit cluster_status
@@ -286,7 +286,7 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"hare@h101.temp">>},
  {partitions,[]}]
 [root@h101 mnesia]#
-{% endhighlight %}
+~~~
 
 其它端口也可以手动指定来避免冲突
 
@@ -357,7 +357,7 @@ Cluster status of node rabbit@h101 ...
 
 使用下面方法创建内存node
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl  -n rabbit  cluster_status
 Cluster status of node rabbit@h101 ...
 [{nodes,[{disc,[rabbit@h101]}]},
@@ -383,7 +383,7 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"hare@h101.temp">>},
  {partitions,[]}]
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -396,7 +396,7 @@ Cluster status of node rabbit@h101 ...
 
 一个集群中运行着的node，可以动态地切换类型
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl  -n rabbit  cluster_status
 Cluster status of node rabbit@h101 ...
 [{nodes,[{disc,[hare@h101]},{ram,[rabbit@h101]}]},
@@ -434,7 +434,7 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"hare@h101.temp">>},
  {partitions,[]}]
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 一个node 停止应用后，会对集群中剩余node的负载产生一定的影响，所以最好是在业务低峰进行以上操作
 

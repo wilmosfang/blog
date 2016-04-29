@@ -47,7 +47,7 @@ Keepalived + Redis 的实现方式并非官方HA方案，在监控与失效切�
 ## 下载redis源码包
 
 
-{% highlight bash %}
+~~~
 [root@temp src]# wget http://download.redis.io/releases/redis-3.0.4.tar.gz
 --2015-09-24 14:21:10--  http://download.redis.io/releases/redis-3.0.4.tar.gz
 Resolving download.redis.io... 109.74.203.151
@@ -63,7 +63,7 @@ Saving to: “redis-3.0.4.tar.gz”
 [root@temp src]# ls
 redis-3.0.4.tar.gz
 [root@temp src]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -72,7 +72,7 @@ redis-3.0.4.tar.gz
 
 解压redis源码包
 
-{% highlight bash %}
+~~~
 [root@temp src]# tar -zxvf redis-3.0.4.tar.gz 
 redis-3.0.4/
 redis-3.0.4/.gitignore
@@ -93,13 +93,13 @@ redis-3.0.4/utils/whatisdoing.sh
 [root@temp src]# ls
 redis-3.0.4  redis-3.0.4.tar.gz
 [root@temp src]# 
-{% endhighlight %}
+~~~
 
 
 ### 报错一
 
 
-{% highlight bash %}
+~~~
 [root@temp redis-3.0.4]# pwd
 /usr/local/src/redis-3.0.4
 [root@temp redis-3.0.4]# make 
@@ -152,13 +152,13 @@ make: *** [all] Error 2
 [root@temp redis-3.0.4]# echo $?
 2
 [root@temp redis-3.0.4]#
-{% endhighlight %}
+~~~
 
 **make[3]: gcc: Command not found**  此问题是没有安装 **gcc** 导致的
 
 解决办法安装 **gcc**
 
-{% highlight bash %}
+~~~
 [root@temp redis-3.0.4]# rpm -qa | grep gcc 
 libgcc-4.4.7-11.el6.x86_64
 [root@temp redis-3.0.4]# yum -y install gcc 
@@ -226,13 +226,13 @@ Dependency Installed:
 
 Complete!
 [root@temp redis-3.0.4]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 报错二
 
-{% highlight bash %}
+~~~
 [root@temp redis-3.0.4]# pwd
 /usr/local/src/redis-3.0.4
 [root@temp redis-3.0.4]# make 
@@ -248,13 +248,13 @@ make: *** [all] Error 2
 [root@temp redis-3.0.4]# echo $?
 2
 [root@temp redis-3.0.4]#
-{% endhighlight %}
+~~~
 
 此问题是 **Redis** 默认会使用 **jemalloc** , 因为 **jemalloc** 被证明比 **libc** 有更少的碎片问题，但是我的系统中没有 **jemalloc** ，所以会出错
 
 下面是来自源码中 **README** 的申明
 
-{% highlight bash %}
+~~~
 Allocator
 ---------
 
@@ -271,11 +271,11 @@ To force compiling against libc malloc, use:
 To compile against jemalloc on Mac OS X systems, use:
 
     % make MALLOC=jemalloc
-{% endhighlight %}
+~~~
 
 解决办法是手动指定系统中已有的 **libc**
 
-{% highlight bash %}
+~~~
 [root@temp redis-3.0.4]# make MALLOC=libc
 cd src && make all
 make[1]: Entering directory `/usr/local/src/redis-3.0.4/src'
@@ -459,7 +459,7 @@ make[1]: Leaving directory `/usr/local/src/redis-3.0.4/src'
 [root@temp redis-3.0.4]# echo $?
 0
 [root@temp redis-3.0.4]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -467,7 +467,7 @@ make[1]: Leaving directory `/usr/local/src/redis-3.0.4/src'
 
 修改配置并运行 **redis**
 
-{% highlight bash %}
+~~~
 [root@temp redis-3.0.4]# mkdir /etc/redis
 [root@temp redis-3.0.4]# cp redis.conf  /etc/redis/redis.conf
 BUGS             COPYING       INSTALL  MANIFESTO  redis.conf  runtest-cluster  sentinel.conf     tests
@@ -530,14 +530,14 @@ aof-rewrite-incremental-fsync yes
 root      6989  0.0  0.0 103252   828 pts/0    S+   16:02   0:00  |       \_ grep redis
 root      6985  0.4  0.0 127840  1912 ?        Ssl  16:01   0:00 src/redis-server *:6379                   
 [root@temp redis-3.0.4]# 
-{% endhighlight %}
+~~~
 
 ---
 
 
 ## 安装keepalived
 
-{% highlight bash %}
+~~~
 [root@temp ~]# yum -y install  keepalived.x86_64   
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -577,13 +577,13 @@ Installed:
 
 Complete!
 [root@temp ~]# 
-{% endhighlight %}
+~~~
 
 ## 修改/etc/hosts
 
 
 
-{% highlight bash %}
+~~~
 [root@redis-a ~]# cat /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
@@ -602,7 +602,7 @@ HOSTNAME=redis-a.temp
 NETWORKING=yes
 HOSTNAME=redis-b.temp
 [root@redis-b ~]# 
-{% endhighlight %}
+~~~
 
 
 ## 故障检查与切换脚本
@@ -611,7 +611,7 @@ HOSTNAME=redis-b.temp
 
 redis状态检查脚本，两个节点上的一样
 
-{% highlight bash %}
+~~~
 [root@redis-a scripts]# cat /etc/keepalived/scripts/redis_check.sh 
 #!/bin/bash
 
@@ -625,7 +625,7 @@ else
  exit 1
 fi
 [root@redis-a scripts]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -633,7 +633,7 @@ fi
 
 master状态切换脚本，两个节点上一样
 
-{% highlight bash %}
+~~~
 [root@redis-a scripts]# cat /etc/keepalived/scripts/redis_master.sh 
 #!/bin/bash 
 
@@ -649,7 +649,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[master] Run slaveof no one,close m
 $REDISCLI SLAVEOF NO ONE >> $LOGFILE 2>&1
 echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[master] wait other slave connect...." >> $LOGFILE
 [root@redis-a scripts]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -657,7 +657,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[master] wait other slave connect..
 
 backup状态切换脚本，不同之处在于互指对方为master
 
-{% highlight bash %}
+~~~
 [root@redis-a scripts]# cat /etc/keepalived/scripts/redis_backup.sh 
 #!/bin/bash 
 
@@ -688,7 +688,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[backup] being backup status" >> $L
 #$REDISCLI SLAVEOF redis-a  6379 >> $LOGFILE  2>&1
 echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[backup] wait other connect...." >> $LOGFILE
 [root@redis-b scripts]# 
-{% endhighlight %}
+~~~
 
 > **Note:** 我注释掉了同步代码，因为生产中，在没了解实例的当前内存使用状况，服务器实际负载的状况下，贸然自动同步，会对服务器造成很大压力，对其它应用也会有很大影响，所以这一步由人工来确认，在此只作日志记录
 
@@ -702,7 +702,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[backup] wait other connect...." >>
 
 fault状态切换脚本，不同之处在于互指对方为master
 
-{% highlight bash %}
+~~~
 
 [root@redis-a scripts]# cat /etc/keepalived/scripts/redis_fault.sh 
 #!/bin/bash 
@@ -734,7 +734,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[fault] being fault status" >> $LOG
 #$REDISCLI SLAVEOF redis-a  6379 >> $LOGFILE  2>&1
 #echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[fault] wait other connect...." >> $LOGFILE
 [root@redis-b scripts]# 
-{% endhighlight %}
+~~~
 
 > **Note:** 我注释掉了同步代码，原因同上
 
@@ -746,7 +746,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[fault] being fault status" >> $LOG
 stop状态切换脚本，不同之处在于互指对方为master
 
 
-{% highlight bash %}
+~~~
 [root@redis-a scripts]# cat /etc/keepalived/scripts/redis_stop.sh 
 #!/bin/bash 
 
@@ -777,7 +777,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[stop] being slave status" >> $LOGF
 #$REDISCLI SLAVEOF redis-a  6379 >> $LOGFILE  2>&1
 #echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[stop] wait other  connect...." >> $LOGFILE
 [root@redis-b scripts]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -786,7 +786,7 @@ echo "`date +'%Y-%m-%d:%H:%M:%S'`|$pid|state:[stop] being slave status" >> $LOGF
 
 keepalived 配置
 
-{% highlight bash %}
+~~~
 [root@redis-a keepalived]# cat /etc/keepalived/keepalived.conf 
 ! Configuration File for keepalived
 
@@ -865,11 +865,11 @@ vrrp_instance VI_123 {
 
 }
 [root@redis-b keepalived]# 
-{% endhighlight %}
+~~~
 
 下面是它的区别
 
-{% highlight bash %}
+~~~
 4c4
 <    router_id LVS_redis-b
 ---
@@ -878,7 +878,7 @@ vrrp_instance VI_123 {
 <     priority 139
 ---
 >     priority 138
-{% endhighlight %}
+~~~
 
 priority 的范围是 1-255
 
@@ -912,7 +912,7 @@ priority 的范围是 1-255
 
 redis-b 是master 
 
-{% highlight bash %}
+~~~
 [root@redis-b keepalived]# redis-cli info replication 
 # Replication
 role:master
@@ -941,11 +941,11 @@ repl_backlog_histlen:8106
     inet6 fe80::20c:29ff:feab:e89f/64 scope link 
        valid_lft forever preferred_lft forever
 [root@redis-b keepalived]# 
-{% endhighlight %}
+~~~
 
 redis-a 是slave
 
-{% highlight bash %}
+~~~
 [root@redis-a keepalived]# redis-cli info replication 
 # Replication
 role:slave
@@ -964,34 +964,34 @@ repl_backlog_size:1048576
 repl_backlog_first_byte_offset:0
 repl_backlog_histlen:0
 [root@redis-a keepalived]# 
-{% endhighlight %}
+~~~
 
 
 ### 模拟故障发生
 
-{% highlight bash %}
+~~~
 [root@redis-b keepalived]# redis-cli shutdown 
 [root@redis-b keepalived]# redis-cli info replication
 Could not connect to Redis at 127.0.0.1:6379: Connection refused
 [root@redis-b keepalived]# 
-{% endhighlight %}
+~~~
 
 ### 发生自动切换
 
 redis-a 的日志中产生了数据
 
-{% highlight bash %}
+~~~
 2015-09-25:00:53:36|25366|state:[master] read change to master
 2015-09-25:00:53:36|25366|state:[master] wait 10 sec for data sync from old master
 2015-09-25:00:53:46|25366|state:[master] data rsync from old mater ok...
 2015-09-25:00:53:46|25366|state:[master] Run slaveof no one,close master/slave
 OK
 2015-09-25:00:53:46|25366|state:[master] wait other slave connect....
-{% endhighlight %}
+~~~
 
 redis-a 自动升为master
 
-{% highlight bash %}
+~~~
 [root@redis-a keepalived]# redis-cli info replication 
 # Replication
 role:master
@@ -1019,7 +1019,7 @@ repl_backlog_histlen:0
     inet6 fe80::20c:29ff:fe6e:1352/64 scope link 
        valid_lft forever preferred_lft forever
 [root@redis-a keepalived]# 
-{% endhighlight %}
+~~~
 
 ---
 

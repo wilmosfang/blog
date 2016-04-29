@@ -58,7 +58,7 @@ Docker需要运行在 **CentOS 7.X** 上 (这是以CentOS为演示平台)
 
 检查方法
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# hostnamectl 
    Static hostname: h103
          Icon name: computer-vm
@@ -71,7 +71,7 @@ Docker需要运行在 **CentOS 7.X** 上 (这是以CentOS为演示平台)
             Kernel: Linux 3.10.0-327.4.4.el7.x86_64
       Architecture: x86-64
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 符合要求
 
@@ -81,7 +81,7 @@ Docker需要运行在 **CentOS 7.X** 上 (这是以CentOS为演示平台)
 
 另外最好将系统进行升级，打上所有最新的补丁
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# yum update 
 Loaded plugins: fastestmirror, langpacks
 Loading mirror speeds from cached hostfile
@@ -90,7 +90,7 @@ Loading mirror speeds from cached hostfile
  * updates: mirrors.163.com
 No packages marked for update
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 准备工作完成
 
@@ -103,7 +103,7 @@ No packages marked for update
 
 ### 添加yum仓库
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# ll /etc/yum.repos.d/
 total 28
 drwxr-xr-x 2 root root   24 Jan 19 15:18 bak
@@ -147,12 +147,12 @@ enabled=1
 gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 
 ### 安装Docker
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# yum install docker-engine
 Loaded plugins: fastestmirror, langpacks
 dockerrepo                                                                                                     | 2.9 kB  00:00:00     
@@ -254,13 +254,13 @@ Dependency Installed:
 
 Complete!
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 启动Docker
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# service docker start
 Redirecting to /bin/systemctl start  docker.service
 [root@h103 ~]# ps faux | grep docker
@@ -297,11 +297,11 @@ Jan 19 17:20:10 h103 docker[3200]: time="2016-01-19T17:20:10.462336163+08:00" le
 Jan 19 17:20:10 h103 systemd[1]: Started Docker Application Container Engine.
 Hint: Some lines were ellipsized, use -l to show in full.
 [root@h103 ~]#
-{% endhighlight %}
+~~~
 
 > **Tip:** CentOS 7 开始使用 **systemd** 来管理服务
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# which systemctl 
 /usr/bin/systemctl
 [root@h103 ~]# rpm -qf /usr/bin/systemctl
@@ -335,14 +335,14 @@ state, maintains mount and automount points and implements an
 elaborate transactional dependency-based service control logic. It can
 work as a drop-in replacement for sysvinit.
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 检查Docker
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
@@ -372,7 +372,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/userguide/
 
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -381,7 +381,7 @@ For more examples and ideas, visit:
 
 确保Docker已经删除的情况下，执行如下命令
 
-{% highlight bash %}
+~~~
 [root@h103 ~]#  curl -sSL https://get.docker.com/ | sh
 + sh -c 'sleep 3; yum -y -q install docker-engine'
 
@@ -393,11 +393,11 @@ adding your user to the "docker" group with something like:
 Remember that you will have to log out and back in for this to take effect!
 
 [root@h103 ~]#
-{% endhighlight %}
+~~~
 
 启动Docker
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# service docker start
 Redirecting to /bin/systemctl start  docker.service
 [root@h103 ~]# service docker status
@@ -433,11 +433,11 @@ root      4514     1  4517  0    6 17:49 ?        Ssl    0:00 /usr/bin/docker da
 root      4514     1  4521  0    6 17:49 ?        Ssl    0:00 /usr/bin/docker daemon -H fd://
 root      4514     1  4526  0    6 17:49 ?        Ssl    0:00 /usr/bin/docker daemon -H fd://
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 使用相同的方式检验Docker
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
@@ -467,11 +467,11 @@ For more examples and ideas, visit:
  https://docs.docker.com/userguide/
 
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 脚本自动创建了一个docker的软件仓库，所以其实是将上面的手动过程使用脚本自动完成了
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# ll /etc/yum.repos.d/docker-main.repo 
 -rw-r--r-- 1 root root 166 Jan 19 17:46 /etc/yum.repos.d/docker-main.repo
 [root@h103 ~]# cat /etc/yum.repos.d/docker-main.repo 
@@ -482,7 +482,7 @@ enabled=1
 gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -501,7 +501,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 
 普通用户没有docker操作权限
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# id cc
 uid=1000(cc) gid=1000(cc) groups=1000(cc)
 [root@h103 ~]# su - cc
@@ -509,21 +509,21 @@ Last login: Tue Jan 19 23:00:16 CST 2016 on pts/1
 [cc@h103 ~]$ docker run hello-world
 Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 [cc@h103 ~]$ 
-{% endhighlight %}
+~~~
 
 将普通用户添加到docker组
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# usermod -aG docker cc
 [root@h103 ~]# id cc
 uid=1000(cc) gid=1000(cc) groups=1000(cc),993(docker)
 [root@h103 ~]#
-{% endhighlight %}
+~~~
 
 再次尝试使用普通用户的身份执行docker命令
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# su - cc
 Last login: Tue Jan 19 23:23:04 CST 2016 on pts/1
 [cc@h103 ~]$ docker run hello-world
@@ -549,7 +549,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/userguide/
 
 [cc@h103 ~]$ 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -557,7 +557,7 @@ For more examples and ideas, visit:
 ## 设定开机启动
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# systemctl list-unit-files| grep docker
 docker.service                              disabled
 docker.socket                               disabled
@@ -567,7 +567,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service 
 docker.service                              enabled 
 docker.socket                               disabled
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** CentOS 7 里服务的开机启动也是由 **systemctl** 来进行管理了
 
@@ -575,7 +575,7 @@ docker.socket                               disabled
 我们看到还有一个 **docker.socket** 不是开机启动的，它和 **docker.socket** 的关系如下
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# systemctl list-dependencies docker.service
 docker.service
 ● ├─docker.socket
@@ -637,7 +637,7 @@ WantedBy=sockets.target
 [root@h103 ~]# ll /var/run/docker.sock
 srw-rw---- 1 root docker 0 Jan 20 11:21 /var/run/docker.sock
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 可见 **docker.service** 是依赖于 **docker.socket** 的，但是并不必要开启
 
@@ -646,7 +646,7 @@ srw-rw---- 1 root docker 0 Jan 20 11:21 /var/run/docker.sock
 
 可以用上面方法也将 **docker.socket** 设为开机启动(但这一步不是非常必要)
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# systemctl list-unit-files| grep docker
 docker.service                              enabled 
 docker.socket                               disabled
@@ -656,7 +656,7 @@ Created symlink from /etc/systemd/system/sockets.target.wants/docker.socket to /
 docker.service                              enabled 
 docker.socket                               enabled 
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -667,18 +667,18 @@ docker.socket                               enabled
 ### 列出安装包
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# yum list installed | grep docker
 docker-engine.x86_64                  1.9.1-1.el7.centos             @dockerrepo
 docker-engine-selinux.noarch          1.9.1-1.el7.centos             @dockerrepo
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 
 ### 删除软件包
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# yum -y remove docker-engine.x86_64
 Loaded plugins: fastestmirror, langpacks
 Resolving Dependencies
@@ -712,7 +712,7 @@ Removed:
 
 Complete!
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 这种情况下，只删除了软件包，但是没有删除镜像，容器，卷和自己创建的本地配置
 
@@ -721,7 +721,7 @@ Complete!
 ### 删除数据
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# ll /var/lib/docker
 total 16
 drwx------ 3 root root   77 Jan 19 17:37 containers
@@ -739,7 +739,7 @@ drwx------ 2 root root    6 Jan 19 17:20 volumes
 [root@h103 ~]# du -sh /var/lib/docker
 du: cannot access ‘/var/lib/docker’: No such file or directory
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 其它配置文件可以根据具体项目进行定位和清理
 

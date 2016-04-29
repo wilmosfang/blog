@@ -40,7 +40,7 @@ comments: true
 在构建环境中准备相应的证书文件和插件信息
 
 
-{% highlight bash %}
+~~~
 [root@docker docker]# mkdir build && cd build
 [root@docker build]# pwd
 /root/docker/build
@@ -55,7 +55,7 @@ total 16
 -rw------- 1 root root 1679 Jan 27 13:52 docker.key
 -rw-r--r-- 1 root root   20 Jan 27 13:51 plugins
 [root@docker build]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 这里我使用的自签名证书
 
@@ -64,7 +64,7 @@ total 16
 ### 创建Dockerfile
 
 
-{% highlight bash %}
+~~~
 [root@docker build]# vim Dockerfile
 [root@docker build]# cat Dockerfile 
 FROM jenkins
@@ -89,7 +89,7 @@ total 20
 -rw------- 1 root root 1679 Jan 27 13:52 docker.key
 -rw-r--r-- 1 root root   20 Jan 27 13:51 plugins
 [root@docker build]# 
-{% endhighlight %}
+~~~
 
 
 > **Note:** **Dockerfile plugins** 还有两个证书文件 (**docker.crt and docker.key**) 必须在同一个目录里，包含 **Dockerfile** 的目录叫作构建环境，文件只有放在构建环境中才能在构建过程中被集成进去
@@ -101,7 +101,7 @@ total 20
 ### 构建镜像
 
 
-{% highlight bash %}
+~~~
 [root@docker build]# docker  build -t  ci-infrastructure/jnkns-img  . 
 Sending build context to Docker daemon 9.728 kB
 Step 1 : FROM jenkins
@@ -144,7 +144,7 @@ jenkins                       latest              fc39417bd5fb        2 weeks ag
 registry                      2                   683f9cd9cf88        3 weeks ago         224.5 MB
 hello-world                   latest              0a6ba66e537a        3 months ago        960 B
 [root@docker build]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -152,7 +152,7 @@ hello-world                   latest              0a6ba66e537a        3 months a
 
 ## 推送镜像
 
-{% highlight bash %}
+~~~
 [root@docker build]# docker tag ci-infrastructure/jnkns-img  docker:5000/ci/jnkns-img
 [root@docker build]# docker push docker:5000/ci/jnkns-img 
 The push refers to a repository [docker:5000/ci/jnkns-img] (len: 1)
@@ -200,7 +200,7 @@ ce2b29af7753: Pushed
 523ef1d23f22: Pushed 
 latest: digest: sha256:613ef35ff2fff0a26bab66dd9213463b034d4e536e9a6d52cbaeacb767fdf828 size: 87506
 [root@docker certs]# 
-{% endhighlight %}
+~~~
 
 推送过程中要注意的地方:
 
@@ -216,7 +216,7 @@ latest: digest: sha256:613ef35ff2fff0a26bab66dd9213463b034d4e536e9a6d52cbaeacb76
 
 可以使用其它的机器通过 **docker pull** 来测试一下上传的镜像
 
-{% highlight bash %}
+~~~
 [root@h104 certs]# docker pull docker:5000/ci/jnkns-img 
 Using default tag: latest
 latest: Pulling from ci/jnkns-img
@@ -242,14 +242,14 @@ jenkins                       latest              fc39417bd5fb        2 weeks ag
 registry                      2                   683f9cd9cf88        3 weeks ago         224.5 MB
 hello-world                   latest              0a6ba66e537a        3 months ago        960 B
 [root@h104 certs]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ## 通过镜像运行容器
 
-{% highlight bash %}
+~~~
 [root@h104 ~]#  docker run -p 1973:1973 --name jenkins01 docker:5000/ci/jnkns-img 
 Running from: /usr/share/jenkins/jenkins.war
 webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
@@ -278,7 +278,7 @@ Caused by: java.io.FileNotFoundException: /var/lib/jenkins/cert (Permission deni
 	... 8 more
 
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 ### 报错
 
@@ -292,7 +292,7 @@ Caused by: java.io.FileNotFoundException: /var/lib/jenkins/cert (Permission deni
 
 注释掉https的相关配置，然后再构建镜像
 
-{% highlight bash %}
+~~~
 [root@docker build]# vim Dockerfile 
 [root@docker build]# cat Dockerfile 
 FROM jenkins
@@ -348,12 +348,12 @@ ce2b29af7753: Pushed
 523ef1d23f22: Pushed 
 latest: digest: sha256:b0593124c0f6790329649ae4863bb0c1d66b9aa32c9ce260c505a9ccfd185bd2 size: 78740
 [root@docker build]# 
-{% endhighlight %}
+~~~
 
 
 再次构建,构建前要使用 **docker rm** 删掉之前构建失败的容器，或者新容器换个名字，否则会有冲突
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker run -p 8080:8080 --name jenkins01 docker:5000/ci/jnkns-img2
 Running from: /usr/share/jenkins/jenkins.war
 webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
@@ -404,18 +404,18 @@ Jan 27, 2016 1:47:16 PM hudson.model.AsyncPeriodicWork$1 run
 INFO: Finished Download metadata. 48,013 ms
 ...
 ...
-{% endhighlight %}
+~~~
 
 另开一个窗口
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker ps -a 
 CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS              PORTS                               NAMES
 236348a3c9ff        docker:5000/ci/jnkns-img2   "/bin/tini -- /usr/lo"   7 minutes ago       Up 7 minutes        0.0.0.0:8080->8080/tcp, 50000/tcp   jenkins01
 [root@h104 ~]# netstat  -ant | grep 80
 tcp6       0      0 :::8080                 :::*                    LISTEN     
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -432,11 +432,11 @@ tcp6       0      0 :::8080                 :::*                    LISTEN
 
 可以看到 **Role-based Authorization Strategy** 插件，版本和我们指定的一样
 
-{% highlight bash %}
+~~~
 [root@docker build]# cat plugins 
 role-strategy:2.2.0
 [root@docker build]# 
-{% endhighlight %}
+~~~
 
 ![jenkins2.png](/images/registry/jenkins2.png)
 

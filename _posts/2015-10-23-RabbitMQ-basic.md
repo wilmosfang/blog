@@ -41,7 +41,7 @@ MQ可以使架构变得松耦合，从而更有弹性，更灵活，是SOA架构
 
 配置好了epel 软件仓库后，使用如下命令进行安装
 
-{% highlight bash %}
+~~~
 [root@h102 conf]# yum install erlang.x86_64 
 Loaded plugins: dellsysid, fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -138,7 +138,7 @@ Complete!
 [root@h102 conf]# echo $?
 0
 [root@h102 conf]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -146,7 +146,7 @@ Complete!
 
 下载 **[RabbitMQ Server][install-rpm]** 安装包
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# wget  http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm 
 --2015-10-21 21:57:41--  http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
 Resolving www.rabbitmq.com... 192.240.153.117
@@ -160,19 +160,19 @@ Saving to: “rabbitmq-server-3.5.6-1.noarch.rpm”
 2015-10-21 21:57:57 (271 KB/s) - “rabbitmq-server-3.5.6-1.noarch.rpm” saved [4239866/4239866]
 
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 ---
 
 安装 **[RabbitMQ Server][install-rpm]**
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rpm -ivh rabbitmq-server-3.5.6-1.noarch.rpm  
 warning: rabbitmq-server-3.5.6-1.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 056e8e56: NOKEY
 Preparing...                ########################################### [100%]
    1:rabbitmq-server        ########################################### [100%]
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -181,7 +181,7 @@ Preparing...                ########################################### [100%]
 
 ### 启动服务
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /etc/init.d/rabbitmq-server  status 
 Status of node rabbit@h102 ...
 Error: unable to connect to node rabbit@h102: nodedown
@@ -248,13 +248,13 @@ Status of node rabbit@h102 ...
  {run_queue,0},
  {uptime,10}]
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 停止服务
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /etc/init.d/rabbitmq-server stop 
 Stopping rabbitmq-server: rabbitmq-server.
 [root@h102 ~]# /etc/init.d/rabbitmq-server status
@@ -278,7 +278,7 @@ current node details:
 - cookie hash: N3kEGl2Jm7amHtg0ViAg8w==
 
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -287,7 +287,7 @@ current node details:
 
 使用 **cat /proc/$RABBITMQ_BEAM_PROCESS_PID/limits** 可以看到限制
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# ps faux | grep rabbit 
 root      4627  0.0  0.0 103256   828 pts/0    S+   22:08   0:00          \_ grep rabbit
 rabbitmq  2995  0.0  0.0  10828   476 ?        S    21:55   0:00 /usr/lib64/erlang/erts-5.8.5/bin/epmd -daemon
@@ -318,11 +318,11 @@ Max nice priority         0                    0
 Max realtime priority     0                    0                    
 Max realtime timeout      unlimited            unlimited            us        
 [root@h102 rabbitmq]#
-{% endhighlight %}
+~~~
 
 查看端口运行情况
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# netstat  -an | grep -E "(4369|25672|5672|5671|15672|61613|61614|1883|8883)"
 tcp        0      0 0.0.0.0:4369                0.0.0.0:*                   LISTEN      
 tcp        0      0 0.0.0.0:25672               0.0.0.0:*                   LISTEN      
@@ -331,7 +331,7 @@ tcp        0      0 127.0.0.1:4369              127.0.0.1:49602             ESTA
 tcp        0      0 192.168.100.102:4369        192.168.100.102:52333       TIME_WAIT   
 tcp        0      0 :::5672                     :::*                        LISTEN      
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
  > **Tip:** 在 **/etc/security/limits.conf** 中修改系统的文件句柄数，这个参数对会产生大量连接，需要打开很多文件的服务有制约作用，系统的默认1024比较保守，可以满足开发需求，但无法满足生产需求
 
@@ -344,7 +344,7 @@ tcp        0      0 :::5672                     :::*                        LIST
 
 ### 关闭node
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# rabbitmqctl  stop 
 Stopping and halting node rabbit@h102 ...
 [root@h102 rabbitmq]# rabbitmqctl  status
@@ -368,7 +368,7 @@ current node details:
 - cookie hash: N3kEGl2Jm7amHtg0ViAg8w==
 
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
 >This command instructs the RabbitMQ node to terminate.
 
@@ -376,7 +376,7 @@ current node details:
 
 ### 关闭RabbitMQ 应用
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# rabbitmqctl  status
 Status of node rabbit@h102 ...
 [{pid,5596},
@@ -465,7 +465,7 @@ Status of node rabbit@h102 ...
  {run_queue,0},
  {uptime,89}]
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
 节点还在运行，应用已经停了
 
@@ -475,7 +475,7 @@ Status of node rabbit@h102 ...
 
 日志信息
 
-{% highlight bash %}
+~~~
 =INFO REPORT==== 23-Oct-2015::16:52:30 ===
 Stopping RabbitMQ
 
@@ -484,23 +484,23 @@ stopped TCP Listener on [::]:5672
 
 =INFO REPORT==== 23-Oct-2015::16:52:30 ===
 Stopped RabbitMQ application
-{% endhighlight %}
+~~~
 
 > **Tip:** 使用 **tail -f  /var/log/rabbitmq/rabbit@h102.log** 查看日志
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# netstat  -ant | grep 5672
 tcp        0      0 0.0.0.0:25672               0.0.0.0:*                   LISTEN      
 tcp        0      0 192.168.100.102:54922       192.168.100.102:25672       TIME_WAIT   
 [root@h102 rabbitmq]#
-{% endhighlight %}
+~~~
 
 ---
 
 ### 开启RabbitMQ 应用
 
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# rabbitmqctl  status
 Status of node rabbit@h102 ...
 [{pid,5596},
@@ -577,14 +577,14 @@ Status of node rabbit@h102 ...
  {run_queue,0},
  {uptime,516}]
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
 >This command instructs the RabbitMQ node to start the RabbitMQ application.
 
 日志信息
 
 
-{% highlight bash %}
+~~~
 =INFO REPORT==== 23-Oct-2015::16:52:50 ===
 Starting RabbitMQ 3.5.6 on Erlang R14B04
 Copyright (C) 2007-2015 Pivotal Software, Inc.
@@ -623,27 +623,27 @@ started TCP Listener on [::]:5672
 
 =INFO REPORT==== 23-Oct-2015::16:52:50 ===
 Server startup complete; 0 plugins started.
-{% endhighlight %}
+~~~
 
 
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# netstat  -ant | grep 5672
 tcp        0      0 0.0.0.0:25672               0.0.0.0:*                   LISTEN      
 tcp        0      0 192.168.100.102:39082       192.168.100.102:25672       TIME_WAIT   
 tcp        0      0 :::5672                     :::*                        LISTEN      
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 重置node
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# rabbitmqctl  reset 
 Resetting node rabbit@h102 ...
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
 让节点恢复到初始状态(原文是返回处女状态 )
 
@@ -651,31 +651,31 @@ Resetting node rabbit@h102 ...
 
 必须先停掉RabbitMQ应用，才能成功执行,否则会报错
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# rabbitmqctl  reset
 Resetting node rabbit@h102 ...
 Error: mnesia_unexpectedly_running
 [root@h102 rabbitmq]# echo $?
 2
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
 停掉后，可以正常执行
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# rabbitmqctl  stop_app
 Stopping node rabbit@h102 ...
 [root@h102 rabbitmq]# rabbitmqctl  reset
 Resetting node rabbit@h102 ...
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
 日志
 
-{% highlight bash %}
+~~~
 =INFO REPORT==== 23-Oct-2015::17:08:47 ===
 Resetting Rabbit
-{% endhighlight %}
+~~~
 
 
 ---
@@ -685,7 +685,7 @@ Resetting Rabbit
 
 也必须先停掉应用，否则无法成功
 
-{% highlight bash %}
+~~~
 [root@h102 rabbitmq]# rabbitmqctl  start_app
 Starting node rabbit@h102 ...
 [root@h102 rabbitmq]# rabbitmqctl  force_reset
@@ -696,14 +696,14 @@ Stopping node rabbit@h102 ...
 [root@h102 rabbitmq]# rabbitmqctl  force_reset
 Forcefully resetting node rabbit@h102 ...
 [root@h102 rabbitmq]# 
-{% endhighlight %}
+~~~
 
 日志
 
-{% highlight bash %}
+~~~
 =INFO REPORT==== 23-Oct-2015::17:11:19 ===
 Resetting Rabbit forcefully
-{% endhighlight %}
+~~~
 
 
 ---
@@ -712,7 +712,7 @@ Resetting Rabbit forcefully
 
 当前状态
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# ll /var/log/rabbitmq/
 total 24
 -rw-r--r-- 1 rabbitmq rabbitmq 15807 Oct 23 17:11 rabbit@h102.log
@@ -722,26 +722,26 @@ total 24
 -rw-r--r-- 1 root     root         0 Oct 23 16:37 startup_err
 -rw-r--r-- 1 root     root      2040 Oct 23 17:11 startup_log
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 轮转日志 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmqctl  rotate_logs .1
 Rotating logs to files with suffix ".1" ...
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 日志
 
-{% highlight bash %}
+~~~
 =INFO REPORT==== 23-Oct-2015::17:20:23 ===
 Rotating logs with suffix '.1'
-{% endhighlight %}
+~~~
 
 之后的状态
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# ll /var/log/rabbitmq/
 total 24
 -rw-r--r-- 1 rabbitmq rabbitmq     0 Oct 23 17:20 rabbit@h102.log
@@ -753,7 +753,7 @@ total 24
 -rw-r--r-- 1 root     root         0 Oct 23 16:37 startup_err
 -rw-r--r-- 1 root     root      2040 Oct 23 17:11 startup_log
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 发现原来的日志已经加上了 **.1** 的后缀
 

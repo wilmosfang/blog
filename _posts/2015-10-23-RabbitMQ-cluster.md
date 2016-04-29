@@ -42,16 +42,16 @@ MQ可以使架构变得松耦合，从而更有弹性，更灵活，是SOA架构
 
 先安装 **[epel][epel]** 库，然后按照下面方式安装 **[RabbitMQ][rabbitmq]**
 
-{% highlight bash %}
+~~~
 yum install erlang.x86_64  
 wget  http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
 rpm -ivh rabbitmq-server-3.5.6-1.noarch.rpm 
 
-{% endhighlight %}
+~~~
 
 ## 启动节点
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# /etc/init.d/rabbitmq-server start 
 Starting rabbitmq-server: SUCCESS
 rabbitmq-server.
@@ -98,7 +98,7 @@ Status of node rabbit@h101 ...
  {run_queue,0},
  {uptime,6}]
 [root@h101 ~]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -108,7 +108,7 @@ Status of node rabbit@h101 ...
 #### 前台启动
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmq-server  
 
               RabbitMQ 3.5.6. Copyright (C) 2007-2015 Pivotal Software, Inc.
@@ -120,20 +120,20 @@ Status of node rabbit@h101 ...
               Starting broker... completed with 0 plugins.
               
               
-{% endhighlight %}
+~~~
 
 如果当前窗口终结，则这个服务会退出
 
 #### 后台启动
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmq-server  -detached 
 Warning: PID file not written; -detached was passed.
 [root@h102 ~]# echo $?
 0
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 详细可参考 **[rabbitmq-server][rabbitmq-server]** 使用方法
 
@@ -148,7 +148,7 @@ Warning: PID file not written; -detached was passed.
 
 在Linux中cookie的位置一般在 **/var/lib/rabbitmq/.erlang.cookie**
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# scp  /var/lib/rabbitmq/.erlang.cookie  root@h102:/var/lib/rabbitmq/.erlang.cookie
 The authenticity of host 'h102 (192.168.100.102)' can't be established.
 RSA key fingerprint is 78:c4:6f:3f:08:43:d1:2a:02:bf:ec:f3:9f:e3:89:76.
@@ -157,7 +157,7 @@ Warning: Permanently added 'h102,192.168.100.102' (RSA) to the list of known hos
 root@h102's password: 
 .erlang.cookie                                                                                      100%   20     0.0KB/s   00:00    
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 
 >Erlang nodes use a cookie to determine whether they are allowed to communicate with each other - for two nodes to be able to communicate they must have the same cookie. The cookie is just a string of alphanumeric characters. It can be as long or short as you like. Every cluster node must have the same cookie. The cookie is also used for tools such as rabbitmqctl and rabbitmq-plugins.
@@ -173,7 +173,7 @@ root@h102's password:
 ## 查看集群状态
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl  cluster_status
 Cluster status of node rabbit@h101 ...
 [{nodes,[{disc,[rabbit@h101]}]},
@@ -188,7 +188,7 @@ Cluster status of node rabbit@h102 ...
  {cluster_name,<<"rabbit@h102.temp">>},
  {partitions,[]}]
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -196,7 +196,7 @@ Cluster status of node rabbit@h102 ...
 
 首先关掉本地应用 **rabbitmqctl  stop_app**
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /etc/init.d/rabbitmq-server stop 
 Stopping rabbitmq-server: RabbitMQ is not running
 rabbitmq-server.
@@ -237,11 +237,11 @@ Status of node rabbit@h102 ...
  {run_queue,0},
  {uptime,21}]
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 加入集群 **rabbitmqctl join_cluster  rabbit@h101**
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmqctl join_cluster  rabbit@h101
 Clustering node rabbit@h102 with rabbit@h101 ...
 [root@h102 ~]# rabbitmqctl cluster_status
@@ -254,11 +254,11 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"rabbit@h101.temp">>},
  {partitions,[]}]
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 启动应用 **rabbitmqctl  start_app**
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmqctl cluster_status
 Cluster status of node rabbit@h102 ...
 [{nodes,[{disc,[rabbit@h101,rabbit@h102]}]}]
@@ -278,7 +278,7 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"rabbit@h101.temp">>},
  {partitions,[]}]
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 更多node的加入也是使用相同的办法，并且集群中node是平等的，新node可以选择任意一个节点加入
 
@@ -289,7 +289,7 @@ Cluster status of node rabbit@h101 ...
 * 2 加入集群
 * 3 启应用
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmqctl  stop_app 
 Stopping node rabbit@h102 ...
 [root@h102 ~]# rabbitmqctl join_cluster  rabbit@h101
@@ -303,7 +303,7 @@ Cluster status of node rabbit@h102 ...
  {cluster_name,<<"rabbit@h101.temp">>},
  {partitions,[]}]
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -313,15 +313,15 @@ Cluster status of node rabbit@h102 ...
 
 >Nodes that have been joined to a cluster can be stopped at any time. It is also ok for them to crash. In both cases the rest of the cluster continues operating unaffected, and the nodes automatically "catch up" with the other cluster nodes when they start up again.
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl  stop 
 Stopping and halting node rabbit@h101 ...
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 h101上日志
 
-{% highlight bash %}
+~~~
 =INFO REPORT==== 23-Oct-2015::22:19:33 ===
 Stopping RabbitMQ
 
@@ -333,11 +333,11 @@ Stopped RabbitMQ application
 
 =INFO REPORT==== 23-Oct-2015::22:19:33 ===
 Halting Erlang VM
-{% endhighlight %}
+~~~
 
 h102上日志 
 
-{% highlight bash %}
+~~~
 =INFO REPORT==== 23-Oct-2015::22:19:33 ===
 rabbit on node rabbit@h101 down
 
@@ -346,11 +346,11 @@ Keep rabbit@h101 listeners: the node is already back
 
 =INFO REPORT==== 23-Oct-2015::22:19:34 ===
 node rabbit@h101 down: connection_closed
-{% endhighlight %}
+~~~
 
 h102上集群状态
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmqctl cluster_status 
 Cluster status of node rabbit@h102 ...
 [{nodes,[{disc,[rabbit@h101,rabbit@h102]}]},
@@ -358,30 +358,30 @@ Cluster status of node rabbit@h102 ...
  {cluster_name,<<"rabbit@h101.temp">>},
  {partitions,[]}]
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 启动h101
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# /etc/init.d/rabbitmq-server start 
 Starting rabbitmq-server: SUCCESS
 rabbitmq-server.
 [root@h101 ~]#
-{% endhighlight %}
+~~~
 
 h102上日志
 
-{% highlight bash %}
+~~~
 =INFO REPORT==== 23-Oct-2015::22:26:04 ===
 node rabbit@h101 up
 
 =INFO REPORT==== 23-Oct-2015::22:26:05 ===
 rabbit on node rabbit@h101 up
-{% endhighlight %}
+~~~
 
 集群状态
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmqctl cluster_status 
 Cluster status of node rabbit@h102 ...
 [{nodes,[{disc,[rabbit@h101,rabbit@h102]}]},
@@ -396,7 +396,7 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"rabbit@h101.temp">>},
  {partitions,[]}]
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** There are some important caveats:
 >
@@ -417,7 +417,7 @@ Cluster status of node rabbit@h101 ...
 * 2 重置node
 * 3 起应用
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmqctl cluster_status 
 Cluster status of node rabbit@h102 ...
 [{nodes,[{disc,[rabbit@h101,rabbit@h102]}]},
@@ -437,12 +437,12 @@ Cluster status of node rabbit@h102 ...
  {cluster_name,<<"rabbit@h102.temp">>},
  {partitions,[]}]
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 
 h101上的集群状态
 
-{% highlight bash %}
+~~~
 [root@h101 ~]#  rabbitmqctl cluster_status 
 Cluster status of node rabbit@h101 ...
 [{nodes,[{disc,[rabbit@h101,rabbit@h102]}]},
@@ -462,7 +462,7 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"rabbit@h101.temp">>},
  {partitions,[]}]
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 ### 远程剔除
 
@@ -470,24 +470,24 @@ Cluster status of node rabbit@h101 ...
 
 停掉h101上应用，模拟不响应
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl stop_app
 Stopping node rabbit@h101 ...
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 从h102上对h101进行剔除
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# rabbitmqctl forget_cluster_node rabbit@h101
 Removing node rabbit@h101 from cluster ...
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 此时h102上信息已经一致了，但是h101还认为自己是集群的一部分，一旦它的应用恢复，它会尝试与集群联络，从而产生报错
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl start_app
 Starting node rabbit@h101 ...
 
@@ -510,11 +510,11 @@ Stack trace:
 
 Error: {error,{inconsistent_cluster,"Node rabbit@h101 thinks it's clustered with node rabbit@h102, but rabbit@h102 disagrees"}}
 [root@h101 ~]#
-{% endhighlight %}
+~~~
 
 解决办法是一旦有机会连上h101 ,就对它进行重置
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rabbitmqctl reset
 Resetting node rabbit@h101 ...
 [root@h101 ~]# rabbitmqctl start_app 
@@ -526,7 +526,7 @@ Cluster status of node rabbit@h101 ...
  {cluster_name,<<"rabbit@h101.temp">>},
  {partitions,[]}]
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 
 

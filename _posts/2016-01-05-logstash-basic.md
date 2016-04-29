@@ -44,13 +44,13 @@ comments: true
 
 ### 检查java版本
 
-{% highlight bash %}
+~~~
 [root@h102 ELK]# java -version
 java version "1.7.0_65"
 OpenJDK Runtime Environment (rhel-2.5.1.2.el6_5-x86_64 u65-b17)
 OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 [root@h102 ELK]# 
-{% endhighlight %}
+~~~
 
 符合要求
 
@@ -64,7 +64,7 @@ OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 
 ## 基础测试
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /opt/logstash/bin/logstash -e 'input { stdin { } } output { stdout {} }'
 Settings: Default filter workers: 1
 Logstash startup completed
@@ -76,7 +76,7 @@ abc
 2015-12-23T03:27:46.412Z h102.temp 123
 Logstash shutdown completed
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 使用 `-e` 可以直接在命令中指定配置
 
@@ -97,7 +97,7 @@ Logstash shutdown completed
 
 现在读取Apache web日志，分析后写到Elasticsearch中
 
-{% highlight bash %}
+~~~
 [root@h102 logstash]# ls
 logstash-tutorial.log
 [root@h102 logstash]# head -n 3 logstash-tutorial.log
@@ -130,7 +130,7 @@ output {
 [root@h102 logstash]# /opt/logstash/bin/logstash -f first-pipeline.conf  -t
 Configuration OK
 [root@h102 logstash]#
-{% endhighlight %}
+~~~
 
 **`-t`** 可以进行配置检查
 
@@ -142,7 +142,7 @@ Configuration OK
 
 执行操作
 
-{% highlight bash %}
+~~~
 [root@h102 logstash]# /opt/logstash/bin/logstash -f first-pipeline.conf  
 Settings: Default filter workers: 1
 Logstash startup completed
@@ -151,7 +151,7 @@ Logstash startup completed
 2015-12-23T13:45:19.037Z h102.temp 83.149.9.216 - - [04/Jan/2015:05:13:44 +0000] "GET /presentations/logstash-monitorama-2013/plugin/highlight/highlight.js HTTP/1.1" 200 26185 "http://semicomplete.com/presentations/logstash-monitorama-2013/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36"
 ...
 ...
-{% endhighlight %}
+~~~
 
 ---
 
@@ -162,7 +162,7 @@ Logstash startup completed
 
 查返回状态为 **404** 和 **304**的
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl -XGET 'localhost:9200/logstash-2015.12.23/_search?q=response=404'
 {"took":3,"timed_out":false,"_shards":{"total":5,"successful":5,"failed":0},"hits":{"total":2,"max_score":1.5351382,"hits":[{"_index":"logstash-2015.12.23","_type":"logs","_id":"AVHPFktn70zKhyBEHGid","_score":1.5351382,"_source":{"message":"66.249.73.185 - - [04/Jan/2015:05:22:13 +0000] \"GET /doc/index.html?org/elasticsearch/action/search/SearchResponse.html HTTP/1.1\" 404 294 \"-\" \"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)\"","@version":"1","@timestamp":"2015-12-23T13:45:22.565Z","host":"h102.temp","path":"/root/logstash/logstash-tutorial.log","clientip":"66.249.73.185","ident":"-","auth":"-","timestamp":"04/Jan/2015:05:22:13 +0000","verb":"GET","request":"/doc/index.html?org/elasticsearch/action/search/SearchResponse.html","httpversion":"1.1","response":"404","bytes":"294","referrer":"\"-\"","agent":"\"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)\"","geoip":{"ip":"66.249.73.185","country_code2":"US","country_code3":"USA","country_name":"United States","continent_code":"NA","region_name":"CA","city_name":"Mountain View","latitude":37.385999999999996,"longitude":-122.0838,"dma_code":807,"area_code":650,"timezone":"America/Los_Angeles","real_region_name":"California","location":[-122.0838,37.385999999999996]}}},{"_index":"logstash-2015.12.23","_type":"logs","_id":"AVHPFktm70zKhyBEHGhn","_score":1.4070371,"_source":{"message":"83.149.9.216 - - [04/Jan/2015:05:13:45 +0000] \"GET /presentations/logstash-monitorama-2013/images/frontend-response-codes.png HTTP/1.1\" 200 52878 \"http://semicomplete.com/presentations/logstash-monitorama-2013/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36\"","@version":"1","@timestamp":"2015-12-23T13:45:19.047Z","host":"h102.temp","path":"/root/logstash/logstash-tutorial.log","clientip":"83.149.9.216","ident":"-","auth":"-","timestamp":"04/Jan/2015:05:13:45 +0000","verb":"GET","request":"/presentations/logstash-monitorama-2013/images/frontend-response-codes.png","httpversion":"1.1","response":"200","bytes":"52878","referrer":"\"http://semicomplete.com/presentations/logstash-monitorama-2013/\"","agent":"\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36\"","geoip":{"ip":"83.149.9.216","country_code2":"RU","country_code3":"RUS","country_name":"Russian Federation","continent_code":"EU","region_name":"48","city_name":"Moscow","latitude":55.75219999999999,"longitude":37.6156,"timezone":"Europe/Moscow","real_region_name":"Moscow City","location":[37.6156,55.75219999999999]}}}]}}[root@h102 ~]# 
 [root@h102 ~]# 
@@ -195,14 +195,14 @@ Logstash startup completed
   }
 }
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 加 **pretty** 参数，可以使输出更清晰
 
 
 查来自 **Buffalo**  的
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl -XGET 'localhost:9200/logstash-2015.12.23/_search?q=geoip.city_name=Buffalo&pretty'
 {
   "took" : 4,
@@ -225,7 +225,7 @@ Logstash startup completed
   }
 }
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -239,7 +239,7 @@ Logstash startup completed
 
 配置和启动filebeat
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# grep -v "#" /etc/filebeat/filebeat.yml  | grep -v "^$"
 filebeat:
   prospectors:
@@ -264,12 +264,12 @@ root      2787  0.0  0.0 103256   828 pts/1    S+   15:53   0:00          \_ gre
 root      2770  0.0  0.0  11388   232 pts/1    Sl   15:52   0:00 filebeat-god -r / -n -p /var/run/filebeat.pid -- /usr/bin/filebeat -c /etc/filebeat/filebeat.yml
 root      2771  0.5  0.7 356380 13944 pts/1    Sl   15:52   0:00  \_ /usr/bin/filebeat -c /etc/filebeat/filebeat.yml
 [root@h102 etc]# 
-{% endhighlight %}
+~~~
 
 
 配置logstash并且运行
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# cat  logstash-filebeat-es-simple.conf
 input {
 	stdin{}
@@ -305,14 +305,14 @@ Logstash startup completed
 }
 ...
 ...
-{% endhighlight %}
+~~~
 
 logstash的配置中加入了 **stdout {codec=>rubydebug}** 是为了方便在终端监视信息(在实际应用中完全没有必要)，经过一番刷屏，最终停了下来
 
 
 数据导入之前es里是这样的
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# curl localhost:9200/_cat/indices?v
 health status index               pri rep docs.count docs.deleted store.size pri.store.size 
 yellow open   filebeat-2015.12.24   5   1       3182            0        1mb            1mb 
@@ -320,11 +320,11 @@ yellow open   logstash-2015.12.23   5   1        100            0    235.8kb    
 yellow open   logstash-2015.12.22   5   1         41            0    126.5kb        126.5kb 
 yellow open   .kibana               1   1         94            0    102.3kb        102.3kb 
 [root@h102 etc]#
-{% endhighlight %}
+~~~
 
 导入之后是这样的
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl localhost:9200/_cat/indices?v
 health status index               pri rep docs.count docs.deleted store.size pri.store.size 
 yellow open   filebeat-2015.12.24   5   1       3182            0        1mb            1mb 
@@ -333,13 +333,13 @@ yellow open   logstash-2015.12.22   5   1         41            0    126.5kb    
 yellow open   filebeat-2016.01.05   5   1       4182            0      1.3mb          1.3mb 
 yellow open   .kibana               1   1         94            0    102.3kb        102.3kb 
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 多了一个 **filebeat-2016.01.05**
 
 查看数据
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# curl -XGET 'localhost:9200/filebeat-2016.01.05/_search?q=message=2935&pretty'
 {
   "took" : 9,
@@ -362,7 +362,7 @@ yellow open   .kibana               1   1         94            0    102.3kb    
   }
 }
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -387,9 +387,9 @@ yellow open   .kibana               1   1         94            0    102.3kb    
 
 当前的 **Logstash** 是这样的处理模型
 
-{% highlight bash %}
+~~~
 input threads | filter worker threads | output worker
-{% endhighlight %}
+~~~
 
 
 
@@ -399,9 +399,9 @@ input threads | filter worker threads | output worker
 **Filter** 是可选项，如果没关于 **Filter** 的定义 ,就是如下模型
 
 
-{% highlight bash %}
+~~~
 input threads | output worker
-{% endhighlight %}
+~~~
 
 
 ![deploy_1.png](/images/logstash/deploy_1.png)
@@ -416,7 +416,7 @@ input threads | output worker
 
 可以在配置中加入判断与处理逻辑
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# vim logstash-syslog.conf
 [root@h102 etc]# cat logstash-syslog.conf 
 input {
@@ -451,7 +451,7 @@ output {
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-syslog.conf  -t 
 Configuration OK
 [root@h102 etc]#
-{% endhighlight %}
+~~~
 
 * 打开本地的 tcp udp 5000端口
 * 标记类型为 **syslog**
@@ -466,18 +466,18 @@ Configuration OK
 
 启动 **Logstash** 
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-syslog.conf  
 Settings: Default filter workers: 1
 Logstash startup completed
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 尝试手动连接本地 **5000** 端口，然后输入一些内容
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# netstat  -ant | grep 5000
 tcp        0      0 :::5000                     :::*                        LISTEN      
 tcp        0      0 ::1:44814                   ::1:5000                    ESTABLISHED 
@@ -490,12 +490,12 @@ Dec 23 12:11:43 louis postfix/smtpd[31499]: connect from unknown[95.75.93.154]
 Dec 23 14:42:56 louis named[16000]: client 199.48.164.7#64817: query (cache) 'amsterdamboothuren.com/MX/IN' denied
 ...
 ...
-{% endhighlight %}
+~~~
 
 发现这边的终端有输出
 
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-syslog.conf  
 Settings: Default filter workers: 1
 Logstash startup completed
@@ -539,12 +539,12 @@ Logstash startup completed
 }
 ...
 ...
-{% endhighlight %}
+~~~
 
 ES里也有了数据
 
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# curl -XGET 'localhost:9200/logstash-2016.12.23/_search?q=message=louis&pretty'
 {
   "took" : 5,
@@ -573,7 +573,7 @@ ES里也有了数据
   }
 }
 [root@h102 etc]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -587,7 +587,7 @@ ES里也有了数据
 
 配置如下
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# cat logstash-multiline.conf
 input {
   stdin {
@@ -610,7 +610,7 @@ real	0m18.807s
 user	0m30.841s
 sys	0m2.290s
 [root@h102 etc]# 
-{% endhighlight %}
+~~~
 
 
 * **pattern** 为正则匹配
@@ -623,7 +623,7 @@ sys	0m2.290s
 
 开启 **Logstash** 进行测试
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# time /opt/logstash/bin/logstash -f logstash-multiline.conf 
 Settings: Default filter workers: 1
 Logstash startup completed
@@ -667,7 +667,7 @@ l10 FROM t1 WHERE id =  '43';
     ],
           "host" => "h102.temp"
 }
-{% endhighlight %}
+~~~
 
 发现在输入 **# User@Host:** 之前，所有的行都被进行压栈处理，输入此条信息后，前面的信息进行了一个完结，又重新等待新的输入，直到遇到又一个 **# User@Host:**
 

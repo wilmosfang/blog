@@ -41,7 +41,7 @@ comments: true
 
 ## 安装zabbix软件仓库
 
-{% highlight bash %}
+~~~
 [root@zabbix-server zabbix]# wget http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
 --2016-01-15 16:26:48--  http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
 Resolving repo.zabbix.com... 87.110.183.174
@@ -61,7 +61,7 @@ Preparing...                ########################################### [100%]
 [root@zabbix-server zabbix]# ll /etc/yum.repos.d/zabbix.repo 
 -rw-r--r--. 1 root root 401 Sep 11  2014 /etc/yum.repos.d/zabbix.repo
 [root@zabbix-server zabbix]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -69,7 +69,7 @@ Preparing...                ########################################### [100%]
 ## 安装Zabbix软件包
 
 
-{% highlight bash %}
+~~~
 [root@zabbix-server zabbix]# yum install zabbix-server-mysql zabbix-web-mysql 
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -238,7 +238,7 @@ Dependency Installed:
 
 Complete!
 [root@zabbix-server zabbix]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -252,7 +252,7 @@ zabbix的数据需要存到数据库
 
 ### 创建zabbix数据库
 
-{% highlight bash %}
+~~~
 [root@zabbix-server zabbix]# mysql -u root -p 
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -290,14 +290,14 @@ Query OK, 0 rows affected (0.00 sec)
 mysql> quit;
 Bye
 [root@zabbix-server zabbix]# 
-{% endhighlight %}
+~~~
 
 ### 导入初始schema与数据
 
 
 初始化数据在 **`/usr/share/doc/zabbix-server-mysql-2.4.7/create/`** 中
 
-{% highlight bash %}
+~~~
 [root@zabbix-server zabbix]# ll /usr/share/doc/zabbix-server-mysql-2.4.7/create/
 total 2988
 -rw-r--r--. 1 root root  972942 Nov 13 18:31 data.sql
@@ -316,7 +316,7 @@ Enter password:
 [root@zabbix-server create]# mysql -u root -p zabbix < data.sql 
 Enter password: 
 [root@zabbix-server create]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -324,16 +324,16 @@ Enter password:
 
 确保如下参数已经正确配置
 
-{% highlight bash %}
+~~~
 DBHost=localhost
 DBName=zabbix
 DBUser=zabbix
 DBPassword=zabbix
-{% endhighlight %}
+~~~
 
 操作过程
 
-{% highlight bash %}
+~~~
 [root@zabbix-server create]# grep -v "^#" /etc/zabbix/zabbix_server.conf | cat -s 
 
 LogFile=/var/log/zabbix/zabbix_server.log
@@ -387,7 +387,7 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
 > DBPassword=zabbix
 > 
 [root@zabbix-server create]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -396,7 +396,7 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
 
 将 **date.timezone** 配置成正确的时区 **Asia/Shanghai**
 
-{% highlight bash %}
+~~~
 [root@zabbix-server conf.d]# vim /etc/httpd/conf.d/zabbix.conf 
 [root@zabbix-server conf.d]# grep  php_value  /etc/httpd/conf.d/zabbix.conf 
         php_value max_execution_time 300
@@ -407,7 +407,7 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
         # php_value date.timezone Europe/Riga
         php_value date.timezone Asia/Shanghai
 [root@zabbix-server conf.d]#  
-{% endhighlight %}
+~~~
 
 ---
 
@@ -416,7 +416,7 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
 
 允许web访问
 
-{% highlight bash %}
+~~~
 [root@zabbix-server conf.d]# iptables -L -nv | grep 80
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:2180 
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:8000 
@@ -432,7 +432,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:2180 
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:8000 
 [root@zabbix-server conf.d]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -441,7 +441,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 分别启动 **httpd** 和 **zabbix-server**
 
-{% highlight bash %}
+~~~
 [root@zabbix-server conf.d]# /etc/init.d/httpd start 
 Starting httpd: httpd: Could not reliably determine the server's fully qualified domain name, using zabbix-server.temp for ServerName
                                                            [  OK  ]
@@ -449,7 +449,7 @@ Starting httpd: httpd: Could not reliably determine the server's fully qualified
 [root@zabbix-server conf.d]# /etc/init.d/zabbix-server start 
 Starting Zabbix server:                                    [  OK  ]
 [root@zabbix-server conf.d]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -506,14 +506,14 @@ Starting Zabbix server:                                    [  OK  ]
 
 原因是 SELinux 的干扰，解决办法是关掉
 
-{% highlight bash %}
+~~~
 [root@zabbix-server conf.d]# getenforce 
 Enforcing
 [root@zabbix-server conf.d]# setenforce 0
 [root@zabbix-server conf.d]# getenforce 
 Permissive
 [root@zabbix-server conf.d]# 
-{% endhighlight %}
+~~~
 
 报警就消失了
 
@@ -521,7 +521,7 @@ Permissive
 
 方法如下
 
-{% highlight bash %}
+~~~
 [root@zabbix-server conf.d]# grep  "^SELI" /etc/sysconfig/selinux 
 SELINUX=enforcing
 SELINUXTYPE=targeted 
@@ -530,7 +530,7 @@ SELINUXTYPE=targeted
 SELINUX=disabled
 SELINUXTYPE=targeted 
 [root@zabbix-server conf.d]# 
-{% endhighlight %}
+~~~
 
 ---
 

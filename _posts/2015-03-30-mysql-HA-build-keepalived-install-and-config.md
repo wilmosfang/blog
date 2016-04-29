@@ -53,7 +53,7 @@ keepalived和LVS配合使用是开源界比较流行的LB解决方案，keepaliv
 
 由于系统软件中已经有相应rpm包，所以安装非常简单 , m1 m2都要进行安装
 
-{% highlight bash %}
+~~~
 [root@localhost tmp]# yum -y install keepalived.x86_64
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -86,11 +86,11 @@ Installed:
 
 Complete!
 [root@localhost tmp]#
-{% endhighlight %}
+~~~
 
 **keepalived**的默认配置文件是**/etc/keepalived/keepalived.conf**，里面包含了LVS的配置部分，由于我们的环境里没有用到LVS , 所以直接把相关配置删掉，最后修改完成的效果是这样的
 
-{% highlight bash %}
+~~~
 [root@m1 ~]# cat /etc/keepalived/keepalived.conf
 ! Configuration File for keepalived
 
@@ -121,13 +121,13 @@ vrrp_instance VI_66 {    #实例号，多个实例环境中，用来区分配置
     }
 }
 [root@m1 ~]# 
-{% endhighlight %}
+~~~
 
 **router_id,interface,virtual_router_id,priority,virtual_ipaddress** , 这几个参数非常重要，一定要配置正确
 
 将m1的keepalived配置文件同步到m2上
 
-{% highlight bash %}
+~~~
 [root@localhost keepalived]# rsync  -v keepalived.conf m2:/etc/keepalived/
 root@m2's password:
 keepalived.conf
@@ -135,7 +135,7 @@ keepalived.conf
 sent 623 bytes  received 67 bytes  197.14 bytes/sec
 total size is 544  speedup is 0.79
 [root@localhost keepalived]#
-{% endhighlight %}
+~~~
 
 在m2上将**router_id,interface,priority**进行相应修改
 
@@ -146,7 +146,7 @@ total size is 544  speedup is 0.79
 
 keepalived启停测试，观察浮动IP的挂载情况
 
-{% highlight bash %}
+~~~
 [root@localhost keepalived]# /etc/init.d/keepalived  start
 Starting keepalived: [  OK  ]
 [root@localhost keepalived]# ip a
@@ -185,7 +185,7 @@ Stopping keepalived: [  OK  ]
     inet6 fe80::20c:29ff:fe25:abf6/64 scope link
        valid_lft forever preferred_lft forever
 [root@localhost keepalived]#
-{% endhighlight %}
+~~~
 
 再进行主备测试，将m1与m2的keepalived都启动，观察是否优先级高的获得了VIP的挂载权，然后关掉master，观察VIP有没有飘移到backup上，然后主备反过来测试一遍
 
@@ -205,39 +205,39 @@ Stopping keepalived: [  OK  ]
 
 配置好keepalived，确保它可以按照预期工作后，开始给mysql提升权限，让它可以操作keepalived的启停
 
-{% highlight bash %}
+~~~
 [root@m1 ~]# visudo
-{% endhighlight %}
+~~~
 
 在末尾添加如下几行
 
-{% highlight bash %}
+~~~
 #mysql sudo keepalived
 Host_Alias HOSTKEEP =192.168.75.11
 Cmnd_Alias COMKEEP = /etc/init.d/keepalived stop , /etc/init.d/keepalived start , /etc/init.d/keepalived restart , /etc/init.d/keepalived reload ## reload is used to check connection error
 User_Alias USERKEEP = mysql
 USERKEEP  HOSTKEEP=(ALL)  NOPASSWD:COMKEEP
-{% endhighlight %}
+~~~
 
 同理，在m2上也加上如上几行，只是把IP改为m2自己的ip
 
 强烈推荐使用**visudo**而不是直接使用文本编辑器直接修改**/etc/sudoers**，就像这样
 
-{% highlight bash %}
+~~~
 [root@m1 ~]# vim /etc/sudoers
-{% endhighlight %}
+~~~
 因为visudo会进行语法检查，而其它方法不会
 
 同时，注释掉配置中下面这行
 
-{% highlight bash %}
+~~~
 #Defaults    requiretty
-{% endhighlight %}
+~~~
 或者也可以使用下面方式，使之无效
 
-{% highlight bash %}
+~~~
 Defaults    !requiretty
-{% endhighlight %}
+~~~
 
 >这个坑浪费掉了我半天的时间，都是因为不想使用高权限的root直接操作，而使用低权限的mysql进行操作产生的问题。低权限得提权，提权我选择使用sudo，而sudo在远程操作的时候，默认是要求有tty的，而mha在非计划failover情况下，是一个后台进程进行监视与控制，没有tty，于是对IP的操作部分会失败，解决办法就是如上所述
 
@@ -270,7 +270,7 @@ Defaults    !requiretty
 
 这个脚本在**mha4mysql-manager-0.53.tar.gz**中有模板
 
-{% highlight bash %}
+~~~
 [root@s tmp]# ll  mha4mysql-manager-0.53.tar.gz
 -rw-r--r--. 1 root root 105797 Mar 18 17:28 mha4mysql-manager-0.53.tar.gz
 [root@s tmp]# ll  mha4mysql-manager-0.53
@@ -299,46 +299,46 @@ total 32
 -rwxr-xr-x. 1 root root 11867 Jan  8  2012 power_manager
 -rwxr-xr-x. 1 root root  1360 Jan  8  2012 send_report
 [root@s tmp]# 
-{% endhighlight %}
+~~~
 
 >**Tip:** 注意 , 不是manager的rpm包，而是tar.gz的源码包
 
 因为我们不必要创建新用户，故注释掉第**83**行和**88**行
 
-{% highlight bash %}
+~~~
  83       #FIXME_xxx_create_user( $new_master_handler->{dbh} );
  84       $new_master_handler->enable_log_bin_local();
  85       $new_master_handler->disconnect();
  86 
  87       ## Update master ip on the catalog database, etc
  88       #FIXME_xxx;
-{% endhighlight %}
+~~~
 
 修改第**73**和**74**行
 
-{% highlight bash %}
+~~~
  73       $new_master_handler->connect( $new_master_ip, $new_master_port, "root",
  74         "rootpass", 1 );
-{% endhighlight %}
+~~~
 
 
 改为我们之前在数据库中设置的**mhauser**的用户名和密码
 
 
-{% highlight bash %}
+~~~
  73       $new_master_handler->connect( $new_master_ip, $new_master_port, "mhauser",
  74         "xxx", 1 );
-{% endhighlight %}
+~~~
 
 >**Note:**  mha0.55和mha0.56不必要进行这一步，因为脚本作了升级，这个用户的信息可以直接通过全局或应用配置文件直接传过来，这个版本的差异也trouble了我好长时间
 
 在原来**89**行的地方加入一条脚本
 
-{% highlight bash %}
+~~~
  88       #FIXME_xxx;
  89       `/usr/bin/ssh -t  mysql\@${orig_master_ip} "sudo /etc/init.d/keepalived stop"`;
  90       $exit_code = 0;
-{% endhighlight %}
+~~~
 
 **\`/usr/bin/ssh -t  mysql\@${orig_master_ip} "sudo /etc/init.d/keepalived stop"\`;** 的作用就是用来远程停止keepalived服务
 
@@ -361,17 +361,17 @@ MHA Manager 会调用 **master_ip_failover_script** 三次
 
 注释掉第**142**行**237**行
 
-{% highlight bash %}
+~~~
 142       #FIXME_xxx_drop_app_user($orig_master_handler);
 ...
 ...
 237       #FIXME_xxx_create_app_user($new_master_handler);
-{% endhighlight %}
+~~~
 
 修改第**122，123，136，137，227，228**行，使用mhauser的用户名**mhauser**和他的密码**xxx**替换掉**root**和**rootpass**
 
 
-{% highlight bash %}
+~~~
 122       $new_master_handler->connect( $new_master_ip, $new_master_port, "root",
 123         "rootpass", 1 );
 ...
@@ -382,15 +382,15 @@ MHA Manager 会调用 **master_ip_failover_script** 三次
 ...
 227       $new_master_handler->connect( $new_master_ip, $new_master_port, "root",
 228         "rootpass", 1 );
-{% endhighlight %}
+~~~
 
 在**241**行下面插入**\`/usr/bin/ssh -t  mysql\@${orig_master_ip} "sudo /etc/init.d/keepalived stop"\`;**
 
-{% highlight bash %}
+~~~
 241       ## Update master ip on the catalog database, etc
 242       `/usr/bin/ssh -t  mysql\@${orig_master_ip} "sudo /etc/init.d/keepalived stop"`;
 243       $exit_code = 0;
-{% endhighlight %}
+~~~
 
 致此，failover脚本已经配置完毕
 

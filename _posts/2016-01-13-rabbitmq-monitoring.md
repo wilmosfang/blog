@@ -46,7 +46,7 @@ RabbitMQ 有插件机制，从而可以动态灵活地扩展功能和特性
 
 主要是通过 **rabbitmq-plugins** 来管理的
 
-{% highlight bash %}
+~~~
 [root@rabbitmq ~]# rabbitmq-plugins -h
 Error: could not recognise command
 Usage:
@@ -60,11 +60,11 @@ Commands:
 
 
 [root@rabbitmq ~]# 
-{% endhighlight %}
+~~~
 
 启用 **rabbitmq_management** 插件
 
-{% highlight bash %}
+~~~
 [root@rabbitmq ~]# rabbitmq-plugins list
  Configured: E = explicitly enabled; e = implicitly enabled
  | Status:   * = running on rabbit@rabbitmq
@@ -167,7 +167,7 @@ tcp        0      0 0.0.0.0:15672               0.0.0.0:*                   LIST
   </body>
 </html>
 [root@rabbitmq ~]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -175,7 +175,7 @@ tcp        0      0 0.0.0.0:15672               0.0.0.0:*                   LIST
 
 ### 创建认证密码
 
-{% highlight bash %}
+~~~
 [nginx@new-mq-node pass]$ pwd
 /usr/local/nginx/pass
 [nginx@new-mq-node pass]$ perl -e 'print  crypt(mqpass,mqpass)'
@@ -183,7 +183,7 @@ mqdhK69Oo2JQA[nginx@new-mq-node pass]$ vim mq.passwd
 [nginx@new-mq-node pass]$ cat mq.passwd 
 mqmonitor:mqdhK69Oo2JQA
 [nginx@new-mq-node pass]$ 
-{% endhighlight %}
+~~~
 
 
 > **Note:** 这里的认证密码要和mq中监控用户的一样，否则第一次正确输入后可以看到MQ的认证窗口，但在第二次认证过程中，nginx会到自己的基本认证文件中去找对应用户从而导致跳转失败，可以在错误日志中看到对应信息
@@ -192,7 +192,7 @@ mqmonitor:mqdhK69Oo2JQA
 ### 修改nginx配置
 
 
-{% highlight bash %}
+~~~
 [nginx@new-mq-node conf]$ tail nginx.conf | grep include
     include apps/mq.conf;
 [nginx@new-mq-node conf]$ cat apps/mq.conf 
@@ -226,7 +226,7 @@ mqmonitor:mqdhK69Oo2JQA
 
     }
 [nginx@new-mq-node conf]$
-{% endhighlight %}
+~~~
 
 
 
@@ -237,7 +237,7 @@ mqmonitor:mqdhK69Oo2JQA
 
 打开本地(RabbitMQ Server)防火墙
 
-{% highlight bash %}
+~~~
 [root@rabbitmq ~]# netstat  -ant | grep 15672
 tcp        0      0 0.0.0.0:15672               0.0.0.0:*                   LISTEN      
 [root@rabbitmq ~]# iptables -L -nv | grep 15672
@@ -250,11 +250,11 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@rabbitmq ~]# iptables -L -nv | grep 15672
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:15672 
 [root@rabbitmq ~]# 
-{% endhighlight %}
+~~~
 
 打开nginx server防火墙
 
-{% highlight bash %}
+~~~
 [root@new-mq-node nginx]# iptables -L -nv | grep 1443
 [root@new-mq-node nginx]# vim /etc/sysconfig/iptables
 [root@new-mq-node nginx]# grep 1443 /etc/sysconfig/iptables
@@ -264,7 +264,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@new-mq-node nginx]# iptables -L -nv | grep 1443
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:1443 
 [root@new-mq-node nginx]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -272,7 +272,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ### 检查和重载nginx服务
 
-{% highlight bash %}
+~~~
 [root@new-mq-node nginx]# netstat  -ant | grep 1443
 [root@new-mq-node nginx]# sbin/nginx -t -c conf/nginx.conf
 the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
@@ -284,14 +284,14 @@ nginx    15681  0.0  0.0  46956  2028 ?        S    10:16   0:00  \_ nginx: work
 [root@new-mq-node nginx]# netstat  -ant | grep 1443
 tcp        0      0 0.0.0.0:1443                0.0.0.0:*                   LISTEN      
 [root@new-mq-node nginx]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 配置DNAT
 
-{% highlight bash %}
+~~~
 [root@net-border ~]#  iptables -L -nv  -t nat | grep 1443
 [root@net-border ~]# vim /etc/sysconfig/iptables
 [root@net-border ~]# grep 1443 /etc/sysconfig/iptables
@@ -301,7 +301,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@net-border ~]#  iptables -L -nv  -t nat | grep 1443
     0     0 DNAT       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:21443 to:192.168.66.111:1443 
 [root@net-border ~]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -386,7 +386,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 ### 创建用户
 
-{% highlight bash %}
+~~~
 [root@rabbitmq ~]# rabbitmqctl  list_users
 Listing users ...
 cooper	[]
@@ -399,11 +399,11 @@ cooper	[]
 guest	[administrator]
 mqmonitor	[]
 [root@rabbitmq ~]#
-{% endhighlight %}
+~~~
 
 ### 用户赋权
 
-{% highlight bash %}
+~~~
 [root@rabbitmq ~]# rabbitmqctl set_user_tags mqmonitor monitoring
 Setting tags for user "mqmonitor" to [monitoring] ...
 [root@rabbitmq ~]# rabbitmqctl  list_users
@@ -412,7 +412,7 @@ cooper	[]
 guest	[administrator]
 mqmonitor	[monitoring]
 [root@rabbitmq ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -449,7 +449,7 @@ mqmonitor	[monitoring]
 
 当前的集群为单节点
 
-{% highlight bash %}
+~~~
 [root@rabbitmq ~]# rabbitmqctl  cluster_status
 Cluster status of node 'rabbit@rabbitmq' ...
 [{nodes,[{disc,['rabbit@rabbitmq']}]},
@@ -457,13 +457,13 @@ Cluster status of node 'rabbit@rabbitmq' ...
  {cluster_name,<<"rabbit@rabbitmq">>},
  {partitions,[]}]
 [root@rabbitmq ~]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 也可以在管理界面里看得到
 
 ### 安装Rabbitmq
 
-{% highlight bash %}
+~~~
 [root@new-mq-node nginx]# yum install erlang
 ...
 ...
@@ -492,7 +492,7 @@ rabbitmq-server-3.5.6-1.noarch
 要与原来节点的版本保持一致
 
 
-{% endhighlight %}
+~~~
 
 ### 同步 Erlang cookie
 
@@ -500,12 +500,12 @@ rabbitmq-server-3.5.6-1.noarch
 
 在Linux中cookie的位置一般在 **/var/lib/rabbitmq/.erlang.cookie**
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# vim .erlang.cookie
 [root@new-mq-node rabbitmq]# cat .erlang.cookie 
 ABCDEFGGTESTGNUMPXYZ
 [root@new-mq-node rabbitmq]# 
-{% endhighlight %}
+~~~
 
 > **Note:** 一定要确保所有node上的cookie内容相同，并且为所有者只读
 
@@ -516,7 +516,7 @@ ABCDEFGGTESTGNUMPXYZ
 如果 **.erlang.cookie** 不为所有者只读，启动时会报如下错误
 
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# ll .erlang.cookie 
 -rw-r--r--   1 rabbitmq rabbitmq   21 Jan 13 14:08 .erlang.cookie
 [root@new-mq-node rabbitmq]# /etc/init.d/rabbitmq-server  start 
@@ -537,21 +537,21 @@ Kernel pid terminated (application_controller) ({application_start_failure,kerne
 {error_logger,\{\{2016,1,13},{14,22,17\}\},std_info,[{application,kernel},{exited,{shutdown,{kernel,start,[normal,[]]\}\}},{type,permanent}]}
 {"Kernel pid terminated",application_controller,"{application_start_failure,kernel,{shutdown,{kernel,start,[normal,[]]\}\}}"}
 [root@new-mq-node rabbitmq]#
-{% endhighlight %}
+~~~
 
 解决办法是修改权限成为 **`-r--------`**
 
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# chmod 400 .erlang.cookie 
 [root@new-mq-node rabbitmq]# ll .erlang.cookie 
 -r-------- 1 rabbitmq rabbitmq 21 Jan 13 14:08 .erlang.cookie
 [root@new-mq-node rabbitmq]# 
-{% endhighlight %}
+~~~
 
 再次尝试就能成功启动
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# /etc/init.d/rabbitmq-server  start 
 Starting rabbitmq-server: SUCCESS
 rabbitmq-server.
@@ -563,7 +563,7 @@ Status of node 'rabbit@new-mq-node' ...
 tcp        0      0 0.0.0.0:25672               0.0.0.0:*                   LISTEN      
 tcp        0      0 :::5672                     :::*                        LISTEN      
 [root@new-mq-node rabbitmq]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -576,7 +576,7 @@ tcp        0      0 :::5672                     :::*                        LIST
 * **25672**  : for clustering
 * **15672** : RabbitMQ Management for web
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# iptables -L -nv | grep 5672
 [root@new-mq-node rabbitmq]# grep 5672 /etc/sysconfig/iptables 
 [root@new-mq-node rabbitmq]# vim /etc/sysconfig/iptables
@@ -591,7 +591,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:15672 
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:5672 
 [root@new-mq-node rabbitmq]#
-{% endhighlight %}
+~~~
 
 > **Tip:** 其实只要目标节点，也就是指向(join_cluster to xx)的那个节点(xx) 25672打开了，就可以加入了，也能正常运行，只是这种情况下，自己就不能被加入，也无法提供服务
 
@@ -601,7 +601,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 
 当前状态
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# rabbitmqctl  cluster_status
 Cluster status of node 'rabbit@new-mq-node' ...
 [{nodes,[{disc,['rabbit@new-mq-node']}]},
@@ -609,19 +609,19 @@ Cluster status of node 'rabbit@new-mq-node' ...
  {cluster_name,<<"rabbit@new-mq-node">>},
  {partitions,[]}]
 [root@new-mq-node rabbitmq]# 
-{% endhighlight %}
+~~~
 
 停止应用
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# rabbitmqctl  stop_app
 Stopping node 'rabbit@new-mq-node' ...
 [root@new-mq-node rabbitmq]#
-{% endhighlight %}
+~~~
 
 加入集群
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq
 Clustering node 'rabbit@new-mq-node' with 'rabbit@rabbitmq' ...
 [root@new-mq-node rabbitmq]#
@@ -629,11 +629,11 @@ Clustering node 'rabbit@new-mq-node' with 'rabbit@rabbitmq' ...
 Cluster status of node 'rabbit@new-mq-node' ...
 [{nodes,[{disc,['rabbit@new-mq-node','rabbit@rabbitmq']}]}]
 [root@new-mq-node rabbitmq]# 
-{% endhighlight %}
+~~~
 
 启动应用
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# rabbitmqctl start_app
 Starting node 'rabbit@new-mq-node' ...
 [root@new-mq-node rabbitmq]# rabbitmqctl  cluster_status
@@ -643,14 +643,14 @@ Cluster status of node 'rabbit@new-mq-node' ...
  {cluster_name,<<"rabbit@rabbitmq">>},
  {partitions,[]}]
 [root@new-mq-node rabbitmq]#
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 开启管理插件
 
-{% highlight bash %}
+~~~
 [root@new-mq-node rabbitmq]# rabbitmq-plugins list
  Configured: E = explicitly enabled; e = implicitly enabled
  | Status:   * = running on rabbit@new-mq-node
@@ -720,7 +720,7 @@ Applying plugin configuration to rabbit@new-mq-node... started 6 plugins.
 [root@new-mq-node rabbitmq]# netstat  -ant | grep 15672
 tcp        0      0 0.0.0.0:15672               0.0.0.0:*                   LISTEN      
 [root@new-mq-node rabbitmq]#
-{% endhighlight %}
+~~~
 
  **Note:** 如果不启用 **rabbitmq_management** 那么在管理界面里是看不到新节点 **File descriptors** 、**Socket descriptors** 、 **Erlang processes** 、 **Memory** 、 **Disk space** 、**Info** 等相关状态的
 

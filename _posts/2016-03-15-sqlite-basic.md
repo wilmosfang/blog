@@ -42,7 +42,7 @@ comments: true
 
 **[SQLite][sqlite]** 的 **[下载地址][sqlite_dl]**
 
-{% highlight bash %}
+~~~
 [root@h102 sqlite]# wget http://www.sqlite.org/2016/sqlite-autoconf-3110100.tar.gz
 --2016-03-11 23:28:10--  http://www.sqlite.org/2016/sqlite-autoconf-3110100.tar.gz
 Resolving www.sqlite.org... 67.18.92.124, 2600:3c00::f03c:91ff:fe96:b959
@@ -61,7 +61,7 @@ sqlite-autoconf-3110100.tar.gz
 [root@h102 sqlite]# sha1sum sqlite-autoconf-3110100.tar.gz 
 c4b4dcd735a4daf5a2e2bb90f374484c8d4dad29  sqlite-autoconf-3110100.tar.gz
 [root@h102 sqlite]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -75,17 +75,17 @@ c4b4dcd735a4daf5a2e2bb90f374484c8d4dad29  sqlite-autoconf-3110100.tar.gz
 
 使用下列命令进行解压安装
 
-{% highlight bash %}
+~~~
 tar -zxvf sqlite-autoconf-3110100.tar.gz 
 cd sqlite-autoconf-3110100
 ./configure --prefix=/usr/local/sqlite3.11
 make
 make install
-{% endhighlight %}
+~~~
 
 ### 详细安装过程
 
-{% highlight bash %}
+~~~
 [root@h102 sqlite]# tar -zxvf sqlite-autoconf-3110100.tar.gz 
 sqlite-autoconf-3110100/
 sqlite-autoconf-3110100/config.sub
@@ -334,19 +334,19 @@ drwxr-xr-x 3 root root 4096 Mar 12 00:05 share
 7 directories, 10 files
 [root@h102 sqlite-autoconf-3110100]# 
 
-{% endhighlight %}
+~~~
 
 ### 版本确认
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /usr/local/sqlite3.11/bin/sqlite3 -version
 3.11.1 2016-03-03 16:17:53 f047920ce16971e573bc6ec9a48b118c9de2b3a7
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ### 帮助信息
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /usr/local/sqlite3.11/bin/sqlite3 --help 
 Usage: /usr/local/sqlite3.11/bin/sqlite3 [OPTIONS] FILENAME [SQL]
 FILENAME is the name of an SQLite database. A new database is created
@@ -378,7 +378,7 @@ OPTIONS include:
    -vfs NAME            use NAME as the default VFS
 [root@h102 ~]# 
 
-{% endhighlight %}
+~~~
 
 比前几个版本多出了不少新的参数
 
@@ -390,7 +390,7 @@ OPTIONS include:
 ### 交互式输入
 
 
-{% highlight bash %}
+~~~
 [root@h102 bin]# ./sqlite3 
 SQLite version 3.11.1 2016-03-03 16:17:53
 Enter ".help" for usage hints.
@@ -399,11 +399,11 @@ Use ".open FILENAME" to reopen on a persistent database.
 sqlite> 
 sqlite> 
 
-{% endhighlight %}
+~~~
 
 ### help
 
-{% highlight bash %}
+~~~
 sqlite> .help
 .backup ?DB? FILE      Backup DB (default "main") to FILE
 .bail on|off           Stop after hitting an error.  Default OFF
@@ -471,14 +471,14 @@ sqlite> .help
 .width NUM1 NUM2 ...   Set column widths for "column" mode
                          Negative values right-justify
 sqlite> 
-{% endhighlight %}
+~~~
 
 ### show
 
 
 查看当前的默认配置
 
-{% highlight bash %}
+~~~
 sqlite> .show
         echo: off
          eqp: off
@@ -492,7 +492,7 @@ rowseparator: "\n"
        stats: off
        width: 
 sqlite> 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -529,7 +529,7 @@ INTEGER|从 1970-01-01 00:00:00 UTC 算起的秒数
 ## 创建数据库
 
 
-{% highlight bash %}
+~~~
 [root@h102 bin]# ./sqlite3 test.db
 SQLite version 3.11.1 2016-03-03 16:17:53
 Enter ".help" for usage hints.
@@ -538,13 +538,13 @@ seq  name             file
 ---  ---------------  ----------------------------------------------------------
 0    main             /usr/local/sqlite3.11/bin/test.db                         
 sqlite>
-{% endhighlight %}
+~~~
 
 ---
 
 ## 创建表
 
-{% highlight bash %}
+~~~
 sqlite> create table test ( id int primary key not null, name text );
 sqlite> .tables
 test
@@ -559,12 +559,12 @@ sqlite> select * from test;
 2|hello
 3|hello
 sqlite> 
-{% endhighlight %}
+~~~
 
 > **Tip:** 以点开头的管理命令，如 **`.tables`** 和 **`.schema`** 是不能接 **`;`** 的，而增删改查类操作是必须要以 **`;`** 结尾的
 
 
-{% highlight bash %}
+~~~
 sqlite> .table
 test
 sqlite> .table;
@@ -589,7 +589,7 @@ sqlite> insert into test values(5,"hello")
    ...> ;
 Error: UNIQUE constraint failed: test.id
 sqlite> 
-{% endhighlight %}
+~~~
 
 
 
@@ -599,7 +599,7 @@ sqlite>
 
 可以使用这种方式来将sqlite数据转化为SQL
 
-{% highlight bash %}
+~~~
 [root@h102 bin]# ./sqlite3 test.db .dump > test.sql
 [root@h102 bin]# cat test.sql 
 PRAGMA foreign_keys=OFF;
@@ -612,12 +612,12 @@ INSERT INTO "test" VALUES(4,'hello');
 INSERT INTO "test" VALUES(5,'hello');
 COMMIT;
 [root@h102 bin]# 
-{% endhighlight %}
+~~~
 
 
 也可以定向的只dump一个表，但这个操作没法在shell中完成，只能在sqlite中完成
 
-{% highlight bash %}
+~~~
 sqlite> .dump test
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
@@ -631,13 +631,13 @@ INSERT INTO "test" VALUES(12,'12');
 INSERT INTO "test" VALUES(13,'www');
 COMMIT;
 sqlite> 
-{% endhighlight %}
+~~~
 
 
 ### 导入数据库
 
 
-{% highlight bash %}
+~~~
 [root@h102 bin]# ls
 sqlite3  test.db  test.sql
 [root@h102 bin]# ./sqlite3 test_tmp.db < test.sql 
@@ -660,7 +660,7 @@ sqlite> select * from test;
 4|hello
 5|hello
 sqlite> 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -668,7 +668,7 @@ sqlite>
 
 sqlite可以对多个数据库(多个文件)进行操作
 
-{% highlight bash %}
+~~~
 sqlite> .databases
 seq  name             file                                                      
 ---  ---------------  ----------------------------------------------------------
@@ -716,7 +716,7 @@ sqlite> select * from t2;
 4|hello
 sqlite> 
 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -724,7 +724,7 @@ sqlite>
 
 无法分离 **main** 和 **temp** 数据库
 
-{% highlight bash %}
+~~~
 sqlite> .databases
 seq  name             file                                                      
 ---  ---------------  ----------------------------------------------------------
@@ -738,11 +738,11 @@ seq  name             file
 ---  ---------------  ----------------------------------------------------------
 0    main             /usr/local/sqlite3.11/bin/test.db                         
 sqlite> 
-{% endhighlight %} 
+~~~ 
 
 > **Tip:**  可以使用 attach 的方法来创建数据库别名
 
-{% highlight bash %}
+~~~
 sqlite> .databases
 seq  name             file                                                      
 ---  ---------------  ----------------------------------------------------------
@@ -767,13 +767,13 @@ Error: cannot detach database temp
 sqlite> detach database main;
 Error: cannot detach database main
 sqlite> 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 创建表
 
-{% highlight bash %}
+~~~
 sqlite> .tables 
 hello  t2     test 
 sqlite> create table ui(
@@ -789,26 +789,26 @@ sqlite> .tables
 hello  t2     test   ui   
 sqlite> 
 
-{% endhighlight %}
+~~~
 
 
 
 ##  删除表
 
-{% highlight bash %}
+~~~
 sqlite> .tables
 company     department  hello       t2          test        ui        
 sqlite> drop table t2;
 sqlite> .tables
 company     department  hello       test        ui        
 sqlite>
-{% endhighlight %}
+~~~
 
 
 ## 插入数据
 
 
-{% highlight bash %}
+~~~
 sqlite> .schema test
 CREATE TABLE test ( id int primary key not null, name text );
 sqlite> insert into test (id,name) values ( 12,"12");
@@ -831,7 +831,7 @@ sqlite> insert into company values (5, 'David', 27, 'Texas', 85000.00 );
 sqlite> insert into company values (6, 'Kim', 22, 'South-Hall', 45000.00 );
 sqlite> insert into company values (7, 'James', 24, 'Houston', 10000.00 );
 sqlite> 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -843,7 +843,7 @@ sqlite>
 
 使用下面的方法来格式化输出
 
-{% highlight bash %}
+~~~
 sqlite> .show
         echo: off
          eqp: off
@@ -871,11 +871,11 @@ rowseparator: "\n"
        stats: off
        width: 
 sqlite> 
-{% endhighlight %}
+~~~
 
 再进行查询
 
-{% highlight bash %}
+~~~
 sqlite> select * from company;
 id          name        age         address     salary    
 ----------  ----------  ----------  ----------  ----------
@@ -887,11 +887,11 @@ id          name        age         address     salary
 6           Kim         22          South-Hall  45000.0   
 7           James       24          Houston     10000.0   
 sqlite> 
-{% endhighlight %}
+~~~
 
 格式明显变工整了
 
-{% highlight bash %}
+~~~
 sqlite> select name,salary,id from company;
 name        salary      id        
 ----------  ----------  ----------
@@ -903,11 +903,11 @@ David       85000.0     5
 Kim         45000.0     6         
 James       10000.0     7         
 sqlite> 
-{% endhighlight %}
+~~~
 
 ### 设置列宽
 
-{% highlight bash %}
+~~~
 sqlite> .width 6 , 15, 10
 sqlite> select name,salary,id from company;
 name    salary      id             
@@ -920,11 +920,11 @@ David   85000.0     5
 Kim     45000.0     6              
 James   10000.0     7              
 sqlite>
-{% endhighlight %}
+~~~
 
 ## 隐藏的信息管理表
 
-{% highlight bash %}
+~~~
 sqlite> .schema sqlite_master
 CREATE TABLE sqlite_master (
   type text,
@@ -934,12 +934,12 @@ CREATE TABLE sqlite_master (
   sql text
 );
 sqlite> 
-{% endhighlight %}
+~~~
 
 这张表里包含了其它表的信息
 
 
-{% highlight bash %}
+~~~
 sqlite>  select * from sqlite_master;
 type        name        tbl_name    rootpage    sql                                                         
 ----------  ----------  ----------  ----------  ------------------------------------------------------------
@@ -963,7 +963,7 @@ id int primary key not null,
 dept c
 index       sqlite_aut  department  12                                                                      
 sqlite> 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -971,7 +971,7 @@ sqlite>
 
 
 
-{% highlight bash %}
+~~~
 sqlite> select 20+30;
 20+30 = 50
 sqlite> select 20-30;
@@ -983,13 +983,13 @@ sqlite> select 20/30;
 sqlite> select 20%30;
 20%30 = 20
 sqlite> 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 比较运算符
 
-{% highlight bash %}
+~~~
 sqlite> .mode column
 sqlite> select * from company; 
 id          name        age         address     salary    
@@ -1027,7 +1027,7 @@ id          name        age         address     salary
 6           Kim         22          South-Hall  45000.0   
 sqlite> 
 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1035,7 +1035,7 @@ sqlite>
 ## 逻辑运算符
 
 
-{% highlight bash %}
+~~~
 sqlite> SELECT * FROM COMPANY WHERE AGE <= 22 and SALARY >= 40000;
 id          name        age         address     salary    
 ----------  ----------  ----------  ----------  ----------
@@ -1102,7 +1102,7 @@ id          name        age         address     salary
 4           Mark        25          Rich-Mond   65000.0   
 5           David       27          Texas       85000.0   
 sqlite> 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -1110,7 +1110,7 @@ sqlite>
 ## 位运算符
 
 
-{% highlight bash %}
+~~~
 sqlite> .mode line
 sqlite> select 6|5;
   6|5 = 7
@@ -1123,13 +1123,13 @@ sqlite> select (6 << 2 );
 sqlite> select (6 >>1);
 (6 >>1) = 3
 sqlite> 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 表达式
 
-{% highlight bash %}
+~~~
 sqlite> SELECT ( 22 + 34 ) AS ADDITION;
 ADDITION  
 ----------
@@ -1143,14 +1143,14 @@ CURRENT_TIMESTAMP
 -------------------
 2016-03-14 06:46:16
 sqlite>
-{% endhighlight %}
+~~~
 
 
 ---
 
 ## UPDATE
 
-{% highlight bash %}
+~~~
 sqlite> select * from COMPANY;
 id          name        age         address     salary    
 ----------  ----------  ----------  ----------  ----------
@@ -1178,7 +1178,7 @@ id          name        age         address     salary
 6           Kim         22          test        10.0      
 7           James       24          test        10.0      
 sqlite> 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1186,7 +1186,7 @@ sqlite>
 
 ## DELETE
 
-{% highlight bash %}
+~~~
 sqlite> select * from company where id=7;
 id          name        age         address     salary    
 ----------  ----------  ----------  ----------  ----------
@@ -1205,14 +1205,14 @@ id          name        age         address     salary
 sqlite> delete from company;
 sqlite> select * from company;
 sqlite>
-{% endhighlight %}
+~~~
 
 
 ---
 
 ## LIKE
 
-{% highlight bash %}
+~~~
 sqlite> select * from company where age like '%5';
 id          name        age         address     salary    
 ----------  ----------  ----------  ----------  ----------
@@ -1225,7 +1225,7 @@ id          name        age         address     salary
 4           Mark        25          Rich-Mond   65000.0   
 6           Kim         22          South-Hall  45000.0   
 sqlite> 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1236,7 +1236,7 @@ sqlite>
 GLOB与LIKE类似，都是用来进行模糊匹配的，但是通配符使用的shell的规则 用**`*`** 替代 **`%`** 用 **`？`** 替代 **`_`**
 
 
-{% highlight bash %}
+~~~
 sqlite> select * from company where age glob '*5';
 id          name        age         address     salary    
 ----------  ----------  ----------  ----------  ----------
@@ -1250,14 +1250,14 @@ id          name        age         address     salary
 sqlite>
 sqlite> select * from company where age glob '%5';
 sqlite>
-{% endhighlight %}
+~~~
 
 ---
 
 ## LIMIT
 
 
-{% highlight bash %}
+~~~
 sqlite> select * from company;
 id          name        age         address     salary    
 ----------  ----------  ----------  ----------  ----------
@@ -1281,14 +1281,14 @@ id          name        age         address     salary
 5           David       27          Texas       85000.0   
 6           Kim         22          South-Hall  45000.0   
 sqlite>
-{% endhighlight %}
+~~~
 
 
 ---
 
 ## ORDER BY
 
-{% highlight bash %}
+~~~
 sqlite> select * from company order by salary;
 id          name        age         address     salary    
 ----------  ----------  ----------  ----------  ----------
@@ -1310,13 +1310,13 @@ id          name        age         address     salary
 2           Allen       25          Texas       15000.0   
 7           James       24          Houston     10000.0   
 sqlite> 
-{% endhighlight %}
+~~~
 
 ---
 
 ## GROUP BY
 
-{% highlight bash %}
+~~~
 sqlite> select age,sum(salary) from company group by age order by age ;
 age         sum(salary)
 ----------  -----------
@@ -1339,7 +1339,7 @@ James       20000.0
 David       85000.0    
 Allen       15000.0    
 sqlite>
-{% endhighlight %}
+~~~
 
 ---
 
@@ -1348,7 +1348,7 @@ sqlite>
 在最终结果中进行过滤
 
 
-{% highlight bash %}
+~~~
 sqlite> select name,count(*) from company group by name;
 name        count(*)  
 ----------  ----------
@@ -1368,7 +1368,7 @@ Kim         1
 Mark        1         
 Teddy       1         
 sqlite> 
-{% endhighlight %}
+~~~
 
 
 ## DISTINCT
@@ -1376,7 +1376,7 @@ sqlite>
 去重
 
 
-{% highlight bash %}
+~~~
 sqlite> select name from company;
 name      
 ----------
@@ -1401,7 +1401,7 @@ David
 Kim       
 James     
 sqlite>
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1411,7 +1411,7 @@ sqlite>
 
 **.quit** 和 **.exit** 都可以用来退出sqlite
 
-{% highlight bash %}
+~~~
 [root@h102 bin]# ./sqlite3 
 SQLite version 3.11.1 2016-03-03 16:17:53
 Enter ".help" for usage hints.
@@ -1425,7 +1425,7 @@ Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
 sqlite> .exit
 [root@h102 bin]# 
-{% endhighlight %}
+~~~
 
 ---
 

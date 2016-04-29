@@ -107,7 +107,7 @@ comments: true
 
 这个是获取短信余额的脚本
 
-{% highlight bash %}
+~~~
 [root@redis-b sms_script]# cat sms_get_balance.bash 
 #!/bin/bash
 
@@ -136,7 +136,7 @@ $CURL -X POST  "$url" -d "account=$url_account&password=$url_pass&timestamps=$ur
 	"Count":972
 }
 [root@redis-b sms_script]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -144,7 +144,7 @@ $CURL -X POST  "$url" -d "account=$url_account&password=$url_pass&timestamps=$ur
 
 这个是发送短信的脚本
 
-{% highlight bash %}
+~~~
 [root@redis-b sms_script]# cat sms_sent_message.bash 
 #!/bin/bash
 
@@ -264,7 +264,7 @@ More: <'phone_numbers'>  <'message'>  must be specified and only two args
 		]
 }
 [root@redis-b sms_script]# 
-{% endhighlight %}
+~~~
 
 几秒钟后手机会收到一条短信
 
@@ -274,10 +274,10 @@ More: <'phone_numbers'>  <'message'>  must be specified and only two args
 > 
 > 也可以使用shell来代替，比如
 
-{% highlight bash %}
+~~~
 echo '报警' | tr -d '\n' | xxd -plain | sed 's/\(..\)/%\1/g'  
 echo '报警' |tr -d '\n' |od -An -tx1|tr ' ' %
-{% endhighlight %}
+~~~
 
 只是上面的脚本在处理带有换行的内容时会产生问题，最后都会变成一行，格式就很难看
 
@@ -314,9 +314,9 @@ echo '报警' |tr -d '\n' |od -An -tx1|tr ' ' %
 * 使用Zabbix server执行
 * 命令内容
 
-{% highlight bash %}
+~~~
 /tmp/sms_script/sms_sent_message.bash '1801601xxxx'  'zabbix测试系统报警:{TRIGGER.STATUS}:{HOST.NAME1}:{TRIGGER.NAME}: {ITEM.NAME1} ({HOST.NAME1}:{ITEM.KEY1}): {ITEM.VALUE1}:{EVENT.DATE} {EVENT.TIME}'
-{% endhighlight %}
+~~~
 
 > **Tip:** 可以使用Zabbix提供的宏组合出自已想要的信息，相关的宏信息可以参考 **[Zabbix Macros][macros]**
 
@@ -347,7 +347,7 @@ echo '报警' |tr -d '\n' |od -An -tx1|tr ' ' %
 通过防火墙丢弃icmp包触发报警
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# iptables -L -nv | grep icmp
     7   672 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0           
    87  9577 REJECT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited 
@@ -368,7 +368,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
     0     0 DROP       icmp --  *      *       0.0.0.0/0            0.0.0.0/0           
     0     0 REJECT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited 
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 过一小会儿(根据检查频度和触发规则而定)，报警被触发了
 

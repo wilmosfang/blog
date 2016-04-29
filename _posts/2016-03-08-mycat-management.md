@@ -39,14 +39,14 @@ comments: true
 * **8066** 用作数据交互
 * **9066** 用作mycat管理
 
-{% highlight bash %}
+~~~
 [root@h102 conf]# grep 66 server.xml 
 			<property name="serverPort">8066</property> <property name="managerPort">9066</property> 
 [root@h102 conf]# netstat  -ant | grep 66
 tcp        0      0 :::8066                     :::*                        LISTEN      
 tcp        0      0 :::9066                     :::*                        LISTEN      
 [root@h102 conf]# 
-{% endhighlight %}
+~~~
 
 这个端口可以在启动前自定义
 
@@ -57,7 +57,7 @@ tcp        0      0 :::9066                     :::*                        LIST
 
 管理台的登录方式与普通mysql登录无异
 
-{% highlight bash %}
+~~~
 [root@h102 conf]# mysql -u cc -p -P 9066 -h 192.168.100.102
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -73,7 +73,7 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql> 
-{% endhighlight %}
+~~~
 
 Arg | Comment
 -------- | ---
@@ -93,7 +93,7 @@ Arg | Comment
 
 使用 **`show @@help`** 能够查看所有可用命令
 
-{% highlight bash %}
+~~~
 mysql> show @@help;
 +------------------------------------------+--------------------------------------------+
 | STATEMENT                                | DESCRIPTION                                |
@@ -158,14 +158,14 @@ mysql> show @@help;
 56 rows in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 查看当前时间
 
-{% highlight bash %}
+~~~
 mysql> show @@time.current;
 +---------------+
 | TIMESTAMP     |
@@ -175,11 +175,11 @@ mysql> show @@time.current;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 ### 查看启动时间
 
-{% highlight bash %}
+~~~
 mysql> show @@time.startup;
 +---------------+
 | TIMESTAMP     |
@@ -189,7 +189,7 @@ mysql> show @@time.startup;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 > **Note:**  这个时间是以ms为单位的Unix时间 
 
@@ -199,7 +199,7 @@ mysql>
 ### 查看当前版本
 
 
-{% highlight bash %}
+~~~
 mysql> show @@version;
 +-----------------------------------+
 | VERSION                           |
@@ -209,13 +209,13 @@ mysql> show @@version;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看系统状态
 
 
-{% highlight bash %}
+~~~
 mysql>  show @@server;
 +---------------+-------------+--------------+------------+---------------+---------------+---------+--------+-----------------------+
 | UPTIME        | USED_MEMORY | TOTAL_MEMORY | MAX_MEMORY | RELOAD_TIME   | ROLLBACK_TIME | CHARSET | STATUS | AVG_BUFPOOL_ITEM_SIZE |
@@ -225,13 +225,13 @@ mysql>  show @@server;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看线程池
 
 
-{% highlight bash %}
+~~~
 mysql> show @@threadpool ;
 +------------------+-----------+--------------+-----------------+----------------+------------+
 | NAME             | POOL_SIZE | ACTIVE_COUNT | TASK_QUEUE_SIZE | COMPLETED_TASK | TOTAL_TASK |
@@ -242,13 +242,13 @@ mysql> show @@threadpool ;
 2 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看逻辑数据库
 
 
-{% highlight bash %}
+~~~
 mysql> show @@database;
 +----------+
 | DATABASE |
@@ -259,7 +259,7 @@ mysql> show @@database;
 2 rows in set (0.00 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 
 ### 查看数据节点
@@ -267,7 +267,7 @@ mysql>
 
 #### 查看所有数据节点
 
-{% highlight bash %}
+~~~
 mysql> show @@datanode;
 +------+----------------+-------+-------+--------+------+------+---------+------------+----------+---------+---------------+
 | NAME | DATHOST        | INDEX | TYPE  | ACTIVE | IDLE | SIZE | EXECUTE | TOTAL_TIME | MAX_TIME | MAX_SQL | RECOVERY_TIME |
@@ -284,12 +284,12 @@ mysql> show @@datanode;
 8 rows in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 #### 查看某个schema的数据节点
 
 
-{% highlight bash %}
+~~~
 mysql> show @@datanode where schema = cctest;
 +------+----------+-------+-------+--------+------+------+---------+------------+----------+---------+---------------+
 | NAME | DATHOST  | INDEX | TYPE  | ACTIVE | IDLE | SIZE | EXECUTE | TOTAL_TIME | MAX_TIME | MAX_SQL | RECOVERY_TIME |
@@ -302,14 +302,14 @@ mysql> show @@datanode where schema = cctest;
 4 rows in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看数据源
 
 #### 查看所有数据源
 
-{% highlight bash %}
+~~~
 mysql> show @@datasource;
 +----------+--------+-------+-----------------+------+------+--------+------+------+---------+
 | DATANODE | NAME   | TYPE  | HOST            | PORT | W/R  | ACTIVE | IDLE | SIZE | EXECUTE |
@@ -329,12 +329,12 @@ mysql> show @@datasource;
 11 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 #### 查看某一个数据节点的数据源
 
-{% highlight bash %}
+~~~
 mysql> show @@datasource where dataNode = sd2;
 +----------+--------+-------+-----------------+------+------+--------+------+------+---------+
 | DATANODE | NAME   | TYPE  | HOST            | PORT | W/R  | ACTIVE | IDLE | SIZE | EXECUTE |
@@ -344,14 +344,14 @@ mysql> show @@datasource where dataNode = sd2;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 查看处理器状态
 
-{% highlight bash %}
+~~~
 mysql> show @@processor;
 +------------+--------+---------+-------------+---------+---------+-------------+--------------+------------+----------+----------+----------+
 | NAME       | NET_IN | NET_OUT | REACT_COUNT | R_QUEUE | W_QUEUE | FREE_BUFFER | TOTAL_BUFFER | BU_PERCENT | BU_WARNS | FC_COUNT | BC_COUNT |
@@ -362,12 +362,12 @@ mysql> show @@processor;
 2 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看命令状态(统计)
 
-{% highlight bash %}
+~~~
 mysql> show @@command;
 +------------+---------+-------+--------------+--------------+------------+------+------+------+-------+
 | PROCESSOR  | INIT_DB | QUERY | STMT_PREPARE | STMT_EXECUTE | STMT_CLOSE | PING | KILL | QUIT | OTHER |
@@ -378,12 +378,12 @@ mysql> show @@command;
 2 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看连接状态
 
-{% highlight bash %}
+~~~
 mysql> show @@connection;
 +------------+------+-----------------+------+------------+------+--------+---------+--------+---------+---------------+-------------+------------+---------+------------+
 | PROCESSOR  | ID   | HOST            | PORT | LOCAL_PORT | USER | SCHEMA | CHARSET | NET_IN | NET_OUT | ALIVE_TIME(S) | RECV_BUFFER | SEND_QUEUE | txlevel | autocommit |
@@ -394,13 +394,13 @@ mysql> show @@connection;
 2 rows in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看缓存状态
 
 
-{% highlight bash %}
+~~~
 mysql> show @@cache;
 +-------------------------------------+-------+------+--------+------+------+-------------+----------+
 | CACHE                               | MAX   | CUR  | ACCESS | HIT  | PUT  | LAST_ACCESS | LAST_PUT |
@@ -412,12 +412,12 @@ mysql> show @@cache;
 3 rows in set (0.01 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 ### 查看后端连接状态
 
 
-{% highlight bash %}
+~~~
 mysql> show @@backend;
 +------------+------+---------+-----------------+------+--------+--------+---------+------+--------+----------+------------+--------+----------+---------+------------+
 | processor  | id   | mysqlId | host            | port | l_port | net_in | net_out | life | closed | borrowed | SEND_QUEUE | schema | charset  | txlevel | autocommit |
@@ -436,21 +436,21 @@ mysql> show @@backend;
 10 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 ### 查看会话状态
 
-{% highlight bash %}
+~~~
 mysql> show @@session;
 Empty set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看连接SQL
 
-{% highlight bash %}
+~~~
 mysql>  show @@connection.sql;
 +------+-----------------+------+--------+---------------+--------------+-----------------------+
 | ID   | HOST            | USER | SCHEMA | START_TIME    | EXECUTE_TIME | SQL                   |
@@ -462,12 +462,12 @@ mysql>  show @@connection.sql;
 3 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看SQL执行状态
 
-{% highlight bash %}
+~~~
 mysql> show @@sql.execute;
 +--------+---------+-------+----------+----------+
 | SQL_ID | EXECUTE | TIME  | MAX_TIME | MIN_TIME |
@@ -479,11 +479,11 @@ mysql> show @@sql.execute;
 3 rows in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 ### 查看SQL详细
 
-{% highlight bash %}
+~~~
 mysql> show @@sql.detail where id = 3;
 +-------------+---------+------+------------------------+-----------+
 | DATA_SOURCE | EXECUTE | TIME | LAST_EXECUTE_TIMESTAMP | LAST_TIME |
@@ -495,13 +495,13 @@ mysql> show @@sql.detail where id = 3;
 3 rows in set (0.00 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 
 ### 查看SQL
 
 
-{% highlight bash %}
+~~~
 mysql> show @@sql;
 +------+------+---------------+--------------+-------------------------------+
 | ID   | USER | START_TIME    | EXECUTE_TIME | SQL                           |
@@ -511,13 +511,13 @@ mysql> show @@sql;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看高频SQL
 
 
-{% highlight bash %}
+~~~
 mysql> show @@sql.high ;
 +------+------+-----------+----------+----------+----------+--------------+---------------+-------------------------------+
 | ID   | USER | FREQUENCY | AVG_TIME | MAX_TIME | MIN_TIME | EXECUTE_TIME | LAST_TIME     | SQL                           |
@@ -527,21 +527,21 @@ mysql> show @@sql.high ;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看慢查询
 
-{% highlight bash %}
+~~~
 mysql> show @@sql.slow;
 Empty set (0.00 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 ### 查看SQL统计
 
-{% highlight bash %}
+~~~
 mysql> show @@sql.sum;
 +------+------+------+------+------+------+--------------+--------------+---------------+
 | ID   | USER | R    | W    | R%   | MAX  | TIME_COUNT   | TTL_COUNT    | LAST_TIME     |
@@ -560,13 +560,13 @@ mysql> show @@sql.sum.user;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看表统计
 
 
-{% highlight bash %}
+~~~
 mysql> show @@sql.sum.table;
 +------+----------+------+------+------+-----------+-----------+---------------+
 | ID   | TABLE    | R    | W    | R%   | RELATABLE | RELACOUNT | LAST_TIME     |
@@ -577,11 +577,11 @@ mysql> show @@sql.sum.table;
 2 rows in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 ### 查看分析器状态
 
-{% highlight bash %}
+~~~
 mysql> show @@parser;
 +----------------+-------------+------------+----------------+------------------+--------------+------------+
 | PROCESSOR_NAME | PARSE_COUNT | TIME_COUNT | MAX_PARSE_TIME | MAX_PARSE_SQL_ID | CACHED_COUNT | CACHE_SIZE |
@@ -591,13 +591,13 @@ mysql> show @@parser;
 1 row in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看路由状态
 
 
-{% highlight bash %}
+~~~
 mysql> show @@router;
 +----------------+-------------+------------+----------------+------------------+
 | PROCESSOR_NAME | ROUTE_COUNT | TIME_COUNT | MAX_ROUTE_TIME | MAX_ROUTE_SQL_ID |
@@ -608,12 +608,12 @@ mysql> show @@router;
 2 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 ### 查看心跳状态
 
 
-{% highlight bash %}
+~~~
 mysql> show @@heartbeat;
 +--------+-------+-----------------+------+---------+-------+----------+---------+--------------+---------------------+-------+
 | NAME   | TYPE  | HOST            | PORT | RS_CODE | RETRY | STATUS   | TIMEOUT | EXECUTE_TIME | LAST_ACTIVE_TIME    | STOP  |
@@ -626,12 +626,12 @@ mysql> show @@heartbeat;
 4 rows in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看某一台主机的心跳记录
 
-{% highlight bash %}
+~~~
 mysql> show @@heartbeat.detail where name= h101M1;
 +--------+-------+-----------------+------+---------------------+--------------+
 | NAME   | TYPE  | HOST            | PORT | TIME                | EXECUTE_TIME |
@@ -651,11 +651,11 @@ mysql> show @@heartbeat.detail where name= h101M1;
 
 mysql> 
 
-{% endhighlight %}
+~~~
 
 ### 查看系统参数
 
-{% highlight bash %}
+~~~
 mysql> show @@sysparam ;
 +-------------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | PARAM_NAME                    | PARAM_VALUE        | PARAM_DESCR                                                                                                                                                                                                                                                                                                                       |
@@ -682,13 +682,13 @@ mysql> show @@sysparam ;
 18 rows in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看mycat.log日志
 
 
-{% highlight bash %}
+~~~
 mysql> show @@syslog limit=10;
 +---------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | DATE                | LOG                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -707,22 +707,22 @@ mysql> show @@syslog limit=10;
 10 rows in set (0.06 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 查看白名单
 
-{% highlight bash %}
+~~~
 mysql> show @@white;
 Empty set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 强制断开连接
 
-{% highlight bash %}
+~~~
 mysql> show @@connection;
 +------------+------+-----------------+------+------------+------+--------+---------+--------+---------+---------------+-------------+------------+---------+------------+
 | PROCESSOR  | ID   | HOST            | PORT | LOCAL_PORT | USER | SCHEMA | CHARSET | NET_IN | NET_OUT | ALIVE_TIME(S) | RECV_BUFFER | SEND_QUEUE | txlevel | autocommit |
@@ -744,25 +744,25 @@ mysql> show @@connection;
 1 row in set (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 重载配置
 
-{% highlight bash %}
+~~~
 mysql> reload @@config;
 Query OK, 1 row affected (0.15 sec)
 Reload config success
 
 mysql> 
-{% endhighlight %}
+~~~
 
 重载的是 **schema.xml** 配置
 
 
 ### 重置SQL统计
 
-{% highlight bash %}
+~~~
 mysql> reload @@user_stat;
 Query OK, 1 row affected (0.03 sec)
 Reset show @@sql  @@sql.sum @@sql.slow success
@@ -782,35 +782,35 @@ mysql> show @@sql.slow;
 Empty set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ### 关闭SQL统计
 
-{% highlight bash %}
+~~~
 mysql> reload @@sqlstat=close ;
 Query OK, 1 row affected (0.00 sec)
 Set sql stat module isclosed=close, to succeed by manager. 
 
 mysql> 
-{% endhighlight %}
+~~~
 
 关闭后，`@@sql  @@sql.sum @@sql.slow` 就不会变化
 
 
 ### 打开SQL统计
 
-{% highlight bash %}
+~~~
 mysql> reload @@sqlstat=open;
 Query OK, 1 row affected (0.01 sec)
 Set sql stat module isclosed=open, to fail by manager. 
 
 mysql> 
-{% endhighlight %}
+~~~
 
 ### 离线上线
 
-{% highlight bash %}
+~~~
 mysql> offline;
 Query OK, 1 row affected (0.00 sec)
 
@@ -834,13 +834,13 @@ mysql> show @@server;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 然而我并没变有发现前后操作有什么异常，依旧可以正常连接操作
 
 ### 定向清理慢SQL
 
-{% highlight bash %}
+~~~
 mysql> clear @@slow where schema = cctest;
 Query OK, 0 rows affected (0.01 sec)
 
@@ -848,12 +848,12 @@ mysql> clear @@slow where datanode = sd1;
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 > **Tip:** 还有好多，虽然 `show @@help` 中有列出，但目前还不支持，也许还没实现(正在开发中) 如
 
-{% highlight bash %}
+~~~
 mysql> reload @@route;
 ERROR 1003 (HY000): Unsupported statement
 mysql> reload @@user;
@@ -867,7 +867,7 @@ ERROR 1003 (HY000): Unsupported statement
 mysql> show @@slow where schema =cctest;
 ERROR 1003 (HY000): Unsupported statement
 mysql> 
-{% endhighlight %}
+~~~
 
 Mycat还是一个成长中的项目，还需要一些时间将这些功能完善，但目前来看，主体功能已经可以满足大部分需求
 

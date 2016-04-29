@@ -38,7 +38,7 @@ comments: true
 
 
 
-{% highlight bash %}
+~~~
 [root@h101 src]# wget  http://www.memcached.org/files/memcached-1.4.24.tar.gz
 --2015-09-23 14:21:12--  http://www.memcached.org/files/memcached-1.4.24.tar.gz
 Resolving www.memcached.org... 173.255.253.96
@@ -49,13 +49,13 @@ Saving to: “memcached-1.4.24.tar.gz”
 
 60% [=====================================================>                                     ] 213,988     34.2K/s  eta 16s     
 [root@h101 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 解压
 
-{% highlight bash %}
+~~~
 [root@h101 src]# ls
 memcached-1.4.24.tar.gz
 [root@h101 src]# tar -zxvf memcached-1.4.24.tar.gz 
@@ -73,7 +73,7 @@ memcached-1.4.24/Makefile.in
 [root@h101 src]# ls
 memcached-1.4.24  memcached-1.4.24.tar.gz
 [root@h101 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -81,7 +81,7 @@ memcached-1.4.24  memcached-1.4.24.tar.gz
 
 此时直接配置会出错
 
-{% highlight bash %}
+~~~
 [root@h101 src]# cd memcached-1.4.24
 [root@h101 memcached-1.4.24]# ls
 aclocal.m4  compile       daemon.c    items.h         memcached_dtrace.d  protocol_binary.h  slabs.h         timedrun.c
@@ -143,11 +143,11 @@ checking for libevent directory... configure: error: libevent is required.  You 
       If it's already installed, specify its path using --with-libevent=/dir/
 
 [root@h101 memcached-1.4.24]#
-{% endhighlight %}
+~~~
 
 提示缺少 **libevent** 
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# rpm -qa | grep libevent
 libevent-1.4.13-4.el6.x86_64
 [root@h101 memcached-1.4.24]# rpm -ql  libevent-1.4.13-4.el6.x86_64 
@@ -160,13 +160,13 @@ libevent-1.4.13-4.el6.x86_64
 /usr/share/doc/libevent-1.4.13
 /usr/share/doc/libevent-1.4.13/README
 [root@h101 memcached-1.4.24]# 
-{% endhighlight %}
+~~~
 
 发现已经 **libevent** 安装了
 
 使用 **--with-libevent=/usr/lib64/** 再试一次
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# ./configure --with-libevent=/usr/lib64/
 checking build system type... x86_64-unknown-linux-gnu
 checking host system type... x86_64-unknown-linux-gnu
@@ -219,7 +219,7 @@ checking for libevent directory... configure: error: libevent is required.  You 
       If it's already installed, specify its path using --with-libevent=/dir/
 
 [root@h101 memcached-1.4.24]#
-{% endhighlight %}
+~~~
 
 问题依旧，原来是缺少 **libevent-devel** 开发包
 
@@ -227,7 +227,7 @@ checking for libevent directory... configure: error: libevent is required.  You 
 
 ### 解决依赖
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# yum -y install libevent-devel.x86_64  
 Loaded plugins: fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -299,11 +299,11 @@ Dependency Installed:
 
 Complete!
 [root@h101 memcached-1.4.24]# 
-{% endhighlight %}
+~~~
 
 ### 安装
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# ./configure 
 checking build system type... x86_64-unknown-linux-gnu
 checking host system type... x86_64-unknown-linux-gnu
@@ -492,7 +492,7 @@ make[1]: Leaving directory `/usr/local/src/memcached-1.4.24'
 [root@h101 memcached-1.4.24]# ll /usr/local/bin/ | grep memcached 
 -rwxr-xr-x 1 root root 358710 Sep 23 14:45 memcached
 [root@h101 memcached-1.4.24]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -501,7 +501,7 @@ make[1]: Leaving directory `/usr/local/src/memcached-1.4.24'
 
 以下为 **memcached** 的参数
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# /usr/local/bin/memcached  -h 
 memcached 1.4.24
 -p <num>      TCP port number to listen on (default: 11211)
@@ -580,11 +580,11 @@ memcached 1.4.24
               - expirezero_does_not_evict: Items set to not expire, will not evict.
                 (requires lru_maintainer)
 [root@h101 memcached-1.4.24]# 
-{% endhighlight %}
+~~~
 
 启动一个 **memcached** 后台进程
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# /usr/local/bin/memcached  -d  -m 1024 -p 12345 -u cc -c 512 -t 10 
 [root@h101 memcached-1.4.24]# ps faux | grep memcached
 root      8745  0.0  0.0 103252   828 pts/0    S+   15:17   0:00  |       \_ grep memcached
@@ -594,7 +594,7 @@ cc        8732  0.1  0.0 786084  1644 ?        Ssl  15:17   0:00 /usr/local/bin/
 tcp        0      0 0.0.0.0:12345               0.0.0.0:*                   LISTEN      
 tcp        0      0 :::12345                    :::*                        LISTEN      
 [root@h101 memcached-1.4.24]# 
-{% endhighlight %}
+~~~
 
 
 Option     | Comment
@@ -612,7 +612,7 @@ Option     | Comment
 
 停止是比较简单粗暴的，直接使用kill
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# ps faux | grep mem
 root       777  0.0  0.0      0     0 ?        S    13:43   0:00  \_ [vmmemctl]
 root      8822  0.0  0.0 103252   828 pts/0    S+   15:48   0:00  |       \_ grep mem
@@ -623,7 +623,7 @@ root       777  0.0  0.0      0     0 ?        S    13:43   0:00  \_ [vmmemctl]
 root      8825  0.0  0.0 103252   828 pts/0    S+   15:49   0:00  |       \_ grep mem
 [root@h101 memcached-1.4.24]# netstat  -ant | grep 12345
 [root@h101 memcached-1.4.24]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -632,7 +632,7 @@ root      8825  0.0  0.0 103252   828 pts/0    S+   15:49   0:00  |       \_ gre
 
 使用下列方法可以检查线程数量
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# ps fuax | grep mem
 root       777  0.0  0.0      0     0 ?        S    13:43   0:00  \_ [vmmemctl]
 root      8857  0.0  0.0 103252   824 pts/0    S+   15:52   0:00  |       \_ grep mem
@@ -668,11 +668,11 @@ memcached(8835)─┬─{memcached}(8836)
     - -        00:00:00 -
     - -        00:00:00 -
 [root@h101 memcached-1.4.24]# 
-{% endhighlight %}
+~~~
 
 修改部分参数，重启，发现如期进行了调整
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# kill  8835 
 [root@h101 memcached-1.4.24]# netstat  -ant | grep 12345
 [root@h101 memcached-1.4.24]# /usr/local/bin/memcached -d -m 1024 -p 12354 -u test  -c 512 -t 5
@@ -691,7 +691,7 @@ memcached(8917)─┬─{memcached}(8918)
                 ├─{memcached}(8922)
                 └─{memcached}(8923)
 [root@h101 memcached-1.4.24]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -702,7 +702,7 @@ memcached(8917)─┬─{memcached}(8918)
 
 使用 **telnet** 连接实例
 
-{% highlight bash %}
+~~~
 [root@h101 memcached-1.4.24]# telnet localhost 12354
 Trying ::1...
 Connected to localhost.
@@ -711,7 +711,7 @@ Escape character is '^]'.
 ERROR
 
 ERROR
-{% endhighlight %}
+~~~
 
 ---
 
@@ -719,7 +719,7 @@ ERROR
 
 查看状态
 
-{% highlight bash %}
+~~~
 stats
 STAT pid 8917
 STAT uptime 1183
@@ -774,13 +774,13 @@ STAT crawler_reclaimed 0
 STAT crawler_items_checked 0
 STAT lrutail_reflocked 0
 END
-{% endhighlight %}
+~~~
 
 ---
 
 #### stats items
 
-{% highlight bash %}
+~~~
 stats items
 STAT items:1:number 4
 STAT items:1:age 1736
@@ -796,7 +796,7 @@ STAT items:1:crawler_reclaimed 0
 STAT items:1:crawler_items_checked 0
 STAT items:1:lrutail_reflocked 0
 END
-{% endhighlight %}
+~~~
 
 
 ---
@@ -805,14 +805,14 @@ END
 
  查看内容
 
-{% highlight bash %}
+~~~
 stats cachedump 1 0
 ITEM a [8 b; 1442995392 s]
 ITEM abc [8 b; 1442995392 s]
 ITEM def [6 b; 1442995392 s]
 ITEM username [8 b; 1442995392 s]
 END
-{% endhighlight %}
+~~~
 
 >通过stats items 和 stats cachedump slab\_id limit\_num配合get命令可以遍历memcached的记录。
 
@@ -822,7 +822,7 @@ END
 
 #### stats slabs/sizes/reset
 
-{% highlight bash %}
+~~~
 stats slabs
 STAT 1:chunk_size 96
 STAT 1:chunks_per_page 10922
@@ -848,7 +848,7 @@ STAT 96 4
 END
 stats reset
 RESET
-{% endhighlight %}
+~~~
 
 
 
@@ -857,10 +857,10 @@ RESET
 
 ### version
 
-{% highlight bash %}
+~~~
 version
 VERSION 1.4.24
-{% endhighlight %}
+~~~
 
 ---
 
@@ -868,10 +868,10 @@ VERSION 1.4.24
 
 存储命令的格式：
 
-{% highlight bash %}
+~~~
 <command name> <key> <flags> <exptime> <bytes>
 <data block>
-{% endhighlight %}
+~~~
 
 
 参数说明如下：
@@ -891,7 +891,7 @@ data block|存储的数据块（可直接理解为key-value结构中的value）
 
 设定KEY 而不论是否存在
 
-{% highlight bash %}
+~~~
 set abc 0 0 8 
 123456789
 CLIENT_ERROR bad data chunk
@@ -916,7 +916,7 @@ ab
 
 
 END
-{% endhighlight %}
+~~~
 
 ---
 
@@ -924,7 +924,7 @@ END
 
 删除存在的KEY
 
-{% highlight bash %}
+~~~
 get abc   
 VALUE abc 0 8
 12345678
@@ -935,7 +935,7 @@ get abc
 END
 delete ioio
 NOT_FOUND
-{% endhighlight %}
+~~~
 
 ---
 
@@ -943,7 +943,7 @@ NOT_FOUND
 
 添加不存在的KEY
 
-{% highlight bash %}
+~~~
 add abc 0 0 8 
 qwertyui
 STORED
@@ -958,7 +958,7 @@ get abc
 VALUE abc 0 8
 qwertyui
 END
-{% endhighlight %}
+~~~
 
 
 ---
@@ -968,7 +968,7 @@ END
 
 替换已存在的KEY
 
-{% highlight bash %}
+~~~
 get abc
 VALUE abc 0 8
 qwertyui
@@ -984,7 +984,7 @@ replace ui 0 0 8
 asdfghjkl
 CLIENT_ERROR bad data chunk
 ERROR
-{% endhighlight %}
+~~~
 
 ---
 
@@ -992,7 +992,7 @@ ERROR
 
 查看修改tag
 
-{% highlight bash %}
+~~~
 get abc
 VALUE abc 0 9
 asdfghjkl
@@ -1012,7 +1012,7 @@ gets abc
 VALUE abc 0 8 9
 zxcvbnml
 END
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1021,7 +1021,7 @@ END
 
 cas即checked and set的意思，只有当最后一个参数和gets所获取的参数匹配时才能存储，否则返回“EXISTS”
 
-{% highlight bash %}
+~~~
 gets a
 VALUE a 0 8 11
 lkjhgfds
@@ -1040,7 +1040,7 @@ gets a
 VALUE a 0 8 12
 asdfdsas
 END
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1049,7 +1049,7 @@ END
 
 在现有的缓存数据后添加缓存数据，如现有缓存的key不存在服务器响应为ERROR
 
-{% highlight bash %}
+~~~
 get a
 VALUE a 0 8
 asdfdsas
@@ -1063,7 +1063,7 @@ asdfdsaslkjhhjkl
 END
 append uu
 ERROR
-{% endhighlight %}
+~~~
 
 ---
 
@@ -1071,7 +1071,7 @@ ERROR
 
 和append非常类似，但它的作用是在现有的缓存数据前添加缓存数据
 
-{% highlight bash %}
+~~~
 get a 
 VALUE a 0 16
 asdfdsaslkjhhjkl
@@ -1085,7 +1085,7 @@ nmjhnmjhasdfdsaslkjhhjkl
 END
 prepend pp
 ERROR
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1098,7 +1098,7 @@ flush\_all 实际上没有立即释放项目所占用的内存，而是在随后
 flush\_all 效果是它导致所有更新时间早于 flush_all 所设定时间的项目，在被执行取回命令时命令被忽略。
 
 
-{% highlight bash %}
+~~~
 get a 
 VALUE a 0 24
 nmjhnmjhasdfdsaslkjhhjkl
@@ -1113,20 +1113,20 @@ get c
 END
 get username 
 END
-{% endhighlight %}
+~~~
 
 ---
 
 ### quit
 
-{% highlight bash %}
+~~~
 ERROR
 
 ERROR
 quit
 Connection closed by foreign host.
 [root@h101 memcached-1.4.24]# 
-{% endhighlight %}
+~~~
 
 ---
 

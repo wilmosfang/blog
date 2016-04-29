@@ -52,7 +52,7 @@ Docker Swarm 中使用 **[Consul][consul]** 来进行服务发现，这里简单
 
 ### 启动首个节点
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# consul agent -server -bootstrap-expect 1 -data-dir /tmp/consul -node=a1 -bind=192.168.100.104 -config-dir /etc/consul.d 
 ==> WARNING: BootstrapExpect Mode is specified as 1; this is the same as Bootstrap mode.
 ==> WARNING: Bootstrap mode enabled! Do not enable unless necessary
@@ -88,7 +88,7 @@ Docker Swarm 中使用 **[Consul][consul]** 来进行服务发现，这里简单
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 ARG     | Comment
@@ -104,7 +104,7 @@ ARG     | Comment
 
 ### 启动第二个节点
 
-{% highlight bash %}
+~~~
 [root@docker consul]# consul agent -data-dir /tmp/consul -node=a2 -bind=192.168.100.103 -config-dir /etc/consul.d
 ==> Starting Consul agent...
 ==> Starting Consul agent RPC...
@@ -127,13 +127,13 @@ ARG     | Comment
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 此时已经分别在104和103上启动了两个代理a1和a2，a1准备用来作server ，a2用来作client，但它们彼此还互不认识，都是自己的单节点集群中的唯一节点，可以通过 **`consul members`** 来进行查看
 
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# consul members
 Node  Address               Status  Type    Build  Protocol  DC
 a1    192.168.100.104:8301  alive   server  0.6.4  2         dc1
@@ -143,7 +143,7 @@ a1    192.168.100.104:8301  alive   server  0.6.4  2         dc1
 Node  Address               Status  Type    Build  Protocol  DC
 a2    192.168.100.103:8301  alive   client  0.6.4  2         dc1
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -151,23 +151,23 @@ a2    192.168.100.103:8301  alive   client  0.6.4  2         dc1
 
 使用a1来加入a2
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# consul join 192.168.100.103
 Successfully joined cluster by contacting 1 nodes.
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 > **Note:** 要确保两个节点TCP或UDP的8301是开放的，最好是TCP和UDP都开放，因为节点间的通讯得依赖这个端口，否则无法加入
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# consul join 192.168.100.103
 Error joining the cluster: dial tcp 192.168.100.103:8301: getsockopt: no route to host
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 防火墙端口打开方法：在Centos7中使用 **firewall-cmd** 来管理防火墙
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# firewall-cmd --list-all 
 public (default, active)
   interfaces: eno16777736 eno33554960
@@ -195,11 +195,11 @@ public (default, active)
 [root@h104 consul]# consul join 192.168.100.103
 Successfully joined cluster by contacting 1 nodes.
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 加入成功后server节点上就会产生如下日志
 
-{% highlight bash %}
+~~~
 ...
 ...
     2016/03/18 22:00:36 [INFO] agent.rpc: Accepted client: 127.0.0.1:44743
@@ -213,14 +213,14 @@ Successfully joined cluster by contacting 1 nodes.
     2016/03/18 22:07:12 [INFO] agent.rpc: Accepted client: 127.0.0.1:44813
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 > **Note:** 要确保server节点TCP的8300是开放的，最好是server 和client都开放(没准以后client也会更换角色呢)，因为client向server的RPC得依赖这个端口，不打开无法同步
 
 
 
-{% highlight bash %}
+~~~
 ...
 ...
     2016/03/18 22:04:06 [INFO] serf: EventMemberJoin: a1 192.168.100.104
@@ -231,11 +231,11 @@ Successfully joined cluster by contacting 1 nodes.
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 打开方式一样
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# firewall-cmd --add-port=8300/tcp
 success
 [root@h104 consul]# firewall-cmd --list-all 
@@ -250,22 +250,22 @@ public (default, active)
   rich rules: 
 	
 [root@h104 consul]#
-{% endhighlight %}
+~~~
 
 打开后client才能正常同步
 
-{% highlight bash %}
+~~~
 ...
 ...
     2016/03/18 22:06:03 [INFO] agent: Synced node info
 ...
 ...
-{% endhighlight %}
+~~~
 
 
 此时再在两个节点上查看成员状态，彼此都能互识了
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# consul members
 Node  Address               Status  Type    Build  Protocol  DC
 a1    192.168.100.104:8301  alive   server  0.6.4  2         dc1
@@ -277,7 +277,7 @@ Node  Address               Status  Type    Build  Protocol  DC
 a1    192.168.100.104:8301  alive   server  0.6.4  2         dc1
 a2    192.168.100.103:8301  alive   client  0.6.4  2         dc1
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 > **Tip:** 如果有多个成员，也只用加入一个节点，其它节点会在这个节点加入集群后通过成员间的通讯相互发现
@@ -291,7 +291,7 @@ a2    192.168.100.103:8301  alive   client  0.6.4  2         dc1
 
 如果使用DNS API，查询结构为 **`NAME.node.consul`** 和 **`NAME.node.DATACENTER.consul`** 
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# dig @127.0.0.1 -p 8600 a2.node.consul
 
 ; <<>> DiG 9.9.4-RedHat-9.9.4-29.el7_2.1 <<>> @127.0.0.1 -p 8600 a2.node.consul
@@ -356,7 +356,7 @@ a1.node.dc1.consul.	0	IN	A	192.168.100.104
 ;; MSG SIZE  rcvd: 70
 
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -381,7 +381,7 @@ a1.node.dc1.consul.	0	IN	A	192.168.100.104
 
 这里使用配置文件的方式来定义健康检查
 
-{% highlight bash %}
+~~~
 [root@docker ~]# echo '{"check": {"name": "ping","script": "ping -c1 soft.dog >/dev/null", "interval": "30s"}}'  > /etc/consul.d/ping.json
 [root@docker ~]# echo '{"service": {"name": "web", "tags": ["rails"], "port": 80,"check": {"script": "curl localhost >/dev/null 2>&1", "interval": "10s"}}}' > /etc/consul.d/web.json 
 [root@docker ~]# cat /etc/consul.d/ping.json 
@@ -389,23 +389,23 @@ a1.node.dc1.consul.	0	IN	A	192.168.100.104
 [root@docker ~]# cat /etc/consul.d/web.json 
 {"service": {"name": "web", "tags": ["rails"], "port": 80,"check": {"script": "curl localhost >/dev/null 2>&1", "interval": "10s"}}}
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ### 重载配置
 
 通过给进程发送 **SIGHUP** 的信号来使配置重载
 
-{% highlight bash %}
+~~~
 [root@docker ~]# ps faux | grep consul
 root     22094  1.2  0.3  25084 13756 pts/0    Sl+  21:51   1:07  |       \_ consul agent -data-dir /tmp/consul -node=a2 -bind=192.168.100.103 -config-dir /etc/consul.d
 root     25063  0.0  0.0 112644   960 pts/1    S+   23:20   0:00          \_ grep --color=auto consul
 [root@docker ~]# kill -s SIGHUP 22094
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 这时可以观察到日志输出
 
-{% highlight bash %}
+~~~
 ...
 ...
 ==> Caught signal: hangup
@@ -420,7 +420,7 @@ root     25063  0.0  0.0 112644   960 pts/1    S+   23:20   0:00          \_ gre
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 重新加载配置后，两个检查脚本都成功载入了
 
@@ -433,7 +433,7 @@ ping 脚本检查正常，因为我的博客地址是可达的，同时由于我
 
 可以使用HTTP API来检查配置
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# curl http://localhost:8500/v1/health/state/critical
 [{"Node":"a2","CheckID":"service:web","Name":"Service 'web' check","Status":"critical","Notes":"","Output":"","ServiceID":"web","ServiceName":"web","CreateIndex":593,"ModifyIndex":593}][root@h104 consul]# 
 [root@h104 consul]#
@@ -441,7 +441,7 @@ ping 脚本检查正常，因为我的博客地址是可达的，同时由于我
 [root@docker ~]# curl http://localhost:8500/v1/health/state/critical
 [{"Node":"a2","CheckID":"service:web","Name":"Service 'web' check","Status":"critical","Notes":"","Output":"","ServiceID":"web","ServiceName":"web","CreateIndex":593,"ModifyIndex":593}][root@docker ~]# 
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 可以在任意一个节点上进行检查
 
@@ -454,7 +454,7 @@ ping 脚本检查正常，因为我的博客地址是可达的，同时由于我
 Consul 提供了一个简单的键值存储机制，可以使用这个特性来存储动态配置，服务协调，主节点选举和其它一些功能
 
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# curl -v http://localhost:8500/v1/kv/?recurse
 * About to connect() to localhost port 8500 (#0)
 *   Trying ::1...
@@ -476,7 +476,7 @@ Consul 提供了一个简单的键值存储机制，可以使用这个特性来�
 < 
 * Connection #0 to host localhost left intact
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 因为没有任何值，所以反馈结果为 404
 
@@ -486,7 +486,7 @@ Consul 提供了一个简单的键值存储机制，可以使用这个特性来�
 
 创建用 **PUT** 方法
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# curl -X PUT -d 'soft.dog' http://localhost:8500/v1/kv/web/key1
 true[root@h104 consul]# curl -X PUT -d 'soft.dog' http://localhost:8500/v1/kv/web/key2?flags=42
 true[root@h104 consul]# curl -X PUT -d 'soft.dog' http://localhost:8500/v1/kv/web/sub/key3
@@ -494,7 +494,7 @@ true[root@h104 consul]# curl http://localhost:8500/v1/kv/?recurse
 [{"LockIndex":0,"Key":"web/key1","Flags":0,"Value":"c29mdC5kb2c=","CreateIndex":909,"ModifyIndex":909},{"LockIndex":0,"Key":"web/key2","Flags":42,"Value":"c29mdC5kb2c=","CreateIndex":912,"ModifyIndex":912},{"LockIndex":0,"Key":"web/sub/key3","Flags":0,"Value":"c29mdC5kb2c=","CreateIndex":917,"ModifyIndex":917}][root@h104 consul]# 
 [root@h104 consul]# 
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 
 ### 查询值
@@ -503,11 +503,11 @@ true[root@h104 consul]# curl http://localhost:8500/v1/kv/?recurse
 
 **`?recurse`** 参数是递归返回所有KV的意思， 如果要单独返回指定值可以使用指定key的方式
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# curl  http://localhost:8500/v1/kv/web/key2
 [{"LockIndex":0,"Key":"web/key2","Flags":42,"Value":"c29mdC5kb2c=","CreateIndex":912,"ModifyIndex":912}][root@h104 consul]# 
 [root@h104 consul]#  
-{% endhighlight %}
+~~~
 
 ---
 
@@ -515,12 +515,12 @@ true[root@h104 consul]# curl http://localhost:8500/v1/kv/?recurse
 
 删除用 **DELETE** 方法
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# curl -X DELETE  http://localhost:8500/v1/kv/web/sub?recurse
 true[root@h104 consul]# curl http://localhost:8500/v1/kv/web?recurse
 [{"LockIndex":0,"Key":"web/key1","Flags":0,"Value":"c29mdC5kb2c=","CreateIndex":909,"ModifyIndex":909},{"LockIndex":0,"Key":"web/key2","Flags":42,"Value":"c29mdC5kb2c=","CreateIndex":912,"ModifyIndex":912}][root@h104 consul]# 
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -528,7 +528,7 @@ true[root@h104 consul]# curl http://localhost:8500/v1/kv/web?recurse
 
 更新和存值一样使用 **PUT** 方法，只是提供一个与原值不同的内容就可以了
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# curl http://localhost:8500/v1/kv/web/key1
 [{"LockIndex":0,"Key":"web/key1","Flags":0,"Value":"c29mdC5kb2c=","CreateIndex":909,"ModifyIndex":909}][root@h104 consul]# 
 [root@h104 consul]# 
@@ -537,7 +537,7 @@ true[root@h104 consul]#
 [root@h104 consul]# curl http://localhost:8500/v1/kv/web/key1
 [{"LockIndex":0,"Key":"web/key1","Flags":0,"Value":"Z3JlYXQ=","CreateIndex":909,"ModifyIndex":1000}][root@h104 consul]# 
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 **ModifyIndex** 会增加
 
@@ -545,7 +545,7 @@ true[root@h104 consul]#
 
 也就是检查更新， Check-And-Set ， 当 **cas** 指定的值与 **ModifyIndex** 相等时，才能成功更新，否则更新失败
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# curl  http://localhost:8500/v1/kv/web/key1
 [{"LockIndex":0,"Key":"web/key1","Flags":0,"Value":"Z3JlYXQ=","CreateIndex":909,"ModifyIndex":1061}][root@h104 consul]# 
 [root@h104 consul]# 
@@ -556,7 +556,7 @@ false[root@h104 consul]#
 [root@h104 consul]# curl  http://localhost:8500/v1/kv/web/key1
 [{"LockIndex":0,"Key":"web/key1","Flags":0,"Value":"Z3JlYXQ=","CreateIndex":909,"ModifyIndex":1076}][root@h104 consul]# 
 [root@h104 consul]#
-{% endhighlight %}
+~~~
 
 第一次更新成功是因为 **cas** 指定的值 1061 与 **ModifyIndex** 相等，第二次失败是因为，**cas** 指定的值 1061与**ModifyIndex** 的 1076 不相等
 
@@ -564,7 +564,7 @@ false[root@h104 consul]#
 
 ### 监听
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# time curl "http://localhost:8500/v1/kv/web/key2?index=101&wait=5s"
 [{"LockIndex":0,"Key":"web/key2","Flags":42,"Value":"c29mdC5kb2c=","CreateIndex":912,"ModifyIndex":912}]
 real	0m0.030s
@@ -576,7 +576,7 @@ real	0m5.138s
 user	0m0.005s
 sys	0m0.015s
 [root@h104 consul]#
-{% endhighlight %}
+~~~
 
 当数据的 **ModifyIndex** 超过指定值，立刻返回，如果5s之内还没有满足条件，就直接返回原值，如果不加wait，则为一直等下去
 

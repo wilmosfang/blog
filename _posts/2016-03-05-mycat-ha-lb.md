@@ -73,7 +73,7 @@ Mycat 是无状态的，可以使用 HAProxy 或四层交换机等设备构建 M
 
 ### 下载
 
-{% highlight bash %}
+~~~
 [root@h101 keepalived]# wget  http://www.keepalived.org/software/keepalived-1.2.19.tar.gz
 --2016-03-02 15:26:58--  http://www.keepalived.org/software/keepalived-1.2.19.tar.gz
 Resolving www.keepalived.org... 37.59.63.157, 2001:41d0:8:7a9d::1
@@ -87,11 +87,11 @@ Saving to: “keepalived-1.2.19.tar.gz”
 2016-03-02 15:27:11 (32.1 KB/s) - “keepalived-1.2.19.tar.gz” saved [330164/330164]
 
 [root@h101 keepalived]# 
-{% endhighlight %}
+~~~
 
 ### 解压
 
-{% highlight bash %}
+~~~
 [root@h101 keepalived]# tar -zxvf keepalived-1.2.19.tar.gz 
 keepalived-1.2.19/
 keepalived-1.2.19/keepalived.spec.in
@@ -110,23 +110,23 @@ keepalived-1.2.19  keepalived-1.2.19.tar.gz
 AUTHOR  ChangeLog  configure.in  COPYING  genhash  install-sh  keepalived.spec.in  Makefile.in  TODO
 bin     configure  CONTRIBUTORS  doc      INSTALL  keepalived  lib                 README       VERSION
 [root@h101 keepalived-1.2.19]# 
-{% endhighlight %}
+~~~
 
 ### 安装
 
 使用下列命令进行安装
 
-{% highlight bash %}
+~~~
 ./configure --prefix=/usr/local/keepalived
 make 
 make install
-{% endhighlight %}
+~~~
 
 > **Tip:** 可以使用 **`echo $?`** 来确认执行结果
 
 #### 详细安装过程
 
-{% highlight bash %}
+~~~
 [root@h101 keepalived-1.2.19]# ls
 AUTHOR  ChangeLog  configure.in  COPYING  genhash  install-sh  keepalived.spec.in  Makefile.in  TODO
 bin     configure  CONTRIBUTORS  doc      INSTALL  keepalived  lib                 README       VERSION
@@ -352,11 +352,11 @@ drwxr-xr-x 5 root root 4096 Mar  2 15:58 etc
 drwxr-xr-x 2 root root 4096 Mar  2 15:58 sbin
 drwxr-xr-x 3 root root 4096 Mar  2 15:58 share
 [root@h101 keepalived-1.2.19]# 
-{% endhighlight %}
+~~~
 
 #### 目录结构
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# tree /usr/local/keepalived/
 /usr/local/keepalived/
 ├── bin
@@ -408,15 +408,15 @@ drwxr-xr-x 3 root root 4096 Mar  2 15:58 share
 
 13 directories, 33 files
 [root@h101 sbin]# 
-{% endhighlight %}
+~~~
 
 ### 版本确认
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# /usr/local/keepalived/sbin/keepalived  -v 
 Keepalived v1.2.19 (03/02,2016)
 [root@h101 sbin]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -431,7 +431,7 @@ Keepalived v1.2.19 (03/02,2016)
 
 ### 解压
 
-{% highlight bash %}
+~~~
 [root@h101 haproxy]# ls
 haproxy-1.6.3.tar.gz
 [root@h101 haproxy]# md5sum haproxy-1.6.3.tar.gz 
@@ -474,21 +474,21 @@ drwxrwxr-x  2 root root   4096 Dec 27 22:04 tests
 -rw-rw-r--  1 root root     24 Dec 27 22:04 VERDATE
 -rw-rw-r--  1 root root      6 Dec 27 22:04 VERSION
 [root@h101 haproxy]# 
-{% endhighlight %}
+~~~
 
 
 ### 编译安装
 
 使用下面命令进行编译安装
 
-{% highlight bash %}
+~~~
 make TARGET=linux2628 ARCH=x86_64 PREFIX=/usr/local/haproxy
 make install PREFIX=/usr/local/haproxy
-{% endhighlight %}
+~~~
 
 #### 详细安装过程
 
-{% highlight bash %}
+~~~
 [root@h101 haproxy]# cd haproxy-1.6.3
 [root@h101 haproxy-1.6.3]# ls
 CHANGELOG  CONTRIBUTING  ebtree    include  MAINTAINERS  README   src      tests    VERSION
@@ -523,11 +523,11 @@ for x in architecture close-options configuration cookie-options intro linux-syn
 [root@h101 haproxy-1.6.3]# echo $?
 0
 [root@h101 haproxy-1.6.3]#
-{% endhighlight %}
+~~~
 
 #### 目录结构
 
-{% highlight bash %}
+~~~
 [root@h101 haproxy-1.6.3]# ll /usr/local/haproxy/
 total 12
 drwxr-xr-x 3 root root 4096 Mar  2 16:23 doc
@@ -556,18 +556,18 @@ drwxr-xr-x 3 root root 4096 Mar  2 16:23 share
 
 6 directories, 12 files
 [root@h101 haproxy-1.6.3]#
-{% endhighlight %}
+~~~
 
 
 ### 版本确认
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# /usr/local/haproxy/sbin/haproxy -v
 HA-Proxy version 1.6.3 2015/12/25
 Copyright 2000-2015 Willy Tarreau <willy@haproxy.org>
 
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -580,11 +580,11 @@ Copyright 2000-2015 Willy Tarreau <willy@haproxy.org>
 
 确保系统中有 **rsyslog** 包
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# rpm -qa | grep rsyslog
 rsyslog-5.8.10-8.el6.x86_64
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** Centos6 以后系统都默认使用 rsyslog 来管理日志，当前的最新版为 **rsyslog-8.16.0**
 
@@ -594,7 +594,7 @@ rsyslog-5.8.10-8.el6.x86_64
 
 当前配置
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# grep -v "^#" /etc/rsyslog.conf  | grep -v "^$"
 $ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
 $ModLoad imklog   # provides kernel logging support (previously done by rklogd)
@@ -610,11 +610,11 @@ local7.*                                                /var/log/boot.log
 $template SpiceTmpl,"%TIMESTAMP%.%TIMESTAMP:::date-subseconds% %syslogtag% %syslogseverity-text%:%msg:::sp-if-no-1st-sp%%msg:::drop-last-lf%\n"
 :programname, startswith, "spice-vdagent"	/var/log/spice-vdagent.log;SpiceTmpl
 [root@h101 ~]#
-{% endhighlight %}
+~~~
 
 当前配置中有一条 **`$IncludeConfig /etc/rsyslog.d/*.conf`** , 代表所有在 **/etc/rsyslog.d/** 中以 **conf** 结尾的配置会被合并进来，于是为了便于管理，我们单独为 haproxy 创建一个配置文件
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# vim /etc/rsyslog.d/haproxy.conf 
 [root@h101 ~]# cat /etc/rsyslog.d/haproxy.conf 
 $ModLoad imudp
@@ -622,7 +622,7 @@ $UDPServerRun 514
 
 local0.* /var/log/haproxy.log
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 Item     | Comment
 -------- | ---
@@ -635,7 +635,7 @@ Item     | Comment
 
 ### 重启rsyslog服务
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# ll /var/log/ha*
 ls: cannot access /var/log/ha*: No such file or directory
 [root@h101 ~]# /etc/init.d/rsyslog restart 
@@ -648,7 +648,7 @@ tcp        0      0 192.168.100.101:22          192.168.100.1:49514         ESTA
 udp        0      0 0.0.0.0:514                 0.0.0.0:*                               43095/rsyslogd      
 udp        0      0 :::514                      :::*                                    43095/rsyslogd      
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 可以看到多出了一个日志文件 **/var/log/haproxy.log** ，同时也打开了 UDP 的 514 端口
 
@@ -657,7 +657,7 @@ udp        0      0 :::514                      :::*                            
 
 我们可以使用 **logger**  命令来测试配置
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# logger -it test -p local0.info "test"
 [root@h101 ~]# 
 ----------
@@ -666,7 +666,7 @@ Mar  4 17:40:21 h101 test[44940]: test
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 在一个窗口中输入 **`logger -it test -p local0.info "test"`** ， 跟踪 **/var/log/haproxy.log** 文件可以看到产生了我定制的信息
 
@@ -677,7 +677,7 @@ Mar  4 17:40:21 h101 test[44940]: test
 
 ### 下载
 
-{% highlight bash %}
+~~~
 [root@h101 mycat]# rsync  -av root@192.168.100.102:/usr/local/src/mycat/Mycat-server-1.5-GA-20160217103036-linux.tar.gz  . 
 root@192.168.100.102's password: 
 receiving incremental file list
@@ -688,11 +688,11 @@ total size is 11477321  speedup is 1.00
 [root@h101 mycat]# ls
 Mycat-server-1.5-GA-20160217103036-linux.tar.gz
 [root@h101 mycat]# 
-{% endhighlight %}
+~~~
 
 ### 解压
 
-{% highlight bash %}
+~~~
 [root@h101 mycat]# tar -zxvf Mycat-server-1.5-GA-20160217103036-linux.tar.gz 
 mycat/bin/wrapper-linux-ppc-64
 mycat/bin/wrapper-linux-x86-64
@@ -705,17 +705,17 @@ mycat/bin/xml_to_yaml.sh
 mycat/logs/
 mycat/catlet/
 [root@h101 mycat]#
-{% endhighlight %}
+~~~
 
 ### 环境确认
 
-{% highlight bash %}
+~~~
 [root@h101 mycat]# java -version
 java version "1.7.0_65"
 OpenJDK Runtime Environment (rhel-2.5.1.2.el6_5-x86_64 u65-b17)
 OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 [root@h101 mycat]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -726,7 +726,7 @@ OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 
 ### **wrapper.conf**
 
-{% highlight bash %}
+~~~
 [root@h101 conf]# cat wrapper.conf | egrep "(Xm|MaxDirectMemorySize)"
 #wrapper.java.additional.5=-XX:MaxDirectMemorySize=2G
 wrapper.java.additional.5=-XX:MaxDirectMemorySize=256m
@@ -735,11 +735,11 @@ wrapper.java.additional.10=-Xmx512m
 #wrapper.java.additional.11=-Xms1G
 wrapper.java.additional.11=-Xms128m
 [root@h101 conf]# 
-{% endhighlight %}
+~~~
 
 ### **server.xml、schema.xml、rule.xml**
 
-{% highlight bash %}
+~~~
 --[server.xml]--------
         <user name="cc">
                 <property name="password">cc</property>
@@ -788,13 +788,13 @@ wrapper.java.additional.11=-Xms128m
 		<!-- how many data nodes -->
 		<property name="count">4</property>
 	</function>
-{% endhighlight %}
+~~~
 
 ### 打开防火墙
 
 确保 **8066** 开启
 
-{% highlight bash %}
+~~~
 [root@h101 conf]# iptables -L -nv  | grep 8066
 [root@h101 conf]# vim /etc/sysconfig/iptables
 [root@h101 conf]# /etc/init.d/iptables reload 
@@ -802,7 +802,7 @@ iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@h101 conf]# iptables -L -nv  | grep 8066
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:8066 
 [root@h101 conf]# 
-{% endhighlight %}
+~~~
 
 以相同的方式打开 **9066、8888、9999**
 
@@ -815,20 +815,20 @@ Port | Comment
 9999 | haproxy对外的mycat管理端口
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# iptables -L -nv | grep -E "(8066|9066|8888|9999)"
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:8066 
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:9066 
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:8888 
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:9999 
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 启动mycat
 
-{% highlight bash %}
+~~~
 [root@h101 bin]# ./mycat  start 
 Starting Mycat-server...
 [root@h101 bin]#
@@ -885,7 +885,7 @@ mysql> select * from abc;
 8 rows in set (0.53 sec)
 
 mysql>
-{% endhighlight %}
+~~~
 
 > **Tip:**  密切关注 **mycat.log** 和 **wrapper.log** ，根据日志信息确认启动成功，如果有错误进行相应调整
 
@@ -899,7 +899,7 @@ mysql>
 
 添加一个 **haproxy** 用户，并赋权
 
-{% highlight bash %}
+~~~
 [root@h101 haproxy]# grep proxy /etc/passwd
 [root@h101 haproxy]# useradd haproxy
 [root@h101 haproxy]# grep proxy /etc/passwd
@@ -911,12 +911,12 @@ drwxr-xr-x 3 haproxy haproxy 4096 Mar  2 16:23 doc
 drwxr-xr-x 2 haproxy haproxy 4096 Mar  2 16:23 sbin
 drwxr-xr-x 3 haproxy haproxy 4096 Mar  2 16:23 share
 [root@h101 haproxy]#
-{% endhighlight %}
+~~~
 
 ### 配置haproxy
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# cd /usr/local/haproxy/
 [root@h101 haproxy]# vim haproxy.cfg 
 [root@h101 haproxy]# grep -v "^#" haproxy.cfg 
@@ -964,7 +964,7 @@ listen all_mycat_admin
   timeout server 20000
 
 [root@h101 haproxy]# 
-{% endhighlight %}
+~~~
 
 Haproxy的配置有三个来源：
 
@@ -1014,28 +1014,28 @@ server mycat_101 192.168.100.101:8066 check port 8066 inter 5s rise 2 fall 3 | �
 
 > **Note:**   **Mycat** 官方文档中的配置是使用的 **contimeout、clitimeout、srvtimeout** ，这种写法已经不被支持，如果在配置中这样指定会有如下报错
 
-{% highlight bash %}
+~~~
 [root@h101 haproxy]# /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg
 [WARNING] 063/215627 (16321) : parsing [/usr/local/haproxy/haproxy.cfg:16] : the 'contimeout' directive is now deprecated in favor of 'timeout connect', and will not be supported in future versions.
 [WARNING] 063/215627 (16321) : parsing [/usr/local/haproxy/haproxy.cfg:18] : the 'clitimeout' directive is now deprecated in favor of 'timeout client', and will not be supported in future versions.
 [WARNING] 063/215627 (16321) : parsing [/usr/local/haproxy/haproxy.cfg:20] : the 'srvtimeout' directive is now deprecated in favor of 'timeout server', and will not be supported in future versions.
 [root@h101 haproxy]# 
-{% endhighlight %}
+~~~
 
 正确的写法是 
 
-{% highlight bash %}
+~~~
 #contimeout 5000
   timeout connect 5000
 #clitimeout 50000
   timeout client 50000
 #srvtimeout 50000
   timeout server 50000
-{% endhighlight %}
+~~~
 
 > **Note:** mycat官方文档中是使用 **listen all_mycat  192.168.100.101:8888** 的方式对ip进行绑定，但这种方式已经不被支持，如果使用这种方式，会有如下报错
 
-{% highlight bash %}
+~~~
 [root@h101 haproxy]# /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg
 [ALERT] 063/223814 (22295) : parsing [/usr/local/haproxy/haproxy.cfg:29] : 'listen' cannot handle unexpected argument '192.168.100.101:8888'.
 [ALERT] 063/223814 (22295) : parsing [/usr/local/haproxy/haproxy.cfg:29] : please use the 'bind' keyword for listening addresses.
@@ -1049,11 +1049,11 @@ server mycat_101 192.168.100.101:8066 check port 8066 inter 5s rise 2 fall 3 | �
 [WARNING] 063/223814 (22295) : config : log format ignored for proxy 'all_mycat' since it has no log address.
 [ALERT] 063/223814 (22295) : Fatal errors found in configuration.
 [root@h101 haproxy]# 
-{% endhighlight %}
+~~~
 
 正确的写法是使用 **bind**
 
-{% highlight bash %}
+~~~
 listen all_mycat
   bind *:8888
   mode tcp
@@ -1062,7 +1062,7 @@ listen all_mycat
     server mycat_101 192.168.100.101:8066 check port 8066 inter 5s rise 2 fall 3
     server mycat_102 192.168.100.102:8066 check port 8066 inter 5s rise 2 fall 3
   timeout server 20000
-{% endhighlight %}
+~~~
 
 
 详细内容可以参考 **[Haproxy 配置][haproxy_conf]**
@@ -1071,7 +1071,7 @@ listen all_mycat
 
 ## 启动haproxy
 
-{% highlight bash %}
+~~~
 [root@h101 haproxy]# /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg
 [root@h101 haproxy]# ps faux | grep -v grep | grep haproxy
 haproxy  23083  0.0  0.0  14260   936 ?        Ss   22:43   0:00 /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg
@@ -1082,15 +1082,15 @@ tcp        0      0 0.0.0.0:9999                0.0.0.0:*                   LIST
 tcp        0      0 :::8066                     :::*                        LISTEN      
 tcp        0      0 :::9066                     :::*                        LISTEN      
 [root@h101 haproxy]# 
-{% endhighlight %}
+~~~
 
 查看 **/var/log/haproxy.log** 日志，会多出如下记录
 
-{% highlight bash %}
+~~~
 Mar  4 22:43:40 localhost haproxy[23081]: Proxy admin_status started.
 Mar  4 22:43:40 localhost haproxy[23081]: Proxy all_mycat started.
 Mar  4 22:43:40 localhost haproxy[23081]: Proxy all_mycat_admin started.
-{% endhighlight %}
+~~~
 
 
 > **Tip:**  这里只演示了其中一台的配置方法，以上这些在另一台服务器上也要作同样的设置
@@ -1110,7 +1110,7 @@ Mar  4 22:43:40 localhost haproxy[23081]: Proxy all_mycat_admin started.
 
 如果检测到其中一个 mycat异常，会是如下界面
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# ps faux | grep mycat
 root     33274  0.0  0.0 103256   828 pts/2    S+   23:55   0:00  |       \_ grep mycat
 root      3980  0.1  0.0  19124   784 ?        Sl   13:17   0:50 /usr/local/src/mycat/mycat/bin/./wrapper-linux-x86-64 /usr/local/src/mycat/mycat/conf/wrapper.conf wrapper.syslog.ident=mycat wrapper.pidfile=/usr/local/src/mycat/mycat/logs/mycat.pid wrapper.daemonize=TRUE wrapper.lockfile=/var/lock/subsys/mycat
@@ -1118,7 +1118,7 @@ root      3980  0.1  0.0  19124   784 ?        Sl   13:17   0:50 /usr/local/src/
 [root@h101 ~]# ps faux | grep mycat
 root     33292  0.0  0.0 103256   828 pts/2    S+   23:55   0:00  |       \_ grep mycat
 [root@h101 ~]# 
-{% endhighlight %}
+~~~
 
 ![mycat_haproxy2.png](/images/mycat_ha/mycat_haproxy2.png)
 
@@ -1140,7 +1140,7 @@ keepalived要对本机运行的haproxy健康状态进行检查，当发现haprox
 
 下面是一个最简单的 haproxy 健康检查脚本，能实现对haproxy运行状态的粗略判断(当然这个脚本有很大的精进打磨空间)
 
-{% highlight bash %}
+~~~
 [root@h101 script]# cat /usr/local/keepalived/script/chk_haproxy.bash 
 #!/bin/bash
 
@@ -1153,11 +1153,11 @@ else
 fi
 [root@h101 script]# chmod +x /usr/local/keepalived/script/chk_haproxy.bash 
 [root@h101 script]# 
-{% endhighlight %}
+~~~
 
 它进行的判断就是，如果系统中有命令包含 **haproxy.cfg** 的进程(假定这种情况就代表haproxy正在运行)，就反馈 **0** ， 否则反馈 **1**
 
-{% highlight bash %}
+~~~
 [root@h101 script]# ps faux | grep -v grep | grep haproxy 
 haproxy  23083  0.0  0.0  14260  1408 ?        Ss   22:43   0:00 /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg
 [root@h101 script]# /usr/local/keepalived/script/chk_haproxy.bash 
@@ -1169,14 +1169,14 @@ haproxy  23083  0.0  0.0  14260  1408 ?        Ss   22:43   0:00 /usr/local/hapr
 [root@h101 script]# echo $?
 1
 [root@h101 script]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ###  配置keepalived
 
 
-{% highlight bash %}
+~~~
 [root@h101 script]# cat /etc/keepalived/keepalived.conf
 ! Configuration File for keepalived
 
@@ -1242,12 +1242,12 @@ vrrp_instance VI_222 {
     }
 }
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 其中的核心部分在这里
 
 
-{% highlight bash %}
+~~~
 vrrp_script checkhaproxy {
 	script "/usr/local/keepalived/script/chk_haproxy.bash"
 	weight -20 
@@ -1258,7 +1258,7 @@ vrrp_script checkhaproxy {
     track_script {
             checkhaproxy
     }
-{% endhighlight %}
+~~~
 
 **track_script**  中调用 **checkhaproxy**
 
@@ -1284,10 +1284,10 @@ vrrp_script checkhaproxy {
 
 先确保两边的haproxy都是正常运行的
 
-{% highlight bash %}
+~~~
 [root@h101 script]# /usr/local/keepalived/sbin/keepalived -f /etc/keepalived/keepalived.conf
 [root@h101 script]#
-{% endhighlight %}
+~~~
 
 两边的keepalived启动后，以初始设定优先级高的keepalived为Master
 
@@ -1296,7 +1296,7 @@ vrrp_script checkhaproxy {
 
 在原master上执行以下命令，可以看到IP的漂移过程 
 
-{% highlight bash %}
+~~~
 [root@h102 mycat-web]# ip a 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -1319,14 +1319,14 @@ root     12707  0.0  0.0 103256   828 pts/1    S+   23:48   0:00  |       \_ gre
 haproxy  12118  0.0  0.0  14260   936 ?        Ss   23:42   0:00 /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg
 [root@h102 mycat-web]# kill 12118; watch -n .5 ip a 
 [root@h102 mycat-web]# 
-{% endhighlight %}
+~~~
 
 这个过程中 **192.168.100.222** 会消失，在另一台服务器上，就能看到这个IP被挂载了
 
 
 反过来也一样，会看到IP被挂载的过程
 
-{% highlight bash %}
+~~~
 [root@h102 mycat-web]# ip a 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -1345,7 +1345,7 @@ haproxy  12118  0.0  0.0  14260   936 ?        Ss   23:42   0:00 /usr/local/hapr
        valid_lft forever preferred_lft forever
 [root@h102 mycat-web]# /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg; watch -n .5 ip a 
 [root@h102 mycat-web]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -1353,7 +1353,7 @@ haproxy  12118  0.0  0.0  14260   936 ?        Ss   23:42   0:00 /usr/local/hapr
 
 ## 访问测试 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# mysql -u cc -p -P 8888 -h 192.168.100.222 
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -1391,7 +1391,7 @@ mysql> show tables;
 2 rows in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ## 切换过程中的影响
@@ -1400,7 +1400,7 @@ mysql>
 
 下面的过程就是在切换中进行操作的
 
-{% highlight bash %}
+~~~
 mysql> show tables;
 ERROR 2013 (HY000): Lost connection to MySQL server during query
 mysql> show tables;
@@ -1426,7 +1426,7 @@ mysql> show databases;
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ---

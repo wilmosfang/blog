@@ -56,7 +56,7 @@ Registry 要求构建在不小于 **1.6.0** 版本的 Docker 引擎上
 
 ### 创建运行Registry
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker run -d -p 5000:5000 --name registry registry:2
 Unable to find image 'registry:2' locally
 2: Pulling from library/registry
@@ -77,13 +77,13 @@ Status: Downloaded newer image for registry:2
 [root@h103 ~]# echo $?
 0
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 从Docker Hub拉取镜像
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker pull ubuntu
 Using default tag: latest
 latest: Pulling from library/ubuntu
@@ -104,14 +104,14 @@ ubuntu              latest              8693db7e8a00        9 hours ago         
 registry            2                   683f9cd9cf88        2 weeks ago         224.5 MB
 hello-world         latest              0a6ba66e537a        3 months ago        960 B
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
 
 ### 镜像打标
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 ubuntu              latest              8693db7e8a00        9 hours ago         187.9 MB
@@ -125,7 +125,7 @@ localhost:5000/myfirstimage   latest              8693db7e8a00        9 hours ag
 registry                      2                   683f9cd9cf88        2 weeks ago         224.5 MB
 hello-world                   latest              0a6ba66e537a        3 months ago        960 B
 [root@h103 ~]#
-{% endhighlight %}
+~~~
 
 
 
@@ -136,7 +136,7 @@ hello-world                   latest              0a6ba66e537a        3 months a
 ### 推送镜像到Registry
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker push localhost:5000/myfirstimage 
 The push refers to a repository [localhost:5000/myfirstimage] (len: 1)
 8693db7e8a00: Pushed 
@@ -145,7 +145,7 @@ c4fae638e7ce: Pushed
 f15ce52fc004: Pushed 
 latest: digest: sha256:a27637294694a32300c5a9b94c9078709ec75216dd875fbdbc89acb0eb803401 size: 6806
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -153,7 +153,7 @@ latest: digest: sha256:a27637294694a32300c5a9b94c9078709ec75216dd875fbdbc89acb0e
 ### 从Registry拉取镜像
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker pull localhost:5000/myfirstimage
 Using default tag: latest
 latest: Pulling from myfirstimage
@@ -162,7 +162,7 @@ Status: Image is up to date for localhost:5000/myfirstimage:latest
 [root@h103 ~]# echo $?
 0
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -171,7 +171,7 @@ Status: Image is up to date for localhost:5000/myfirstimage:latest
 
 registry和其它实例没有任何区别，使用stop然后rm就可以便捷地进行销毁
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker  ps -a 
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAME
 7716d7899161        registry:2          "/bin/registry /etc/d"   22 hours ago        Up 2 minutes        0.0.0.0:5000->5000/tcp   regi
@@ -185,14 +185,14 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 [root@h103 ~]# docker  ps -a 
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 
 ## 部署本地Registry服务
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker run -d -p 5000:5000 --restart=always --name registry registry:2
 4352b16f2582ed0478f3380be5ab4a65487d7adf1698c66f365881e3aefdab68
 [root@h103 ~]# docker ps -a 
@@ -245,7 +245,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 registry
 registry
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -258,7 +258,7 @@ registry
 可以使用 **`-v`** 的参数来指定一个卷的位置，从而实现对数据存储的控制
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# ls
 anaconda-ks.cfg  dockerfile
 [root@h103 ~]# docker ps -a 
@@ -341,7 +341,7 @@ data/
 
 39 directories, 14 files
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -352,7 +352,7 @@ data/
 ### 创建自签名证书
 
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# cd certs/
 [root@h104 certs]# openssl genrsa -out docker.key 2048
 Generating RSA private key, 2048 bit long modulus
@@ -396,12 +396,12 @@ total 12
 -rw------- 1 root root 1675 Jan 21 22:02 docker.key
 [root@h104 certs]# cd ..
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 
 ### 运行Registry
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker ps -a 
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 [root@h104 ~]# ls
@@ -412,7 +412,7 @@ b578e321f33f6f2a0c34340b35239d1ce724c4523f3b2266bc01239658fc3f46
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 b578e321f33f        registry:2          "/bin/registry /etc/d"   6 seconds ago       Up 5 seconds        0.0.0.0:5000->5000/tcp   registry
 [root@h104 ~]#
-{% endhighlight %}
+~~~
 
 
 
@@ -423,7 +423,7 @@ b578e321f33f        registry:2          "/bin/registry /etc/d"   6 seconds ago  
 
 其实就是将本地的镜像作一些别名(链接)
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker tag ubuntu 192.168.100.104:5000/ubuntu
 [root@h103 ~]# docker tag ubuntu h104:5000/ubuntu
 [root@h103 ~]# docker tag ubuntu docker-registry:5000/ubuntu 
@@ -441,7 +441,7 @@ jenkins                       latest              fc39417bd5fb        12 days ag
 registry                      2                   683f9cd9cf88        2 weeks ago         224.5 MB
 hello-world                   latest              0a6ba66e537a        3 months ago        960 B
 [root@h103 ~]#
-{% endhighlight %}
+~~~
 
 
 
@@ -449,14 +449,14 @@ hello-world                   latest              0a6ba66e537a        3 months a
 
 #### 报错1
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker push h104:5000/ubuntu
 The push refers to a repository [h104:5000/ubuntu] (len: 1)
 unable to ping registry endpoint https://h104:5000/v0/
 v2 ping attempt failed with error: Get https://h104:5000/v2/: tls: oversized record received with length 20527
  v1 ping attempt failed with error: Get https://h104:5000/v1/_ping: tls: oversized record received with length 20527
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 根据官网的解释和方法，我没有成功处理
 
@@ -489,29 +489,29 @@ v2 ping attempt failed with error: Get https://h104:5000/v2/: tls: oversized rec
 #### 报错234
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker push 192.168.100.104:5000/ubuntu
 The push refers to a repository [192.168.100.104:5000/ubuntu] (len: 1)
 unable to ping registry endpoint https://192.168.100.104:5000/v0/
 v2 ping attempt failed with error: Get https://192.168.100.104:5000/v2/: x509: cannot validate certificate for 192.168.100.104 because it doesn't contain any IP SANs
  v1 ping attempt failed with error: Get https://192.168.100.104:5000/v1/_ping: x509: cannot validate certificate for 192.168.100.104 because it doesn't contain any IP SANs
 [root@h103 ~]#
-{% endhighlight %}
+~~~
 
 原因是证书中没有指定IP
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# docker push h104:5000/ubuntu
 The push refers to a repository [h104:5000/ubuntu] (len: 1)
 unable to ping registry endpoint https://h104:5000/v0/
 v2 ping attempt failed with error: Get https://h104:5000/v2/: x509: certificate is valid for docker-registry, not h104
  v1 ping attempt failed with error: Get https://h104:5000/v1/_ping: x509: certificate is valid for docker-registry, not h104
 [root@h103 ~]#
-{% endhighlight %}
+~~~
 
 原因是证书中指定的主机名为 **docker-registry** 而不是 **h104**
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# vim /etc/hosts
 [root@h103 ~]# grep docker-registry  /etc/hosts
 192.168.100.104  h104 docker-registry
@@ -521,7 +521,7 @@ unable to ping registry endpoint https://docker-registry:5000/v0/
 v2 ping attempt failed with error: Get https://docker-registry:5000/v2/: x509: certificate signed by unknown authority
  v1 ping attempt failed with error: Get https://docker-registry:5000/v1/_ping: x509: certificate signed by unknown authority
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 原因是证书不被信任(自签名证书)
 
@@ -530,7 +530,7 @@ v2 ping attempt failed with error: Get https://docker-registry:5000/v2/: x509: c
 
 将证书内容导入受信列表，重启docker客户端
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# ll /etc/pki/tls/certs/ca-bundle.crt
 lrwxrwxrwx 1 root root 49 Jan 19 16:30 /etc/pki/tls/certs/ca-bundle.crt -> /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 [root@h103 ~]# ll /etc/pki/ca-trust/extracted/pem/
@@ -569,7 +569,7 @@ latest: Pulling from ubuntu
 Digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e3fcf6b3
 Status: Image is up to date for docker-registry:5000/ubuntu:latest
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 > **Note:** 一定要重启客户端，否则无效
 
@@ -578,7 +578,7 @@ Status: Image is up to date for docker-registry:5000/ubuntu:latest
 * 解决办法二：
 
 
-{% highlight bash %}
+~~~
 [root@h103 ~]# ll /etc/pki/ca-trust/source/anchors/
 total 0
 [root@h103 ~]# scp root@h104:/root/certs/docker.crt  /etc/pki/ca-trust/source/anchors/
@@ -619,7 +619,7 @@ latest: Pulling from ubuntu
 Digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e3fcf6b3
 Status: Image is up to date for docker-registry:5000/ubuntu:latest
 [root@h103 ~]# 
-{% endhighlight %}
+~~~
 
 为什么这么啰嗦地反复测试，是为了说明以下三步必须且只能按照以下步骤完成，否则无法生效
 
@@ -641,30 +641,30 @@ Status: Image is up to date for docker-registry:5000/ubuntu:latest
 
 类似于下面两种
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker push docker:5000/ubuntu 
 The push refers to a repository [docker:5000/ubuntu] (len: 1)
 unable to ping registry endpoint https://docker:5000/v0/
 v2 ping attempt failed with error: Get https://docker:5000/v2/: dial tcp 192.168.100.103:5000: no route to host
  v1 ping attempt failed with error: Get https://docker:5000/v1/_ping: dial tcp 192.168.100.103:5000: no route to host
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker push docker:5000/ubuntu 
 The push refers to a repository [docker:5000/ubuntu] (len: 1)
 unable to ping registry endpoint https://docker:5000/v0/
 v2 ping attempt failed with error: Get https://docker:5000/v2/: dial tcp 192.168.100.103:5000: i/o timeout
  v1 ping attempt failed with error: Get https://docker:5000/v1/_ping: dial tcp 192.168.100.103:5000: i/o timeout
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 * 故障原因
 
 一般而言，防火墙会在docker服务之前打开，docker服务启动后会在iptables中应用一些策略
 
-{% highlight bash %}
+~~~
 [root@docker ~]# systemctl list-dependencies docker.service | head -n 10
 docker.service
 ● ├─docker.socket
@@ -685,13 +685,13 @@ docker.service
 Chain DOCKER (1 references)
   288 46767 ACCEPT     tcp  --  !docker0 docker0  0.0.0.0/0            172.17.0.2           tcp dpt:5000
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 
 如果单独重载iptables服务，docker这边的配置会丢失
 
-{% highlight bash %}
+~~~
 [root@docker ~]# firewall-cmd --reload
 success
 [root@docker ~]# iptables -L -nv | grep -i docker
@@ -699,24 +699,24 @@ success
     0     0 ACCEPT     all  --  docker0 !docker0  0.0.0.0/0            0.0.0.0/0           
     0     0 ACCEPT     all  --  docker0 docker0  0.0.0.0/0            0.0.0.0/0           
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 从而导致网络不可达或相关信息的报错
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker push docker:5000/ubuntu 
 The push refers to a repository [docker:5000/ubuntu] (len: 1)
 unable to ping registry endpoint https://docker:5000/v0/
 v2 ping attempt failed with error: Get https://docker:5000/v2/: dial tcp 192.168.100.103:5000: no route to host
  v1 ping attempt failed with error: Get https://docker:5000/v1/_ping: dial tcp 192.168.100.103:5000: no route to host
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 * 解决办法
 
 就是确保在iptables服务重启后，docker服务也重启一下，以应用docker里的网络策略(最主要的是加载那条 **Chain DOCKER**)
 
-{% highlight bash %}
+~~~
 [root@docker ~]# systemctl stop docker && systemctl  start docker 
 [root@docker ~]# iptables -L -nv | grep -i docker 
     0     0 DOCKER     all  --  *      docker0  0.0.0.0/0            0.0.0.0/0           
@@ -735,7 +735,7 @@ a4c5be5b6e59: Image already exists
 c4fae638e7ce: Image already exists 
 latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e3fcf6b3 size: 6800
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 
 > **Tip:** 由docker export出来的端口不必在主机的防火墙filter表中另外打开，因为它的数据进入了forward链中
@@ -770,7 +770,7 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 
 用户名密码：**testuser/testpassword**
 
-{% highlight bash %}
+~~~
 [root@docker ~]# ls
 anaconda-ks.cfg  certs  dockerfile
 [root@docker ~]# mkdir auth
@@ -782,7 +782,7 @@ total 4
 testuser:$2y$05$.NF64Yoz4W/VCfM1RrkBw.CT7ji3TbzdgBWjIH6X60MMgNFC.vIy.
 
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 ### 创建一个registry
 
@@ -794,7 +794,7 @@ testuser:$2y$05$.NF64Yoz4W/VCfM1RrkBw.CT7ji3TbzdgBWjIH6X60MMgNFC.vIy.
 
 先清掉docker中同名的registry，然后再创建，否则会报冲突，也可以给这个registry改为其它名字
 
-{% highlight bash %}
+~~~
 [root@docker ~]# docker run -d -p 5000:5000 --restart=always --name registry \
 > -v `pwd`/data:/data \
 > -v `pwd`/certs:/certs \
@@ -812,23 +812,23 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 3d9f0915226f        registry:2          "htpasswd -Bbn testus"   5 minutes ago       Exited (0) 5 minutes ago                            prickly_jang
 27995af3fa59        registry:2          "htpasswd -Bbn testus"   2 hours ago         Exited (0) 2 hours ago                              gloomy_goldberg
 [root@docker ~]#
-{% endhighlight %}
+~~~
 
 ### 尝试push一个镜像
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker push docker:5000/ubuntu 
 The push refers to a repository [docker:5000/ubuntu] (len: 1)
 
 Head https://docker:5000/v2/ubuntu/blobs/sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4: no basic auth credentials
 [root@h104 ~]#
-{% endhighlight %}
+~~~
 
 报错是因为没有进行认证
 
 ### 进行认证
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# docker login docker:5000
 Username: testuser
 Password: 
@@ -843,7 +843,7 @@ c4fae638e7ce: Pushed
 f15ce52fc004: Pushed 
 latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e3fcf6b3 size: 6800
 [root@h104 ~]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -864,7 +864,7 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 
 可以使用下面两种方法进行安装
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > docker-compose
 ...
 ...
@@ -872,20 +872,20 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 ...
 ...
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 下载可以参考 **[Install Docker Compose][compose_install]**
 
 > **Tip:** 如果不翻墙，这个不到10M的文件，可以让人崩溃
 
-{% highlight bash %}
+~~~
 4% [===>                                                                                                           ] 321,090      423B/s  eta 7h 17m 
-{% endhighlight %}
+~~~
 
 
 ### Compose软件基础信息
 
-{% highlight bash %}
+~~~
 [root@docker ~]# ls
 anaconda-ks.cfg  auth  certs  data  docker-compose-Linux-x86_64  dockerfile
 [root@docker ~]# du -sh docker-compose-Linux-x86_64 
@@ -935,14 +935,14 @@ Commands:
   migrate-to-labels  Recreate containers to add labels
   version            Show the Docker-Compose version information
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 编辑docker-compose.yml
 
 
-{% highlight bash %}
+~~~
 [root@docker ~]# ls
 anaconda-ks.cfg  auth  certs  data  docker-compose-Linux-x86_64  docker-compose.yml  dockerfile
 [root@docker ~]# vim docker-compose.yml 
@@ -966,7 +966,7 @@ registry2:
 ERROR: yaml.scanner.ScannerError: mapping values are not allowed here
   in "./docker-compose.yml", line 4, column 8
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 #### 报错1
 
@@ -981,7 +981,7 @@ ERROR: yaml.scanner.ScannerError: mapping values are not allowed here
 
 ---
 
-{% highlight bash %}
+~~~
 [root@docker ~]# vim docker-compose.yml 
 [root@docker ~]# cat docker-compose.yml 
 registry2:
@@ -1003,7 +1003,7 @@ registry2:
 ERROR: Validation failed in file './docker-compose.yml', reason(s):
 Service 'registry2' configuration key 'environment' contains an invalid type, it should be an object, or an array
 [root@docker ~]# 
-{% endhighlight %}
+~~~
 
 
 #### 报错2
@@ -1020,7 +1020,7 @@ Service 'registry2' configuration key 'environment' contains an invalid type, it
 
 ---
 
-{% highlight bash %}
+~~~
 [root@docker ~]# vim docker-compose.yml 
 [root@docker ~]# cat docker-compose.yml 
 registry2:
@@ -1071,7 +1071,7 @@ MAC Address: 00:0C:29:B6:CC:BA (VMware)
 
 Nmap done: 1 IP address (1 host up) scanned in 5.00 seconds
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 #### 报错3
 
@@ -1087,7 +1087,7 @@ Nmap done: 1 IP address (1 host up) scanned in 5.00 seconds
 
 
 
-{% highlight bash %}
+~~~
 WRONG
         "Ports": {
             "5000/tcp": null,
@@ -1108,7 +1108,7 @@ RIGHT
                 }
             ]
         }
-{% endhighlight %}
+~~~
 
 
 
@@ -1116,7 +1116,7 @@ RIGHT
 
 
 
-{% highlight bash %}
+~~~
 [root@docker ~]# docker stop e870d0a4b904 && docker rm -v e870d0a4b904
 e870d0a4b904
 e870d0a4b904
@@ -1171,7 +1171,7 @@ c4fae638e7ce: Pushed
 f15ce52fc004: Pushed 
 latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e3fcf6b3 size: 6800
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 现在一切正常
 
@@ -1185,7 +1185,7 @@ latest: digest: sha256:45d78ef16a9e6199ffbbc78f71c2c6ef6647f3be6b9721fe3f1b08d6e
 
 # 命令汇总
 
-{% highlight bash %}
+~~~
 docker run -d -p 5000:5000 --name registry registry:2
 docker pull ubuntu
 docker tag ubuntu localhost:5000/myfirstimage
@@ -1255,7 +1255,7 @@ cat docker-compose.yml
 nmap docker
 docker login docker:5002
 docker push docker:5002/ubuntu
-{% endhighlight %}
+~~~
 
 
 ---

@@ -39,16 +39,16 @@ comments: true
 
 使用下面的方式安装
 
-{% highlight bash %}
+~~~
 wget --no-check-certificate https://github.com/ideawu/c1000k/archive/master.zip
 unzip master.zip
 cd c1000k-master
 make
-{% endhighlight %}
+~~~
 
 安装过程
 
-{% highlight bash %}
+~~~
 [root@h101 c1000k]# wget --no-check-certificate https://github.com/ideawu/c1000k/archive/master.zip
 --2015-11-25 13:44:07--  https://github.com/ideawu/c1000k/archive/master.zip
 Resolving github.com... 192.30.252.130
@@ -88,7 +88,7 @@ client.c  Makefile  README.md  server.c
 gcc -std=c99 -O2 -o server server.c
 gcc -O2 -o client client.c
 [root@h101 c1000k-master]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -96,7 +96,7 @@ gcc -O2 -o client client.c
 
 指定一个空闲端口，服务端会顺次打开100个端口进行监听，并且在当前terminal挂起
 
-{% highlight bash %}
+~~~
 [root@h101 c1000k-master]# ./server  8000
 server listen on port: 8000
 server listen on port: 8001
@@ -200,7 +200,7 @@ server listen on port: 8098
 server listen on port: 8099
 
 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -208,16 +208,16 @@ server listen on port: 8099
 
 
 
-{% highlight bash %}
+~~~
 [root@h101 c1000k-master]# ./client 127.0.0.1 8000
 connections: 922
 error: Connection refused
 [root@h101 c1000k-master]# 
-{% endhighlight %}
+~~~
 
 运行完服务端也会跟着退出
 
-{% highlight bash %}
+~~~
 ...
 ...
 server listen on port: 8095
@@ -228,7 +228,7 @@ server listen on port: 8099
 connections: 921
 error: Too many open files
 [root@h101 c1000k-master]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -236,20 +236,20 @@ error: Too many open files
 
 客户端反馈结果
 
-{% highlight bash %}
+~~~
 connections: 922
 error: Connection refused
-{% endhighlight %}
+~~~
 
 说明客户端的第922个连接被拒绝了
 
 
 服务端反馈结果
 
-{% highlight bash %}
+~~~
 connections: 921
 error: Too many open files
-{% endhighlight %}
+~~~
 
 说明服务端只能打开921个连接，无法打开更多，触及了 **max-open-files** 规定的上限，所以退出了
 

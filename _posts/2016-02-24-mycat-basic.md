@@ -86,13 +86,13 @@ comments: true
 MyCAT 是使用JAVA开发的，必须运行于JRE的环境中，MyCAT的运行依赖不低于JDK7版本的环境
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# java -version
 java version "1.7.0_65"
 OpenJDK Runtime Environment (rhel-2.5.1.2.el6_5-x86_64 u65-b17)
 OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 环境符合要求
 
@@ -102,7 +102,7 @@ OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
 
 MyCAT的 **[下载地址][mycat_dl]**
 
-{% highlight bash %}
+~~~
 [root@h102 mycat]# wget https://github.com/MyCATApache/Mycat-download/raw/master/1.5-GA/Mycat-server-1.5-GA-20160217103036-linux.tar.gz
 --2016-02-24 17:00:41--  https://github.com/MyCATApache/Mycat-download/raw/master/1.5-GA/Mycat-server-1.5-GA-20160217103036-linux.tar.gz
 Resolving github.com... 192.30.252.129
@@ -121,7 +121,7 @@ Saving to: “Mycat-server-1.5-GA-20160217103036-linux.tar.gz”
 2016-02-24 17:02:26 (129 KB/s) - “Mycat-server-1.5-GA-20160217103036-linux.tar.gz” saved [11477321/11477321]
 
 [root@h102 mycat]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -130,7 +130,7 @@ Saving to: “Mycat-server-1.5-GA-20160217103036-linux.tar.gz”
 
 解压就可以直接使用
 
-{% highlight bash %}
+~~~
 [root@h102 mycat]# ls
 Mycat-server-1.5-GA-20160217103036-linux.tar.gz
 [root@h102 mycat]# tar -xzvf Mycat-server-1.5-GA-20160217103036-linux.tar.gz 
@@ -266,7 +266,7 @@ mycat/
 
 5 directories, 53 files
 [root@h102 mycat]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -277,7 +277,7 @@ mycat/
 
 主要调整内存使用大小，因为是测试环境，尽量调小一点，生产环境得根据具体情况评估
 
-{% highlight bash %}
+~~~
 [root@h102 mycat]# ll conf/wrapper.conf 
 -rwxrwxrwx 1 root root 4244 Feb 24 20:58 conf/wrapper.conf
 [root@h102 mycat]# vim conf/wrapper.conf 
@@ -331,7 +331,7 @@ wrapper.ntservice.interactive=false
 wrapper.ping.timeout=120
 configuration.directory.in.classpath.first=conf
 [root@h102 mycat]# 
-{% endhighlight %}
+~~~
 
 
 下面是几个java程序的常用且容易混淆的配置
@@ -349,15 +349,15 @@ Args | Comment
 
 ## 启动
 
-{% highlight bash %}
+~~~
 [root@h102 bin]# ./mycat start 
 Starting Mycat-server...
 [root@h102 bin]# 
-{% endhighlight %}
+~~~
 
 查看进程状态
 
-{% highlight bash %}
+~~~
 [root@h102 bin]# ps faux | grep mycat
 root     32813  0.0  0.0 103256   828 pts/0    S+   21:25   0:00  |       \_ grep mycat
 root     32758  0.1  0.0  19124   780 ?        Sl   21:24   0:00 /usr/local/src/mycat/mycat/bin/./wrapper-linux-x86- /usr/local/src/mycat/mycat/conf/wrapper.conf wrapper.syslog.ident=mycat wrapper.pidfile=/usr/local/src/mycat/mycat/gs/mycat.pid wrapper.daemonize=TRUE wrapper.lockfile=/var/lock/subsys/mycat
@@ -404,12 +404,12 @@ root     32760 32758 32793  0   33 21:24 ?        Sl     0:00 java -DMYCAT_HOME=
 root     32760 32758 32794  0   33 21:24 ?        Sl     0:00 java -DMYCAT_HOME=. -server -XX:MaxPermSize=64M -XX:+A
 root     32760 32758 32795  0   33 21:24 ?        Sl     0:00 java -DMYCAT_HOME=. -server -XX:MaxPermSize=64M -XX:+A
 [root@h102 bin]# 
-{% endhighlight %}
+~~~
 
 
 端口开启情况(同时打开防火墙)
 
-{% highlight bash %}
+~~~
 [root@h102 mycat]# netstat  -ant | grep 8066
 tcp        0      0 :::8066                     :::*                        LISTEN      
 [root@h102 mycat]# lsof -i :8066
@@ -419,7 +419,7 @@ java    32760 root   60u  IPv6 166556      0t0  TCP *:8066 (LISTEN)
 [root@h102 mycat]# iptables -L -nv | grep 8066
     0   0   ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:8066 
 [root@h102 mycat]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -431,7 +431,7 @@ java    32760 root   60u  IPv6 166556      0t0  TCP *:8066 (LISTEN)
 
 
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# mysql -utest -ptest  -P8066 -h 192.168.100.102
 Warning: Using a password on the command line interface can be insecure.
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -480,7 +480,7 @@ ERROR 3009 (HY000): java.lang.IllegalArgumentException: Invalid DataSource:0
 mysql> desc goods;
 ERROR 3009 (HY000): java.lang.IllegalArgumentException: Invalid DataSource:0
 mysql> 
-{% endhighlight %}
+~~~
 
 这是由于没指定数据源产生的报错
 
@@ -490,7 +490,7 @@ mysql>
 > **Tip:** 为什么用户名和密码是 **test** 呢，因为 **conf/server.xml** 有定义
 
 
-{% highlight bash %}
+~~~
 <user name="test">
 	<property name="password">test</property>
 	<property name="schemas">TESTDB</property>
@@ -500,11 +500,11 @@ mysql>
 	<property name="schemas">TESTDB</property>
 	<property name="readOnly">true</property>
 </user>
-{% endhighlight %}
+~~~
 
 所以user/user也可以登录
 
-{% highlight bash %}
+~~~
 [root@h101 ~]# mysql -uuser -puser  -P8066 -h 192.168.100.102
 Warning: Using a password on the command line interface can be insecure.
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -555,7 +555,7 @@ ERROR 1495 (HY000): User readonly
 mysql> desc customer;
 ERROR 1495 (HY000): User readonly
 mysql> 
-{% endhighlight %}
+~~~
 
 
 
@@ -563,12 +563,12 @@ mysql>
 
 ## 停止
 
-{% highlight bash %}
+~~~
 [root@h102 bin]# ./mycat  stop 
 Stopping Mycat-server...
 Stopped Mycat-server.
 [root@h102 bin]# 
-{% endhighlight %}
+~~~
 
 ---
 

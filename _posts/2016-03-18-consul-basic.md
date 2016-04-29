@@ -50,7 +50,7 @@ Docker Swarm 中使用 **[Consul][consul]** 来进行服务发现，这里简单
 **Consul** 的 **[下载地址][consul_dl]**
 
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# wget https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip
 --2016-03-18 15:25:40--  https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip
 Resolving releases.hashicorp.com (releases.hashicorp.com)... 103.245.224.69
@@ -69,7 +69,7 @@ total 6064
 [root@h104 consul]# sha256sum consul_0.6.4_linux_amd64.zip 
 abdf0e1856292468e2c9971420d73b805e93888e006c76324ae39416edcf0627  consul_0.6.4_linux_amd64.zip
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 建议下载完成后进行一下 **校验** 以确保包的完整性，**Consul 0.6.4** 各平台版本可以参考  **[SHA256 checksums for Consul 0.6.4][checksum]**
 
@@ -79,7 +79,7 @@ abdf0e1856292468e2c9971420d73b805e93888e006c76324ae39416edcf0627  consul_0.6.4_l
 
 解压后就是一个可以直接使用的bin文件，拷贝到合适目录就行了
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# ls
 consul_0.6.4_linux_amd64.zip
 [root@h104 consul]# unzip consul_0.6.4_linux_amd64.zip 
@@ -123,7 +123,7 @@ Consul v0.6.4
 Consul Protocol: 3 (Understands back to: 1)
 [root@h104 consul]# 
 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -138,7 +138,7 @@ Consul Protocol: 3 (Understands back to: 1)
 
 以开发模式运行 **Consul**，这个模式可以快速启动一个单节点集群，但是由于并不保存状态，所以不要在生产环境中使用
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# consul agent -dev -bind=0.0.0.0
 ==> Starting Consul agent...
 ==> Error starting agent: Failed to get advertise address: Multiple private IPs found. Please configure one.
@@ -182,11 +182,11 @@ Consul Protocol: 3 (Understands back to: 1)
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 > **Note:**  在有多个IP的环境下，必须指定IP，否则会失败
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# ip a 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -214,11 +214,11 @@ Consul Protocol: 3 (Understands back to: 1)
 ==> Starting Consul agent...
 ==> Error starting agent: Failed to get advertise address: Multiple private IPs found. Please configure one.
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 启动 **consul** 后，系统会监听在一些端口
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# netstat  -tunpea | grep consul
 tcp        0      0 192.168.100.104:8300    0.0.0.0:*               LISTEN      0          47240      11552/consul        
 tcp        0      0 192.168.100.104:8301    0.0.0.0:*               LISTEN      0          47241      11552/consul        
@@ -230,7 +230,7 @@ udp        0      0 192.168.100.104:8301    0.0.0.0:*                           
 udp        0      0 192.168.100.104:8302    0.0.0.0:*                           0          47244      11552/consul        
 udp        0      0 127.0.0.1:8600          0.0.0.0:*                           0          47252      11552/consul        
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -238,7 +238,7 @@ udp        0      0 127.0.0.1:8600          0.0.0.0:*                           
 
 ### 使用member命令
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# consul members --help 
 Usage: consul members [options]
 
@@ -259,7 +259,7 @@ Options:
 Node  Address               Status  Tags
 h104  192.168.100.104:8301  alive   build=0.6.4:26a0ef8c,dc=dc1,port=8300,role=consul,vsn=2,vsn_max=3,vsn_min=1
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -267,7 +267,7 @@ h104  192.168.100.104:8301  alive   build=0.6.4:26a0ef8c,dc=dc1,port=8300,role=c
 
 还可以使用 **HTTP API** (RESTful API) 的方式查看信息
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# curl localhost:8500/v1/catalog/nodes?pretty
 [
     {
@@ -281,7 +281,7 @@ h104  192.168.100.104:8301  alive   build=0.6.4:26a0ef8c,dc=dc1,port=8300,role=c
     }
 ][root@h104 ~]# 
 [root@h104 ~]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -289,16 +289,16 @@ h104  192.168.100.104:8301  alive   build=0.6.4:26a0ef8c,dc=dc1,port=8300,role=c
 
 启动服务后，本地的 **8600** 一直处于监听状态，可以接受DNS请求
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# netstat  -tunpea | grep consul | grep 8600
 tcp        0      0 127.0.0.1:8600          0.0.0.0:*               LISTEN      0          52147      13641/consul        
 udp        0      0 127.0.0.1:8600          0.0.0.0:*                           0          52979      13641/consul        
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 使用 dig 查看节点IP
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# dig @127.0.0.1 -p 8600  h104.node.consul
 
 ; <<>> DiG 9.9.4-RedHat-9.9.4-29.el7_2.1 <<>> @127.0.0.1 -p 8600 h104.node.consul
@@ -321,7 +321,7 @@ h104.node.consul.	0	IN	A	192.168.100.104
 ;; MSG SIZE  rcvd: 66
 
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 
 
@@ -331,7 +331,7 @@ h104.node.consul.	0	IN	A	192.168.100.104
 
 终端前台运行的情况下 **`Ctrl-C`** 可以平滑地停止服务
 
-{% highlight bash %}
+~~~
 ...
 ...
 ...
@@ -354,7 +354,7 @@ h104.node.consul.	0	IN	A	192.168.100.104
 Error connecting to Consul agent: dial tcp 127.0.0.1:8400: getsockopt: connection refused
 [root@h104 consul]# netstat  -tunpea | grep consul
 [root@h104 consul]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -371,17 +371,17 @@ Consul 会加载配置目录中的所有配置文件，配置文件是以 **.jso
 
 创建配置文件
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# mkdir /etc/consul.d
 [root@h104 consul]# echo '{"service": {"name": "web", "tags": ["rails"], "port": 80}}' > /etc/consul.d/web.json
 [root@h104 consul]# cat /etc/consul.d/web.json 
 {"service": {"name": "web", "tags": ["rails"], "port": 80}}
 [root@h104 consul]#
-{% endhighlight %}
+~~~
 
 指定配置文件启动服务
 
-{% highlight bash %}
+~~~
 [root@h104 consul]# consul agent -dev -bind=192.168.100.104 -config-dir /etc/consul.d/
 ==> Starting Consul agent...
 ==> Starting Consul agent RPC...
@@ -422,7 +422,7 @@ Consul 会加载配置目录中的所有配置文件，配置文件是以 **.jso
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 输出中表示 **Synced service 'web'**，说明定义的服务已经成功被注册进来了，如果要以配置文件的形式注册更多的服务，可以在配置目录中添加其它的服务定义
 
@@ -436,7 +436,7 @@ Consul 会加载配置目录中的所有配置文件，配置文件是以 **.jso
 
 
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# dig @127.0.0.1 -p 8600  web.service.consul
 
 ; <<>> DiG 9.9.4-RedHat-9.9.4-29.el7_2.1 <<>> @127.0.0.1 -p 8600 web.service.consul
@@ -459,11 +459,11 @@ web.service.consul.	0	IN	A	192.168.100.104
 ;; MSG SIZE  rcvd: 70
 
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 也可以使用 DNS API 获取整个 address/port 信息，只要加上 SRV
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# dig @127.0.0.1 -p 8600  web.service.consul SRV
 
 ; <<>> DiG 9.9.4-RedHat-9.9.4-29.el7_2.1 <<>> @127.0.0.1 -p 8600 web.service.consul SRV
@@ -489,11 +489,11 @@ h104.node.dc1.consul.	0	IN	A	192.168.100.104
 ;; MSG SIZE  rcvd: 130
 
 [root@h104 ~]#
-{% endhighlight %}
+~~~
 
 我们还可以使用 DNS API 结合 tag 来过滤服务
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# dig @127.0.0.1 -p 8600  rails.web.service.consul 
 
 ; <<>> DiG 9.9.4-RedHat-9.9.4-29.el7_2.1 <<>> @127.0.0.1 -p 8600 rails.web.service.consul
@@ -516,13 +516,13 @@ rails.web.service.consul. 0	IN	A	192.168.100.104
 ;; MSG SIZE  rcvd: 82
 
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 使用HTTP API查看 
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# curl http://localhost:8500/v1/catalog/service/web?pretty
 [
     {
@@ -541,11 +541,11 @@ rails.web.service.consul. 0	IN	A	192.168.100.104
     }
 ][root@h104 ~]# 
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 查看服务的健康状态
 
-{% highlight bash %}
+~~~
 [root@h104 ~]# curl http://localhost:8500/v1/health/service/web?passing
 [{"Node":{"Node":"h104","Address":"192.168.100.104","TaggedAddresses":{"wan":"192.168.100.104"},"CreateIndex":3,"ModifyIndex":5},"Service":{"ID":"web","Service":"web","Tags":["rails"],"Address":"","Port":80,"EnableTagOverride":false,"CreateIndex":5,"ModifyIndex":5},"Checks":[{"Node":"h104","CheckID":"serfHealth","Name":"Serf Health Status","Status":"passing","Notes":"","Output":"Agent alive and reachable","ServiceID":"","ServiceName":"","CreateIndex":3,"ModifyIndex":3}]}][root@h104 ~]# 
 [root@h104 ~]# 
@@ -590,7 +590,7 @@ rails.web.service.consul. 0	IN	A	192.168.100.104
     }
 ][root@h104 ~]# 
 [root@h104 ~]# 
-{% endhighlight %}
+~~~
 
 服务是可以使用 HTTP API 进行动态修改 (HTTP API 可以用来进行动态的添加，删除，修改服务)
 

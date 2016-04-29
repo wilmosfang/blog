@@ -51,20 +51,20 @@ comments: true
 
 停掉应用后将 **zookeeper-3.4.6** 目录拷贝两份
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# ll  -d zookeeper-3.4.6*
 drwxr-xr-x 10 1000 1000     4096 Dec  2 21:58 zookeeper-3.4.6
 drwxr-xr-x 10 root root     4096 Dec  3 19:24 zookeeper-3.4.6.1
 drwxr-xr-x 10 root root     4096 Dec  3 19:24 zookeeper-3.4.6.2
 -rw-r--r--  1 root root 17699306 Oct 31  2014 zookeeper-3.4.6.tar.gz
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 修改配置
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# cat zookeeper-3.4.6/conf/zoo.cfg 
 tickTime=2000
 initLimit=10
@@ -108,7 +108,7 @@ server.0=127.0.0.1:8000:8100
 server.1=127.0.0.1:8001:8101
 server.2=127.0.0.1:8002:8102
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 Item     | Comment
 -------- | ---
@@ -123,19 +123,19 @@ server.X=A:B:C|X代表serverid，要求dataDir/myid(需要另外手动创建)里
 
 ### 建数据目录
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# ll -d /tmp/zookeeper*
 drwxr-xr-x 3 root root 4096 Dec  3 19:33 /tmp/zookeeper0
 drwxr-xr-x 3 root root 4096 Dec  3 19:33 /tmp/zookeeper1
 drwxr-xr-x 3 root root 4096 Dec  3 19:33 /tmp/zookeeper2
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 创建 **myid** 文件
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# ll /tmp/zookeeper*/myid
 -rw-r--r-- 1 root root 2 Dec  3 19:22 /tmp/zookeeper0/myid
 -rw-r--r-- 1 root root 2 Dec  3 19:22 /tmp/zookeeper1/myid
@@ -145,7 +145,7 @@ drwxr-xr-x 3 root root 4096 Dec  3 19:33 /tmp/zookeeper2
 1
 2
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -153,7 +153,7 @@ drwxr-xr-x 3 root root 4096 Dec  3 19:33 /tmp/zookeeper2
 
 分别启动服务
 
-{% highlight bash %}
+~~~
 [root@h101 zk]#  zookeeper-3.4.6/bin/zkServer.sh start 
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
@@ -167,12 +167,12 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6.2/bin/../conf/zoo.cfg
 Starting zookeeper ... STARTED
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 查看状态
 
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# zookeeper-3.4.6.2/bin/zkServer.sh status
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6.2/bin/../conf/zoo.cfg
@@ -186,7 +186,7 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
 Mode: follower
 [root@h101 zk]#
-{% endhighlight %}
+~~~
 
 可知此时每个服务分别的角色
 
@@ -194,28 +194,28 @@ Mode: follower
 
 查看进程
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# ps faux | grep zookeeper | grep -v grep  
 root      5474  0.2  2.8 2103548 55168 pts/0   Sl   19:33   0:06 java -Dzookeeper.log.dir=. -Dzookeeper.root.logger=INFO,CONSOLE -cp /root/zk/zookeeper-3.4.6/bin/../build/classes:/root/zk/zookeeper-3.4.6/bin/../build/lib/*.jar:/root/zk/zookeeper-3.4.6/bin/../lib/slf4j-log4j12-1.6.1.jar:/root/zk/zookeeper-3.4.6/bin/../lib/slf4j-api-1.6.1.jar:/root/zk/zookeeper-3.4.6/bin/../lib/netty-3.7.0.Final.jar:/root/zk/zookeeper-3.4.6/bin/../lib/log4j-1.2.16.jar:/root/zk/zookeeper-3.4.6/bin/../lib/jline-0.9.94.jar:/root/zk/zookeeper-3.4.6/bin/../zookeeper-3.4.6.jar:/root/zk/zookeeper-3.4.6/bin/../src/java/lib/*.jar:/root/zk/zookeeper-3.4.6/bin/../conf: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false org.apache.zookeeper.server.quorum.QuorumPeerMain /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
 root      5505  0.4  3.1 2109716 61216 pts/0   Sl   19:33   0:12 java -Dzookeeper.log.dir=. -Dzookeeper.root.logger=INFO,CONSOLE -cp /root/zk/zookeeper-3.4.6.1/bin/../build/classes:/root/zk/zookeeper-3.4.6.1/bin/../build/lib/*.jar:/root/zk/zookeeper-3.4.6.1/bin/../lib/slf4j-log4j12-1.6.1.jar:/root/zk/zookeeper-3.4.6.1/bin/../lib/slf4j-api-1.6.1.jar:/root/zk/zookeeper-3.4.6.1/bin/../lib/netty-3.7.0.Final.jar:/root/zk/zookeeper-3.4.6.1/bin/../lib/log4j-1.2.16.jar:/root/zk/zookeeper-3.4.6.1/bin/../lib/jline-0.9.94.jar:/root/zk/zookeeper-3.4.6.1/bin/../zookeeper-3.4.6.jar:/root/zk/zookeeper-3.4.6.1/bin/../src/java/lib/*.jar:/root/zk/zookeeper-3.4.6.1/bin/../conf: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false org.apache.zookeeper.server.quorum.QuorumPeerMain /root/zk/zookeeper-3.4.6.1/bin/../conf/zoo.cfg
 root      5549  0.3  2.8 2103548 53900 pts/0   Sl   19:33   0:10 java -Dzookeeper.log.dir=. -Dzookeeper.root.logger=INFO,CONSOLE -cp /root/zk/zookeeper-3.4.6.2/bin/../build/classes:/root/zk/zookeeper-3.4.6.2/bin/../build/lib/*.jar:/root/zk/zookeeper-3.4.6.2/bin/../lib/slf4j-log4j12-1.6.1.jar:/root/zk/zookeeper-3.4.6.2/bin/../lib/slf4j-api-1.6.1.jar:/root/zk/zookeeper-3.4.6.2/bin/../lib/netty-3.7.0.Final.jar:/root/zk/zookeeper-3.4.6.2/bin/../lib/log4j-1.2.16.jar:/root/zk/zookeeper-3.4.6.2/bin/../lib/jline-0.9.94.jar:/root/zk/zookeeper-3.4.6.2/bin/../zookeeper-3.4.6.jar:/root/zk/zookeeper-3.4.6.2/bin/../src/java/lib/*.jar:/root/zk/zookeeper-3.4.6.2/bin/../conf: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false org.apache.zookeeper.server.quorum.QuorumPeerMain /root/zk/zookeeper-3.4.6.2/bin/../conf/zoo.cfg
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# ll /tmp/zookeeper*/zookeeper_server.pid 
 -rw-r--r-- 1 root root 4 Dec  3 19:33 /tmp/zookeeper0/zookeeper_server.pid
 -rw-r--r-- 1 root root 4 Dec  3 19:33 /tmp/zookeeper1/zookeeper_server.pid
 -rw-r--r-- 1 root root 4 Dec  3 19:33 /tmp/zookeeper2/zookeeper_server.pid
 [root@h101 zk]# cat  /tmp/zookeeper*/zookeeper_server.pid 
 547455055549[root@h101 zk]#
-{% endhighlight %}
+~~~
 
 ---
 
 ### 连接服务
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# zookeeper-3.4.6/bin/zkCli.sh  -server localhost:2180
 Connecting to localhost:2180
 2015-12-03 20:21:25,745 [myid:] - INFO  [main:Environment@100] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
@@ -319,14 +319,14 @@ ephemeralOwner = 0x0
 dataLength = 4
 numChildren = 0
 [zk: localhost:2182(CONNECTED) 9] 
-{% endhighlight %}
+~~~
 
 
 ### 依次关掉服务
 
 当前状态
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# zookeeper-3.4.6/bin/zkServer.sh  status
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
@@ -340,11 +340,11 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6.2/bin/../conf/zoo.cfg
 Mode: follower
 [root@h101 zk]#
-{% endhighlight %}
+~~~
 
 关掉当前leader
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# zookeeper-3.4.6.1/bin/zkServer.sh  stop
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6.1/bin/../conf/zoo.cfg
@@ -358,11 +358,11 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
 Mode: follower
 [root@h101 zk]#
-{% endhighlight %}
+~~~
 
 关掉新选出的leader(关掉一大半server)
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# zookeeper-3.4.6.2/bin/zkServer.sh  stop
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6.2/bin/../conf/zoo.cfg
@@ -386,14 +386,14 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
 Error contacting service. It is probably not running.
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 发现剩下一台，但服务已经不可用了
 
 
 随便启动一台
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# zookeeper-3.4.6/bin/zkServer.sh  status
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
@@ -411,7 +411,7 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6/bin/../conf/zoo.cfg
 Mode: leader
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 剩下的那个成为了leader，新启动的成为了follower，服务变得可用
 
@@ -427,7 +427,7 @@ Mode: leader
 
 ### 修改配置
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# cat zookeeper-3.4.6-real/conf/zoo.cfg 
 tickTime=2000
 initLimit=10
@@ -439,13 +439,13 @@ server.101=192.168.100.101:8000:8100
 server.102=192.168.100.102:8000:8100
 server.202=192.168.100.202:8000:8100
 [root@h101 zk]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 拷贝目录
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# rsync  -av zookeeper-3.4.6-real root@192.168.100.102:/root/zk/zookeeper-3.4.6-real/
 root@192.168.100.102's password: 
 sending incremental file list
@@ -483,7 +483,7 @@ zookeeper-3.4.6-real/src/recipes/queue/test/org/apache/zookeeper/recipes/queue/D
 sent 38977410 bytes  received 29989 bytes  6001138.31 bytes/sec
 total size is 38865680  speedup is 1.00
 [root@h101 zk]#
-{% endhighlight %}
+~~~
 
 > **Note:** 拷贝后，注意修改 **dataDir** 成正确的路径，也可以不修改，那在其它服务器上创建的绝对路径就要相同
 
@@ -492,7 +492,7 @@ total size is 38865680  speedup is 1.00
 
 ### 创建dataDir和myid
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# mkdir  /tmp/zookeeper101
 [root@h101 zk]# echo 101 > /tmp/zookeeper101/myid
 [root@h101 zk]# cat /tmp/zookeeper101/myid
@@ -504,7 +504,7 @@ total size is 38865680  speedup is 1.00
 ----------
 [root@redis-b ~]# mkdir  /tmp/zookeeper202
 [root@redis-b ~]# echo 202 > /tmp/zookeeper202/myid
-{% endhighlight %}
+~~~
 
 
 ---
@@ -514,35 +514,35 @@ total size is 38865680  speedup is 1.00
 
 在每台服务器的 **/etc/sysconfig/iptables** 中加入以下几行
 
-{% highlight bash %}
+~~~
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 2180  -j ACCEPT 
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 8000  -j ACCEPT 
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 8100  -j ACCEPT 
-{% endhighlight %}
+~~~
 
 然后重载一下
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# vim /etc/sysconfig/iptables
 [root@h101 zk]# /etc/init.d/iptables  reload 
 iptables: Trying to reload firewall rules:                 [  OK  ]
 [root@h101 zk]#
-{% endhighlight %}
+~~~
 
 
 可以使用 **`iptables -L -nv`** 进行检查，filter 表中包含以下几行的，为已经生效
 
-{% highlight bash %}
+~~~
 0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:2180 
 0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:8000 
 0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:8100
-{% endhighlight %}
+~~~
 
 ---
 
 ### 启动服务
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# zookeeper-3.4.6-real/bin/zkServer.sh start 
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6-real/bin/../conf/zoo.cfg
@@ -560,12 +560,12 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6-real/zookeeper-3.4.6-real/bin/../conf/zoo.cfg
 Starting zookeeper ... STARTED
 [root@redis-b zookeeper-3.4.6-real]#
-{% endhighlight %}
+~~~
 
 服务状态
 
 
-{% highlight bash %}
+~~~
 [root@h101 zk]# zookeeper-3.4.6-real/bin/zkServer.sh status
 JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6-real/bin/../conf/zoo.cfg
@@ -583,7 +583,7 @@ JMX enabled by default
 Using config: /root/zk/zookeeper-3.4.6-real/zookeeper-3.4.6-real/bin/../conf/zoo.cfg
 Mode: leader
 [root@redis-b zookeeper-3.4.6-real]#
-{% endhighlight %}
+~~~
 
 
 
@@ -592,7 +592,7 @@ Mode: leader
 ### 连接测试 
 
 
-{% highlight bash %}
+~~~
 [root@redis-b zookeeper-3.4.6-real]# zookeeper-3.4.6-real/bin/zkCli.sh -server 192.168.100.101:2180
 Connecting to 192.168.100.101:2180
 2015-12-03 21:17:07,041 [myid:] - INFO  [main:Environment@100] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
@@ -694,7 +694,7 @@ ephemeralOwner = 0x0
 dataLength = 2
 numChildren = 0
 [zk: 192.168.100.202:2180(CONNECTED) 10] 
-{% endhighlight %}
+~~~
 
 
 ---

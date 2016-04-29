@@ -54,9 +54,9 @@ comments: true
 
 从 **MongoDB 3.0** 开始，MongoDB 日志的格式包含了 **severity level** 和 **component** 
 
-{% highlight bash %}
+~~~
 <timestamp> <severity> <component> [<context>] <message>
-{% endhighlight %}
+~~~
 
 ### Timestamp
 
@@ -103,7 +103,7 @@ WRITE|Messages related to write operations, such as update commands
 
 从下面实例的格式中可以看到
 
-{% highlight bash %}
+~~~
 2014-11-03T18:28:32.450-0500 I NETWORK  [initandlisten] waiting for connections on port 27017
 2015-12-25T18:41:47.683+0800 I CONTROL  [signalProcessingThread] pid=37405 port=27017 64-bit host=mongodb-server
 2015-12-25T18:51:43.858+0800 I QUERY    [conn425412] query local.oplog.rs query: { ts: { $gte: Timestamp 1450975902000|10 } } planSummary: COLLSCAN cursorid:400229983803 ntoreturn:0 ntoskip:0 nscanned:0 nscannedObjects:102 keyUpdates:0 writeConflicts:0 numYields:11609 nreturned:101 reslen:18110 locks:{ Global: { acquireCount: { r: 11610 } }, MMAPV1Journal: { acquireCount: { r: 11611 } }, Database: { acquireCount: { r: 11610 }, acquireWaitCount: { r: 1 }, timeAcquiringMicros: { r: 165 } }, oplog: { acquireCount: { R: 11610 } } } 1211ms
@@ -112,13 +112,13 @@ WRITE|Messages related to write operations, such as update commands
 2015-12-26T02:15:02.218+0800 I QUERY    [conn429640] assertion 13435 not master and slaveOk=false ns:feed_test_repo.notifications query:{ query: {}, orderby: { _id: 1.0 } }
 2015-12-26T13:50:20.755+0800 I REPL     [ReplicationExecutor] Member 192.168.100.123:27017 is now in state ARBITER
 2015-12-29T01:45:40.781+0800 I STORAGE  [FileAllocator] allocating new datafile /var/lib/mongo/feed_test_repo.107, filling with zeroes...
-{% endhighlight %}
+~~~
 
 参考
 
-{% highlight bash %}
+~~~
 <timestamp> <severity> <component> [<context>] <message>
-{% endhighlight %}
+~~~
 
 * 前四部分(`<timestamp> <severity> <component> [<context>]`)的内容相对固定
 * 最后一部分 (`<message>`) 内部比较多变
@@ -132,7 +132,7 @@ WRITE|Messages related to write operations, such as update commands
 ## logstash配置
 
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# cat logstash-for-mongo.conf  
 input {
   stdin {}
@@ -166,31 +166,31 @@ output {
   stdout { codec => rubydebug }
 }
 [root@h102 etc]# 
-{% endhighlight %}
+~~~
 
 
 ### 检测配置
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# /opt/logstash/bin/logstash -f  logstash-for-mongo.conf -t
 Configuration OK
 [root@h102 etc]# 
-{% endhighlight %}
+~~~
 
 ### 运行logstash
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# /opt/logstash/bin/logstash -f  logstash-for-mongo.conf
 Settings: Default filter workers: 1
 Logstash startup completed
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 ### 输入测试
 
-{% highlight bash %}
+~~~
 2015-12-25T18:41:47.683+0800 I CONTROL  [signalProcessingThread] db version v3.0.3
 {
        "message" => "2015-12-25T18:41:47.683+0800 I CONTROL  [signalProcessingThread] db version v3.0.3",
@@ -228,14 +228,14 @@ Logstash startup completed
           "body" => "command feed_test_repo.$cmd command: geoNear { geoNear: \"users\", near: [ 88.598884, 44.102866 ], query: {}, num: 30, maxDistance: 10 } keyUpdates:0 writeConflicts:0 numYields:399 reslen:37700 locks:{ Global: { acquireCount: { r: 400 } }, MMAPV1Journal: { acquireCount: { r: 400 } }, Database: { acquireCount: { r: 400 } }, Collection: { acquireCount: { R: 400 } } } 2584ms",
     "spend_time" => 2584
 }
-{% endhighlight %}
+~~~
 
 可以正常解析
 
 > **Tip:** 如果无法正常解析, tags 里会多出一个 **_grokparsefailure** ，并且无法捕获下面多出来的那些值
 
 
-{% highlight bash %}
+~~~
 18:41:47.683+0800 I CONTROL  [signalProcessingThread] db version v3.0.3
 {
        "message" => "18:41:47.683+0800 I CONTROL  [signalProcessingThread] db version v3.0.3",
@@ -246,7 +246,7 @@ Logstash startup completed
         [0] "_grokparsefailure"
     ]
 }
-{% endhighlight %}
+~~~
 
 ---
 
@@ -255,7 +255,7 @@ Logstash startup completed
 
 ### input
 
-{% highlight bash %}
+~~~
 input {
   stdin {}
   file {
@@ -264,7 +264,7 @@ input {
 	    start_position => beginning
        }
 }
-{% endhighlight %}
+~~~
 
 Item     | Comment
 -------- | ---
@@ -281,7 +281,7 @@ Item     | Comment
 
 ### filter
 
-{% highlight bash %}
+~~~
 filter {
   grok {
        match => ["message","%{TIMESTAMP_ISO8601:timestamp}\s+%{MONGO3_SEVERITY:severity}\s+%{MONGO3_COMPONENT:component}%{SPACE}(?:\[%{DATA:context}\])?\s+%{GREEDYDATA:body}"]
@@ -296,7 +296,7 @@ filter {
    #remove_field => [ "timestamp" ]
   }
 }
-{% endhighlight %}
+~~~
 
 Item     | Comment
 -------- | ---
@@ -317,7 +317,7 @@ Item     | Comment
 ### output
 
 
-{% highlight bash %}
+~~~
 output {
   elasticsearch { 
   	hosts => ["localhost:9200"] 
@@ -325,7 +325,7 @@ output {
 	}
   stdout { codec => rubydebug }
 }
-{% endhighlight %}
+~~~
 
 
 Item     | Comment

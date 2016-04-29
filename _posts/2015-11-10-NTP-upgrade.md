@@ -37,7 +37,7 @@ comments: true
 
 **[下载地址][ntp_download]**
 
-{% highlight bash %}
+~~~
 [root@h101 tmp]# wget  http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p4.tar.gz 
 --2015-11-09 17:40:04--  http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p4.tar.gz
 Resolving www.eecis.udel.edu... 128.4.31.8
@@ -55,12 +55,12 @@ Saving to: “ntp-4.2.8p4.tar.gz”
 2015-11-09 17:40:38 (227 KB/s) - “ntp-4.2.8p4.tar.gz” saved [7104852/7104852]
 
 [root@h101 tmp]# 
-{% endhighlight %}
+~~~
 
 对下载包进行校验
 
 
-{% highlight bash %}
+~~~
 [root@h101 tmp]# wget http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p4.tar.gz.md5 
 --2015-11-09 17:41:56--  http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p4.tar.gz.md5
 Resolving www.eecis.udel.edu... 128.4.31.8
@@ -84,7 +84,7 @@ ntp-4.2.8p4.tar.gz.md5: ASCII text
 [root@h101 tmp]# md5sum   ntp-4.2.8p4.tar.gz   
 6af96862b09324a8ef965ca76b759c8b  ntp-4.2.8p4.tar.gz
 [root@h101 tmp]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -93,21 +93,21 @@ ntp-4.2.8p4.tar.gz.md5: ASCII text
 
 详细的安装方法可以参考 [安装NTP][ntp_build]
 
-{% highlight bash %}
+~~~
 ./configure  
 echo $?
 make 
 echo $?
 make install 
 echo $?
-{% endhighlight %}
+~~~
 
 > **Tip:** **echo $?** 用来确认上一步是否成功执行
 
 
 注意：**make install** 可能会覆盖一些文件，所以这一步要非常小心，默认会生成在 **/usr/local/bin** 中
 
-{% highlight bash %}
+~~~
 Installation directories:
   --prefix=PREFIX         install architecture-independent files in PREFIX
                           [/usr/local]
@@ -118,13 +118,13 @@ By default, `make install' will install all the files in
 `/usr/local/bin', `/usr/local/lib' etc.  You can specify
 an installation prefix other than `/usr/local' using `--prefix',
 for instance `--prefix=$HOME'.
-{% endhighlight %}
+~~~
 
 >It is not possible in a software distribution such as this to support every individual computer and operating system with a common executable, even with the same system but different versions and options. Therefore, it is necessary to configure, build and install for each system and version. In almost all cases, these procedures are completely automatic, The user types ./configure, make and install in that order and the autoconfigure system does the rest. 
 
 总之，安装成功后会多出以下文件 
 
-{% highlight bash %}
+~~~
 [root@h101 ntp-4.2.8p4]# ll  /usr/local/bin/ntp*
 -rwxr-xr-x 1 root root 2630962 Nov  9 19:53 /usr/local/bin/ntpd
 -rwxr-xr-x 1 root root  413656 Nov  9 19:53 /usr/local/bin/ntpdate
@@ -135,11 +135,11 @@ for instance `--prefix=$HOME'.
 -rwxr-xr-x 1 root root    3567 Nov  9 19:53 /usr/local/bin/ntptrace
 -rwxr-xr-x 1 root root    3207 Nov  9 19:53 /usr/local/bin/ntp-wait
 [root@h101 ntp-4.2.8p4]# 
-{% endhighlight %}
+~~~
 
 检查发现，已经是最新的版本了
 
-{% highlight bash %}
+~~~
 [root@h101 ntp-4.2.8p4]# /usr/local/bin/ntpd --help 
 ntpd - NTP daemon program - Ver. 4.2.8p4
 Usage:  ntpd [ -<flag> [<val>] | --<name>[{=| }<val>] ]... \
@@ -211,7 +211,7 @@ The following option preset mechanisms are supported:
 
 Please send bug reports to:  <http://bugs.ntp.org, bugs@ntp.org>
 [root@h101 ntp-4.2.8p4]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -219,7 +219,7 @@ Please send bug reports to:  <http://bugs.ntp.org, bugs@ntp.org>
 
 当前版还是 **Ver. 4.2.6p5**
 
-{% highlight bash %}
+~~~
 [root@h101 etc]# /usr/sbin/ntpd --help 
 ntpd - NTP daemon program - Ver. 4.2.6p5
 USAGE:  ntpd [ -<flag> [<val>] | --<name>[{=| }<val>] ]...
@@ -283,36 +283,36 @@ The following option preset mechanisms are supported:
 
 please send bug reports to:  http://bugs.ntp.org, bugs@ntp.org
 [root@h101 etc]#
-{% endhighlight %}
+~~~
 
 检查当前运行状态
 
-{% highlight bash %}
+~~~
 [root@h101 etc]# ps faux | grep ntp 
 root     57457  0.5  0.0 107668  1436 pts/0    S+   20:42   0:01  |       \_ watch -n .5 ntpstat
 root     57453  0.0  0.0 107668  1436 pts/1    S+   20:42   0:00  |       \_ watch -n 4 ntpq -p
 root     58106  0.0  0.0 103256   828 pts/2    S+   20:47   0:00  |       \_ grep ntp
 ntp      57448  0.2  0.0  30736  2104 ?        Ss   20:41   0:00 ntpd -u ntp:ntp -p /var/run/ntpd.pid -g
 [root@h101 etc]# 
-{% endhighlight %}
+~~~
 
 停止NTP服务
 
-{% highlight bash %}
+~~~
 [root@h101 etc]# /etc/init.d/ntpd stop 
 Shutting down ntpd:                                        [  OK  ]
 [root@h101 etc]#
-{% endhighlight %}
+~~~
 
 备份原NTP server程序
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# mv ntpd   ntpd.old.4.2.6p5
-{% endhighlight %}
+~~~
 
 更替成新的NTP server
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# cp  /usr/local/bin/ntpd  .
 [root@h101 sbin]# pwd
 /usr/sbin
@@ -325,11 +325,11 @@ Shutting down ntpd:                                        [  OK  ]
 -rwxr-xr-x 1 root root  252424 Oct 26 23:32 ntpq
 -rwxr-xr-x 1 root root   72848 Oct 26 23:32 ntptime
 [root@h101 sbin]# 
-{% endhighlight %}
+~~~
 
 尝试启动服务
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# /etc/init.d/ntpd status
 ntpd is stopped
 [root@h101 sbin]# /etc/init.d/ntpd start 
@@ -340,7 +340,7 @@ Usage:  ntpd [ -<flag> [<val>] | --<name>[{=| }<val>] ]... \
 Try 'ntpd --help' for more information.
                                                            [FAILED]
 [root@h101 sbin]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -354,7 +354,7 @@ Try 'ntpd --help' for more information.
 
 去掉用户和组的参数，再次启动
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# vim /etc/sysconfig/ntpd
 [root@h101 sbin]# cat /etc/sysconfig/ntpd
 # Drop root to id 'ntp:ntp' by default.
@@ -459,7 +459,7 @@ synchronised to NTP server (202.118.1.130) at stratum 3
    time correct to within 268 ms
    polling server every 64 s
 [root@h101 tmp]# 
-{% endhighlight %}
+~~~
 
 成功升级，只是运行用户和组是root，可能会有安全隐患
 
@@ -471,7 +471,7 @@ synchronised to NTP server (202.118.1.130) at stratum 3
 
 重编译，并且配置时加入参数 **`--enable-clockctl`**
 
-{% highlight bash %}
+~~~
 [root@h101 ntp-4.2.8p4]# ./configure    --enable-clockctl 
 ...
 ...
@@ -567,21 +567,21 @@ The following option preset mechanisms are supported:
 Please send bug reports to:  <http://bugs.ntp.org, bugs@ntp.org>
 [root@h101 ntp-4.2.8p4]# 
 
-{% endhighlight %}
+~~~
 
 停止ntp服务
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# /etc/init.d/ntpd stop 
 Shutting down ntpd:                                        [  OK  ]
 [root@h101 sbin]# /etc/init.d/ntpd status
 ntpd is stopped
 [root@h101 sbin]# 
-{% endhighlight %}
+~~~
 
 替换ntp服务程序
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# mv ntpd ntpd.noconfig
 [root@h101 sbin]# cp  /usr/local/bin/ntpd  . 
 [root@h101 sbin]# ll ntpd*
@@ -591,23 +591,23 @@ ntpd is stopped
 -rwxr-xr-x 1 root root 2630962 Nov  9 21:22 ntpd.noconfig
 -rwxr-xr-x 1 root root  759720 Oct 26 23:32 ntpd.old.4.2.6p5
 [root@h101 sbin]#
-{% endhighlight %}
+~~~
 
 
 还原配置
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# vim /etc/sysconfig/ntpd
 [root@h101 sbin]# cat /etc/sysconfig/ntpd 
 # Drop root to id 'ntp:ntp' by default.
 OPTIONS="-u ntp:ntp -p /var/run/ntpd.pid -g"
 #OPTIONS=" -p /var/run/ntpd.pid -g"
 [root@h101 sbin]# 
-{% endhighlight %}
+~~~
 
 启动服务
 
-{% highlight bash %}
+~~~
 [root@h101 sbin]# /etc/init.d/ntpd start 
 Starting ntpd:                                             [  OK  ]
 [root@h101 sbin]# ps faux | grep ntp 
@@ -632,7 +632,7 @@ synchronised to NTP server (202.118.1.81) at stratum 3
    time correct to within 101 ms
    polling server every 64 s
 [root@h101 sbin]# 
-{% endhighlight %}
+~~~
 
 
 

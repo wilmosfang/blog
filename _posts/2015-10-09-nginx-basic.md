@@ -41,7 +41,7 @@ comments: true
 
 
 
-{% highlight bash %}
+~~~
 [root@h102 src]# wget http://nginx.org/download/nginx-1.9.5.tar.gz 
 --2015-10-09 14:09:41--  http://nginx.org/download/nginx-1.9.5.tar.gz
 Resolving nginx.org... 206.251.255.63, 2606:7100:1:69::3f
@@ -57,7 +57,7 @@ Saving to: “nginx-1.9.5.tar.gz”
 [root@h102 src]# ls
 nginx-1.9.5.tar.gz
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -65,7 +65,7 @@ nginx-1.9.5.tar.gz
 
 ### 解压
 
-{% highlight bash %}
+~~~
 [root@h102 src]# tar -zxvf nginx-1.9.5.tar.gz 
 nginx-1.9.5/
 nginx-1.9.5/auto/
@@ -95,14 +95,14 @@ nginx-1.9.5/auto/cc/sunc
 [root@h102 src]# ls
 nginx-1.9.5  nginx-1.9.5.tar.gz
 [root@h102 src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 配置
 
 
-{% highlight bash %}
+~~~
 [root@h102 src]# cd nginx-1.9.5
 [root@h102 nginx-1.9.5]# ls
 auto  CHANGES  CHANGES.ru  conf  configure  contrib  html  LICENSE  man  README  src
@@ -208,7 +208,7 @@ option, or install the PCRE library into the system, or build the PCRE library
 statically from the source with nginx by using --with-pcre=<path> option.
 
 [root@h102 nginx-1.9.5]# 
-{% endhighlight %}
+~~~
 
 #### 报错1
 
@@ -225,7 +225,7 @@ statically from the source with nginx by using --with-pcre=<path> option.
 
 由此可见 **pcre** 已经在系统中有安装，只是它的开发包没有
 
-{% highlight bash %}
+~~~
 [root@h102 nginx-1.9.5]# yum list all | grep -i pcre
 pcre.x86_64                             7.8-6.el6                @anaconda-CentOS-201410241409.x86_64/6.6
 ghc-pcre-light.x86_64                   0.4-7.el6                epel           
@@ -236,11 +236,11 @@ pcre-devel.i686                         7.8-7.el6                base
 pcre-devel.x86_64                       7.8-7.el6                base           
 pcre-static.x86_64                      7.8-7.el6                base           
 [root@h102 nginx-1.9.5]# 
-{% endhighlight %}
+~~~
 
 对此包进行更新，并且使用yum安装它的开发包
 
-{% highlight bash %}
+~~~
 [root@h102 nginx-1.9.5]# yum install  pcre-devel.x86_64 pcre.x86_64  
 Loaded plugins: dellsysid, fastestmirror, refresh-packagekit, security
 Setting up Install Process
@@ -305,11 +305,11 @@ Updated:
 
 Complete!
 [root@h102 nginx-1.9.5]#
-{% endhighlight %}
+~~~
 
 重新配置，就可以配置成功
 
-{% highlight bash %}
+~~~
 [root@h102 nginx-1.9.5]# ./configure 
 checking for OS
  + Linux 2.6.32-504.el6.x86_64 x86_64
@@ -433,11 +433,11 @@ Configuration summary
 [root@h102 nginx-1.9.5]# echo $?
 0
 [root@h102 nginx-1.9.5]# 
-{% endhighlight %}
+~~~
 
 > **Tip:** 以下是可配置的选项，不加参数会按默认特性配置
 
-{% highlight bash %}
+~~~
 [root@h102 nginx-1.9.5]# ./configure  --help 
 
   --help                             print this message
@@ -596,13 +596,13 @@ Configuration summary
   --with-debug                       enable debug logging
 
 [root@h102 nginx-1.9.5]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 编译
 
-{% highlight bash %}
+~~~
 [root@h102 nginx-1.9.5]# make 
 make -f objs/Makefile
 make[1]: Entering directory `/usr/local/src/nginx-1.9.5'
@@ -635,14 +635,14 @@ make[1]: Leaving directory `/usr/local/src/nginx-1.9.5'
 [root@h102 nginx-1.9.5]# echo $?
 0
 [root@h102 nginx-1.9.5]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 安装
 
 
-{% highlight bash %}
+~~~
 [root@h102 nginx-1.9.5]# make install 
 make -f objs/Makefile install
 make[1]: Entering directory `/usr/local/src/nginx-1.9.5'
@@ -674,7 +674,7 @@ make[1]: Leaving directory `/usr/local/src/nginx-1.9.5'
 [root@h102 nginx-1.9.5]# echo $?
 0
 [root@h102 nginx-1.9.5]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -683,7 +683,7 @@ make[1]: Leaving directory `/usr/local/src/nginx-1.9.5'
 
 nginx的目录结构
 
-{% highlight bash %}
+~~~
 [root@h102 local]# tree /usr/local/nginx/
 /usr/local/nginx/
 ├── conf
@@ -711,7 +711,7 @@ nginx的目录结构
 
 4 directories, 18 files
 [root@h102 local]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -719,7 +719,7 @@ nginx的目录结构
 
 查看配置
 
-{% highlight bash %}
+~~~
 [root@h102 conf]#  grep -v  "#" /usr/local/nginx/conf/nginx.conf  | grep -v "^$" 
 worker_processes  1;
 events {
@@ -744,21 +744,21 @@ http {
     }
 }
 [root@h102 conf]# 
-{% endhighlight %}
+~~~
 
 启动nginx
 
-{% highlight bash %}
+~~~
 [root@h102 logs]# /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
 [root@h102 logs]# 
-{% endhighlight %}
+~~~
 
 两种方法查看进程号
 
 * 1.使用 **ps**
 * 2.使用 **pid** 文件
 
-{% highlight bash %}
+~~~
 [root@h102 logs]# ps fuax | grep nginx 
 root     11761  0.0  0.0 103256   824 pts/0    S+   15:23   0:00          \_ grep nginx
 root     11756  0.0  0.0  24316   676 ?        Ss   15:23   0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
@@ -766,7 +766,7 @@ nobody   11757  0.0  0.0  24728  1244 ?        S    15:23   0:00  \_ nginx: work
 [root@h102 logs]# cat /usr/local/nginx/logs/nginx.pid 
 11756
 [root@h102 logs]# 
-{% endhighlight %}
+~~~
 
 此刻就可以使用浏览器进行访问了
 
@@ -784,7 +784,7 @@ nginx是通过给Nginx主进程发系统信号的方式来停止的
 
 #### 从容停止
 
-{% highlight bash %}
+~~~
 [root@h102 logs]# ps faux | grep nginx 
 root     11909  0.0  0.0 103256   828 pts/0    S+   15:31   0:00          \_ grep nginx
 root     11756  0.0  0.0  24316   676 ?        Ss   15:23   0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
@@ -793,11 +793,11 @@ nobody   11757  0.0  0.0  24728  1244 ?        S    15:23   0:00  \_ nginx: work
 [root@h102 logs]# ps faux | grep nginx 
 root     11914  0.0  0.0 103256   824 pts/0    S+   15:32   0:00          \_ grep nginx
 [root@h102 logs]# 
-{% endhighlight %}
+~~~
 
 #### 快速停止
 
-{% highlight bash %}
+~~~
 [root@h102 logs]# ps faux | grep nginx 
 root     11947  0.0  0.0 103256   828 pts/0    S+   15:42   0:00          \_ grep nginx
 root     11923  0.0  0.0  24316   676 ?        Ss   15:34   0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
@@ -806,10 +806,10 @@ nobody   11924  0.0  0.0  24728  1512 ?        S    15:34   0:00  \_ nginx: work
 [root@h102 logs]# ps faux | grep nginx 
 root     11950  0.0  0.0 103256   824 pts/0    S+   15:42   0:00          \_ grep nginx
 [root@h102 logs]# 
-{% endhighlight %}
+~~~
 
 
-{% highlight bash %}
+~~~
 [root@h102 logs]# ps faux | grep nginx 
 root     11961  0.0  0.0 103256   828 pts/0    S+   15:43   0:00          \_ grep nginx
 root     11957  0.0  0.0  24316   680 ?        Ss   15:43   0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
@@ -818,12 +818,12 @@ nobody   11958  0.0  0.0  24728  1516 ?        S    15:43   0:00  \_ nginx: work
 [root@h102 logs]# ps faux | grep nginx 
 root     11964  0.0  0.0 103256   828 pts/0    S+   15:43   0:00          \_ grep nginx
 [root@h102 logs]# 
-{% endhighlight %}
+~~~
 
 #### 强制停止
 
 
-{% highlight bash %}
+~~~
 [root@h102 logs]# ps faux | grep nginx 
 root     11974  0.0  0.0 103256   828 pts/0    S+   15:45   0:00          \_ grep nginx
 root     11971  0.0  0.0  24316   680 ?        Ss   15:45   0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
@@ -833,7 +833,7 @@ nobody   11972  0.0  0.0  24728  1248 ?        S    15:45   0:00  \_ nginx: work
 root     11976  0.0  0.0 103256   828 pts/0    S+   15:45   0:00          \_ grep nginx
 nobody   11972  0.0  0.0  24728  1340 ?        S    15:45   0:00 nginx: worker process                                          
 [root@h102 logs]#
-{% endhighlight %}
+~~~
 
 强制停止比较暴力，会导致worker进程仍然停留在系统中，并且还能被访问
 
@@ -843,7 +843,7 @@ nobody   11972  0.0  0.0  24728  1340 ?        S    15:45   0:00 nginx: worker p
 
 重启之前最好先检查一下配置，避免由于配置不合理而导致的服务不可用
 
-{% highlight bash %}
+~~~
 [root@h102 nginx]# sbin/nginx -h 
 nginx version: nginx/1.9.5
 Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]
@@ -867,13 +867,13 @@ nginx: configuration file /usr/local/nginx/conf/nginx.conf test failed
 nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
 nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
 [root@h102 nginx]#
-{% endhighlight %}
+~~~
 
 ---
 
 ### 重启
 
-{% highlight bash %}
+~~~
 [root@h102 nginx]# ps fuax | grep nginx 
 root     49758  0.0  0.0 103256   828 pts/0    S+   16:40   0:00          \_ grep nginx
 root     44512  0.0  0.0  24316   676 ?        Ss   16:39   0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
@@ -884,7 +884,7 @@ root     62744  0.0  0.0 103256   828 pts/0    S+   16:40   0:00          \_ gre
 root     44512  0.0  0.0  24316  1352 ?        Ss   16:39   0:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
 nobody   60962  0.0  0.0  24732  1364 ?        S    16:40   0:00  \_ nginx: worker process                                          
 [root@h102 nginx]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -909,16 +909,16 @@ nobody   60962  0.0  0.0  24732  1364 ?        S    16:40   0:00  \_ nginx: work
 
 根据上面的步骤准备好另一个版本的Nginx
 
-{% highlight bash %}
+~~~
 wget  http://nginx.org/download/nginx-1.8.0.tar.gz
 tar -zxvf nginx-1.8.0.tar.gz 
 ./configure 
 make 
-{% endhighlight %}
+~~~
 
 此时 **objs** 目录中有一个不同版本的 **nginx** 
 
-{% highlight bash %}
+~~~
 [root@h102 nginx-1.8.0]# ll objs/
 total 3276
 -rw-r--r-- 1 root root   16436 Oct  9 19:15 autoconf.err
@@ -939,11 +939,11 @@ nginx version: nginx/1.8.0
 built by gcc 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC) 
 configure arguments:
 [root@h102 nginx-1.8.0]# 
-{% endhighlight %}
+~~~
 
 查看当前运行Nginx版本
 
-{% highlight bash %}
+~~~
 [root@h102 sbin]# pwd
 /usr/local/nginx/sbin
 [root@h102 sbin]# ls
@@ -961,13 +961,13 @@ root      5635  0.0  0.0 103256   828 pts/0    S+   20:21   0:00          \_ gre
 root      5500  0.0  0.0  24316   676 ?        Ss   20:01   0:00 nginx: master process sbin/nginx -c conf/nginx.conf
 nobody    5501  0.0  0.0  24728  1244 ?        S    20:01   0:00  \_ nginx: worker process        
 [root@h102 sbin]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 替换Nginx可执行文件
 
-{% highlight bash %}
+~~~
 [root@h102 sbin]# ls
 nginx
 [root@h102 sbin]# mv nginx  nginx.old
@@ -983,21 +983,21 @@ nginx version: nginx/1.8.0
 built by gcc 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC) 
 configure arguments:
 [root@h102 sbin]# 
-{% endhighlight %}
+~~~
 
 ### 使用新版本Nginx测试配置
 
 
-{% highlight bash %}
+~~~
 [root@h102 sbin]# ./nginx -t -c /usr/local/nginx/conf/nginx.conf
 nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
 nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
 [root@h102 sbin]# 
-{% endhighlight %}
+~~~
 
 ### 平滑替换Nginx可执行程序
 
-{% highlight bash %}
+~~~
 [root@h102 sbin]# kill -USR2 `cat /usr/local/nginx/logs/nginx.pid`
 [root@h102 sbin]# cat /usr/local/nginx/logs/nginx.pid
 5651
@@ -1018,7 +1018,7 @@ nobody    5501  0.0  0.0  24728  1244 ?        S    20:01   0:00  \_ nginx: work
 root      5651  0.0  0.0  24316  1820 ?        S    20:23   0:00  \_ nginx: master process sbin/nginx -c conf/nginx.conf
 nobody    5653  0.0  0.0  24740  1252 ?        S    20:23   0:00      \_ nginx: worker process        
 [root@h102 sbin]# 
-{% endhighlight %}
+~~~
 
 此时两个master并存
 
@@ -1026,7 +1026,7 @@ nobody    5653  0.0  0.0  24740  1252 ?        S    20:23   0:00      \_ nginx: 
 ### 从容关闭旧版本Nginx worker进程
 
 
-{% highlight bash %}
+~~~
 [root@h102 sbin]# ps fuax | grep nginx 
 root      5730  0.0  0.0 103256   828 pts/0    S+   20:43   0:00          \_ grep nginx
 root      5500  0.0  0.0  24316   848 ?        Ss   20:01   0:00 nginx: master process sbin/nginx -c conf/nginx.conf
@@ -1042,14 +1042,14 @@ root      5500  0.0  0.0  24316   852 ?        Ss   20:01   0:00 nginx: master p
 root      5651  0.0  0.0  24316  1820 ?        S    20:23   0:00  \_ nginx: master process sbin/nginx -c conf/nginx.conf
 nobody    5653  0.0  0.0  24740  1532 ?        S    20:23   0:00      \_ nginx: worker process        
 [root@h102 sbin]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 重新启动旧版本Nginx worker进程
 
 
-{% highlight bash %}
+~~~
 [root@h102 sbin]# kill -HUP `cat /usr/local/nginx/logs/nginx.pid.oldbin` 
 [root@h102 sbin]# ps fuax | grep nginx 
 root      5748  0.0  0.0 103256   828 pts/0    S+   20:49   0:00          \_ grep nginx
@@ -1058,13 +1058,13 @@ root      5651  0.0  0.0  24316  1820 ?        S    20:23   0:00  \_ nginx: mast
 nobody    5653  0.0  0.0  24740  1532 ?        S    20:23   0:00  |   \_ nginx: worker process        
 nobody    5746  0.0  0.0  24728  1244 ?        S    20:49   0:00  \_ nginx: worker process        
 [root@h102 sbin]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 彻底关闭旧版本Nginx worker进程
 
-{% highlight bash %}
+~~~
 [root@h102 sbin]# kill -WINCH `cat /usr/local/nginx/logs/nginx.pid.oldbin` 
 [root@h102 sbin]# ps fuax | grep nginx 
 root      5759  0.0  0.0 103256   828 pts/0    S+   20:52   0:00          \_ grep nginx
@@ -1077,7 +1077,7 @@ root      5762  0.0  0.0 103256   828 pts/0    S+   20:52   0:00          \_ gre
 root      5651  0.0  0.0  24316  1820 ?        S    20:23   0:00 nginx: master process sbin/nginx -c conf/nginx.conf
 nobody    5653  0.0  0.0  24740  1532 ?        S    20:23   0:00  \_ nginx: worker process        
 [root@h102 sbin]# 
-{% endhighlight %}
+~~~
 
 版本切换成功,整个切换过程服务都是可用状态
 

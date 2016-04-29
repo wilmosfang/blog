@@ -41,7 +41,7 @@ comments: true
 
 ## 下载安装Percona Toolkit
 
-{% highlight bash %}
+~~~
 [root@replication-check-vm src]# wget  http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 --2015-11-19 21:21:06--  http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 Resolving www.percona.com... 74.121.199.234
@@ -147,7 +147,7 @@ Updated:
 
 Complete!
 [root@replication-check-vm src]#
-{% endhighlight %}
+~~~
 
 ---
 
@@ -162,7 +162,7 @@ Complete!
 
 检查示例
 
-{% highlight bash %}
+~~~
 [mysql@replication-check-vm ~]$ pt-table-checksum --nocheck-replication-filters --nocheck-binlog-format --replicate=test.checksum --tables abc_test_db.users  h=replication-check-vm,u=root --ask-pass  
 Enter MySQL password: 
 Checksumming abc_test_db.users:   9% 05:00 remain
@@ -184,7 +184,7 @@ Checksumming abc_test_db.users:  99% 00:01 remain
             TS ERRORS  DIFFS     ROWS  CHUNKS SKIPPED    TIME TABLE
 11-19T22:02:30      0    103 14879748     154       0 594.225 abc_test_db.users
 [mysql@replication-check-vm ~]$
-{% endhighlight %}
+~~~
 
 Option	| Comment
 -------- | ---
@@ -201,7 +201,7 @@ Option	| Comment
 > 
 > **Tip:** 可以一次指定多个表进行检查，中间使用逗号分隔
 
-{% highlight bash %}
+~~~
 [mysql@replication-check-vm ~]$ pt-table-checksum --nocheck-replication-filters --nocheck-binlog-format --replicate=test.checksum --tables user_key_db.user_schema,user_key_db.log_records    h=replication-check-vm,u=root --ask-pass  
 Enter MySQL password: 
 Checksumming user_key_db.log_records:   3% 14:14 remain
@@ -258,7 +258,7 @@ Checksumming user_key_db.user_schema:  90% 00:58 remain
 Checksumming user_key_db.user_schema:  96% 00:22 remain
 11-19T23:12:05      0    133 13877382     212       0 626.470 user_key_db.user_schema
 [mysql@replication-check-vm ~]$
-{% endhighlight %}
+~~~
 
 
 ---
@@ -279,11 +279,11 @@ Checksumming user_key_db.user_schema:  96% 00:22 remain
 > **Note:**  **pt-table-sync** is mature, proven in the real world, and well tested, but if used improperly it can have adverse consequences. Always test syncing first with `--dry-run` and `--print`.
 
 
-{% highlight bash %}
+~~~
 [mysql@replication-check-vm ~]$ pt-table-sync --replicate test.checksum  h=slave-vm,u=root --ask-pass  --sync-to-master --databases=abc_test_db  --tables=users  --print > /tmp/users.sql
 Enter password for slave-vm:       
 [mysql@replication-check-vm ~]$ 
-{% endhighlight %}
+~~~
 
 Option	| Comment
 -------- | ---

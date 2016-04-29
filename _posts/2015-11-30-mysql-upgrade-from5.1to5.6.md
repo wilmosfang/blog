@@ -41,7 +41,7 @@ comments: true
 
 > **Tip:** 以方便存放备份文件，这样省去了一次单独的网络间拷贝，还可以方便的给其它服务器使用，用来创建更多slave
 
-{% highlight bash %}
+~~~
 [root@upgrade-master ~]# mount -t nfs -o intr upgrade-slave:/data/nfs /mnt/mysqlbak/
 [root@upgrade-master ~]# df -h 
 Filesystem            Size  Used Avail Use% Mounted on
@@ -53,7 +53,7 @@ tmpfs                  24G     0   24G   0% /dev/shm
 upgrade-slave:/data/nfs
                       1.7T   73M  1.7T   1% /mnt/mysqlbak
 [root@upgrade-master ~]#
-{% endhighlight %}
+~~~
 
 
 ---
@@ -66,21 +66,21 @@ upgrade-slave:/data/nfs
 
 > **Tip:** 如果是mha，可以参考以下命令
 
-{% highlight bash %}
+~~~
 masterha_check_status --conf=/etc/app1.cnf
 masterha_stop  --conf=/etc/app1.cnf
-{% endhighlight %}
+~~~
 
 ---
 
 ### 开始备份
 
 
-{% highlight bash %}
+~~~
 [root@upgrade-master ~]# time nohup /usr/bin/innobackupex --defaults-file=/etc/my.cnf  --user=root --password=xxxxxxxx  /mnt/mysqlbak/masterdb.full.backup  >> /tmp/masterdb.full.backup.log  2>&1   & 
 [1] 890
 [root@upgrade-master ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -88,7 +88,7 @@ masterha_stop  --conf=/etc/app1.cnf
 
 分别下载同版本mysql，和目标版本(高版本)mysql
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave src]# yumdownloader  Percona-Server-client-51.x86_64   Percona-Server-devel-51.x86_64 Percona-Server-server-51.x86_64  Percona-Server-shared-51.x86_64  ; yumdownloader Percona-Server-client-56.x86_64 Percona-Server-devel-56.x86_64  Percona-Server-server-56.x86_64  Percona-Server-shared-56.x86_64  
 Loaded plugins: fastestmirror, refresh-packagekit
 Loading mirror speeds from cached hostfile
@@ -111,7 +111,7 @@ Percona-Server-shared-56-5.6.27-rel75.0.el6.x86_64.rpm                          
 [root@upgrade-slave src]# echo $?
 0
 [root@upgrade-slave src]#   
-{% endhighlight %}
+~~~
 	
 
 > **Tip:** 可以对卷进行快照，以方便恢复，但是要注意的是:
@@ -122,7 +122,7 @@ Percona-Server-shared-56-5.6.27-rel75.0.el6.x86_64.rpm                          
 > * 快照使用完一般都是立即删除，因为cow的机制会给io带来额外开销，删除快照使用 **lvremove**
 > * 创建快照的方法如下
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# lvs
   LV      VG             Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   lv_data vg_test_for_mysqlupgrade -wi-ao----   1.73t                                                    
@@ -141,7 +141,7 @@ Percona-Server-shared-56-5.6.27-rel75.0.el6.x86_64.rpm                          
   lv_swap   vg_test_for_mysqlupgrade -wi-ao----  16.00g                                                     
   lv_var    vg_test_for_mysqlupgrade -wi-ao---- 100.00g                                                     
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -149,7 +149,7 @@ Percona-Server-shared-56-5.6.27-rel75.0.el6.x86_64.rpm                          
 
 安装与原数据库相同版本的mysql
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave src]# rpm -ivh  Percona-Server-server-51-5.1.73-rel14.12.624.rhel6.x86_64.rpm  Percona-Server-client-51-5.1.73-rel14.12.624.rhel6.x86_64.rpm 
 Preparing...                ########################################### [100%]
    1:Percona-Server-client-5########################################### [ 50%]
@@ -195,7 +195,7 @@ See http://www.percona.com/doc/percona-server/5.1/management/udf_percona_toolkit
 [root@upgrade-slave src]# echo $?
 0
 [root@upgrade-slave src]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -203,7 +203,7 @@ See http://www.percona.com/doc/percona-server/5.1/management/udf_percona_toolkit
 
 备份并清空 **/var/lib/mysql**  (也就是mysql的数据目录)，不清空在之后的恢复过程中会报错
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave data]# cp -r mysql mysql.20151126  
 [root@upgrade-slave data]# ls
 benchmark  lost+found  mysql  mysql.20151125  mysql.20151126  mysql.bak  nfs  redis
@@ -213,7 +213,7 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 [root@upgrade-slave mysql]# rm -rf *
 [root@upgrade-slave mysql]# ls
 [root@upgrade-slave mysql]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -223,7 +223,7 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 
 其目的是为了适应新的主机环境，并且避免与master的server-id冲突
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave etc]# diff /tmp/new.mysql.cnf /tmp/old.mysql.cnf 
 27d26
 < relay-log=relay-bin
@@ -236,7 +236,7 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 ---
 > server-id = 3
 [root@upgrade-slave etc]#
-{% endhighlight %}
+~~~
 
 > **Tip:**  根据具体情况，有时 **tmpdir** 也要根据环境进行设置，修改完成后，最好进行再次确认，合适的配置可以减少errlog里的报错，和重新调试的时间
 
@@ -257,9 +257,9 @@ upgrade-slave.err  ibdata1  ib_logfile0  ib_logfile1  ib_logfile2  mysql  mysql-
 
 > **Tip:** 如果是mha，可以参考以下命令
 
-{% highlight bash %}
+~~~
 nohup  masterha_manager --conf=/etc/app1.cnf  --ignore_last_failover  &
-{% endhighlight %}
+~~~
 
 
 ---
@@ -267,13 +267,13 @@ nohup  masterha_manager --conf=/etc/app1.cnf  --ignore_last_failover  &
 ## 安装xtrabackup
 
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave percona.51]# rpm -ivh  xtrabackup-1.6.7-356.rhel6.x86_64.rpm 
 warning: xtrabackup-1.6.7-356.rhel6.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID cd2efd2a: NOKEY
 Preparing...                ########################################### [100%]
    1:xtrabackup             ########################################### [100%]
 [root@upgrade-slave percona.51]# 
-{% endhighlight %}
+~~~
 
 尽量安装版本相近的xtrabackup,可以有效避免一些兼容性问题
 
@@ -283,7 +283,7 @@ Preparing...                ########################################### [100%]
 
 准备恢复
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave nfs]# time nohup  innobackupex --apply-log  masterdb.full.backup/2015-11-25_21-25-02/
 nohup: ignoring input and appending output to `nohup.out'
 
@@ -291,13 +291,13 @@ real	2m49.336s
 user	0m18.968s
 sys	0m5.878s
 [root@upgrade-slave nfs]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 恢复数据
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave nfs]# time nohup  innobackupex  --copy-back  masterdb.full.backup/2015-11-25_21-25-02/  >> /tmp/fullcopyback.log  2>&1   & 
 [1] 117341
 [root@upgrade-slave nfs]# 
@@ -326,13 +326,13 @@ sys	4m54.254s
 
 [1]+  Done                    time nohup innobackupex --copy-back masterdb.full.backup/2015-11-25_21-25-02/ >> /tmp/fullcopyback.log 2>&1
 [root@upgrade-slave nfs]#
-{% endhighlight %}
+~~~
 
 ---
 
 ## 修改权限
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# cd /var/lib/mysql/
 [root@upgrade-slave mysql]# ls
 huodongdb  something_more  ib_logfile0  istuffdb    mysql        feeddb
@@ -381,13 +381,13 @@ drwxr-xr-x. 2 mysql mysql       4096 Nov 26 20:11 feeddb
 drwxr-xr-x. 2 mysql mysql       4096 Nov 26 20:11 test
 -rw-r--r--. 1 mysql mysql         29 Nov 26 20:08 xtrabackup_binlog_pos_innodb
 [root@upgrade-slave lib]#
-{% endhighlight %}
+~~~
 
 ---
 
 ## 启动服务
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave lib]# /etc/init.d/mysql  start 
 Starting MySQL (Percona Server)..............              [  OK  ]
 [root@upgrade-slave lib]# mysql -u root -p 
@@ -445,7 +445,7 @@ InnoDB: Compressed tables use zlib 1.2.3
 151126 20:46:18  InnoDB: highest supported file format is Barracuda.
 ...
 ...
-{% endhighlight %}
+~~~
 
 启动过程中如何有任何问题，可以通过追踪 **/var/lib/mysql/upgrade-slave.err** 文件来获知
 
@@ -454,11 +454,11 @@ InnoDB: Compressed tables use zlib 1.2.3
 
 ## 停止mysql
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave mysql]# /etc/init.d/mysql stop 
 Shutting down MySQL.                                       [  OK  ]
 [root@upgrade-slave mysql]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -466,7 +466,7 @@ Shutting down MySQL.                                       [  OK  ]
 
 便于恢复到当前状态
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# df  -h 
 Filesystem            Size  Used Avail Use% Mounted on
 /dev/mapper/vg_test_for_mysqlupgrade-lv_root
@@ -500,13 +500,13 @@ tmpfs                  63G     0   63G   0% /dev/shm
   lv_swap   vg_test_for_mysqlupgrade -wi-ao----  16.00g                                                     
   lv_var    vg_test_for_mysqlupgrade -wi-ao---- 100.00g                                                     
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 检查mysql状态
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave src]# ps faux | grep mysql 
 root      11270  0.0  0.0 103308   824 pts/1    S+   21:22   0:00  |                       \_ grep mysql
 root     136775  0.0  0.0 189236  3732 pts/2    S+   20:58   0:00  |           \_ sudo tail -f /var/lib/mysql/upgrade-slave.err
@@ -516,7 +516,7 @@ root     137993  0.0  0.0 100944   608 pts/3    S+   20:59   0:00               
 [root@upgrade-slave src]# /etc/init.d/mysql  status
 MySQL is not running                                       [FAILED]
 [root@upgrade-slave src]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -526,7 +526,7 @@ MySQL is not running                                       [FAILED]
 
 因为有依赖关系所以要使用 **`--nodeps`** 来忽略掉依赖
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave src]# rpm -e Percona-Server-client-51-5.1.73-rel14.12.624.rhel6.x86_64 Percona-Server-server-51-5.1.73-rel14.12.624.rhel6.x86_64 Percona-Server-shared-51-5.1.73-rel14.12.624.rhel6.x86_64 
 error: Failed dependencies:
 	libmysqlclient.so.16()(64bit) is needed by (installed) postfix-2:2.6.6-6.el6_5.x86_64
@@ -559,23 +559,23 @@ See http://www.percona.com/doc/percona-server/5.6/management/udf_percona_toolkit
 [root@upgrade-slave src]# echo $?
 0
 [root@upgrade-slave src]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 尝试启动数据库
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave mysql]# /etc/init.d/mysql  start 
 Starting MySQL (Percona Server)............The server quit [FAILED]updating PID file (/var/lib/mysql/upgrade-slave.pid).
 [root@upgrade-slave mysql]# 
-{% endhighlight %}
+~~~
 
 
 **/var/lib/mysql/upgrade-slave.err** 日志报错
 
 
-{% highlight bash %}
+~~~
 151126 21:27:16 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
 2015-11-26 21:27:16 0 [Warning] 'THREAD_CONCURRENCY' is deprecated and will be removed in a future release.
 2015-11-26 21:27:16 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
@@ -654,7 +654,7 @@ Starting MySQL (Percona Server)............The server quit [FAILED]updating PID 
 2015-11-26 21:27:27 12493 [Note] /usr/sbin/mysqld: Shutdown complete
 
 151126 21:27:27 mysqld_safe mysqld from pid file /var/lib/mysql/upgrade-slave.pid ended
-{% endhighlight %}
+~~~
 
 原因为某些参数在新的版本里已经不被支持，或者将要被废弃，或者已经改成了新的名字，解决方法是查阅文档，修改配置文件
 
@@ -662,7 +662,7 @@ Starting MySQL (Percona Server)............The server quit [FAILED]updating PID 
 
 ## 修改配置文件my.cnf
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# diff /tmp/old.my.cnf /tmp/new.my.cnf
 11c11
 < table_cache = 2048
@@ -681,23 +681,23 @@ Starting MySQL (Percona Server)............The server quit [FAILED]updating PID 
 48d46
 < innodb_ibuf_max_size = 1G
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 尝试启动mysql
 
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# /etc/init.d/mysql  start 
 Starting MySQL (Percona Server)............                [  OK  ]
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 
 **/var/lib/mysql/upgrade-slave.err** 日志仍然报错
 
-{% highlight bash %}
+~~~
 151126 21:35:58 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
 2015-11-26 21:35:59 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
 2015-11-26 21:35:59 0 [Note] /usr/sbin/mysqld (mysqld 5.6.27-75.0-log) starting as process 15776 ...
@@ -782,7 +782,7 @@ Starting MySQL (Percona Server)............                [  OK  ]
 2015-11-26 21:36:09 15776 [Note] Event Scheduler: Loaded 0 events
 2015-11-26 21:36:09 15776 [Note] /usr/sbin/mysqld: ready for connections.
 Version: '5.6.27-75.0-log'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  Percona Server (GPL), Release 75.0, Revision 8bb53b6
-{% endhighlight %}
+~~~
 
 报错表明schema的结构有问题
 
@@ -790,7 +790,7 @@ Version: '5.6.27-75.0-log'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  Per
 
 并且发现已经是新的版本了
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# mysql -u root -p 
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -807,7 +807,7 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql> 
-{% endhighlight %}
+~~~
 
 解决schema的结构错误的方法是进行upgrade
 
@@ -818,7 +818,7 @@ mysql>
 
 必须是实例正在运行的状态下使用upgrade
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# time mysql_upgrade -u root -p 
 Enter password: 
 Looking for 'mysql' as: mysql
@@ -871,7 +871,7 @@ real	2m4.418s
 user	0m0.049s
 sys	0m0.038s
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 修复完成
 
@@ -879,19 +879,19 @@ sys	0m0.038s
 
 ## 重启mysql
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# /etc/init.d/mysql  stop 
 Shutting down MySQL (Percona Server)...                    [  OK  ]
 [root@upgrade-slave ~]# /etc/init.d/mysql  start
 Starting MySQL (Percona Server)...........                 [  OK  ]
 [root@upgrade-slave ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ## 检查日志
 
-{% highlight bash %}
+~~~
 151126 21:49:21 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
 2015-11-26 21:49:21 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
 2015-11-26 21:49:21 0 [Note] /usr/sbin/mysqld (mysqld 5.6.27-75.0-log) starting as process 20186 ...
@@ -920,7 +920,7 @@ Starting MySQL (Percona Server)...........                 [  OK  ]
 2015-11-26 21:49:30 20186 [Note] Event Scheduler: Loaded 0 events
 2015-11-26 21:49:30 20186 [Note] /usr/sbin/mysqld: ready for connections.
 Version: '5.6.27-75.0-log'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  Percona Server (GPL), Release 75.0, Revision 8bb53b6
-{% endhighlight %}
+~~~
 
 schema的结构报错已经消失了，启动正常
 
@@ -928,7 +928,7 @@ schema的结构报错已经消失了，启动正常
 
 ## 同步数据库
 
-{% highlight bash %}
+~~~
 mysql> show master status;
 +------------------+----------+--------------+------------------+-------------------+
 | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
@@ -1122,12 +1122,12 @@ Master_SSL_Verify_Server_Cert: No
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 同步一段时间过后
 
 
-{% highlight bash %}
+~~~
 mysql> show slave status\G
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
@@ -1187,7 +1187,7 @@ Master_SSL_Verify_Server_Cert: No
 1 row in set (0.00 sec)
 
 mysql> 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -1196,7 +1196,7 @@ mysql>
 
 同步完成后，检查一致性，抽查一个关键表
 
-{% highlight bash %}
+~~~
 [root@upgrade-slave ~]# pt-table-checksum --nocheck-replication-filters --nocheck-binlog-format --replicate=test.checksum --tables key_db.users  h=upgrade-master,u=root --ask-pass 
 Enter MySQL password: 
 Checksumming key_db.users:   8% 05:38 remain
@@ -1225,7 +1225,7 @@ Enter password for upgrade-slave:
 [root@upgrade-slave ~]# cat /tmp/users.sql 
 
 [root@upgrade-slave ~]#
-{% endhighlight %}
+~~~
 
 没有发现不一致数据，一致性检查通过
 

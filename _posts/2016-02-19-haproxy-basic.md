@@ -45,7 +45,7 @@ comments: true
 
 ## 环境
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# cat /etc/issue
 CentOS release 6.6 (Final)
 Kernel \r on an \m
@@ -106,7 +106,7 @@ address sizes	: 40 bits physical, 48 bits virtual
 power management:
 
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 ---
 
@@ -119,19 +119,19 @@ power management:
 
 我们使用当前最新版本 **[haproxy-1.6.3.tar.gz][haproxy_1.6.3]**
 
-{% highlight bash %}
+~~~
 [root@h102 haproxy]# ls
 haproxy-1.6.3.tar.gz
 [root@h102 haproxy]# md5sum  haproxy-1.6.3.tar.gz
 3362d1e268c78155c2474cb73e7f03f9  haproxy-1.6.3.tar.gz
 [root@h102 haproxy]# 
-{% endhighlight %}
+~~~
 
 ---
 
 ### 解压
 
-{% highlight bash %}
+~~~
 [root@h102 haproxy]# tar -xzvf haproxy-1.6.3.tar.gz 
 haproxy-1.6.3/
 haproxy-1.6.3/.gitignore
@@ -156,7 +156,7 @@ haproxy-1.6.3  haproxy-1.6.3.tar.gz
 CHANGELOG  CONTRIBUTING  ebtree    include  MAINTAINERS  README   src      tests    VERSION
 contrib    doc           examples  LICENSE  Makefile     ROADMAP  SUBVERS  VERDATE
 [root@h102 haproxy]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -167,20 +167,20 @@ contrib    doc           examples  LICENSE  Makefile     ROADMAP  SUBVERS  VERDA
 
 源码的目录下有一个 **README** 文件
 
-{% highlight bash %}
+~~~
 [root@h102 haproxy-1.6.3]# ls
 CHANGELOG  CONTRIBUTING  ebtree    include  MAINTAINERS  README   src      tests    VERSION
 contrib    doc           examples  LICENSE  Makefile     ROADMAP  SUBVERS  VERDATE
 [root@h102 haproxy-1.6.3]# wc -l README 
 500 README
 [root@h102 haproxy-1.6.3]# 
-{% endhighlight %}
+~~~
 
 这个文件里对安装进行了说明，其中关于优化有以下三点需要注意
 
 * **TARGET**
 
-{% highlight bash %}
+~~~
 To build haproxy, you have to choose your target OS amongst the following ones
 and assign it to the TARGET variable :
 
@@ -199,11 +199,11 @@ and assign it to the TARGET variable :
   - cygwin      for Cygwin
   - generic     for any other OS or version.
   - custom      to manually adjust every setting
-{% endhighlight %}
+~~~
 
 * **CPU**
 
-{% highlight bash %}
+~~~
 You may also choose your CPU to benefit from some optimizations. This is
 particularly important on UltraSparc machines. For this, you can assign
 one of the following choices to the CPU variable :
@@ -214,17 +214,17 @@ one of the following choices to the CPU variable :
   - native : use the build machine's specific processor optimizations. Use with
     extreme care, and never in virtualized environments (known to break).
   - generic : any other processor or no CPU-specific optimization. (default)
-{% endhighlight %}
+~~~
 
 * **ARCH**
 
-{% highlight bash %}
+~~~
 You may want to build specific target binaries which do not match your native
 compiler's target. This is particularly true on 64-bit systems when you want
 to build a 32-bit binary. Use the ARCH variable for this purpose. Right now
 it only knows about a few x86 variants (i386,i486,i586,i686,x86_64), two
 generic ones (32,64) and sets -m32/-m64 as well as -march=<arch> accordingly.
-{% endhighlight %}
+~~~
 
 
 其它编译配置是针对 **PCRE** (正则匹配)、**OpenSSL** 、 **ZLIB** 的优化和开关
@@ -240,7 +240,7 @@ generic ones (32,64) and sets -m32/-m64 as well as -march=<arch> accordingly.
 
 #### 编译
 
-{% highlight bash %}
+~~~
 [root@h102 haproxy-1.6.3]# make TARGET=linux2628 ARCH=x86_64 PREFIX=/usr/local/haproxy
 gcc -Iinclude -Iebtree -Wall -m64 -march=x86-64 -O2 -g -fno-strict-aliasing -Wdeclaration-after-statement       -DCONFIG_HAP_LINUX_SPLICE -DTPROXY -DCONFIG_HAP_LINUX_TPROXY -DCONFIG_HAP_CRYPT -DENABLE_POLL -DENABLE_EPOLL -DUSE_CPU_AFFINITY -DASSUME_SPLICE_WORKS -DUSE_ACCEPT4 -DNETFILTER -DUSE_GETSOCKNAME  -DCONFIG_HAPROXY_VERSION=\"1.6.3\" -DCONFIG_HAPROXY_DATE=\"2015/12/25\" \
 	      -DBUILD_TARGET='"linux2628"' \
@@ -261,13 +261,13 @@ gcc -m64 -march=x86-64 -g -o haproxy-systemd-wrapper src/haproxy-systemd-wrapper
 [root@h102 haproxy-1.6.3]# echo $?
 0
 [root@h102 haproxy-1.6.3]# 
-{% endhighlight %}
+~~~
 
 ---
 
 #### 安装
 
-{% highlight bash %}
+~~~
 [root@h102 haproxy-1.6.3]# make install PREFIX=/usr/local/haproxy
 install -d "/usr/local/haproxy/sbin"
 install haproxy  "/usr/local/haproxy/sbin"
@@ -307,13 +307,13 @@ drwxr-xr-x 3 root root 4096 Feb 19 17:03 share
 
 6 directories, 12 files
 [root@h102 haproxy-1.6.3]# 
-{% endhighlight %}
+~~~
 
 版本查看
 
 **`-vv`** 可以查看编译的配置选项
 
-{% highlight bash %}
+~~~
 [root@h102 haproxy-1.6.3]# /usr/local/haproxy/sbin/haproxy  -vv
 HA-Proxy version 1.6.3 2015/12/25
 Copyright 2000-2015 Willy Tarreau <willy@haproxy.org>
@@ -343,7 +343,7 @@ Available polling systems :
 Total: 3 (3 usable), will use epoll.
 
 [root@h102 haproxy-1.6.3]# 
-{% endhighlight %}
+~~~
 
 
 ---
@@ -355,7 +355,7 @@ Total: 3 (3 usable), will use epoll.
 
 源码包中有一些示例，可以作为配置模板
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# ll /usr/local/src/haproxy/haproxy-1.6.3/examples/*.cfg
 -rw-rw-r-- 1 root root 3740 Dec 27 22:04 /usr/local/src/haproxy/haproxy-1.6.3/examples/acl-content-sw.cfg
 -rw-rw-r-- 1 root root 3042 Dec 27 22:04 /usr/local/src/haproxy/haproxy-1.6.3/examples/auth.cfg
@@ -384,12 +384,12 @@ backend TransparentBack_http
 	server			MyWebServer 192.168.0.40:80
 
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 
 启动nginx，作为一个后端的web服务器
 
-{% highlight bash %}
+~~~
 [root@h102 nginx]# sbin/nginx  -t -c conf/nginx.conf
 the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
 configuration file /usr/local/nginx/conf/nginx.conf test is successful
@@ -397,7 +397,7 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 [root@h102 ~]# netstat  -ant | grep 80
 tcp        0      0 0.0.0.0:80                  0.0.0.0:*                   LISTEN      
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 
 ![nginx.png](/images/haproxy/nginx.png)
@@ -405,7 +405,7 @@ tcp        0      0 0.0.0.0:80                  0.0.0.0:*                   LIST
 
 修改haproxy配置
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# vim /etc/haproxy/transparent_proxy.cfg
 [root@h102 ~]# grep -v "^#" /etc/haproxy/transparent_proxy.cfg 
 
@@ -424,11 +424,11 @@ backend TransparentBack_http
 	server			MyWebServer 127.0.0.1:80
 
 [root@h102 ~]#
-{% endhighlight %}
+~~~
 
 启动haproxy
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# /usr/local/haproxy/sbin/haproxy -f /etc/haproxy/transparent_proxy.cfg
 ...
 ...
@@ -437,7 +437,7 @@ backend TransparentBack_http
 [root@h102 ~]# netstat  -ant | grep 1234
 tcp        0      0 0.0.0.0:1234                0.0.0.0:*                   LISTEN      
 [root@h102 ~]# 
-{% endhighlight %}
+~~~
 
 
 进行访问
@@ -452,7 +452,7 @@ tcp        0      0 0.0.0.0:1234                0.0.0.0:*                   LIST
 
 
 
-{% highlight bash %}
+~~~
 [root@h102 ~]# vim  /etc/haproxy/transparent_proxy.cfg
 [root@h102 ~]# grep -v "^#" /etc/haproxy/transparent_proxy.cfg
 
@@ -478,7 +478,7 @@ backend TransparentBack_http
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 进行访问
 

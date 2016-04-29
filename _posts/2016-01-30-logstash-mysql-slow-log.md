@@ -24,41 +24,41 @@ comments: true
 
 * mysql 5.1.36的slowlog：
 
-{% highlight bash %}
+~~~
 # Time: 151202 17:29:24
 # User@Host: root[root] @  [192.168.35.89]
 # Query_time: 6.578696  Lock_time: 0.000039 Rows_sent: 999424  Rows_examined: 999424
 SET timestamp=1449048564;
 select * from users_test;
 
-{% endhighlight %}
+~~~
 
 * percona server 5.5.34 的slowlog：
 
-{% highlight bash %}
+~~~
 # User@Host: root[root] @  [192.168.35.62]
 # Thread_id: 1164217  Schema: mgr  Last_errno: 0  Killed: 0
 # Query_time: 0.371185  Lock_time: 0.000056  Rows_sent: 0  Rows_examined: 0  Rows_affected: 2  Rows_read: 0
 # Bytes_sent: 11
 SET timestamp=1449105655;
 REPLACE INTO  edgemgr_dbcache(id, type, data, expire_time)  VALUES(UNHEX('ec124ee5766c4a31819719c645dab895'), 'sermap', '{\"storages\":{\"sg1-s1\":[{\"download_port\":9083,\"p2p_port\":9035,\"rtmp_port\":9035,\"addr\":\"{\\\"l\\\":{\\\"https://192.168.35.40:9184/storage\\\":\\\"\\\"},\\\"m\\\":{},\\\"i\\\":{\\\"https://192.168.35.40:9184/storage\\\":\\\"\\\"}}\",\"cpu\":6,\"mem\":100,\"bandwidth\":0,\"disk\":0,\"dead\":0}]},\"lives\":{}}', '2016-01-02 09:20:55');
-{% endhighlight %}
+~~~
 
 
 
 * mysql 5.6.17的slowlog：
 
-{% highlight bash %}
+~~~
 # Time: 151202 16:09:54
 # User@Host: root[root] @  [192.168.35.89]  Id: 84589
 # Query_time: 7.089324  Lock_time: 0.000112 Rows_sent: 1  Rows_examined: 33554432
 SET timestamp=1449043794;
 select count(*) from t1;
-{% endhighlight %}
+~~~
 
 * percona server 5.6.27 的slowlog：
 
-{% highlight bash %}
+~~~
 # Time: 151217  2:00:56
 # User@Host: taobao[taobao] @ regular_exp [192.168.35.23]  Id:  1235
 # Schema: bat_db  Last_errno: 0  Killed: 0
@@ -85,7 +85,7 @@ create table just_for_temp_case as
 use bat_db;
 SET timestamp=1450346627;
 SELECT COUNT(*) FROM `bill`  WHERE `bill`.`type` IN ('manu_title') AND ( bill.real_name = 'testuser');
-{% endhighlight %}
+~~~
 
 展示上面的例子，只是想说明，不同大版本(5.1与5.5)的mysql slow log 格式不一致，相同大版本小版本不同的mysql也不一致，并且不同mysql变种(percona server) 也会不一致，即便版本都一致了，同一个slowlog中的不同记录格式也不尽相同，这就是它麻烦的地方
 
@@ -122,7 +122,7 @@ SELECT COUNT(*) FROM `bill`  WHERE `bill`.`type` IN ('manu_title') AND ( bill.re
 
 ## logstash配置
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# cat  logstash-multiline.conf 
 input {
   stdin {
@@ -155,26 +155,26 @@ output {
   stdout { codec => rubydebug }
 }
 [root@h102 etc]# 
-{% endhighlight %}
+~~~
 
 ### 检测配置
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-multiline.conf -t 
 Configuration OK
 [root@h102 etc]# 
-{% endhighlight %}
+~~~
 
 ### 运行logstash
 
-{% highlight bash %}
+~~~
 [root@h102 etc]# /opt/logstash/bin/logstash -f logstash-multiline.conf 
 Settings: Default filter workers: 1
 Logstash startup completed
 ...
 ...
 ...
-{% endhighlight %}
+~~~
 
 ### 输入测试
 
@@ -183,7 +183,7 @@ Logstash startup completed
 
 > **Tip:** 不能正好一条，要完全包含完整一条的首尾
 
-{% highlight bash %}
+~~~
 {
        "@timestamp" => "2015-12-16T18:00:59.000Z",
           "message" => "# User@Host: taobao[taobao] @ regular_exp [192.168.35.23]  Id:  1236\n# Schema: bat_db  Last_errno: 0  Killed: 0\n# Query_time: 1.679745  Lock_time: 0.124872  Rows_sent: 0  Rows_examined: 292389  Rows_affected: 1066\n# Bytes_sent: 55\nSET timestamp=1450288859;\ncreate table temp_logstash_regular as\n  select t1.user_id, t2.user_key\n  from kibana_test_repo as t1\n  join users as t2\n  on t1.user_id = t2.id\n  where t1.notification_ts >= '2015-12-16 00:00:00' and\n        t1.notification_ts < '2015-12-17 00:00:00'\n  group by t1.user_id;\n# Time: 151217  2:01:01",
@@ -209,7 +209,7 @@ Logstash startup completed
             "query" => "create table temp_logstash_regular as\n  select t1.user_id, t2.user_key\n  from kibana_test_repo as t1\n  join users as t2\n  on t1.user_id = t2.id\n  where t1.notification_ts >= '2015-12-16 00:00:00' and\n        t1.notification_ts < '2015-12-17 00:00:00'\n  group by t1.user_id;\n# Time: 151217  2:01:01",
            "action" => "create"
 }
-{% endhighlight %}
+~~~
 
 可以正常解析
 
@@ -217,7 +217,7 @@ Logstash startup completed
 > **Tip:** 如果无法正常解析, **tags** 里会多出一个 **_grokparsefailure** ，并且无法捕获下面多出来的那些值
 
 
-{% highlight bash %}
+~~~
 {
     "@timestamp" => "2016-01-29T21:29:06.567Z",
        "message" => "# User@Host: taobao[taobao] @ regular_exp [192.168.35.23]  Id:  1236\\n# Schema: bat_db  Last_errno: 0  Killed: 0\\n# Query_time: 1.679745  Lock_time: 0.124872  Rows_sent: 0  Rows_examined: 292389  Rows_affected: 1066\\n# Bytes_sent: 55\\nSET timestamp=1450288859;\\ncreate table temp_logstash_regular as\\n  select t1.user_id, t2.user_key\\n  from kibana_test_repo as t1\\n  join users as t2\\n  on t1.user_id = t2.id\\n  where t1.notification_ts >= '2015-12-16 00:00:00' and\\n        t1.notification_ts < '2015-12-17 00:00:00'\\n  group by t1.user_id;\\n# Time: 151217  2:01:01",
@@ -227,7 +227,7 @@ Logstash startup completed
         [0] "_grokparsefailure"
     ]
 }
-{% endhighlight %}
+~~~
 
 ---
 
@@ -235,7 +235,7 @@ Logstash startup completed
 
 ### input
 
-{% highlight bash %}
+~~~
 input {
   stdin {
     codec => multiline {
@@ -245,7 +245,7 @@ input {
     }
   }
 }
-{% endhighlight %}
+~~~
 
 logstash的流水线模型是 **intpu\|[filter]\|output**，其中 **filter** 部分为可选，但是处理mysql这种复杂的日志，没有filter，还真不行
 
@@ -268,7 +268,7 @@ Item     | Comment
 
 ### filter 
 
-{% highlight bash %}
+~~~
 filter {
   grok {
 	match => [ "message", "(?m)^#\s+User@Host:\s+%{USER:user}\[[^\]]+\]\s+@\s+%{USER:clienthost}\s+\[(?:%{IP:clientip})?\]\s+Id:\s+%{NUMBER:id:int}\n#\s+Schema:\s+%{USER:schema}\s+Last_errno:\s+%{NUMBER:lasterrorno:int}\s+Killed:\s+%{NUMBER:killedno:int}\n#\s+Query_time:\s+%{NUMBER:query_time:float}\s+Lock_time:\s+%{NUMBER:lock_time:float}\s+Rows_sent:\s+%{NUMBER:rows_sent:int}\s+Rows_examined:\s+%{NUMBER:rows_examined:int}\s+Rows_affected:\s+%{NUMBER:rows_affected:int}\n#\s+Bytes_sent:\s+%{NUMBER:bytes_sent:int}\n\s*(?:use\s+%{USER:usedatabase};\s*\n)?SET\s+timestamp=%{NUMBER:timestamp};\n\s*(?<query>(?<action>\w+)\b.*)\s*(?:\n#\s+Time)?.*$"]
@@ -280,7 +280,7 @@ filter {
     #remove_field => [ "timestamp" ]
   }
 }
-{% endhighlight %}
+~~~
 
 **filter** 是整个mysql 日志处理的核心部分，就是通过它来抓取信息赋给各个filed
 
@@ -306,7 +306,7 @@ Item     | Comment
 ### output 
 
 
-{% highlight bash %}
+~~~
 output {
   elasticsearch { 
   	hosts => ["localhost:9200"] 
@@ -314,7 +314,7 @@ output {
 	}
   stdout { codec => rubydebug }
 }
-{% endhighlight %}
+~~~
 
 
 **output** 是经过加工和处理后，事件日志的去向
