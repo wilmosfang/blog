@@ -3,8 +3,8 @@ layout: post
 title: 在Centos6.6中创建一个Bridge
 author: wilmosfang
 categories: linux network
-wc: 186  617 6628
-excerpt: 创建bridge的方法，配置以及注意事项
+wc: 209  661 7251
+excerpt: 创建bridge的方法，SELINUX关闭方法，以及注意事项
 comments: true
 ---
 
@@ -27,7 +27,7 @@ comments: true
 
 下面配置很少，但是花了我整整一个下午的时间排错，其根本原因不是配置错误，而是与**Network Manager**服务的冲突，关掉它这个世界立刻变得平静而祥和
 
-{% highlight bash %}
+~~~
 
 [test@test network-scripts]$ grep -v "#" ifcfg-eth0 | cat -s 
 
@@ -57,7 +57,7 @@ ifup br0
 [test@test network-scripts]$ 
 
 
-{% endhighlight %}
+~~~
 
 之所以在rc.local中添加**ifup br0**，是因为操作系统重启后理应自动启动的**br0**会启动不了，所以使用这个方法来确保启动
 
@@ -65,7 +65,7 @@ ifup br0
 
 下面是重启网络后的效果
 
-{% highlight bash %}
+~~~
 
 [root@test ~]# /etc/init.d/network  restart 
 Shutting down interface br0:                               [  OK  ]
@@ -145,7 +145,7 @@ vnet0     Link encap:Ethernet  HWaddr FE:54:00:12:1E:4A
        valid_lft forever preferred_lft forever
 [root@test ~]# 
 
-{% endhighlight %}
+~~~
 
 
 > **Tip:**  最好使用 **`/etc/init.d/network restart ; ifup br0`** , 因为并不一定重启网络会带着 **br0** 一起重启，如果是远程操作，这个时候就有很大的风险与主机失联，这时原网卡没有配置ip，br0又没启动，会产生很大的麻烦，只能去机房通过服务器的console进行恢复
@@ -156,7 +156,7 @@ selinux有时也会造成影响，需要关闭
 
 查看方法
 
-{% highlight bash %}
+~~~
 [root@test ~]# sestatus  -v 
 SELinux status:                 disabled
 [root@test ~]# getenforce 
@@ -178,15 +178,15 @@ SELINUXTYPE=targeted
 
 [root@test ~]# 
 
-{% endhighlight %}
+~~~
 
 临时关闭方法 
 
-{% highlight bash %}
+~~~
 
 setenforce 0
 
-{% endhighlight %}
+~~~
 
 
 ---
