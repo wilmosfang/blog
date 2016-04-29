@@ -150,7 +150,7 @@ vnet0     Link encap:Ethernet  HWaddr FE:54:00:12:1E:4A
 
 > **Tip:**  最好使用 **`/etc/init.d/network restart ; ifup br0`** , 因为并不一定重启网络会带着 **br0** 一起重启，如果是远程操作，这个时候就有很大的风险与主机失联，这时原网卡没有配置ip，br0又没启动，会产生很大的麻烦，只能去机房通过服务器的console进行恢复
 
-# SELINUX
+## SELINUX
 
 selinux有时也会造成影响，需要关闭
 
