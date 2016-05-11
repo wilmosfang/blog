@@ -68,7 +68,7 @@ just for test
 
 # 总结
 
-* **`for i in `seq 1 10`; do  echo "[sms$i.png](/images/zabbix_sms/sms$i.png)" ; done`**
+* **`for i in `seq 1 10`; do  echo -n ! &&  echo "[sms$i.png](/images/zabbix_sms/sms$i.png)" ; done`**
 
 ---
 
@@ -82,17 +82,17 @@ just for test
 * 嵌入图片
 
 ~~~
-[gituser@tools ~]$  for i in `seq 1 10`; do  echo "[sms$i.png](/images/zabbix_sms/sms$i.png)" ; done 
-[sms1.png](/images/zabbix_sms/sms1.png)
-[sms2.png](/images/zabbix_sms/sms2.png)
-[sms3.png](/images/zabbix_sms/sms3.png)
-[sms4.png](/images/zabbix_sms/sms4.png)
-[sms5.png](/images/zabbix_sms/sms5.png)
-[sms6.png](/images/zabbix_sms/sms6.png)
-[sms7.png](/images/zabbix_sms/sms7.png)
-[sms8.png](/images/zabbix_sms/sms8.png)
-[sms9.png](/images/zabbix_sms/sms9.png)
-[sms10.png](/images/zabbix_sms/sms10.png)
+[gituser@tools ~]$ for i in `seq 1 10`; do  echo -n ! &&  echo "[sms$i.png](/images/zabbix_sms/sms$i.png)" ; done 
+![sms1.png](/images/zabbix_sms/sms1.png)
+![sms2.png](/images/zabbix_sms/sms2.png)
+![sms3.png](/images/zabbix_sms/sms3.png)
+![sms4.png](/images/zabbix_sms/sms4.png)
+![sms5.png](/images/zabbix_sms/sms5.png)
+![sms6.png](/images/zabbix_sms/sms6.png)
+![sms7.png](/images/zabbix_sms/sms7.png)
+![sms8.png](/images/zabbix_sms/sms8.png)
+![sms9.png](/images/zabbix_sms/sms9.png)
+![sms10.png](/images/zabbix_sms/sms10.png)
 [gituser@tools ~]$ 
 ~~~
 
