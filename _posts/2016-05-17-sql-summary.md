@@ -3,7 +3,7 @@ layout: post
 title:  SQL 精编
 author: wilmosfang
 categories:  linux mysql 
-wc: 
+wc: 537  1294 15004 
 excerpt:  SQL 语句与分类，SQL 常见用法，mysql 一些常用函数，数据分析思路，其它 mysql 管理工具
 comments: true
 ---
