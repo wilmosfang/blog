@@ -3,7 +3,7 @@ layout: post
 title:  Ruby 操作 Mysql
 author: wilmosfang
 categories:  linux mysql ruby
-wc: 476  1232 11928 
+wc: 493  1304 12331 
 excerpt: mysql2 gem 的安装，创建用户，连接数据库，创建数据库，创建表，插入数据，捕获返回结果并显示，更新数据，删除数据，查询数据
 comments: true
 ---
@@ -454,6 +454,23 @@ mysql>
  => 10 
 2.3.0 :118 >
 ~~~
+
+---
+
+
+## 兼容性
+
+This gem is tested with the following Ruby versions on Linux and Mac OS X:
+
+* Ruby MRI 1.8.7, 1.9.3, 2.0.0, 2.1.x, 2.2.x, 2.3.x
+* Ruby Enterprise Edition (based on MRI 1.8.7)
+* Rubinius 2.x, 3.x
+
+This gem is tested with the following MySQL and MariaDB versions:
+
+* MySQL 5.5, 5.6, 5.7
+* MySQL Connector/C 6.0 and 6.1 (primarily on Windows)
+* MariaDB 5.5, 10.0, 10.1
 
 
 ---
