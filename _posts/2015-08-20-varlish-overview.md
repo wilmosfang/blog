@@ -2,7 +2,8 @@
 layout: post
 title: Varnish 基础概览
 author: wilmosfang
-categories: linux varnish 
+tags:  varnish 
+categories:  varnish 
 wc: 636 1655 26339
 excerpt: follow me
 comments: true

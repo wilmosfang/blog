@@ -1,7 +1,9 @@
 ---
 layout: post
 title:  Rails 容器与配置
-categories:  linux docker ruby rails 
+author: wilmosfang
+categories:   docker ruby rails 
+tags:   docker ruby rails 
 wc: 659  1361 20354 
 excerpt:  rails 官方镜像的拉取，rails 镜像的构建，rails 容器的构建，访问操作和注意事项 
 comments: true

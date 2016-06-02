@@ -2,7 +2,8 @@
 layout: post
 title: ZooKeeper 集群
 author: wilmosfang
-categories: linux zookeeper cluster
+tags:  zookeeper cluster
+categories:  zookeeper cluster
 wc: 701 2633 32235
 excerpt: follow me
 comments: true

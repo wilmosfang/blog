@@ -1,7 +1,9 @@
 ---
 layout: post
 title:  Mycat HA(高可用) 与 LB(负载均衡)
-categories:  linux cluster mysql mycat  keepalived haproxy rsyslog
+author: wilmosfang
+categories:   cluster mysql mycat  keepalived haproxy rsyslog
+tags:   cluster mysql mycat  keepalived haproxy rsyslog
 wc: 1522  5646 64545 
 excerpt: keepalived、haproxy、mycat的下载安装配置运行，rsyslog的配置运行与测试，简单的haproxy健康检查，haproxy监控，系统访问测试，切换过程中的影响，和部署过程中的注意事项
 comments: true

@@ -2,7 +2,8 @@
 layout: post
 title: NFS 配置
 author: wilmosfang
-categories: linux nfs
+tags:  nfs
+categories:  nfs
 wc: 485 1341 14805
 excerpt: follow me
 comments: true

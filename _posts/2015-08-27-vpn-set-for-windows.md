@@ -2,7 +2,8 @@
 layout: post
 title: Windows客户端创建VPN连接
 author: wilmosfang
-categories: linux vpn
+tags:  vpn
+categories:  vpn
 wc: 92 76 2039
 excerpt: follow me
 comments: true

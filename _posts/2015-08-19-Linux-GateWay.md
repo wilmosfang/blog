@@ -2,7 +2,8 @@
 layout: post
 title: Linux 网关 
 author: wilmosfang
-categories: linux network
+tags:  network
+categories:  network
 wc: 190  543 4998
 excerpt: 使用Linux搭建网关服务器
 comments: true

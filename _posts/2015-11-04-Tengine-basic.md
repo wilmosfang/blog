@@ -2,7 +2,8 @@
 layout: post
 title: Tengine基础
 author: wilmosfang
-categories: linux nginx 
+tags:  nginx 
+categories:  nginx 
 wc: 599 1719 20629
 excerpt: follow me
 comments: true

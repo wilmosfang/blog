@@ -2,7 +2,8 @@
 layout: post
 title: Redis 复制
 author: wilmosfang
-categories: linux redis nosql
+tags:  redis nosql
+categories:  redis nosql
 wc: 579 1478 16982
 excerpt: follow me
 comments: true

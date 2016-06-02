@@ -1,7 +1,9 @@
 ---
 layout: post
 title:  mysql 清理 relay log 和 bin log
-categories:  linux  mysql mha
+author: wilmosfang
+categories:    mysql mha
+tags:    mysql mha
 wc: 255   982 13311 
 excerpt: mysql relay log 和 bin log 的清理方法 
 comments: true

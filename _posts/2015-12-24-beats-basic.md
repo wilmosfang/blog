@@ -2,7 +2,8 @@
 layout: post
 title:  Beats 基础
 author: wilmosfang
-categories: linux elasticsearch logstash beats filebeat
+tags:  elasticsearch logstash beats filebeat
+categories:  elasticsearch logstash beats filebeat
 wc: 383  1241 13946 
 excerpt:  Beats 基础概念与使用方法
 comments: true

@@ -2,7 +2,8 @@
 layout: post
 title: Centos6下logrotate探源
 author: wilmosfang
-categories: linux log
+tags:  log
+categories:  log
 wc: 749 3635 28148
 excerpt: follow me
 comments: true

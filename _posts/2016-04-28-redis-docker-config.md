@@ -1,7 +1,9 @@
 ---
 layout: post
 title:  Redis 容器与配置
-categories:  linux docker nosql redis 
+author: wilmosfang
+categories:   docker nosql redis 
+tags:   docker nosql redis 
 wc:  686  1977 22637 
 excerpt: redis 容器启动，使用容器连接redis容器，redis配置，挂载本地卷，查看日志，查看数据文件，使用客户端容器进行访问，以及需要注意的事项 
 comments: true

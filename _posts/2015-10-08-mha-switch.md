@@ -2,7 +2,8 @@
 layout: post
 title: mha 切换(操作流程建议)
 author: wilmosfang
-categories: linux mha mysql cluster
+tags:  mha mysql cluster
+categories:  mha mysql cluster
 wc: 87 165 2668
 excerpt: follow me
 comments: true

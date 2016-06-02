@@ -2,7 +2,8 @@
 layout: post
 title: etcd 基础
 author: wilmosfang
-categories:  linux etcd
+tags:   etcd
+categories:   etcd
 wc: 853  2527 41364 
 excerpt: 下载安装，服务运行，存取测试，单点集群，获取版本信息，关键字操作，统计信息等相关API
 comments: true

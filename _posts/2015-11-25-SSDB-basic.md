@@ -2,7 +2,8 @@
 layout: post
 title: SSDB基础
 author: wilmosfang
-categories: linux nosql ssdb cluster
+tags:  nosql ssdb cluster
+categories:  nosql ssdb cluster
 wc: 668 2128 19836
 excerpt: follow me
 comments: true

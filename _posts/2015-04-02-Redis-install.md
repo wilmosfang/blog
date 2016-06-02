@@ -2,7 +2,8 @@
 layout: post
 title: Redis 安装
 author: wilmosfang
-categories: linux redis nosql
+tags:  redis nosql
+categories:  redis nosql
 wc: 418  1391 13516
 excerpt: redis 的下载，解压，编译，安装，运行，连接
 comments: true

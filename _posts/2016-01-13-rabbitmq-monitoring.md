@@ -2,7 +2,8 @@
 layout: post
 title:  RabbitMQ 监控
 author: wilmosfang
-categories:  linux network nginx rabbitmq monitoring 
+tags:   network nginx rabbitmq monitoring 
+categories:   network nginx rabbitmq monitoring 
 wc: 789  2321 28166 
 excerpt:  RabbitMQ  的rabbitmq-management管理插件，https安全防护，基本认证，DNAT，访问控制，集群创建和web GUI监控方法 
 comments: true

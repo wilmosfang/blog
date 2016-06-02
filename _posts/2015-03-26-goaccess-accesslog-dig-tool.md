@@ -2,7 +2,8 @@
 layout: post
 title: GoAccess access日志分析工具
 author: wilmosfang
-categories: linux log
+tags:  log
+categories:  log
 wc: 264 872 11009
 excerpt: follow me
 comments: true

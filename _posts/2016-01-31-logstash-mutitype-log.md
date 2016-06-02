@@ -2,7 +2,8 @@
 layout: post
 title:    Logstash 处理多种格式日志
 author: wilmosfang
-categories:  linux elasticsearch logstash beats filebeat 
+tags:   elasticsearch logstash beats filebeat 
+categories:   elasticsearch logstash beats filebeat 
 wc: 229  459 7789 
 excerpt: logstash的配置，filebeat的配置，建议启动顺序，与多类型日志输入的注意事项
 comments: true

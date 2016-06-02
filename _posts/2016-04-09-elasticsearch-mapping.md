@@ -1,7 +1,9 @@
 ---
 layout: post
 title:  Elasticsearch 映射
-categories:  linux nosql elasticsearch  
+author: wilmosfang
+categories:   nosql elasticsearch  
+tags:   nosql elasticsearch  
 wc:  563  1229 15243 
 excerpt: elasticsearch mapping 的相关基础，查看mapping，查看索引mapping，查看字段mapping，类型报错，创建或指定mapping，更新mapping，字段冲突
 comments: true

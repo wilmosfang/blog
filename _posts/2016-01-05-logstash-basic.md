@@ -2,7 +2,8 @@
 layout: post
 title:  Logstash  基础
 author: wilmosfang
-categories: linux logstash elasticsearch
+tags:  logstash elasticsearch
+categories:  logstash elasticsearch
 wc: 718  2270 30257 
 excerpt:  logstash 的安装，基础测试，关闭步骤，系统日志处理，多行日志处理，filebeat对接，管道模型，es的简单检索
 comments: true

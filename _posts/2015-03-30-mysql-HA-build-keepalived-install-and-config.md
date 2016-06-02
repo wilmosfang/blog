@@ -2,7 +2,8 @@
 layout: post
 title: Mysql MHA 搭建 (三) keepalived 1.2.13 安装 
 author: wilmosfang
-categories: linux mha mysql keepalived cluster 
+tags:  mha mysql keepalived cluster 
+categories:  mha mysql keepalived cluster 
 wc: 405 1054 14992
 excerpt: follow me
 comments: true

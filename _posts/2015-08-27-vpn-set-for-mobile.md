@@ -2,7 +2,8 @@
 layout: post
 title: Andriod客户端创建VPN连接
 author: wilmosfang
-categories: linux vpn
+tags:  vpn
+categories:  vpn
 wc: 81 64 1871
 excerpt: follow me
 comments: true

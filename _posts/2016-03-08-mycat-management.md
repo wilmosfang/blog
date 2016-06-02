@@ -1,7 +1,9 @@
 ---
 layout: post
 title:  Mycat 管理命令
-categories:  linux mysql mycat 
+author: wilmosfang
+categories:   mysql mycat 
+tags:   mysql mycat 
 wc: 887  4580 52439 
 excerpt: mycat的管理，与命令总览 
 comments: true

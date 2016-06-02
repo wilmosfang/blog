@@ -2,7 +2,8 @@
 layout: post
 title: Keepalived 实现 Redis AutoFailover (RedisHA)
 author: wilmosfang
-categories: linux redis keepalived nosql
+tags:  redis keepalived nosql
+categories:  redis keepalived nosql
 wc: 1027 3305 37685
 excerpt: follow me
 comments: true

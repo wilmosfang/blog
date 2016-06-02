@@ -2,7 +2,8 @@
 layout: post
 title:  Logstash 处理 Mongod Log
 author: wilmosfang
-categories:  linux logstash mongodb 
+tags:   logstash mongodb 
+categories:   logstash mongodb 
 wc: 408  1350 16251 
 excerpt: mongodb日志格式，logstash配置，配置分析，注意事项 
 comments: true

@@ -2,7 +2,8 @@
 layout: post
 title:  Kibana 基础
 author: wilmosfang
-categories:  linux kibana 
+tags:   kibana 
+categories:   kibana 
 wc: 472  1273 16087 
 excerpt:  Kibana 相关基础与使用方法，下载安装，配置，启动，访问，导入数据，可以用来构建视图和仪表盘
 comments: true

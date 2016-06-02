@@ -2,7 +2,8 @@
 layout: post
 title: Snort 基础
 author: wilmosfang
-categories: linux snort security
+tags:  snort security
+categories:  snort security
 wc: 1353 5732 62839
 excerpt: follow me
 comments: true
