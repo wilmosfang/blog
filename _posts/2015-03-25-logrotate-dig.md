@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Centos6下logrotate探源
+title: Centos6 下 logrotate 探源
 author: wilmosfang
-tags:  log
+tags:  linux log
 categories:  log
 wc: 749 3635 28148
-excerpt: follow me
+excerpt: logrotate 执行时间的探源
 comments: true
 ---
 

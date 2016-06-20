@@ -5,11 +5,11 @@ author: wilmosfang
 tags:  mysql mha cluster
 categories:  mysql mha cluster
 wc: 562 1390 15045
-excerpt: follow me
+excerpt: mysql mha 集群搭建之 mysql 的安装
 comments: true
 ---
 
----
+
 
 # 前言
 

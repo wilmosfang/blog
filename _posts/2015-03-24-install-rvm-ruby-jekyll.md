@@ -2,8 +2,8 @@
 layout: post
 title: 安装jekyll (include rvm,ruby,gem)
 author: wilmosfang
-tags:  rvm ruby jekyll
-categories:  rvm ruby jekyll
+tags:  rvm ruby jekyll nodejs 
+categories:  jekyll
 wc: 567  1826 20553 
 excerpt: 系统环境准备，安装gcc，安装rvm，安装ruby，安装jekyll，安装nodejs，生成blog，运行jekyll server
 comments: true
