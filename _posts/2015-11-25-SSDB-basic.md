@@ -3,14 +3,13 @@ layout: post
 title: SSDB基础
 author: wilmosfang
 tags:  nosql ssdb cluster
-categories:  nosql ssdb cluster
-wc: 668 2128 19836
-excerpt: follow me
+categories:  nosql
+wc: 697  2141 20113
+excerpt: ssdb 下载安装，启动停止，前台后台运行，客户端连接，启动脚本，master-master 集群，内存占用
 comments: true
 ---
 
 
----
 
 # 前言
 
@@ -659,6 +658,32 @@ cache_size + 10 * write_buffer_size * 66 + 32
 ~~~
 
 可以调整配置参数, 限制 ssdb-server 的内存占用.
+
+
+---
+
+# 命令汇总
+
+* **`wget --no-check-certificate https://github.com/ideawu/ssdb/archive/master.zip`**
+* **`unzip master.zip`**
+* **`cd ssdb-master/`**
+* **`make`**
+* **`make install`**
+* **`./ssdb-server  ssdb.conf`**
+* **`ps faux | grep ssdb | grep -v grep`**
+* **`cat log.txt`**
+* **`pstree -a 10734`**
+* **`ps -Lf 10734`**
+* **`./ssdb-server  ssdb.conf  -s stop`**
+* **`./ssdb-server  -d ssdb.conf`**
+* **`ps faux | grep ssdb | grep -v grep`**
+* **`./ssdb-cli -p 8888`**
+* **`vim ssdb.sh`**
+* **`grep configs=  /etc/init.d/ssdb`**
+* **`/etc/init.d/ssdb  start`**
+* **`/etc/init.d/ssdb  stop`**
+* **`grep -v "#" /etc/ssdb/ssdb1234.conf`**
+* **`/usr/local/ssdb/ssdb-server -d /etc/ssdb/ssdb1234.conf`**
 
 ---
 

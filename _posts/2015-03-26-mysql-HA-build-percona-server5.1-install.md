@@ -4,7 +4,7 @@ title: Mysql MHA 搭建 (一) percona5.1 安装
 author: wilmosfang
 tags:  mysql mha cluster
 categories:  mysql
-wc: 562 1390 15045
+wc: 590  1373 15164
 excerpt: mysql mha 集群搭建之 mysql 的安装
 comments: true
 ---
@@ -555,6 +555,31 @@ m2和s配置如下
 
 
 接下来进行MHA与keepalived，还有系统方面的部分配置 
+
+
+---
+
+# 命令汇总
+
+
+* **`lsb_release  -a`**
+* **`iptables -L`**
+* **`/etc/init.d/iptables  stop`**
+* **`chkconfig  --list | grep iptables`**
+* **`chkconfig iptables off`**
+* **`getenforce`**
+* **`setenforce 0`**
+* **`cat /etc/rc.local`**
+* **`wget http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm`**
+* **`rpm -ivh percona-release-0.1-3.noarch.rpm`**
+* **`yum install  Percona-Server-server-51.x86_64`**
+* **`mysql_install_db --defaults-file=/etc/my.cnf`**
+* **`mysqladmin  -u root password 'mysql'`**
+* **`/etc/init.d/mysql  start`**
+* **`mysql -u root -p`**
+
+
+---
 
 [percona yum]: http://www.percona.com/doc/percona-xtrabackup/2.2/installation/yum_repo.html
 
