@@ -3,9 +3,9 @@ layout: post
 title: Mysql MHA 搭建 (二) mha0.53 安装
 author: wilmosfang
 tags:  mha mysql ssh cluster 
-categories:  mha mysql ssh cluster 
-wc: 480 1782 20916
-excerpt: follow me
+categories:  mysql
+wc: 512  1812 21511
+excerpt: mysql mha 的安装搭建，passwordless 环境配置，和相关系统设置
 comments: true
 ---
 
@@ -13,12 +13,12 @@ comments: true
 
 ---
 
-前言
-=
+# 前言
 
-继前一篇[Mysql MHA 搭建 (一) percona5.1 安装][mha1] , 这篇继续mha 的安装部分
 
-[Mha] 全称 mysql master ha , 是一个开源项目，是一组用perl写的脚本，完成自动（非计划情况）或手动（计划情况下）的mysql master 切换操作，减少数据库宕机时间，保证高可用
+继前一篇 **[Mysql MHA 搭建 (一) percona5.1 安装][mha1]** , 这篇继续mha 的安装部分
+
+**[Mha][Mha]** 全称 mysql master ha , 是一个开源项目，是一组用perl写的脚本，完成自动（非计划情况）或手动（计划情况下）的mysql master 切换操作，减少数据库宕机时间，保证高可用
 
 >和其它高可用不太一样的是，它只保证一次非计划打击，需要手动恢复环境，然后手动完成同步，然后手动将修复好的节点加入到集群，检查通过后，再次进行监控
 
@@ -33,8 +33,8 @@ comments: true
 
 ---
 
-安装mha
--
+## 安装mha
+
 
 配置host到m1，m2，s
 
@@ -173,8 +173,8 @@ Preparing...                ########################################### [100%]
 
 ---
 
-系统配置
--
+## 系统配置
+
 
 mha需要一个有拷贝binlog权限的用户可以对其它机器进行password less登录
 
@@ -471,6 +471,35 @@ MySQL Replication Health is OK.
 我会在下一节中结合**keepalived**进行阐释
 
 这里是[mha的wiki][mha wiki] , 里面有对mha的详细介绍，不过，极有可能，你打不开，原因是被墙了，想获取真知，想想办法吧
+
+---
+
+# 命令汇总
+
+* **`rsync -av * m2:/root/tmp`**
+* **`rsync -av * s:/root/tmp`**
+* **`rpm -ivh epel-release-6-8.noarch2.rpm`**
+* **`rpm -ivh mha4mysql-node-0.53-0.el6.noarch.rpm`**
+* **`yum install perl-DBD-MySQL`**
+* **`rpm -ivh mha4mysql-node-0.53-0.el6.noarch.rpm`**
+* **`rpm -ivh mha4mysql-manager-0.53-0.el6.noarch.rpm`**
+* **`yum -y install perl-Config-Tiny   perl-Log-Dispatch  perl-Parallel-ForkManager`**
+* **`rpm -ivh mha4mysql-manager-0.53-0.el6.noarch.rpm`**
+* **`grep mysql /etc/passwd`**
+* **`su - mysql`**
+* **`mkdir /home/mysql`**
+* **`cp /etc/skel/.* /home/mysql/`**
+* **`chown  -R mysql.mysql /home/mysql/`**
+* **`chmod -R 700 /home/mysql/`**
+* **`su - mysql`**
+* **`ssh-keygen -t rsa`**
+* **`ssh-copy-id  -i .ssh/id_rsa.pub  mysql@m2`**
+* **`ssh-copy-id  -i .ssh/id_rsa.pub  mysql@s`**
+* **`cat /etc/masterha_default.cnf`**
+* **`cat /etc/app1.cnf`**
+* **`masterha_check_ssh --conf=/etc/app1.cnf`**
+* **`masterha_check_repl --conf=/etc/app1.cnf`**
+
 
 ---
 
