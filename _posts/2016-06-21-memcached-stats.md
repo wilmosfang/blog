@@ -4,7 +4,7 @@ title:   Memcached 状态详解
 author: wilmosfang
 tags:   nosql memcached 
 categories:   nosql 
-wc: 208  473 6755 
+wc: 211  476 6809 
 excerpt: 连接 memcached 实例，stats 命令，指标详解 
 comments: true
 ---
@@ -18,6 +18,9 @@ comments: true
 在 **[memcached][memcached]** 运维管理过程中，会需要了解缓存系统当前的状态，这里分享一下 **[memcached][memcached]** 状态的详细解释
 
 > **Tip:** **[memcached][memcached]** 相关基础，可以参考之前的一篇博客 **[memcached基础][memcached_basic_operation]**
+
+
+详细可以参考 **[memcached 源码][protocol]**
 
 
 > **Tip:**   目前最新版本为 **Memcached  v1.4.26** ，实验中使用 **v1.4.25** 
@@ -39,14 +42,14 @@ comments: true
 
 由于 memcached 的协议非常简单，可以使用 **telnet** 直接连接
 
-```
+~~~
 [mtest@meminst ~]$ telnet localhost 11212
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
 version
 VERSION 1.4.25
-```
+~~~
 
 > **Tip:** 使用 telnet 作客户端，是在直接使用 tcp 建立连接和传送数据，所以并没有其它客户端那么友好的提示信息或界面，这个得忍
 
@@ -56,7 +59,7 @@ VERSION 1.4.25
 
 要获取内部统计数据可以通过 **stats** 命令，最主要的状态信息也都在里面
 
-```
+~~~
 [mtest@meminst ~]$ telnet localhost 11212
 Trying 127.0.0.1...
 Connected to localhost.
@@ -116,7 +119,7 @@ STAT crawler_reclaimed 0
 STAT crawler_items_checked 0
 STAT lrutail_reflocked 0
 END
-```
+~~~
 
 ---
 
