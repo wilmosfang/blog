@@ -3,17 +3,16 @@ layout: post
 title: Mysql MHA 搭建 (三) keepalived 1.2.13 安装 
 author: wilmosfang
 tags:  mha mysql keepalived cluster 
-categories:  mha mysql keepalived cluster 
-wc: 405 1054 14992
-excerpt: follow me
+categories: mysql
+wc: 426  1026 15053 
+excerpt: mha 切换前后架构图，keepalived 的安装，测试，sudo 配置，修改 master_ip_failover 和 master_ip_online_change 脚本
 comments: true
 ---
 
 
----
 
-前言
-=
+# 前言
+
 
 继前一篇[Mysql MHA 搭建 (二) mha0.53 安装 ][mha2] , 这篇继续[keepalived][keepalived] 的安装与配置部分
 
@@ -30,8 +29,8 @@ keepalived和LVS配合使用是开源界比较流行的LB解决方案，keepaliv
 
 ---
 
-架构图
--
+## 架构图
+
 
 #### 切换前
 
@@ -49,8 +48,11 @@ keepalived和LVS配合使用是开源界比较流行的LB解决方案，keepaliv
 |m2|192.168.75.12|192.168.66.66/24|Master|
 |s|192.168.75.13|null|null|
 
-安装keepalived 1.2.13
--
+
+---
+
+## 安装keepalived 1.2.13
+
 
 由于系统软件中已经有相应rpm包，所以安装非常简单 , m1 m2都要进行安装
 
@@ -142,8 +144,8 @@ total size is 544  speedup is 0.79
 
 ---
 
-测试keepalived
--
+## 测试keepalived
+
 
 keepalived启停测试，观察浮动IP的挂载情况
 
@@ -201,8 +203,8 @@ Stopping keepalived: [  OK  ]
 
 ---
 
-配置sudo
--
+## 配置sudo
+
 
 配置好keepalived，确保它可以按照预期工作后，开始给mysql提升权限，让它可以操作keepalived的启停
 
@@ -248,8 +250,8 @@ Defaults    !requiretty
 
 ---
 
-修改脚本
--
+## 修改脚本
+
 
 前一篇中提到两个脚本：
 
@@ -399,6 +401,22 @@ MHA Manager 会调用 **master_ip_failover_script** 三次
 
 ---
 
+# 命令汇总
+
+* **`yum -y install keepalived.x86_64`**
+* **`cat /etc/keepalived/keepalived.conf`**
+* **`rsync  -v keepalived.conf m2:/etc/keepalived/`**
+* **`/etc/init.d/keepalived  start`**
+* **`/etc/init.d/keepalived  stop`**
+* **`ip a`**
+* **`visudo`**
+* **`vim /etc/sudoers`**
+* **`ll  mha4mysql-manager-0.53.tar.gz`**
+* **`ll  mha4mysql-manager-0.53`**
+* **`ll mha4mysql-manager-0.53/samples/scripts/`**
+
+
+---
 
 [mha2]:http://soft.dog/2015/03/27/mysql-HA-build-mha-install-and-config.html
 [keepalived]:http://www.keepalived.org/
