@@ -418,7 +418,7 @@ MHA Manager 会调用 **master_ip_failover_script** 三次
 
 ---
 
-[mha2]:http://soft.dog/2015/03/27/mysql-HA-build-mha-install-and-config.html
+[mha2]:http://soft.dog/2015/03/27/mysql-HA-build-mha-install-and-config/
 [keepalived]:http://www.keepalived.org/
 [keepalived download]:http://www.keepalived.org/download.html
 

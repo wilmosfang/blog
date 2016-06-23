@@ -3,17 +3,15 @@ layout: post
 title: Mysql MHA 搭建 (四) mha failover 测试
 author: wilmosfang
 tags:  mha mysql  keepalived cluster
-categories:  mha mysql  keepalived cluster
-wc: 1064  5236 50029
-excerpt: mha的主动被动切换测试
+categories:  mysql
+wc: 1064  5155 49554
+excerpt: mha的主动被动切换测试，手动迁移测试，被动故障转移测试
 comments: true
 ---
 
 
----
 
-前言
-=
+# 前言
 
 继前一篇[Mysql MHA 搭建 (三) keepalived 1.2.13 安装][mha3] , 这篇将演示如何操作mha进行master failover
 
@@ -1060,7 +1058,6 @@ Master failover to m2(192.168.75.12:3306) completed successfully.
 
 ---
 
-[mha3]:http://soft.dog/2015/03/30/mysql-HA-build-keepalived-install-and-config.html
-
+[mha3]:http://soft.dog/2015/03/30/mysql-HA-build-keepalived-install-and-config/
 
 
