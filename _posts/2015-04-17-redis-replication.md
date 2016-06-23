@@ -3,7 +3,7 @@ layout: post
 title: Redis 复制
 author: wilmosfang
 tags:  redis nosql
-categories:  redis nosql
+categories:   nosql
 wc: 579 1478 16982
 excerpt: follow me
 comments: true

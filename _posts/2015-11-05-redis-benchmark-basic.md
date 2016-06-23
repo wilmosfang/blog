@@ -3,7 +3,7 @@ layout: post
 title: redis-benchmark 基础
 author: wilmosfang
 tags:  redis nosql benchmark
-categories:  redis nosql benchmark
+categories:   nosql 
 wc: 739 2451 17797
 excerpt: follow me
 comments: true
