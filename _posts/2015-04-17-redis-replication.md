@@ -2,21 +2,20 @@
 layout: post
 title: Redis 复制
 author: wilmosfang
-tags:  redis nosql
+tags:  redis nosql 
 categories:   nosql
-wc: 579 1478 16982
-excerpt: follow me
+wc: 581  1392 16632
+excerpt: 持久性的安全隐患，复制原理，增量同步，无盘同步，配置方法，命令同步，配置同步，slave 的只读特性，连接认证，相关注意事项 
 comments: true
 ---
 
----
 
-前言
-=
+# 前言
 
-[Redis][redis]有一个和Mysql一样的特性:[复制][replication]
 
-下面是我根据官方文档的学习笔记，进行的整理与分享
+**[Redis][redis]** 有一个和Mysql一样的特性 **[复制][replication]**
+
+下面是我根据官方文档的学习笔记，对一些知识要点进行的整理与分享
 
 ---
 
@@ -31,8 +30,8 @@ comments: true
 [redis]:http://redis.io/
 [replication]:http://redis.io/topics/replication
 
-安全隐患
--
+## 安全隐患
+
 
 * 1.强烈建议开启master的持久特性
 * 2.如果由于性能或延时方面的考虑，没有条件开启持久，必须确保避免master的自动重启
@@ -49,8 +48,8 @@ comments: true
 
 ---
 
-复制原理
--
+## 复制原理
+
 
 * 1.如果设置了一个Slave，无论是第一次连接还是重连到Master，它都会发出一个SYNC命令；
 * 2.当Master收到SYNC命令之后，会做两件事：
@@ -65,8 +64,8 @@ comments: true
 
 ---
 
-增量同步
--
+## 增量同步
+
 
 从 Redis 2.8 开始， 在网络连接短暂性失效之后， 主从服务器可以尝试继续执行原有的复制进程（process）， 而不一定要执行完整重同步操作。
 
@@ -82,8 +81,8 @@ Redis 2.8 的这个部分重同步特性会用到一个新增的 PSYNC 内部命
 
 ---
 
-无盘同步
--
+## 无盘同步
+
 
 正常情况下同步操作都会在master本地磁盘中创建一个RDB文件，然后把这个RDB文件传给slave以完成同步操作
 
@@ -146,8 +145,8 @@ repl-diskless-sync-delay 5
 
 ---
 
-配置方法 
--
+## 配置方法 
+
 
 配置方法有两种：
 
@@ -315,8 +314,8 @@ slaveof m1 6379
 
 ---
 
-Slave的只读特性
--
+## Slave的只读特性
+
 
 可能是出于安全方面的考，从 Redis 2.6 开始， 从服务器支持只读模式， 并且该模式为从服务器的默认模式。
 
@@ -426,8 +425,8 @@ slave-read-only no
 
 ---
 
-连接认证
--
+## 连接认证
+
 
 redis设计之初就没有过多的考虑安全问题，所以默认情况下，客户端的登录和slave的连接是不用密码认证的
 
@@ -512,8 +511,8 @@ masterauth 123456
 
 ---
 
-限制写操作
--
+## 限制写操作
+
 
 下面两个参数是用来限制 **master** 写操作的:
 
@@ -552,8 +551,8 @@ masterauth 123456
 
 ---
 
-总结
-=
+# 总结
+
 
 [Redis][redis]有一个和mysql类似的[复制][replication]机制，可以进行如下同步方式：
 
