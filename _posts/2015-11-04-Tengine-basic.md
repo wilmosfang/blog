@@ -596,13 +596,9 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 
 * **`wget  http://tengine.taobao.org/download/tengine-2.1.1.tar.gz`**
 * **`md5sum  tengine-2.1.1.tar.gz`**
-* **`ls`**
 * **`tar -zxvf tengine-2.1.1.tar.gz`**
-* **`ls`**
 * **`./configure`**
-* **`echo $?`**
 * **`make`**
-* **`echo $?`**
 * **`make install`**
 * **`echo $?`**
 * **`sbin/nginx -t -c conf/nginx.conf`**
@@ -619,11 +615,10 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 * **`cat nginx.conf | grep -v "#" | grep -v "^$"`**
 * **`cat apps/proxy_tengine.conf | grep -v "#" | grep -v "^$"`**
 * **`../sbin/nginx  -t -c /usr/local/nginx/conf/nginx.conf`**
-* **`kill  -HUP `cat ../logs/nginx.pid ``**
+* **`kill  -HUP \`cat ../logs/nginx.pid \``**
 * **`perl -e 'print  crypt(tengine,tengine)';`**
 * **`cat status.passwd`**
 * **`../sbin/nginx  -t -c /usr/local/nginx/conf/nginx.conf`**
-* **`kill  -HUP `cat ../logs/nginx.pid ``**
 
 ---
 
