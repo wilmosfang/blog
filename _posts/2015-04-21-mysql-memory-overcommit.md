@@ -4,15 +4,13 @@ title: Percona Server  5.1 内存过量消耗分析
 author: wilmosfang
 tags:  mysql troubleshooting
 categories:  mysql troubleshooting
-wc: 301 894 10541
-excerpt: follow me
+wc: 301   857 10416
+excerpt: mysql 内存过量消耗的问题发现，分析，分析工具，解决办法，和相关参数的意义
 comments: true
 ---
 
----
 
-前言
-=
+# 前言
 
 一次巡检过程中发现数据库使用内存有些过量，**innodb_buffer_pool_size** 设置值为 **20G** ，但实际物理内存消耗为 **37G** ，总虚拟内存消耗达 **42G** ，直接导致监控报警，于是开启了一次内存使用探究之旅，整理出来和大家分享一下
 
@@ -27,8 +25,7 @@ comments: true
 ---
 
 
-发现问题
--
+## 发现问题
 
 巡检过程中发现mysql内存使用过量
 
@@ -53,8 +50,8 @@ innodb_buffer_pool_size = 20G
 ---
 
 
-分析问题
--
+## 分析问题
+
 
 初步推断有两种情况：
 
@@ -67,8 +64,8 @@ innodb_buffer_pool_size = 20G
 
 ---
 
-分析工具
--
+## 分析工具
+
 
 **pmap** : 用来生成一个进程的内存使用报表
 
@@ -243,8 +240,8 @@ If you have very fast storage (ie storage with RAM-level speed, not just a RAID 
 
 ---
 
-解决办法
--
+## 解决办法
+
 
 由于它并不能动态进行调整，所以必须安排一次数据库的启停，在配置文件中对 **innodb_ibuf_max_size** 进行限定就可以有效解决此问题
 
@@ -256,8 +253,8 @@ If you have very fast storage (ie storage with RAM-level speed, not just a RAID 
 [percona]:http://www.percona.com/
 
 
-后记
-=
+# 后记
+
 
 其实这个原因的定位并不像这篇文档中的流程一样那么顺利，先后我尝试了几个方面：
 
@@ -281,8 +278,8 @@ pt-mysql-summary  --user=testuser --password=testuser
 
 ---
 
-总结
-=
+# 总结
+
 
 几个重要命令：
 
