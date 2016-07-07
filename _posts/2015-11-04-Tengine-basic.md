@@ -4,13 +4,12 @@ title: Tengine基础
 author: wilmosfang
 tags:  nginx 
 categories:  nginx 
-wc: 599 1719 20629
-excerpt: follow me
+wc: 634  1783 21330
+excerpt: tengine 的下载，安装，配置，检查，启停，模块，负载均衡，反向代理和状态检查
 comments: true
 ---
 
 
----
 
 # 前言
 
@@ -591,7 +590,40 @@ configuration file /usr/local/nginx/conf/nginx.conf test is successful
 
 ![Image_201511042102329.png](/images/tengine/Image_201511042102329.png)
 
+---
 
+# 命令汇总
+
+* **`wget  http://tengine.taobao.org/download/tengine-2.1.1.tar.gz`**
+* **`md5sum  tengine-2.1.1.tar.gz`**
+* **`ls`**
+* **`tar -zxvf tengine-2.1.1.tar.gz`**
+* **`ls`**
+* **`./configure`**
+* **`echo $?`**
+* **`make`**
+* **`echo $?`**
+* **`make install`**
+* **`echo $?`**
+* **`sbin/nginx -t -c conf/nginx.conf`**
+* **`sbin/nginx  -c conf/nginx.conf`**
+* **`/usr/local/nginx/sbin/nginx  -h`**
+* **`/usr/local/nginx/sbin/nginx  -m`**
+* **`/usr/local/nginx/sbin/nginx  -m  2>&1  | grep upstream`**
+* **`/usr/local/nginx/sbin/nginx  -m  2>&1  | grep upstream | grep check`**
+* **`sbin/nginx -h`**
+* **`sbin/nginx -v`**
+* **`sbin/nginx -V`**
+* **`ll /usr/local/nginx`**
+* **`ll /usr/local/nginx.old/`**
+* **`cat nginx.conf | grep -v "#" | grep -v "^$"`**
+* **`cat apps/proxy_tengine.conf | grep -v "#" | grep -v "^$"`**
+* **`../sbin/nginx  -t -c /usr/local/nginx/conf/nginx.conf`**
+* **`kill  -HUP `cat ../logs/nginx.pid ``**
+* **`perl -e 'print  crypt(tengine,tengine)';`**
+* **`cat status.passwd`**
+* **`../sbin/nginx  -t -c /usr/local/nginx/conf/nginx.conf`**
+* **`kill  -HUP `cat ../logs/nginx.pid ``**
 
 ---
 

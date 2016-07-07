@@ -3,8 +3,8 @@ layout: post
 title: Percona Server  5.1 内存过量消耗分析
 author: wilmosfang
 tags:  mysql troubleshooting
-categories:  mysql troubleshooting
-wc: 301   857 10416
+categories:  mysql
+wc: 301   856 10402
 excerpt: mysql 内存过量消耗的问题发现，分析，分析工具，解决办法，和相关参数的意义
 comments: true
 ---
