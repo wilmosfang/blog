@@ -2,8 +2,8 @@
 layout: post
 title:  Jenkins 基础 
 author: wilmosfang
-tags:   Jenkins 
-categories:   Jenkins 
+tags:   jenkins 
+categories:   jenkins 
 wc: 283 871 10039
 excerpt:  Jenkins 的安装与基础
 comments: true
