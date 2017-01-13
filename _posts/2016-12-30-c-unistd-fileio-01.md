@@ -1,6 +1,6 @@
 ---
 layout:  post
-title:  文件I/O (一)
+title:  文件I/O (一).非缓冲IO实现mycopy
 author:  wilmosfang
 tags:   c 
 categories:  c

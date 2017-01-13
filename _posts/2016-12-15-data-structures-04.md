@@ -1,6 +1,6 @@
 ---
 layout:  post
-title:  数据结构基础(四)
+title:  数据结构基础(四).栈
 author:  wilmosfang
 tags:   c 
 categories:  c

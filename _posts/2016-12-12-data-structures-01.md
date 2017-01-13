@@ -1,6 +1,6 @@
 ---
 layout:  post
-title:  数据结构基础(一)
+title:  数据结构基础(一).顺序表
 author:  wilmosfang
 tags:   c 
 categories:  c

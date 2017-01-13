@@ -1,6 +1,6 @@
 ---
 layout:  post
-title:  数据结构基础(六)
+title:  数据结构基础(六).二叉树
 author:  wilmosfang
 tags:   c 
 categories:  c

@@ -1,6 +1,6 @@
 ---
 layout:  post
-title:  数据结构基础(五)
+title:  数据结构基础(五).队
 author:  wilmosfang
 tags:   c 
 categories:  c

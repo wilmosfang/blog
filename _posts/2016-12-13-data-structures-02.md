@@ -1,6 +1,6 @@
 ---
 layout:  post
-title:  数据结构基础(二)
+title:  数据结构基础(二).单链表
 author:  wilmosfang
 tags:   c 
 categories:  c

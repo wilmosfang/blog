@@ -1,6 +1,6 @@
 ---
 layout:  post
-title:  文件I/O (二)
+title:  文件I/O (二).结构体存取
 author:  wilmosfang
 tags:   c 
 categories:  c
