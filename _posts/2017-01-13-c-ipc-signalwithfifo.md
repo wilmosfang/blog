@@ -20,9 +20,10 @@ comments: true
 * 无名管道 ( pipe )
 * 有名管道 ( fifo )
 * 信号 ( signal )
-* 信号量( semophore )
-* 共享内存( shared memory )
-* 套接字( socket )
+* 信号量 ( semaphore )
+* 消息队列 ( message queues )
+* 共享内存 ( shared memory )
+* 套接字 ( socket )
 
 这里分享一下我在学习进程通讯过程中的笔记和心得
 
