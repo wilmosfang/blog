@@ -3,7 +3,7 @@ layout: post
 title:  Logstash  Plugins
 author: wilmosfang
 tags:   logstash ruby
-categories:   logstash ruby
+categories:   logstash
 wc: 751  1934 25341 
 excerpt:  Logstash 插件相关基础与使用方法
 comments: true

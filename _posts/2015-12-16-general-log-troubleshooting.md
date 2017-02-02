@@ -3,7 +3,7 @@ layout: post
 title:  general_log 问题处理 
 author: wilmosfang
 tags:   troubleshooting upgrade mysql 
-categories:   troubleshooting upgrade mysql 
+categories:   mysql 
 wc: 707 3886 33288
 excerpt: mysql 升级过程中出现关于 general_log 缺失的故障处理
 comments: true

@@ -3,7 +3,7 @@ layout: post
 title: 使用XtraBackup创建mysql slave 
 author: wilmosfang
 tags:   mysql admintools
-categories:   mysql admintools
+categories:   mysql
 wc: 1206 4769 52759
 excerpt: follow me
 comments: true

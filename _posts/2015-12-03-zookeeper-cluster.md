@@ -3,7 +3,7 @@ layout: post
 title: ZooKeeper 集群
 author: wilmosfang
 tags:  zookeeper cluster
-categories:  zookeeper cluster
+categories:  zookeeper
 wc: 701 2633 32235
 excerpt: follow me
 comments: true

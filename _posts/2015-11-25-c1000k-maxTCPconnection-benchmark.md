@@ -2,8 +2,8 @@
 layout: post
 title: c1000k TCP 连接上限测试
 author: wilmosfang
-tags:  benchmark
-categories:  benchmark
+tags:  benchmark c1000k
+categories:  c1000k
 wc: 259 813 6283
 excerpt: follow me
 comments: true

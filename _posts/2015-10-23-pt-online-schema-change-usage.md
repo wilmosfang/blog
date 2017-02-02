@@ -3,7 +3,7 @@ layout: post
 title: pt-online-schema-change 使用基础 
 author: wilmosfang
 tags:  admintools mysql
-categories:  admintools mysql
+categories:  mysql
 wc: 608 3439 23834
 excerpt: follow me
 comments: true

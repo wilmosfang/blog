@@ -3,7 +3,7 @@ layout: post
 title:  mysql 迁移
 author: wilmosfang
 tags:  mysql upgrade keepalived
-categories:  mysql upgrade keepalived
+categories:  mysql
 wc: 1093 3654 41156
 excerpt: 安全高效地进行mysql迁移与slave升级，重在迁移过程与检查流程
 comments: true

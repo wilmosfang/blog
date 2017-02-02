@@ -3,7 +3,7 @@ layout: post
 title: Mysql复制数据一致性检查
 author: wilmosfang
 tags:  mysql admintools 
-categories:  mysql admintools 
+categories:  mysql 
 wc: 310 1193 16168
 excerpt: follow me
 comments: true

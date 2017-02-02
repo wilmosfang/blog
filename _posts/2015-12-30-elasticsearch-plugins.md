@@ -2,8 +2,8 @@
 layout: post
 title:  Elasticsearch Plugins
 author: wilmosfang
-tags:  nosql elasticsearch 
-categories:  nosql elasticsearch 
+tags:  elasticsearch nosql
+categories:  elasticsearch 
 wc: 273  588 7336 
 excerpt:  elasticsearch 插件的相关基础
 comments: true

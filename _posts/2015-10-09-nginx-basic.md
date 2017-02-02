@@ -3,7 +3,7 @@ layout: post
 title: nginx基础
 author: wilmosfang
 tags:  nginx upgrade
-categories:  nginx upgrade
+categories:  nginx
 wc: 1092 4425 43801
 excerpt: follow me
 comments: true

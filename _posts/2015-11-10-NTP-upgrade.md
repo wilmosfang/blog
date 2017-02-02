@@ -3,7 +3,7 @@ layout: post
 title: NTP升级
 author: wilmosfang
 tags:  upgrade ntp
-categories:  upgrade ntp
+categories:  ntp
 wc: 664 3060 25495
 excerpt: follow me
 comments: true

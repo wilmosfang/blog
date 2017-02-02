@@ -3,7 +3,7 @@ layout: post
 title:  Ruby 操作 Mysql
 author: wilmosfang
 tags:   mysql ruby
-categories:   mysql ruby
+categories:   ruby
 wc: 493  1296 12349 
 excerpt: mysql2 gem 的安装，创建用户，连接数据库，创建数据库，创建表，插入数据，捕获返回结果并显示，更新数据，删除数据，查询数据，兼容性
 comments: true

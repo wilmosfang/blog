@@ -3,7 +3,7 @@ layout: post
 title: perl dancer 基础
 author: wilmosfang
 tags:  perl dancer
-categories:  perl dancer
+categories:  perl
 wc: 1577 6327 64750
 excerpt: follow me
 comments: true

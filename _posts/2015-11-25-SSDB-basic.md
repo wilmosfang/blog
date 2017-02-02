@@ -3,7 +3,7 @@ layout: post
 title: SSDB基础
 author: wilmosfang
 tags:  nosql ssdb cluster
-categories:  nosql
+categories:  ssdb
 wc: 697  2141 20113
 excerpt: ssdb 下载安装，启动停止，前台后台运行，客户端连接，启动脚本，master-master 集群，内存占用
 comments: true

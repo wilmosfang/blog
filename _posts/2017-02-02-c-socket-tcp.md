@@ -1,30 +1,33 @@
 ---
 layout:  post
-title: 进程间通讯(七).socket
+title: 网络编程.TCP
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:  724  1515 24193 
-excerpt: 套接字、 sockaddr 结构体、in_addr 结构体、sockaddr_in 结构体、socket、AF_INET 和 SOCK_STREAM 宏定义、htons、INADDR_ANY 宏定义、setsockopt、bind、listen、accept、recv、send、inet_addr、connect
+wc:  799  1605 25181 
+excerpt:  网络编程，TCP、TCP 编程步骤
 comments: true
 ---
 
 
 # 前言
 
-**UNIX/Linux** 是多任务的操作系统，通过多个进程分别处理不同事务来实现，如果多个进程要进行协同工作或者争用同一个资源时，互相之间的通讯就很有必要了
+不同计算机中的进程间通讯奠定了当前网络世界的基础
 
-进程间通信，**Inter process communication**，简称 **IPC**，在 **UNIX/Linux** 下主要有以下几种方式:
+网络进程间通信是通过 socket 实现的
 
-* 无名管道 ( pipe )
-* 有名管道 ( fifo )
-* 信号 ( signal )
-* 信号量 ( semaphore )
-* 消息队列 ( message queues )
-* 共享内存 ( shared memory )
-* 套接字 ( socket )
+目前世界上最为流行的就是 `TCP/IP` 协议栈
 
-这里分享一下我在学习进程通讯过程中的笔记和心得
+这个协议栈中有两种通讯方式
+
+* TCP
+* UDP
+
+TCP 的通讯过程如下：
+
+![tcp_sockets.jpg](/images/tcp_sockets.jpg)
+
+这里分享一下我在学习TCP网络编程过程中的笔记和心得
 
 ---
 
@@ -35,19 +38,46 @@ comments: true
 
 ---
 
-## 套接字
+## TCP
 
-之前的各种通信机制如：pipe，FIFO，message queue，signal ，semaphore ，shared memory 都局限于同一台计算机上的进程间通信
+TCP充分实现了数据传输时各种控制功能，可以进行丢包的重发控制，还可以对次序乱掉的分包进行顺序控制（而这些在UDP中都没有）
 
-但是要实现不同计算机（通过网络相连）上的进程互相通信，就需要网络进程间通信（network IPC）
+TCP作为一种面向有连接的协议，只有在确认通信对端存在时才会发送数据，从而可以控制通信流量的浪费
 
-套接字允许进程与不同计算机上的以及同一计算机上的其它进程通信
+TCP通过检验和、序列号、确认应答、重发控制、连接管理以及窗口控制等机制实现 **可靠性传输**
 
-网络上的两个程序通过一个双向的通信连接实现数据的交换，这个连接的一端称为一个socket
+---
 
-建立网络通信连接至少要一对端口号(socket)。socket本质是编程接口(API)，对TCP/IP的封装，TCP/IP也要提供可供程序员做网络开发所用的接口，这就是Socket编程接口
+## TCP 编程步骤
 
->Socket的英文原义是“孔”或“插座”。作为BSD UNIX的进程通信机制，取后一种意思。通常也称作"套接字"，用于描述IP地址和端口，是一个通信链的句柄，可以用来实现不同虚拟机或不同计算机之间的通信。在Internet上的主机一般运行了多个服务软件，同时提供几种服务。每种服务都打开一个Socket，并绑定到一个端口上，不同的端口对应于不同的服务。Socket正如其英文原意那样，像一个多孔插座。一台主机犹如布满各种插座的房间，每个插座有一个编号，有的插座提供220伏交流电， 有的提供110伏交流电，有的则提供有线电视节目。 客户软件将插头插到不同编号的插座，就可以得到不同的服务
+### 服务器端
+
+TCP编程的服务器端一般步骤是：
+
+* 1、创建一个socket，用函数socket()； 
+* 2、设置socket属性，用函数setsockopt(); * 可选 
+* 3、绑定IP地址、端口等信息到socket上，用函数bind(); 
+* 4、开启监听，用函数listen()； 
+* 5、接收客户端上来的连接，用函数accept()； 
+* 6、收发数据，用函数send()和recv()，或者read()和write(); 
+* 7、关闭网络连接； 
+* 8、关闭监听；
+
+### 客户端
+
+TCP编程的客户端一般步骤是：
+
+
+* 1、创建一个socket，用函数socket()； 
+* 2、设置socket属性，用函数setsockopt();* 可选 
+* 3、绑定IP地址、端口等信息到socket上，用函数bind();* 可选 
+* 4、设置要连接的对方的IP地址和端口等属性； 
+* 5、连接服务器，用函数connect()； 
+* 6、收发数据，用函数send()和recv()，或者read()和write(); 
+* 7、关闭网络连接；
+
+
+> **Tip:** 引自 **[《TCP和UDP的最完整的区别》][52117463]**
 
 ---
 
@@ -55,19 +85,20 @@ comments: true
 
 ### 要求
 
-编写一个网络通讯程序，客户端通过指定IP地址的方式向服务端发送一段字符串，服务端收到后显示并且作出响应，然后退出
+客户端用TCP将一幅图片或者文件（1M以上）上传到另一台PC上（服务器），并且用diff测试区别。（注意分包）
 
 
 
 ### 代码示例
 
-**`tcpserver.c`**
+**`tcpcopyserver.c`**
 
 ~~~
-#include <stdio.h> //perror,printf 相关函数在此声明
-#include <netinet/in.h> //sockaddr_in,htons,htonl,socket,AF_INET,SOCK_STREAM,INADDR_ANY,SOL_SOCKET,SO_REUSEADDR,bind,listen,accept,recv,send 相关声明和定义在这个文件中
-#include <string.h> //memset 相关函数在此声明
-#include <unistd.h> //close 相关函数在此声明
+#include <stdio.h> //perror,printf 相关函数的声明包含在内
+#include <netinet/in.h> //sockaddr_in,socket,AF_INET,SOCK_STREAM,htons,htonl,INADDR_ANY,setsockopt,SOL_SOCKET,SO_REUSEADDR,bind,listen,accept,recv,send 相关声明和定义包含在内
+#include <string.h>  //memset 相关函数的声明包含在内
+#include <unistd.h> //write,close 相关函数的声明包含在内
+#include <fcntl.h> //open,O_RDWR,O_CREAT,O_TRUNC相关函数的声明和定义包含在内
 
 #define MAX_CONN 2
 #define BUF_SIZE 1024
@@ -76,9 +107,10 @@ comments: true
 int main()
 {
   struct sockaddr_in server_sai,client_sai;
-  int sfd=0,cfd=0,res=-1,on=1,recvbytes=0,sendbytes=0;
+  int sfd=0,cfd=0,res=-1,on=1,recvbytes=0,sendbytes=0,writebytes=0,fa=0;
   int addrlen=sizeof(struct sockaddr);
-  char buf[BUF_SIZE]; //各种变量定义与初始化
+  char buf[BUF_SIZE];
+  char *filename="/tmp/x.download";   //进行各种变量的定义和初始化
 
   if(-1 == (sfd=socket(AF_INET,SOCK_STREAM,0))) //创建一个IPV4的TCP socket
   {
@@ -86,10 +118,11 @@ int main()
     return res;
   }
   
-  server_sai.sin_family=AF_INET; //IPV4 协议族
+  server_sai.sin_family=AF_INET;  //IPV4 协议族
   server_sai.sin_port=htons(PORT); //9000端口
   server_sai.sin_addr.s_addr=htonl(INADDR_ANY); //0.0.0.0 的通配监听
-  memset(&(server_sai.sin_zero),0,sizeof(server_sai.sin_zero)); //将剩余部分填零
+  memset(&(server_sai.sin_zero),0,sizeof(server_sai.sin_zero));  //将剩余部分填零
+  
   setsockopt(sfd,SOL_SOCKET,SO_REUSEADDR,&on,sizeof(on)); //closesocket（一般不会立即关闭而经历TIME_WAIT的过程）后想继续重用该socket
 
   if(-1 == bind(sfd,(struct sockaddr *)&server_sai,sizeof(struct sockaddr))) //将 sfd 和 socket 地址进行绑定
@@ -98,68 +131,87 @@ int main()
     return res;
   }
   
-  if (-1 == (listen(sfd,MAX_CONN))) //在sfd上进行监听，最多允许同时有2个请求在队列中排队，此配置正是DDOS的攻击点，协议天然的缺陷在于，不论这个值设多设少，都不会是一个适合的值
+  if (-1 == (listen(sfd,MAX_CONN)))  //在sfd上进行监听，最多允许同时有2个请求在队列中排队，此配置正是DDOS的攻击点，协议天然的缺陷在于，不论这个值设多设少，都不会是一个适合的值
   {
     perror("listen");
     return res;
   }
   else printf("Listening...\n");
 
-  if(-1 == (cfd=accept(sfd,(struct sockaddr *)&client_sai,(socklen_t *)&addrlen))) //接受连接，将返回的描述符赋给cfd
+  if(-1 == (cfd=accept(sfd,(struct sockaddr *)&client_sai,(socklen_t *)&addrlen)))   //接受连接，将返回的描述符赋给cfd
   {
     perror("accept");
     return res;
   }
 
-  memset(buf,0,sizeof(buf)); //将缓存置零
-  
-  if(-1  == (recvbytes = recv(cfd,buf,BUF_SIZE,0))) //从对端接受内容并且存到buf中
+  if (-1==(fa=open(filename,O_RDWR|O_CREAT|O_TRUNC,0644))) //以写的方式打开目标文件，也就是服务端数据的存放处
   {
-    perror("recv");
+    printf("cannot open file:%s\n",filename);
     return res;
   }
+
+  memset(buf,0,sizeof(buf)); //将缓存置零
+
+  do
+  {
+    if(-1 == (recvbytes = recv(cfd,buf,sizeof(buf),0))) //从网络端接收数据，并且存到buf中
+    {
+      perror("recv");
+      return res;
+    }
+    if(-1 == (writebytes = write(fa,buf,recvbytes))) //将buf中的数据写到文件中
+    {
+      printf("write error on:%s\n",filename);
+      return res;
+    }
+
+  }while(recvbytes == sizeof(buf)); //如果读到的数据小于一整块了，就意味着数据已经读完，跳出循环
+
   
-  printf("Received a message:%s\n",buf); //将收到的内容输出
-  
-  if(-1  == (sendbytes = send(cfd,"OK",2,0))) //给客户端回复一个ok
+  if(-1  == (sendbytes = send(cfd,"OK",2,0))) //发送一个读完的信号给远端
   {
     perror("send");
     return res;
   }
-
+  
+  close(fa);
   close(sfd);
-  close(cfd); //进行清理，关闭打开的描述符
+  close(cfd); //进行清理操作，关闭所有描述符
   res=0;
   return res;
 }
 ~~~
 
-**`tcpclient.c`**
+**`tcpcopyclient.c`**
 
 ~~~
-#include <stdio.h> //printf,sprintf,perror 相关声明在此文件中
-#include <string.h> //memset,strlen
-#include <unistd.h> //close
-#include <arpa/inet.h> //sockaddr_in,socket,AF_INET,SOCK_STREAM,htons,inet_addr,connect,sockaddr,send,recv //相关定义和声明在此文件中
+#include <stdio.h> //printf,sprintf,perror 相关函数在此声明
+#include <string.h> //memset 相关函数在此声明
+#include <unistd.h> //read,close 相关函数在此声明
+#include <arpa/inet.h> //socket,sockaddr_in,AF_INET,SOCK_STREAM,htons,inet_addr,connect,send,recv 相关函数和宏在此声明和定义
+#include <fcntl.h> //open,O_RDONLY 相关函数和宏在此声明和定义
 
-#define MAX_CONN 2
 #define BUF_SIZE 1024
 #define PORT 9000 
 
 int main(int argc,char *argv[])
 {
   struct sockaddr_in server_sai;
-  int sfd=0,res=-1,recvbytes=0,sendbytes=0;
-  char buf[BUF_SIZE],buf2[5]={0}; //进行变量的定义和初始化
+  int sfd=0,res=-1,recvbytes=0,sendbytes=0,readbytes=0,fa=0;
+  char buf[BUF_SIZE],buf2[5]={0};
+  char *filename=argv[2];  //进行变量的定义和初始化
   
-  if(argc < 3) //如果参数小于3个就报错，命令后面会分别加上IP地址和消息内容，所以一共是三个参数
+  if(argc !=  3)
   {
     printf("error number of argc:%d\n",argc);
     return res;
   }
-  
-  memset(buf,0,sizeof(buf)); //对buf清零
-  sprintf(buf,"%s",argv[2]); //将要传输的内容(第二个参数)复制到buf中
+
+  if (-1==(fa=open(argv[2],O_RDONLY,0644))) //将最后一个参数作为文件名，打开文件
+  {
+    printf("cannot open file:%s\n",filename);
+    return res;
+  }
 
   if(-1 == (sfd=socket(AF_INET,SOCK_STREAM,0))) //创建一个IPV4的TCP socket
   {
@@ -167,9 +219,9 @@ int main(int argc,char *argv[])
     return res;
   }
 
-  server_sai.sin_family=AF_INET;   //IPV4 协议族
-  server_sai.sin_port=htons(PORT); //9000端口
-  server_sai.sin_addr.s_addr=inet_addr(argv[1]); //使用第一个参数作为IP地址
+  server_sai.sin_family=AF_INET; //IPV4 协议族
+  server_sai.sin_port=htons(PORT);  //9000端口
+  server_sai.sin_addr.s_addr=inet_addr(argv[1]);  //使用第一个参数作为IP地址
   memset(&(server_sai.sin_zero),0,sizeof(server_sai.sin_zero)); //将结构体剩余部分填零
   
   if  (-1 == connect(sfd,(struct sockaddr *)&server_sai,sizeof(struct sockaddr))) //使用sfd进行连接
@@ -177,17 +229,34 @@ int main(int argc,char *argv[])
     perror("connect");
     return res;
   }
+
+  memset(buf,0,sizeof(buf)); //将buf清零
+
+  do
+  {
+    if(-1 == (readbytes=read(fa,buf,sizeof(buf)))) //从指定文件中读取数据写到buf中
+    {
+      printf("read error on:%s\n",filename);
+      return res;
+    }
+    if (-1 == (sendbytes=send(sfd,buf,readbytes,0))) //将buf中的数据写到远端
+    {
+      perror("send");
+      return res;
+    }
+  }while(readbytes == sizeof(buf) ); //如果读取的数据不再是一整块，就意味着已经读完，随即跳出循环
   
-  if (-1 == (sendbytes=send(sfd,buf,strlen(buf),0))) //将buf中的内容写到远端服务端，buf中的内容是命令行中的第二个参数
+  if (-1 == (recvbytes=recv(sfd,buf2,5,0))) //从远端读取数据到buf2中
   {
     perror("send");
     return res;
   }
-  
-  recvbytes=recv(sfd,buf2,5,0); //从服务端接收数据，写到buf2中
-  printf("%d -->%s\n",recvbytes,buf2); //将buf2中的数据显示出来
-  close(sfd); //进行清理工作，关闭描述符
 
+  printf("%d -->%s\n",recvbytes,buf2); //将接收到的字节数和数据内容打印出来
+  
+  close(sfd);
+  close(fa); //进行清理工作，关闭描述符
+  
   res=0;
   return res;
 }
@@ -197,23 +266,23 @@ int main(int argc,char *argv[])
 ### 编译执行
 
 ~~~
-emacs@ubuntu:~/c$ alias  gtc
+emacs@ubuntu:~/c$ alias gtc
 alias gtc='gcc -Wall -g -o'
-emacs@ubuntu:~/c$ gtc tcpclient.x tcpclient.c ; gtc tcpserver.x tcpserver.c
+emacs@ubuntu:~/c$ gtc tcpcopyserver.x tcpcopyserver.c ; gtc tcpcopyclient.x tcpcopyclient.c 
 emacs@ubuntu:~/c$ 
 ~~~
 
 此时系统中并没有开放9000端口
 
 ~~~
-emacs@ubuntu:~/c$ netstat -ant  | grep 9000
-emacs@ubuntu:~/c$ 
+emacs@ubuntu:~/c$ netstat -ant | grep 9000
+emacs@ubuntu:~/c$  
 ~~~
 
 运行服务端
 
 ~~~
-emacs@ubuntu:~/c$ ./tcpserver.x 
+emacs@ubuntu:~/c$ ./tcpcopyserver.x 
 Listening...
 
 ~~~
@@ -221,28 +290,39 @@ Listening...
 此时系统中多了一个9000端口
 
 ~~~
-emacs@ubuntu:~/c$ netstat -ant  | grep 9000
+emacs@ubuntu:~/c$ netstat -ant | grep 9000
 tcp        0      0 0.0.0.0:9000            0.0.0.0:*               LISTEN     
-emacs@ubuntu:~/c$
+emacs@ubuntu:~/c$ 
+~~~
+
+服务端也并没有 `/tmp/x.download` 这个文件
+
+~~~
+emacs@ubuntu:~/c$ ll /tmp/x.download 
+ls: 无法访问/tmp/x.download: 没有那个文件或目录
+emacs@ubuntu:~/c$ 
 ~~~
 
 运行客户端，会立刻返回
 
 ~~~
-emacs@ubuntu:~/c$ ./tcpclient.x 127.0.0.1 hello
+emacs@ubuntu:~/c$ du -sh 4.png 
+8.6M	4.png
+emacs@ubuntu:~/c$ 
+emacs@ubuntu:~/c$ ./tcpcopyclient.x  127.0.0.1 4.png
 2 -->OK
 emacs@ubuntu:~/c$ 
 ~~~
 
-服务端会打印信息并且返回
+服务端会打印信息并且返回，对比两个文件也没有差异
 
 ~~~
-emacs@ubuntu:~/c$ ./tcpserver.x 
+emacs@ubuntu:~/c$ ./tcpcopyserver.x 
 Listening...
-Received a message:hello
 emacs@ubuntu:~/c$ 
+emacs@ubuntu:~/c$ diff /tmp/x.download 4.png 
+emacs@ubuntu:~/c$
 ~~~
-
 
 编译执行过程中没有报错，从结果来看，符合预期
 
@@ -622,10 +702,10 @@ extern ssize_t send (int __fd, __const void *__buf, size_t __n, int __flags);
 | flags| 说明| recv|send|
 | :------- | :---- | :---: |:---:|
 |MSG_DONTROUTE|	绕过路由表查找|| •|
-|MSG_DONTWAIT|仅本操作非阻塞|	  •  |  •|
-|MSG_OOB　　|发送或接收带外数据|	 •	| •|
-|MSG_PEEK  |窥看外来消息|  •  ||
-|MSG_WAITALL　|等待所有数据 | •||	  
+|MSG_DONTWAIT|仅本操作非阻塞 |	  •  |  •|
+|MSG_OOB　　|　　发送或接收带外数据|	 •	| •|
+|MSG_PEEK　|	窥看外来消息	|  •  ||
+|MSG_WAITALL　|　等待所有数据 | •||	  
 
 
 返回值 ：>0 表示发送的字节数（实际上是拷贝到发送缓冲中的字节数）；==0 对方调用了close API来关闭连接 ；<0 发送失败，错误原因存于全局变量errno中
@@ -699,13 +779,11 @@ EAFNOSUPPORT sockaddr结构的sa_family不正确
 EALREADY socket为不可阻断且先前的连线操作还未完成
 ~~~
 
-
-
 ---
 
 # 总结
 
-以下函数可以进行socket的创建与控制,是网络编程的基础
+以下函数可以进行socket的创建与控制，是TCP网络编程的基础
 
 * socket
 * htons
@@ -720,5 +798,5 @@ EALREADY socket为不可阻断且先前的连线操作还未完成
 
 通过各方面资料弄懂其参数的意义和返回值的类型，是熟练掌握的基础
 
-[19901763]:https://www.zhihu.com/question/19901763
 
+[52117463]:http://blog.csdn.net/li_ning_/article/details/52117463

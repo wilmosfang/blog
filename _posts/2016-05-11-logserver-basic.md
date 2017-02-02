@@ -2,8 +2,8 @@
 layout: post
 title:  日志服务器
 author: wilmosfang
-tags:   rsyslog loganalyzer mysql php
-categories:   rsyslog loganalyzer mysql php
+tags:   log rsyslog loganalyzer mysql php 
+categories:   loganalyzer
 wc: 1514  4989 60666 
 excerpt:  安装 httpd，安装 mysql，安装 php，安装 rsyslog，创建 schema，rsyslog 的服务端和客户端配置，审批本地所有操作，安装 LogAnalyzer，配置 LogAnalyzer，查看日志统计，LogAnalyzer 登录测试，搜索日志，修改配置、报错和处理办法，相关注意事项
 comments: true

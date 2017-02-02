@@ -3,7 +3,7 @@ layout: post
 title:   Memcached 状态详解
 author: wilmosfang
 tags:   nosql memcached 
-categories:   nosql 
+categories:   memcached 
 wc: 211  476 6809 
 excerpt: 连接 memcached 实例，stats 命令，指标详解 
 comments: true

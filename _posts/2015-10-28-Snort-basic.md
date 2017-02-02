@@ -3,7 +3,7 @@ layout: post
 title: Snort 基础
 author: wilmosfang
 tags:  snort security
-categories:  snort security
+categories:  snort
 wc: 1353 5732 62839
 excerpt: follow me
 comments: true

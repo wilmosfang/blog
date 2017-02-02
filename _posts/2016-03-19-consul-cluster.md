@@ -2,7 +2,7 @@
 layout: post
 title:  Consul 集群
 author: wilmosfang
-categories:   cluster consul
+categories:  consul
 tags:   cluster consul
 wc: 634  2047 22478 
 excerpt:  consul 的发现机制，集群构建，节点查询，脱离集群，健康检查，检查定义，配置重载，状态查看，键值操作，增删查改，条件更新，触发器与集群构建过程中的注意事项 

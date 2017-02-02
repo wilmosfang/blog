@@ -3,7 +3,7 @@ layout: post
 title:  Zabbix 监控系统搭建
 author: wilmosfang
 tags:   monitoring zabbix mysql php
-categories:   monitoring zabbix mysql php
+categories:   zabbix
 wc: 576  1805 26491  
 excerpt: zabbix软件包下载，安装，数据库配置，zabbix服务配置，防火墙配置，访问设置，selinux问题
 comments: true

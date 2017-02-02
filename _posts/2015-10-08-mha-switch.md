@@ -3,7 +3,7 @@ layout: post
 title: mha 切换(操作流程建议)
 author: wilmosfang
 tags:  mha mysql cluster
-categories:  mha mysql cluster
+categories:  mysql
 wc: 87 165 2668
 excerpt: follow me
 comments: true

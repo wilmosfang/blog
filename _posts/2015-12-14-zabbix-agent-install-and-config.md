@@ -3,7 +3,7 @@ layout: post
 title:  Zabbix Agent 安装
 author: wilmosfang
 tags:  monitoring zabbix 
-categories:  monitoring zabbix 
+categories:  zabbix 
 wc: 443 1534 20654
 excerpt: zabbix agent 的安装过程
 comments: true

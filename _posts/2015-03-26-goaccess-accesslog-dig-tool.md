@@ -2,8 +2,8 @@
 layout: post
 title: GoAccess access日志分析工具
 author: wilmosfang
-tags:  linux nginx log
-categories:  log
+tags:  linux nginx log goaccess
+categories:  goaccess
 wc: 264 872 11009
 excerpt: web access log 日志分析工具 goaccess 的安装、报告的方法
 comments: true

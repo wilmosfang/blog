@@ -3,15 +3,15 @@ layout: post
 title: Mysql 监控 
 author: wilmosfang
 tags:  monitoring zabbix mysql
-categories:  monitoring zabbix mysql
+categories: zabbix
 wc: 413 1448 16383
 excerpt: 使用Zabbix监控Mysql的方法 
 comments: true
 date:   2015-08-18 00:00:00
 ---
 
-前言
-=
+# 前言
+
 
 大部分生产系统从一开始就要考虑它的 **高可用** 和 **监控** ，数据库更是如此，这里我分享一下Mysql的[监控方法][pmp]
 
@@ -43,8 +43,8 @@ mysql  Ver 14.14 Distrib 5.6.25-73.1, for Linux (x86_64) using  6.0
 [root@mysql-server packages]# 
 ~~~
 
-准备插件包
--
+## 准备插件包
+
 
 使用[percona][percona]的[repo][pyum]下载下列插件
 
@@ -74,8 +74,8 @@ warning: percona-zabbix-templates-1.1.5-1.noarch.rpm: Header V4 DSA/SHA1 Signatu
 [root@mysql-server packages]# 
 ~~~
 
-安装插件包
--
+## 安装插件包
+
 
 ~~~
 [root@mysql-server packages]# rpm -ivh  percona-zabbix-templates-1.1.5-1.noarch.rpm 
@@ -88,8 +88,8 @@ Templates are installed to /var/lib/zabbix/percona/templates
 [root@mysql-server packages]# 
 ~~~
 
-拷贝配置
--
+## 拷贝配置
+
 
 拷贝 **userparameter_percona_mysql.conf** 到配置目录
 
@@ -99,8 +99,8 @@ Templates are installed to /var/lib/zabbix/percona/templates
 [root@mysql-server packages]# 
 ~~~
 
-配置密码
--
+## 配置密码
+
 
 在相应目录下创建密码配置文件 **ss_get_mysql_stats.php.cnf**
 
@@ -122,8 +122,8 @@ ERROR: run the command manually to investigate the problem: /usr/bin/php -q /var
 [root@mysql-server scripts]# 
 ~~~
 
-安装依赖包
---
+## 安装依赖包
+
 
 这里提示我们系统里没有安装 **php** ,我们给它装上，同时我们也装上 **php-mysql** ,它提供了php 连接 mysql 需要的DBI
 
@@ -186,8 +186,8 @@ Complete!
 [root@mysql-server scripts]#
 ~~~
 
-测试脚本
--
+## 测试脚本
+
 
 装完包后，再次执行测试脚本，就正常返回一个数字了
 
@@ -275,8 +275,8 @@ rm: cannot remove `/tmp/localhost-mysql_cacti_stats.txt': Operation not permitte
 后一条报错的原因是对于之前使用root生成的 **/tmp/localhost-mysql_cacti_stats.txt** zabbix没有写权限
 
 
-给zabbix赋权
--
+## 给zabbix赋权
+
 
 分别来进行处理,先处理写权限问题
 
@@ -340,8 +340,8 @@ Starting Zabbix agent:                                     [  OK  ]
 [root@mysql-server ~]# 
 ~~~
 
-连接测试
--
+## 连接测试
+
 
 在 **zabbix-server** 测试一下连接
 
@@ -357,8 +357,8 @@ Starting Zabbix agent:                                     [  OK  ]
 
 
 
-添加模板
--
+## 添加模板
+
 
 [配置][pmp.installation] **Zabbix Server** 
 

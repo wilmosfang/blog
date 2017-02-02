@@ -2,7 +2,7 @@
 layout: post
 title:  Rails 构建评论功能
 author: wilmosfang
-categories:   ruby rails
+categories:   ruby
 tags:   ruby rails
 wc: 793  1717 19611 
 excerpt:  使用 ruby on rails 的框架构建评论功能，模型的添加删除，model 的迁移，关联评论，添加路由，生成 controller，代码重构，删除评论，删除关联，基本认证

@@ -3,7 +3,7 @@ layout: post
 title: Linux CPU info
 author: wilmosfang
 tags:  monitoring linux
-categories:  monitoring
+categories:  linux
 wc: 335  1122 10459
 excerpt: cpu 的判断方法，查看方法，其它信息，附各项参数意义
 comments: true

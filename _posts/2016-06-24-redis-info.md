@@ -3,7 +3,7 @@ layout: post
 title:   Redis 状态信息详解
 author: wilmosfang
 tags:   nosql redis
-categories:   nosql 
+categories:   redis 
 wc: 574  1357 17442 
 excerpt:  Redis 的下载，解压，安装，启动，连接，info的用法，Redis 状态信息的详解 
 comments: true

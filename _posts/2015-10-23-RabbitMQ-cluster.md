@@ -3,7 +3,7 @@ layout: post
 title: RabbitMQ集群I
 author: wilmosfang
 tags:  rabbitmq cluster
-categories:  rabbitmq cluster
+categories:  rabbitmq 
 wc: 541 1398 16216
 excerpt: follow me
 comments: true

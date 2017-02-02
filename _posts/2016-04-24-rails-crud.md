@@ -2,7 +2,7 @@
 layout: post
 title:  Rails MVC 和 CRUD
 author: wilmosfang
-categories:   ruby rails
+categories:   ruby
 tags:   ruby rails
 wc:  1267  2494 30279 
 excerpt:  创建一个简单的Rails应用，MVC 基础，Rails 的 MVC 框架，创建 controller 和 view，修改页面内容，设置首页，简单访问，添加资源，定义 new 方法，创建模板，添加表单，定义 create 方法，创建 model，进行迁移，保存数据，显示文章，添加链接，数据校验，更新文章，删除文章

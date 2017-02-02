@@ -2,8 +2,8 @@
 layout: post
 title: Centos6 下 logrotate 探源
 author: wilmosfang
-tags:  linux log
-categories:  log
+tags:  linux log logrotate
+categories:  logrotate
 wc: 749 3635 28148
 excerpt: logrotate 执行时间的探源
 comments: true

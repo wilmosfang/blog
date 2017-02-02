@@ -2,8 +2,8 @@
 layout: post
 title: qshell基础
 author: wilmosfang
-tags:  admintools
-categories:  admintools
+tags:  admintools qshell
+categories:  qshell
 wc: 670 1741 21048
 excerpt: follow me
 comments: true

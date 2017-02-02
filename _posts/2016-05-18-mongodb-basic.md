@@ -3,7 +3,7 @@ layout: post
 title:  MongoDB 基础
 author: wilmosfang
 tags:   nosql mongodb
-categories:   nosql mongodb
+categories:   mongodb
 wc: 558  1861 22968 
 excerpt: mongodb 软件仓库，mongodb 安装，手动创建 mongodb 实例，mongodb 服务启动，连接，停止
 comments: true

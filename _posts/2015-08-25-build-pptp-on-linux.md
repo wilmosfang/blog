@@ -3,7 +3,7 @@ layout: post
 title: Linux 搭建 VPN
 author: wilmosfang
 tags:  network vpn
-categories:  network vpn
+categories:  vpn
 wc: 579  2406 24418
 excerpt: Linux 下搭建 pptp VPN 的方法
 comments: true

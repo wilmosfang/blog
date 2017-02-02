@@ -3,7 +3,7 @@ layout: post
 title:  Mycat 配置
 author: wilmosfang
 tags:   mysql mycat
-categories:   mysql mycat
+categories:   mycat
 wc: 474   714 12584 
 excerpt:  mycat的概念和配置解析 
 comments: true

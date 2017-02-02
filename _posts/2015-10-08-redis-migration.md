@@ -3,7 +3,7 @@ layout: post
 title: Redis 迁移(操作流程建议)
 author: wilmosfang
 tags:  redis nosql keepalived
-categories:   nosql 
+categories:   redis 
 wc: 163 230 3602
 excerpt: follow me
 comments: true
