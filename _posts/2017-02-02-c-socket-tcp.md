@@ -1,6 +1,6 @@
 ---
 layout:  post
-title: 网络编程.TCP
+title: 网络编程(一).TCP
 author:  wilmosfang
 tags:   c 
 categories:  c
