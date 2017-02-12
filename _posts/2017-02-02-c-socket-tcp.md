@@ -2,7 +2,7 @@
 layout:  post
 title: 网络编程(一).TCP
 author:  wilmosfang
-tags:   c 
+tags:   c network 
 categories:  c
 wc:  799  1605 25181 
 excerpt:  网络编程，TCP、TCP 编程步骤

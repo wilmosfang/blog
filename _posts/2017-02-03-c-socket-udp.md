@@ -2,7 +2,7 @@
 layout:  post
 title: 网络编程(二).UDP
 author:  wilmosfang
-tags:   c 
+tags:   c network
 categories:  c
 wc:  519   979 15958 
 excerpt:  网络编程，UDP、UDP 编程步骤、TCP和UDP的区别
