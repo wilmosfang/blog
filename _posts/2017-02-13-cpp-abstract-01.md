@@ -2,7 +2,7 @@
 layout:  post
 title:  C++基础(一).抽象
 author:  wilmosfang
-tags:   c++
+tags:   c c++
 categories:  c++
 wc: 209  338 7079 
 excerpt:  c++ 面向对象之抽象

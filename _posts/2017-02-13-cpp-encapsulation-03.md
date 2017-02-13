@@ -2,7 +2,7 @@
 layout:  post
 title:  C++基础(三).封装
 author:  wilmosfang
-tags:   c++
+tags: c  c++
 categories:  c++
 wc:  180  319 4429 
 excerpt:  c++ 面向对象之封装
