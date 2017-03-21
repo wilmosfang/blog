@@ -69,7 +69,7 @@ just for test
 
 # 总结
 
-* **`for i in `seq 1 10`; do  echo -n ! &&  echo "[sms$i.png](/images/zabbix_sms/sms$i.png)" ; done`**
+* **`for i in $(seq 1 10); do  echo -n ! &&  echo "[sms$i.png](/images/zabbix_sms/sms$i.png)" ; done`**
 
 ---
 
