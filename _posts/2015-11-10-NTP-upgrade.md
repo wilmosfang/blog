@@ -4,7 +4,7 @@ title: NTP升级
 author: wilmosfang
 tags:  upgrade ntp
 categories:  ntp
-wc: 664 3060 25495
+wc: 667 2986 24972
 excerpt: follow me
 comments: true
 ---

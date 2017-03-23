@@ -4,7 +4,7 @@ title:  RabbitMQ 监控
 author: wilmosfang
 tags:   network nginx rabbitmq monitoring 
 categories:   rabbitmq 
-wc: 789  2321 28166 
+wc: 791 2235 27522
 excerpt:  RabbitMQ  的rabbitmq-management管理插件，https安全防护，基本认证，DNAT，访问控制，集群创建和web GUI监控方法 
 comments: true
 ---

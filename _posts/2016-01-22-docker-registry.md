@@ -4,7 +4,7 @@ title:  Docker Registry
 author: wilmosfang
 tags:   network docker
 categories:   docker
-wc: 1260  4618 50815 
+wc: 1268 4423 49312
 excerpt: 本地Registry服务的部署与销毁，远程Registry服务的部署与销毁，Docker卷，DockerTLS加密，基本认证与访问控制，使用Compose构建容器，docker-compose.yml的编辑与注意事项，Registry部署过程中的常见问题处理
 comments: true
 ---

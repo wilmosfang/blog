@@ -4,7 +4,7 @@ title:  Ruby 操作 MongoDB
 author: wilmosfang
 tags:   mongodb ruby
 categories:   ruby
-wc: 1082  4847 50727
+wc: 1081 4848 50732
 excerpt:  mongo gem 的安装，兼容性，连接数据库，插入数据，查询数据，修改数据，删除数据，集合操作，数据库操作，索引操作等相关基础
 comments: true
 ---

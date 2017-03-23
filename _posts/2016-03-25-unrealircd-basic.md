@@ -4,7 +4,7 @@ title:  UnrealIRCd 基础
 author: wilmosfang
 categories:   unrealircd
 tags:   irc unrealircd
-wc: 2022 11274 97515 
+wc: 2024 11167 96844
 excerpt: unrealircd 的下载，检验，安装，依赖，基础配置，启动运行，访问，和整个过程中的注意事项以及报错处理 
 comments: true
 ---

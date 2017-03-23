@@ -4,7 +4,7 @@ title:  Elasticsearch 批量导入数据
 author: wilmosfang
 categories:   elasticsearch
 tags:   nosql elasticsearch
-wc: 295   744 11369 
+wc: 294 700 11179
 excerpt: elasticsearch 批量导入数据，bulk API的相关基础，数据内容格式，可用方法，导入操作，注意事项，内存问题处理 
 comments: true
 ---

@@ -4,7 +4,7 @@ title:  Nginx 模块
 author:  wilmosfang
 tags:   nginx 
 categories:  nginx
-wc: 838  3028 42238 
+wc: 838 3028 42238
 excerpt: nginx 的模块加载方法，与查看方法 
 comments: true
 ---

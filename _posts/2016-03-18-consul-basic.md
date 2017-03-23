@@ -4,7 +4,7 @@ title:  Consul 基础
 author: wilmosfang
 categories:   consul
 tags:   consul
-wc: 639  2349 23520 
+wc: 641 2271 23022
 excerpt:  consul 的下载安装运行，成员查看，HTTP API，DNS API ，停止consul，服务定义，服务注册，查看服务和注意事项 
 comments: true
 ---

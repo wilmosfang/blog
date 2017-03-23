@@ -4,7 +4,7 @@ title:  HAproxy 基础
 author: wilmosfang
 tags:   cluster haproxy 
 categories:   haproxy 
-wc: 526  1846 17410 
+wc: 528 1774 16962
 excerpt: haproxy的下载与安装，运行与监控 
 comments: true
 ---

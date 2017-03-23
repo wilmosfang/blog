@@ -4,7 +4,7 @@ title: BGP数据中心鉴别方法
 author: wilmosfang
 tags:  network
 categories:  network
-wc: 743 2168 22352
+wc: 746 2133 22061
 excerpt: follow me
 comments: true
 ---

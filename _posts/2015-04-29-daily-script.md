@@ -4,7 +4,7 @@ title: Daily Script
 author: wilmosfang
 tags:  script
 categories:  script
-wc: 507 1628 13033
+wc: 510 1426 11737
 excerpt: follow me
 comments: true
 ---

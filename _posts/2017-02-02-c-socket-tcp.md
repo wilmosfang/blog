@@ -4,7 +4,7 @@ title: 网络编程(一).TCP
 author:  wilmosfang
 tags:   c network 
 categories:  c
-wc:  799  1605 25181 
+wc: 802 1607 25272
 excerpt:  网络编程，TCP、TCP 编程步骤
 comments: true
 ---

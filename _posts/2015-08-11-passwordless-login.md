@@ -4,7 +4,7 @@ title: 证书管理碉堡机
 author: wilmosfang
 tags:  ssh
 categories:  ssh
-wc: 254 639 6129
+wc: 257 603 5798
 excerpt: follow me
 comments: true
 ---

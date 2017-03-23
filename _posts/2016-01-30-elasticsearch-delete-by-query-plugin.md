@@ -4,7 +4,7 @@ title:  Elasticsearch Delete By Query Plugin
 author: wilmosfang
 tags:   nosql elasticsearch
 categories:   elasticsearch
-wc: 607  1606 16293 
+wc: 607 1559 15939
 excerpt: Elasticsearch Delete By Query Plugin 的安装卸载方法，操作注意事项  
 comments: true
 ---

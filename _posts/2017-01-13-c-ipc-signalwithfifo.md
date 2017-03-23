@@ -4,7 +4,7 @@ title: 进程间通讯(四).非亲缘进程间交互信号
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:  309  816 8034 
+wc: 310 825 8079
 excerpt:  进程间通讯、signal、fifo
 comments: true
 ---

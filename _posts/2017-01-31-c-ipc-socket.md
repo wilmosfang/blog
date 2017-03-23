@@ -4,7 +4,7 @@ title: 进程间通讯(七).socket
 author:  wilmosfang
 tags:   c network 
 categories:  c
-wc:  724  1515 24193 
+wc: 724 1511 24211
 excerpt: 套接字、 sockaddr 结构体、in_addr 结构体、sockaddr_in 结构体、socket、AF_INET 和 SOCK_STREAM 宏定义、htons、INADDR_ANY 宏定义、setsockopt、bind、listen、accept、recv、send、inet_addr、connect
 comments: true
 ---

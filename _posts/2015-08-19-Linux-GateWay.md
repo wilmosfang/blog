@@ -4,7 +4,7 @@ title: Linux 网关
 author: wilmosfang
 tags:  network
 categories:  network
-wc: 190  543 4998
+wc: 192 507 4772
 excerpt: 使用Linux搭建网关服务器
 comments: true
 ---

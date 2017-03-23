@@ -4,7 +4,7 @@ title:  Forklift ETL 基础（一）
 author:  wilmosfang
 tags:   ruby etl forklift mysql elasticsearch 
 categories:  ruby
-wc:  452  1124 11325 
+wc: 450 1123 11329
 excerpt:  forklift 安装，生成项目，引导脚本源码分析，包装脚本源码分析 
 comments: true
 ---

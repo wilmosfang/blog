@@ -4,7 +4,7 @@ title:  Mycat 管理命令
 author: wilmosfang
 categories:   mycat 
 tags:   mysql mycat 
-wc: 887  4580 52439 
+wc: 889 4373 51124
 excerpt: mycat的管理，与命令总览 
 comments: true
 ---

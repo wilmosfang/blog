@@ -4,7 +4,7 @@ title:  一个运维人员的编程思维
 author: wilmosfang
 categories:    thinking 
 tags:    thinking ruby python php perl  
-wc: 555   684 29331 
+wc: 557 662 29201
 excerpt: 运维人员的优秀品质，懒惰，编码能力，编程思维，运维指导思想，程序到底是什么，数据到底是什么，程序能干什么，工具意识，DRY，流的思想 
 comments: true
 ---

@@ -4,7 +4,7 @@ title: Elasticsearch 常用命令
 author: wilmosfang
 tags: nosql elasticsearch 
 categories:   elasticsearch
-wc: 485  1717 17870
+wc: 487 1613 17044
 excerpt: es的配置，防火墙，启停，常用命令 
 comments: true
 ---

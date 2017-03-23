@@ -4,7 +4,7 @@ title: NFS 配置
 author: wilmosfang
 tags:  nfs
 categories:  nfs
-wc: 485 1341 14805
+wc: 488 1282 14378
 excerpt: follow me
 comments: true
 ---

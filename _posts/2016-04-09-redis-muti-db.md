@@ -4,7 +4,7 @@ title:  Redis 多数据库
 author: wilmosfang
 categories:   redis 
 tags:    redis  ruby nosql
-wc: 326  844 9104 
+wc: 328 848 9139
 excerpt:  redis 多数据的支持，多数据库切换，配置，清空数据，CLI 操作，ruby API 操作，注意事项 
 comments: true
 ---

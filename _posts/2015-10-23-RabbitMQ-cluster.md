@@ -4,7 +4,7 @@ title: RabbitMQ集群I
 author: wilmosfang
 tags:  rabbitmq cluster
 categories:  rabbitmq 
-wc: 541 1398 16216
+wc: 544 1304 15544
 excerpt: follow me
 comments: true
 ---

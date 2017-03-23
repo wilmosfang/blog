@@ -4,7 +4,7 @@ title: Mysql MHA 搭建 (三) keepalived 1.2.13 安装
 author: wilmosfang
 tags:  mha mysql keepalived cluster 
 categories: mysql
-wc: 426  1026 15053 
+wc: 426 1026 15051
 excerpt: mha 切换前后架构图，keepalived 的安装，测试，sudo 配置，修改 master_ip_failover 和 master_ip_online_change 脚本
 comments: true
 ---

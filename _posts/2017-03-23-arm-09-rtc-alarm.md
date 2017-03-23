@@ -4,7 +4,7 @@ title:  ARM(九).RTC and ALARM
 author:  wilmosfang
 tags:   arm c
 categories:  arm
-wc: 1750 8006 82051
+wc: 1750 8006 82047
 excerpt:  ARM裸机开发、实时时钟与警报
 comments: true
 ---

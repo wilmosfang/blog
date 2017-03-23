@@ -4,7 +4,7 @@ title:  数据结构基础(三).双链表
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:  382   810 11072 
+wc: 382 810 11092
 excerpt:  线性表，链表，双向链表
 comments: true
 ---

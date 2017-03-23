@@ -4,7 +4,7 @@ title: 进程间通讯(三).signal
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc: 271  706 7459 
+wc: 272 715 7503
 excerpt:  进程间通讯、signal、kill、pause
 comments: true
 ---

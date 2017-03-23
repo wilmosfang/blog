@@ -4,7 +4,7 @@ title: Mac客户端创建VPN连接
 author: wilmosfang
 tags:  vpn
 categories:  vpn
-wc: 68 60 1463
+wc: 71 78 1514
 excerpt: follow me
 comments: true
 ---

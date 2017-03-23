@@ -4,7 +4,7 @@ title:  ARM(四).UART with no FIFO
 author:  wilmosfang
 tags:   arm c
 categories:  arm
-wc: 1715  7860 81333 
+wc: 1715 7863 81349
 excerpt:  ARM裸机开发、不带FIFO的串口(UART)通讯
 comments: true
 ---

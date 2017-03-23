@@ -4,7 +4,7 @@ title:  Mycat 配置
 author: wilmosfang
 tags:   mysql mycat
 categories:   mycat
-wc: 474   714 12584 
+wc: 487 657 12377
 excerpt:  mycat的概念和配置解析 
 comments: true
 ---

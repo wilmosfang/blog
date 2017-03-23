@@ -4,7 +4,7 @@ title: 进程间通讯(五).message queue
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:  605  1489 19484 
+wc: 605 1489 19490
 excerpt:  消息队列、参数限制、msgmni、msgmax、msgmnb、ftok、key_t、IPC_PRIVATE、msg.h 所包含的头文件、msgget、msgsnd、msgrcv、msgctl、msqid_ds、ipc_perm、fgets
 comments: true
 ---

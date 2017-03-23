@@ -4,7 +4,7 @@ title:  Beats 基础
 author: wilmosfang
 tags:  elasticsearch logstash beats filebeat
 categories:   beats
-wc: 383  1241 13946 
+wc: 385 1211 13714
 excerpt:  Beats 基础概念与使用方法
 comments: true
 ---

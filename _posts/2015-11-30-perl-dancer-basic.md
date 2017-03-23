@@ -4,7 +4,7 @@ title: perl dancer 基础
 author: wilmosfang
 tags:  perl dancer
 categories:  perl
-wc: 1577 6327 64750
+wc: 1580 6272 64329
 excerpt: follow me
 comments: true
 ---

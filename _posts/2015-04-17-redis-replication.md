@@ -4,7 +4,7 @@ title: Redis 复制
 author: wilmosfang
 tags: nosql  redis 
 categories:   redis
-wc: 581  1392 16632
+wc: 581 1392 16634
 excerpt: 持久性的安全隐患，复制原理，增量同步，无盘同步，配置方法，命令同步，配置同步，slave 的只读特性，连接认证，相关注意事项 
 comments: true
 ---

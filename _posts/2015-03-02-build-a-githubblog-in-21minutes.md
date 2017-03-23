@@ -4,7 +4,7 @@ title: 21分钟搭建一个GitHub Blog
 author: wilmosfang
 tags:  git jekyll 
 categories:  git
-wc: 100  115 2862
+wc: 101 116 2872
 excerpt: 申请 github 账号，fork 出一个blog ，定制 blog , 添加新博文
 comments: true
 ---

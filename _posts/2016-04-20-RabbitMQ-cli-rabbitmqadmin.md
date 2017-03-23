@@ -4,7 +4,7 @@ title:  RabbitMQ 的CLI管理工具 rabbitmqadmin
 author: wilmosfang
 categories:    rabbitmq
 tags:    rabbitmq
-wc: 2272   8098 103484 
+wc: 2274 8101 103513
 excerpt: Erlang 的仓库下载配置，Erlang 的升级，RabbitMQ 的升级，服务启动，插件启用 ，RabbitMQ CLI 管理工具 rabbitmqadmin 的获取，RabbitMQ 的架构、概念、消息投递过程，user、vhost、connection、exchange、binding、permission、channels、parameter、consumer、queue、policies、node 的查看删除和定义，格式化输出，消息发布与消费，exchange 三种类型 (fanout、direct、topic) 的特性
 comments: true
 ---

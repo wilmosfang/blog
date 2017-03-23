@@ -4,7 +4,7 @@ title:  Mysql binlog 查看方法
 author: wilmosfang
 tags:   mysql troubleshooting
 categories:   mysql 
-wc: 775  5326 85771 
+wc: 776 5326 85772
 excerpt: mysql binlog 的查看方法，show binlog events 和 mysqlbinlog， 这两种方法的操作示例与详解还有注意事项
 comments: true
 ---

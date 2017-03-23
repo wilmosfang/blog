@@ -4,7 +4,7 @@ title: Varnish 基础概览
 author: wilmosfang
 tags:  varnish 
 categories:  varnish 
-wc: 636 1655 26339
+wc: 639 1589 25910
 excerpt: follow me
 comments: true
 ---

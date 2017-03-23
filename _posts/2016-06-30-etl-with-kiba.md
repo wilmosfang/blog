@@ -4,7 +4,7 @@ title:   ETL (Extract-Transform-Load) with Kiba
 author: wilmosfang
 tags:   ruby etl kiba
 categories:   ruby
-wc: 1091  2591 26770 
+wc: 1091 2591 26781
 excerpt: ETL 项目的创建，解决依赖，库文件的创建，源的定义，打印中间结果，解析数值，转化日期，重命名列，数据有效性检查，定义数据去向
 comments: true
 ---

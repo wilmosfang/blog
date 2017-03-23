@@ -4,7 +4,7 @@ title: 在Centos6.6中创建一个Bridge
 author: wilmosfang
 tags:  linux network
 categories:  network
-wc: 209  661 7251
+wc: 210 663 7268
 excerpt: 创建bridge的方法，SELINUX关闭方法，以及注意事项
 comments: true
 ---

@@ -4,7 +4,7 @@ title:  Zabbix Agent 安装
 author: wilmosfang
 tags:  monitoring zabbix 
 categories:  zabbix 
-wc: 443 1534 20654
+wc: 446 1478 20234
 excerpt: zabbix agent 的安装过程
 comments: true
 date:   2015-12-14 17:52:00

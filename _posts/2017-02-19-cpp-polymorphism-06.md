@@ -4,7 +4,7 @@ title:  C++基础(六).多态
 author:  wilmosfang
 tags:   c c++
 categories:  c++
-wc:  234  374 5472 
+wc: 234 374 5471
 excerpt:  c++ 面向对象之多态，成员函数运算符重载
 comments: true
 ---

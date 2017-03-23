@@ -4,7 +4,7 @@ title:  数据结构基础(四).栈
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:  213  404 5836 
+wc: 213 404 5840
 excerpt:  线性表，栈
 comments: true
 ---

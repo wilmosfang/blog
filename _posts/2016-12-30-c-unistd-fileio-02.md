@@ -4,7 +4,7 @@ title:  文件I/O (二).结构体存取
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc: 488  1779 19138 
+wc: 488 1779 19153
 excerpt:  文件IO库的常用函数、函数原型、宏定义、内存对齐、xxd、ASCII 码
 comments: true
 ---

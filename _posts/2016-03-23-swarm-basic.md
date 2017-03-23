@@ -4,7 +4,7 @@ title:  Docker Swarm 基础
 author: wilmosfang
 categories:   docker 
 tags:   cluster docker swarm 
-wc: 887  3915 49041 
+wc: 889 3830 48502
 excerpt: swarm 的架构与依赖环境，发现服务的安装，swarm 的下载安装，集群构建，管理节点代理节点的添加，可能产生的问题，swarm 的使用，状态查看，容器运行，故障转移
 comments: true
 ---

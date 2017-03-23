@@ -4,7 +4,7 @@ title: Mysql MHA 搭建 (一) percona5.1 安装
 author: wilmosfang
 tags:  mysql mha cluster
 categories:  mysql
-wc: 590  1373 15164
+wc: 590 1373 15165
 excerpt: mysql mha 集群搭建之 mysql 的安装
 comments: true
 ---

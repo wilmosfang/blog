@@ -4,7 +4,7 @@ title:  C++基础(七).多态
 author:  wilmosfang
 tags:   c c++
 categories:  c++
-wc:  326   419 13707 
+wc: 326 423 13701
 excerpt:  c++ 面向对象之多态、虚函数、纯虚函数、虚函数与纯虚函数的区别、抽象类、接口、抽象类与接口的区别、虚基类
 comments: true
 ---

@@ -4,7 +4,7 @@ title:  Zabbix 短信报警配置
 author: wilmosfang
 tags:   monitoring zabbix
 categories:   zabbix
-wc: 409 778 11512 
+wc: 413 776 11536
 excerpt: 涉及短信API，短信发送脚本，Zabbix Action配置，触发测试   
 comments: true
 ---

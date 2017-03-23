@@ -4,7 +4,7 @@ title:  数据结构基础(二).单链表
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:  370   740 10794 
+wc: 370 740 10814
 excerpt:  线性表，链表，单向链表
 comments: true
 ---

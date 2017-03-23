@@ -4,7 +4,7 @@ title:  文件I/O (一).非缓冲IO实现mycopy
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc: 194  384 5872 
+wc: 194 384 5896
 excerpt:  文件IO、open/read/write/lseek/close、非缓冲IO
 comments: true
 ---

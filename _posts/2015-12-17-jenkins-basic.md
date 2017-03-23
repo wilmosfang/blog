@@ -4,7 +4,7 @@ title:  Jenkins 基础
 author: wilmosfang
 tags:   jenkins 
 categories:   jenkins 
-wc: 283 871 10039
+wc: 286 835 9748
 excerpt:  Jenkins 的安装与基础
 comments: true
 ---

@@ -4,7 +4,7 @@ title: redis-benchmark 基础
 author: wilmosfang
 tags:  redis nosql benchmark
 categories:   redis 
-wc: 739 2451 17797
+wc: 742 2416 17506
 excerpt: follow me
 comments: true
 ---

@@ -4,7 +4,7 @@ title:  Beats Dashboards 基础
 author: wilmosfang
 tags:  elasticsearch logstash beats filebeat kibana
 categories:  beats
-wc: 543  1179 33266 
+wc: 544 1171 33179
 excerpt:  Beats Dashboards 的安装与配置方法
 comments: true
 ---

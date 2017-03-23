@@ -4,7 +4,7 @@ title: 进程间通讯(六).semaphore and shared memory
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:    912  1847 26729 
+wc: 912 1847 26729
 excerpt:  信号量、共享内存、信号量限制、共享内存限制、sembuf、SEM_UNDO、shmget、shmat、semget、semop、shmdt、semctl、sembuf 共用体、semid_ds 结构体、seminfo 结构体、shmctl、IPC_X 宏定义、shmid_ds 结构体、ipc_perm 结构体
 comments: true
 ---

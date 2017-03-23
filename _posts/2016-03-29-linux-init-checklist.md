@@ -4,7 +4,7 @@ title:  Linux 初始化检查列表
 author: wilmosfang
 categories:  linux 
 tags:    linux
-wc:  751  2339 28173 
+wc: 753 2258 27662
 excerpt:  linux 的初始化检查列表，包括环境，网络联通，基础配置，主机名，系统更新，时间同步，安全配置，口令更改，创建用户，防火墙配置，SELINUX，RSA Key，参数调整，文件系统调优，文件句柄数调整，软件相关，软件仓库，监控和其它注意事项 
 comments: true
 ---

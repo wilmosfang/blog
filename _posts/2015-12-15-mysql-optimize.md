@@ -4,7 +4,7 @@ title:  Mysql 优化存储
 author: wilmosfang
 tags:   mysql 
 categories:   mysql 
-wc: 273 685 9865
+wc: 276 637 9505
 excerpt: 使用optimize table对数据库进行优化
 comments: true
 ---

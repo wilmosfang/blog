@@ -4,7 +4,7 @@ title: mysql 5.1升级到5.6
 author: wilmosfang
 tags:  mysql upgrade
 categories:  mysql
-wc: 1238 5231 59037
+wc: 1241 5117 58153
 excerpt: follow me
 comments: true
 ---

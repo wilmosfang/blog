@@ -4,7 +4,7 @@ title: Tengine基础
 author: wilmosfang
 tags:  nginx 
 categories:  nginx 
-wc: 634  1783 21330
+wc: 629 1767 21235
 excerpt: tengine 的下载，安装，配置，检查，启停，模块，负载均衡，反向代理和状态检查
 comments: true
 ---

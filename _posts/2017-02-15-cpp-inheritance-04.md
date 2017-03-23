@@ -4,7 +4,7 @@ title:  C++基础(四).继承
 author:  wilmosfang
 tags:   c c++
 categories:  c++
-wc: 216  342 7617 
+wc: 216 343 7626
 excerpt:  c++ 面向对象之继承
 comments: true
 ---

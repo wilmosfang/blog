@@ -4,7 +4,7 @@ title:  Ruby on Rails 基础
 author: wilmosfang
 categories:   ruby
 tags:   ruby rvm rails
-wc: 1196  3890 44402 
+wc: 1198 3893 44429
 excerpt:  RVM 的安装，ruby版本查看，可用版本查看，ruby的安装，Rails的安装，环境，安装源的替换，创建Rails应用，Rails的目录结构，启停服务，对外服务的配置，服务的访问 
 comments: true
 ---

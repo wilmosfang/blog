@@ -4,7 +4,7 @@ title: Keepalived 实现 Redis AutoFailover (RedisHA)
 author: wilmosfang
 tags:  redis keepalived nosql
 categories:   redis
-wc: 1027 3305 37685
+wc: 1030 3223 37050
 excerpt: follow me
 comments: true
 ---

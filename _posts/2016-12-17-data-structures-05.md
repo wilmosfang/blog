@@ -4,7 +4,7 @@ title:  数据结构基础(五).队
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:  267  640 7528 
+wc: 267 640 7540
 excerpt:  线性表，队
 comments: true
 ---

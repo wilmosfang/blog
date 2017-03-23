@@ -4,7 +4,7 @@ title: qshell基础
 author: wilmosfang
 tags:  admintools qshell
 categories:  qshell
-wc: 670 1741 21048
+wc: 673 1645 20296
 excerpt: follow me
 comments: true
 ---

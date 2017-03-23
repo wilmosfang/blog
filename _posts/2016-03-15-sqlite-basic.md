@@ -4,7 +4,7 @@ title:  SQLite 基础
 author: wilmosfang
 categories:   sqlite
 tags:   sqlite
-wc: 1457  5534 54927 
+wc: 1459 5332 53644
 excerpt: sqlite的下载，安装，基础命令，交互输入，帮助，环境配置，数据类型，数据库与表的创建修改查看，导入导出，数据库的附加分离，基础信息表，和sqlite下的基本SQL操作
 comments: true
 ---

@@ -4,7 +4,7 @@ title:  数据结构基础(一).顺序表
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc: 297  632 8705   
+wc: 297 640 8746
 excerpt:  数据结构，线性表，顺序表
 comments: true
 ---

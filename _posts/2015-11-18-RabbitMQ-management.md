@@ -4,7 +4,7 @@ title: RabbitMQ管理
 author: wilmosfang
 tags:  rabbitmq python ruby
 categories:  rabbitmq
-wc: 798  2193 21405
+wc: 799 2014 20260
 excerpt: rabbitmqctl 命令的使用，用户管理，访问控制，Python Ruby 连接 RabbitMQ ,日志与状态的查看
 comments: true
 ---

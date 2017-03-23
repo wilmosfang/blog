@@ -4,7 +4,7 @@ title:  Mycat 基础
 author: wilmosfang
 tags:   mysql mycat
 categories:   mycat
-wc: 604  1967 23792 
+wc: 606 1918 23484
 excerpt: mycat运行的环境依赖，mycat下载，安装，配置，连接，启动与停止等相关基础
 comments: true
 ---

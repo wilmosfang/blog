@@ -4,7 +4,7 @@ title:    Logstash 处理多种格式日志
 author: wilmosfang
 tags:   elasticsearch logstash beats filebeat 
 categories:    logstash 
-wc: 229  459 7789 
+wc: 231 450 7702
 excerpt: logstash的配置，filebeat的配置，建议启动顺序，与多类型日志输入的注意事项
 comments: true
 ---

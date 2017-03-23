@@ -4,7 +4,7 @@ title:  C++基础(三).封装
 author:  wilmosfang
 tags: c  c++
 categories:  c++
-wc:  180  319 4429 
+wc: 180 320 4430
 excerpt:  c++ 面向对象之封装
 comments: true
 ---

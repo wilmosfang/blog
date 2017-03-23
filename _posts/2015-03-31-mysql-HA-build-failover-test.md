@@ -4,7 +4,7 @@ title: Mysql MHA 搭建 (四) mha failover 测试
 author: wilmosfang
 tags:  mha mysql  keepalived cluster
 categories:  mysql
-wc: 1064  5155 49554
+wc: 1063 5155 49549
 excerpt: mha的主动被动切换测试，手动迁移测试，被动故障转移测试
 comments: true
 ---

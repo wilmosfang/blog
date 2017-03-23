@@ -4,7 +4,7 @@ title:  ARM(三).UART with FIFO
 author:  wilmosfang
 tags:   arm c
 categories:  arm
-wc:  1689  7798 81839 
+wc: 1689 7798 81836
 excerpt:  ARM裸机开发、带FIFO的串口(UART)通讯
 comments: true
 ---

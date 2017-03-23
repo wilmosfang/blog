@@ -4,7 +4,7 @@ title:  CTAGS 基础
 author:  wilmosfang
 tags:   ctags script 
 categories:  ctags 
-wc:  906  2137 23377 
+wc: 905 2136 23381
 excerpt: ctags 的安装，支持的语言，语言的映射，可识别的语法和对象，生成tags文件，定位，跳转，相同标签跳转，tag补全，tags历史记录 
 comments: true
 ---

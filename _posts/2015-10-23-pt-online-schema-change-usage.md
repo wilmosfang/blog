@@ -4,7 +4,7 @@ title: pt-online-schema-change 使用基础
 author: wilmosfang
 tags:  admintools mysql
 categories:  mysql
-wc: 608 3439 23834
+wc: 611 3376 23432
 excerpt: follow me
 comments: true
 ---

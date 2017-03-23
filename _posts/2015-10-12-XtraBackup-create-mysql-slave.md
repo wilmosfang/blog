@@ -4,7 +4,7 @@ title: 使用XtraBackup创建mysql slave
 author: wilmosfang
 tags:   mysql admintools
 categories:   mysql
-wc: 1206 4769 52759
+wc: 1209 4693 52184
 excerpt: follow me
 comments: true
 ---

@@ -4,7 +4,7 @@ title: memcached基础
 author: wilmosfang
 tags:  nosql memcached
 categories:  memcached 
-wc: 1157  4813 46549
+wc: 1157 4813 46554
 excerpt: memcached 的安装、基础管理命令、基本操作命令、状态查看
 comments: true
 ---

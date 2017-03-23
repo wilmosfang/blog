@@ -4,7 +4,7 @@ title:  数据结构基础(六).二叉树
 author:  wilmosfang
 tags:   c 
 categories:  c
-wc:  189  278 5047 
+wc: 189 278 5065
 excerpt:  二叉树，前序遍历，中序遍历，后序遍历，层次遍历
 comments: true
 ---

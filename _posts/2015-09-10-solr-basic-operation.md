@@ -4,7 +4,7 @@ title: Solr基础操作
 author: wilmosfang
 tags: nosql  solr
 categories:  solr
-wc: 1257  3180 46793
+wc: 1258 3051 45969
 excerpt: solr 的下载解压安装，启动，管理界面，拓扑，索引 XML，索引 JSON，索引 CSV，删除数据，使用 restful API 检索数据，各种匹配方法，格式化输出，关闭 solr
 comments: true
 ---

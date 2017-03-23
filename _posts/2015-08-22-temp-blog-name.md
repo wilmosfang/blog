@@ -4,7 +4,7 @@ title: Temp Blog Name
 author: wilmosfang
 tags:  template
 categories:  template
-wc: 113  175 1692 
+wc: 115 186 1696
 excerpt: 我的blog模板与书写规范，检查与处理流程
 comments: true
 ---

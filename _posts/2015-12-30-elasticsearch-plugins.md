@@ -4,7 +4,7 @@ title:  Elasticsearch Plugins
 author: wilmosfang
 tags:  elasticsearch nosql
 categories:  elasticsearch 
-wc: 273  588 7336 
+wc: 275 549 7064
 excerpt:  elasticsearch 插件的相关基础
 comments: true
 ---

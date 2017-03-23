@@ -4,7 +4,7 @@ title:  C++基础(五).多态
 author:  wilmosfang
 tags:   c c++
 categories:  c++
-wc:  234  311 7585 
+wc: 240 313 7587
 excerpt:  c++ 面向对象之多态，重载、隐藏、重写、重载和重写的区别、隐藏和重写重载的区别、友元、友元函数、友元类
 comments: true
 ---

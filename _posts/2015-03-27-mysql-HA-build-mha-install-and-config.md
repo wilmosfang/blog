@@ -4,7 +4,7 @@ title: Mysql MHA 搭建 (二) mha0.53 安装
 author: wilmosfang
 tags:  mha mysql ssh cluster 
 categories:  mysql
-wc: 512  1812 21511
+wc: 511 1811 21504
 excerpt: mysql mha 的安装搭建，passwordless 环境配置，和相关系统设置
 comments: true
 ---

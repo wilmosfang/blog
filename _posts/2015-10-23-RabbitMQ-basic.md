@@ -4,7 +4,7 @@ title: RabbitMQ基础
 author: wilmosfang
 tags:  rabbitmq
 categories:  rabbitmq
-wc: 795  2505 31759
+wc: 796 2386 31003
 excerpt: rabbitmq 的依赖，Erlang 的安装，rabbitmq 的安装，基础操作，启停，rabbitmqctl基础操作，关闭node，关闭应用，重置node，轮转日志，相关注意事项
 comments: true
 ---

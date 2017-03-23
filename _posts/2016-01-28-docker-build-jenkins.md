@@ -4,7 +4,7 @@ title:  Docker 中构建 Jenkins
 author: wilmosfang
 tags:   docker jenkins
 categories:   docker
-wc: 476  1630 17594 
+wc: 478 1595 17315
 excerpt: 自定义Jenkins镜像，认证登录registry，推送拉取镜像，容器中运行镜像，访问jenkins
 comments: true
 ---

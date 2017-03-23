@@ -4,7 +4,7 @@ title: Mysql复制数据一致性检查
 author: wilmosfang
 tags:  mysql admintools 
 categories:  mysql 
-wc: 310 1193 16168
+wc: 313 1185 16092
 excerpt: follow me
 comments: true
 ---

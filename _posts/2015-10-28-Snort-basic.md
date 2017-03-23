@@ -4,7 +4,7 @@ title: Snort 基础
 author: wilmosfang
 tags:  snort security
 categories:  snort
-wc: 1353 5732 62839
+wc: 1356 5633 62132
 excerpt: follow me
 comments: true
 ---

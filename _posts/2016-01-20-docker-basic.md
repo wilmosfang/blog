@@ -4,7 +4,7 @@ title:  Docker 基础
 author: wilmosfang
 tags:   docker
 categories:   docker
-wc: 810  3055 34393 
+wc: 812 2979 33780
 excerpt: docker基础，yum 安装 docker，script 安装 docker，启动，检测，docker组，卸载，systemctl用法
 comments: true
 ---
