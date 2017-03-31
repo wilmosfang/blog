@@ -235,6 +235,6 @@ emacs@ubuntu:~/c++$
 * 重写
 * 隐藏
 
-[programming]:http://soft.dog/2016/04/07/thinking-of-programming/
+[programming]:/2016/04/07/thinking-of-programming/
 [48976097]:http://blog.csdn.net/zx3517288/article/details/48976097
 [2037327]:http://blog.chinaunix.net/uid-790245-id-2037327.html

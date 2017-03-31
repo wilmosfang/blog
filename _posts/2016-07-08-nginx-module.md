@@ -823,9 +823,9 @@ loaded modules:
 
 
 [nginx]:http://nginx.org/
-[nginx_blog]:http://soft.dog/2015/10/09/nginx-basic/
+[nginx_blog]:/2015/10/09/nginx-basic/
 [tengine]:http://tengine.taobao.org/index_cn.html
-[tengine_blog]:http://soft.dog/2015/11/04/Tengine-basic/
+[tengine_blog]:/2015/11/04/Tengine-basic/
 [tengine_doc]:http://tengine.taobao.org/documentation_cn.html
 [nginx_doc]:http://nginx.org/en/docs/
 [tengine_dl]:http://tengine.taobao.org/download_cn.html

@@ -569,6 +569,6 @@ Property | Value
 
 
 [redis]:http://redis.io/
-[redis_install]:http://soft.dog/2015/04/02/Redis-install/
+[redis_install]:/2015/04/02/Redis-install/
 [info]:http://redis.io/commands/info
 

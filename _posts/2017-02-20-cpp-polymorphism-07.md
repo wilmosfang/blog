@@ -321,6 +321,6 @@ emacs@ubuntu:~/c++$
 > * 一个函数不能有抽象类对象的值参数<参数不能传值>，这个函数不能有抽象类对象的值返回。然而可以有抽象类类型的指针和引用可以作为参数，同样抽象类的指针和引用可以作为函数的返回值类型。因为他们可以指向或者引用抽象类的子类对象
 > * 纯虚函数是在子类里面被实现的。如果子类没有实现纯虚函数，纯虚函数将继承给子类。那么这时子类同样也是一个抽象类
 
-[programming]:http://soft.dog/2016/04/07/thinking-of-programming/
+[programming]:/2016/04/07/thinking-of-programming/
 [2701237]:http://www.cnblogs.com/fly1988happy/archive/2012/09/25/2701237.html
 [blog_4aa0943f0100ccje]:http://blog.sina.com.cn/s/blog_4aa0943f0100ccje.html

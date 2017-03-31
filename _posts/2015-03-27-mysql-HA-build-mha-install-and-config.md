@@ -503,7 +503,7 @@ MySQL Replication Health is OK.
 ---
 
 [Mha]:http://code.google.com/p/mysql-master-ha/
-[mha1]:http://soft.dog/2015/03/26/mysql-HA-build-percona-server5.1-install/
+[mha1]:/2015/03/26/mysql-HA-build-percona-server5.1-install/
 [epel rpm]:http://rpmfind.net/linux/rpm2html/search.php?query=epel&submit=Search+...
 [mha install]:https://code.google.com/p/mysql-master-ha/wiki/Installation
 [mha requirements]:https://code.google.com/p/mysql-master-ha/wiki/Requirements

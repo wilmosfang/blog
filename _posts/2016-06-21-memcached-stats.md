@@ -206,6 +206,6 @@ Verb     | Comment
 
 
 [memcached]:http://memcached.org/
-[memcached_basic_operation]:http://soft.dog/2015/09/23/memcached-basic-operation/
+[memcached_basic_operation]:/2015/09/23/memcached-basic-operation/
 [protocol]:https://github.com/memcached/memcached/blob/master/doc/protocol.txt
 

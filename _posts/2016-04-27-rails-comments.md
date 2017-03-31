@@ -790,6 +790,6 @@ class CommentsController < ApplicationController
 [rubyonrails]:http://rubyonrails.org/
 [getting_started]:http://guides.rubyonrails.org/getting_started.html
 [getting_started_cn]:http://guides.ruby-china.org/getting_started.html
-[rails_crud]:http://soft.dog/2016/04/24/rails-crud/
+[rails_crud]:/2016/04/24/rails-crud/
 
 

@@ -293,5 +293,5 @@ emacs@ubuntu:~/c$
 
 
 
-[thinking-of-programming]:http://soft.dog/2016/04/07/thinking-of-programming/#section-11
+[thinking-of-programming]:/2016/04/07/thinking-of-programming/#section-11
 [visualgo]:https://visualgo.net/

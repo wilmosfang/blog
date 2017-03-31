@@ -230,5 +230,5 @@ emacs@ubuntu:~/c++$
 * 成员函数
 * 运算符重载
 
-[programming]:http://soft.dog/2016/04/07/thinking-of-programming/
-[const]:http://soft.dog/2016/11/30/c-deep-02/#const
+[programming]:/2016/04/07/thinking-of-programming/
+[const]:/2016/11/30/c-deep-02/#const

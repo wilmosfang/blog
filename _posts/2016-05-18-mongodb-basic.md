@@ -551,8 +551,8 @@ bye
 
 [mongodb]:https://www.mongodb.com/
 [mongodb_doc]:https://docs.mongodb.com/
-[neo4j]:http://soft.dog/2016/04/20/neo4j-basic/
-[qianyan]:http://soft.dog/2016/04/20/neo4j-basic/#section
+[neo4j]:/2016/04/20/neo4j-basic/
+[qianyan]:/2016/04/20/neo4j-basic/#section
 [mongodb_dl]:https://www.mongodb.com/download-center?jmp=nav#community
 [mongodb_install]:https://docs.mongodb.com/master/tutorial/install-mongodb-on-red-hat/
 [supported_platforms]:https://docs.mongodb.com/master/installation/#supported-platforms
