@@ -15,7 +15,7 @@ comments: true
 
 ## 前言
 
-我前面有一篇文章可以[21分钟搭建一个GitHub Blog](http://soft.dog/2015/03/02/build-a-githubblog-in-21minutes/)
+我前面有一篇文章可以[21分钟搭建一个GitHub Blog][blog]
 
 这里我们深入到jekyll层面看看,如何在本地也生成一个blog,也就是在本地干和github上一样的事情
 
@@ -566,3 +566,5 @@ Configuration file: /root/tmp/myblog/_config.yml
 * 1.尽量使用rvm,这是一款ruby神器
 * 2.使用合适的安装源,别让自己的青春虚度
 
+
+[blog]:/2015/03/02/build-a-githubblog-in-21minutes/

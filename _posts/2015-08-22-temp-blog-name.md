@@ -111,5 +111,5 @@ just for test
 
 ---
 
-[link]: http://soft.dog/
-[temp]: http://soft.dog/
+[link]:/
+[temp]:/
