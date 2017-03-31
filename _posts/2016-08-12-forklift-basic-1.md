@@ -446,5 +446,5 @@ end
 
 [forklift_etl]:https://rubygems.org/gems/forklift_etl
 [forklift]:https://github.com/taskrabbit/forklift
-[kiba]:http://soft.dog/2016/06/30/etl-with-kiba/
+[kiba]:/2016/06/30/etl-with-kiba/
 

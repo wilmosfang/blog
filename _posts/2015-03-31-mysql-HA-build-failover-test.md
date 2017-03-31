@@ -1058,6 +1058,6 @@ Master failover to m2(192.168.75.12:3306) completed successfully.
 
 ---
 
-[mha3]:http://soft.dog/2015/03/30/mysql-HA-build-keepalived-install-and-config/
+[mha3]:/2015/03/30/mysql-HA-build-keepalived-install-and-config/
 
 

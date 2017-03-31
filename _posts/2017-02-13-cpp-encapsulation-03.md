@@ -177,4 +177,4 @@ emacs@ubuntu:~/c++$
 
 析构函数根据变量的生命周期，作用域，堆内申请和栈内申请的不同，触发的时机也不尽相同，需要对内存回收的时间有一定的认识才能准确判断
 
-[programming]:http://soft.dog/2016/04/07/thinking-of-programming/
+[programming]:/2016/04/07/thinking-of-programming/

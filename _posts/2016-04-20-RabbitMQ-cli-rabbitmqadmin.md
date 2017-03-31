@@ -2268,7 +2268,7 @@ Message published
 ---
 
 [rabbitmq]:http://www.rabbitmq.com/
-[rabbitmq_monitoring]:http://soft.dog/2016/01/13/rabbitmq-monitoring/
+[rabbitmq_monitoring]:/2016/01/13/rabbitmq-monitoring/
 [management_cli]:http://www.rabbitmq.com/management-cli.html
 [erlang_down]:https://www.erlang-solutions.com/resources/download.html
 

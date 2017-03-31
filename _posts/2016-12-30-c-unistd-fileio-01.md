@@ -190,5 +190,5 @@ emacs@ubuntu:~/c$
 通过各方面资料弄懂其参数的意义和返回值的类型，是熟练掌握的基础
 
 
-[c_stdio_01]:http://soft.dog/2016/12/26/c-stdio-01/
+[c_stdio_01]:/2016/12/26/c-stdio-01/
 [linux_c_api]:http://www.kancloud.cn/wizardforcel/linux-c-api-ref/98469

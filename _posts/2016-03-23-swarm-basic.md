@@ -885,5 +885,5 @@ Name: d563af1475b5
 [swarm]:https://docs.docker.com/swarm/overview/
 [compare]:https://www.oreilly.com/ideas/swarm-v-fleet-v-kubernetes-v-mesos
 [swarm_bin]:https://github.com/docker/swarm/blob/master/CONTRIBUTING.md
-[docker_basic]:http://soft.dog/2016/01/20/docker-basic/
+[docker_basic]:/2016/01/20/docker-basic/
 

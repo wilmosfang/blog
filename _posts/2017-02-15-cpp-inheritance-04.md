@@ -212,5 +212,5 @@ class Teacher_Cadre:public Teacher,public Cadre
 Teacher_Cadre::Teacher_Cadre(string vname,int vage,char vsex,string vaddress,string vcellphone,string vtitle,string vpost,float vwages):Teacher(vname,vage,vsex,vaddress,vcellphone,vtitle),Cadre(vname,vage,vsex,vaddress,vcellphone,vpost) 
 ~~~
 
-[programming]:http://soft.dog/2016/04/07/thinking-of-programming/
+[programming]:/2016/04/07/thinking-of-programming/
 

@@ -654,8 +654,8 @@ b460d005093f        test-rails-app-blog   "rails server -b 0.0."   4 seconds ago
 
 
 [rails]:http://rubyonrails.org/
-[rails_basic]:http://soft.dog/2016/04/22/rails-basic/
-[rails_crud]:http://soft.dog/2016/04/24/rails-crud/
-[rails_comments]:http://soft.dog/2016/04/27/rails-comments/
+[rails_basic]:/2016/04/22/rails-basic/
+[rails_crud]:/2016/04/24/rails-crud/
+[rails_comments]:/2016/04/27/rails-comments/
 [docker_rails]:https://hub.docker.com/_/rails/
 [compose_rails]:https://docs.docker.com/compose/rails/

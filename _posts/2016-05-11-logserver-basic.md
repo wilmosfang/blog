@@ -1512,4 +1512,4 @@ Starting httpd: httpd: Could not reliably determine the server's fully qualified
 [ref_doc]:http://www.cnblogs.com/mchina/p/linux-centos-rsyslog-loganalyzer-mysql-log-server.html
 [loganalyzer_doc]:http://loganalyzer.adiscon.com/doc/manual.html
 [loganalyzer_inst]:http://loganalyzer.adiscon.com/doc/install.html
-[elk]:http://soft.dog/2015/12/22/elk-basic/
+[elk]:/2015/12/22/elk-basic/

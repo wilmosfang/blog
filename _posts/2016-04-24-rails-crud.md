@@ -1265,5 +1265,5 @@ end
 [rubyonrails]:http://rubyonrails.org/
 [getting_started]:http://guides.rubyonrails.org/getting_started.html
 [getting_started_cn]:http://guides.ruby-china.org/getting_started.html
-[rails_basic]:http://soft.dog/2016/04/22/rails-basic/
+[rails_basic]:/2016/04/22/rails-basic/
 

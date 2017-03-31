@@ -10,7 +10,7 @@ icon: bookmark
 
 ## 精选
 
-[一个运维人员的编程思维](http://soft.dog/2016/04/07/thinking-of-programming/)
+[一个运维人员的编程思维](/2016/04/07/thinking-of-programming/)
 
 
 
