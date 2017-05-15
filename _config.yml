@@ -26,7 +26,7 @@ description_footer: 小人本住在 苏州的城外 家里有屋又有田 生活
 # comments
 # two ways to comment, only choose one, and use your own short name
 # 两种评论插件，选一个就好了，使用自己的 short_name
-duoshuo_shortname: flash
+#duoshuo_shortname: flash
 disqus_shortname: wilmosfang
 
 # statistic analysis 统计代码
