@@ -1,6 +1,6 @@
 ---
 layout:  post
-title:  安装 jekyll
+title:  安装 Jekyll
 author:  wilmosfang
 tags:   jekyll gcc rvm ruby nodejs
 categories:  jekyll
@@ -12,7 +12,7 @@ comments: true
 
 # 前言
 
-很早以前我写过一篇安装 **[jekyll][jekyll]** 的文章，这次作为一个简单的梳理，再对安装过程作一个更新
+很早以前我写过一篇安装 **[Jekyll][jekyll]** 的文章，这次作为一个简单的梳理，再对安装过程作一个更新
 
 
 > **Tip:** 
