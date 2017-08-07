@@ -1,9 +1,9 @@
 ---
 layout:  post
-title:  hadoop 在 Centos7 下的单机布署(二).HDFS.Pseudo-Distributed Operation
+title:  Hadoop 在 Centos7 下的单机布署(二).HDFS.Pseudo-Distributed Operation
 author:  wilmosfang
 tags:  hadoop hdfs
-categories:  linux 
+categories:  hadoop 
 wc: 1947 12556 150753
 excerpt:  Centos7 下布署 Pseudo-Distributed 模式的 HDFS
 comments: true
