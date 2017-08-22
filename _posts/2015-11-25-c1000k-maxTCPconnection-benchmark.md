@@ -2,10 +2,10 @@
 layout: post
 title: c1000k TCP 连接上限测试
 author: wilmosfang
-tags:  benchmark c1000k
-categories:  c1000k
+tags: linux benchmark c1000k
+categories:  linux
 wc: 262 792 6117
-excerpt: follow me
+excerpt: 使用 c1000k 进行连接上限的压测
 comments: true
 ---
 

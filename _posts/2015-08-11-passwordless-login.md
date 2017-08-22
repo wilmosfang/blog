@@ -2,10 +2,10 @@
 layout: post
 title: 证书管理碉堡机
 author: wilmosfang
-tags:  ssh
-categories:  ssh
+tags: linux ssh
+categories:  linux
 wc: 257 603 5798
-excerpt: follow me
+excerpt: 通过 ssh 证书来构建和管理碉堡机
 comments: true
 ---
 
