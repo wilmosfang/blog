@@ -57,4 +57,4 @@ excerpt_separator: "\n\n\n\n"
 #gems: [jekyll-paginate]
 plugins: [jekyll-paginate]
 
-paginate: 15
+paginate: 20
